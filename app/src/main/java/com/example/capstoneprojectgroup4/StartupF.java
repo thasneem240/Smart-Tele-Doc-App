@@ -9,6 +9,8 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.capstoneprojectgroup4.authentication.StartupPageTwoF;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StartupF#newInstance} factory method to
@@ -77,10 +79,9 @@ public class StartupF extends Fragment {
         authenticationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+                fm = getActivity().getSupportFragmentManager();
+                StartupPageTwoF startupPageTwoF = new StartupPageTwoF();
+                fm.beginTransaction().replace(R.id.fragment_container, startupPageTwoF).commit();
 
             }
         });
