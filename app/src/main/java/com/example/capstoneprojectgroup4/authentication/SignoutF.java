@@ -16,10 +16,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SignoutFragment#newInstance} factory method to
+ * Use the {@link SignoutF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SignoutFragment extends Fragment {
+public class SignoutF extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +32,7 @@ public class SignoutFragment extends Fragment {
 
     private FirebaseAuth mAuth;
 
-    public SignoutFragment() {
+    public SignoutF() {
         // Required empty public constructor
     }
 
@@ -45,8 +45,8 @@ public class SignoutFragment extends Fragment {
      * @return A new instance of fragment SignoutFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignoutFragment newInstance(String param1, String param2) {
-        SignoutFragment fragment = new SignoutFragment();
+    public static SignoutF newInstance(String param1, String param2) {
+        SignoutF fragment = new SignoutF();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

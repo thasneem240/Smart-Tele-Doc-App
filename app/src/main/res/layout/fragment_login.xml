@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/email"
+        app:layout_constraintBaseline_toBaselineOf="@+id/email_edittext"
         app:layout_constraintEnd_toEndOf="@+id/home_button"
         app:layout_constraintStart_toStartOf="@+id/password_name" />
 
@@ -34,7 +34,7 @@
         android:autoText="true"
         android:text="TextView"
         android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintBottom_toTopOf="@+id/email_edittext"
         app:layout_constraintStart_toEndOf="@+id/home_button" />
 
     <Button
@@ -45,10 +45,10 @@
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/password_edittext" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/email_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="104dp"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toTopOf="@+id/home_button" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="38dp"

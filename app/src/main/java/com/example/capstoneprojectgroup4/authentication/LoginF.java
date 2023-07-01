@@ -1,6 +1,5 @@
 package com.example.capstoneprojectgroup4.authentication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -78,8 +77,8 @@ public class LoginF extends Fragment {
 
         TextView email_name = (TextView) v.findViewById(R.id.email_name);
         TextView password_name = (TextView) v.findViewById(R.id.password_name);
-        TextView email_ = (TextView) v.findViewById(R.id.email);
-        TextView password_ = (TextView) v.findViewById(R.id.password);
+        TextView email_ = (TextView) v.findViewById(R.id.email_edittext);
+        TextView password_ = (TextView) v.findViewById(R.id.password_edittext);
         TextView signUpButton = (TextView) v.findViewById(R.id.signUp);
 
         Button login_button = (Button) v.findViewById(R.id.login_button);

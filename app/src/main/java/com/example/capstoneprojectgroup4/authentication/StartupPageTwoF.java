@@ -5,11 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 /**
@@ -32,6 +35,8 @@ public class StartupPageTwoF extends Fragment {
     Button patientButton;
     Button loginButton;
     Button signoutButton;
+    private FirebaseAuth mAuth;
+
 
     public StartupPageTwoF() {
         // Required empty public constructor
@@ -70,13 +75,21 @@ public class StartupPageTwoF extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_startup_page_two, container, false);
 
-        patientButton = v.findViewById(R.id.patient_butto);
+        patientButton = v.findViewById(R.id.patient_button);
         loginButton = v.findViewById(R.id.login_button);
         signoutButton = v.findViewById(R.id.signout_button);
+
+        mAuth = FirebaseAuth.getInstance();
 
         patientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                if(currentUser != null){
+                    Toast.makeText(getActivity(), currentUser.getEmail()+"This user is already signed in", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 fm = getActivity().getSupportFragmentManager();
                 SignupF signupF = new SignupF();
@@ -98,8 +111,8 @@ public class StartupPageTwoF extends Fragment {
             @Override
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
-                SignoutFragment signoutFragment = new SignoutFragment();
-                fm.beginTransaction().replace(R.id.fragment_container, signoutFragment).commit();
+                SignoutF signoutF = new SignoutF();
+                fm.beginTransaction().replace(R.id.fragment_container, signoutF).commit();
             }
         });
 
