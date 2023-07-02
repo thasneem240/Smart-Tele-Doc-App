@@ -98,9 +98,9 @@ public class StartupF extends Fragment {
         pharmacyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fm = getActivity().getSupportFragmentManager();
-                PharmaciesF pharmaciesF = new PharmaciesF();
-                fm.beginTransaction().replace(R.id.fragment_container, pharmaciesF).commit();
+//                fm = getActivity().getSupportFragmentManager();
+//                WelcomeF welcomeF = new WelcomeF();
+//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
 
             }
         });
