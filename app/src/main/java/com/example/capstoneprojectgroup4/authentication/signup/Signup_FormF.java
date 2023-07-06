@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.StartupPageOneF;
+import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -169,7 +169,7 @@ public class Signup_FormF extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                StartupPageOneF startupFormF = new StartupPageOneF();
+                AuthenticationHomeF startupFormF = new AuthenticationHomeF();
                 fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
 
             }

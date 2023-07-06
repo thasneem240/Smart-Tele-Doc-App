@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.StartupPageOneF;
+import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -91,7 +91,6 @@ public class SignupF extends Fragment {
         TextView email_ = (TextView) v.findViewById(R.id.email_edittext);
         TextView password_ = (TextView) v.findViewById(R.id.password_edittext);
         TextView rePassword_ = (TextView) v.findViewById(R.id.repassword_edittext);
-        ProgressBar progressBar = v.findViewById(R.id.prgressbar);
         Button nextButton = v.findViewById(R.id.next_button);
         Button homeButton = v.findViewById(R.id.home_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +98,7 @@ public class SignupF extends Fragment {
             public void onClick(View view) {
                 String email = email_.getText().toString();
                 String password = password_.getText().toString();
-//                progressBar.setVisibility(View.VISIBLE);
+                String reEnterPassword = rePassword_.getText().toString();
 
                 if(TextUtils.isEmpty(email)){
                     Toast.makeText(getActivity(), "Please enter the email", Toast.LENGTH_SHORT).show();
@@ -107,6 +106,10 @@ public class SignupF extends Fragment {
                 }
                 if(TextUtils.isEmpty(password)){
                     Toast.makeText(getActivity(), "Please enter the password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!password.equals(reEnterPassword)){
+                    Toast.makeText(getActivity(), "Passwords don't match", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -134,7 +137,7 @@ public class SignupF extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                StartupPageOneF startupFormF = new StartupPageOneF();
+                AuthenticationHomeF startupFormF = new AuthenticationHomeF();
                 fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
 
             }

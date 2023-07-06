@@ -18,10 +18,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StartupPageOneF#newInstance} factory method to
+ * Use the {@link AuthenticationHomeF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StartupPageOneF extends Fragment {
+public class AuthenticationHomeF extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,10 +36,11 @@ public class StartupPageOneF extends Fragment {
     Button patientButton;
     Button loginButton;
     Button signoutButton;
+    Button patientProfileButton;
     private FirebaseAuth mAuth;
 
 
-    public StartupPageOneF() {
+    public AuthenticationHomeF() {
         // Required empty public constructor
     }
 
@@ -52,8 +53,8 @@ public class StartupPageOneF extends Fragment {
      * @return A new instance of fragment startup_page.
      */
     // TODO: Rename and change types and number of parameters
-    public static StartupPageOneF newInstance(String param1, String param2) {
-        StartupPageOneF fragment = new StartupPageOneF();
+    public static AuthenticationHomeF newInstance(String param1, String param2) {
+        AuthenticationHomeF fragment = new AuthenticationHomeF();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,6 +80,7 @@ public class StartupPageOneF extends Fragment {
         patientButton = v.findViewById(R.id.patient_button);
         loginButton = v.findViewById(R.id.login_button);
         signoutButton = v.findViewById(R.id.signout_button);
+        patientProfileButton = v.findViewById(R.id.patient_profile_button);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -117,7 +119,14 @@ public class StartupPageOneF extends Fragment {
             }
         });
 
-
+        patientProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fm = getActivity().getSupportFragmentManager();
+                PatientProfileF patientProfileF = new PatientProfileF();
+                fm.beginTransaction().replace(R.id.fragment_container, patientProfileF).commit();
+            }
+        });
 
         return v;
     }

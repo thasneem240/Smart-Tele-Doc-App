@@ -9,7 +9,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.capstoneprojectgroup4.authentication.StartupPageOneF;
+import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,7 +80,7 @@ public class StartupF extends Fragment {
             @Override
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
-                StartupPageOneF startupFormF = new StartupPageOneF();
+                AuthenticationHomeF startupFormF = new AuthenticationHomeF();
                 fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
 
             }
