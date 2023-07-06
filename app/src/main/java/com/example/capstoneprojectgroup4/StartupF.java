@@ -9,7 +9,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.capstoneprojectgroup4.authentication.StartupPageTwoF;
+import com.example.capstoneprojectgroup4.authentication.StartupPageOneF;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,8 +80,8 @@ public class StartupF extends Fragment {
             @Override
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
-                StartupPageTwoF startupPageTwoF = new StartupPageTwoF();
-                fm.beginTransaction().replace(R.id.fragment_container, startupPageTwoF).commit();
+                StartupPageOneF startupFormF = new StartupPageOneF();
+                fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
 
             }
         });

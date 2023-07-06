@@ -1,25 +1,30 @@
-package com.example.capstoneprojectgroup4.authentication;
+package com.example.capstoneprojectgroup4.authentication.signup;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import com.example.capstoneprojectgroup4.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SignoutF#newInstance} factory method to
+ * Use the {@link Signup_EmailVerificationF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SignoutF extends Fragment {
+public class Signup_EmailVerificationF extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,10 +34,10 @@ public class SignoutF extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private FirebaseAuth mAuth;
+    FirebaseUser currentUser;
 
-    public SignoutF() {
+    public Signup_EmailVerificationF() {
         // Required empty public constructor
     }
 
@@ -42,11 +47,11 @@ public class SignoutF extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SignoutFragment.
+     * @return A new instance of fragment Signup_EmailVerificationF.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignoutF newInstance(String param1, String param2) {
-        SignoutF fragment = new SignoutF();
+    public static Signup_EmailVerificationF newInstance(String param1, String param2) {
+        Signup_EmailVerificationF fragment = new Signup_EmailVerificationF();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,58 +69,45 @@ public class SignoutF extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Toast.makeText(getActivity(), currentUser.getEmail()+"This user is already signed in", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_signout, container, false);
-
-        Button checkButton = v.findViewById(R.id.check_button);
-        Button signoutButton = v.findViewById(R.id.signout_button);
-        Button homeButton = v.findViewById(R.id.home_button);
+        View v = inflater.inflate(R.layout.fragment_signup__email_verification, container, false);
 
         mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
-        checkButton.setOnClickListener(new View.OnClickListener() {
+        Button emailVarificationButton = v.findViewById(R.id.email_verification_button);
+        Button next = v.findViewById(R.id.next_button2);
+
+
+        emailVarificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseUser currentUser = mAuth.getCurrentUser();
-                if(currentUser != null){
-                    Toast.makeText(getActivity(), currentUser.getEmail()+"This user is already signed in", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(getActivity(), "This user is not signed", Toast.LENGTH_SHORT).show();
+                Log.d("123", mAuth.getCurrentUser()+".");
+                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(getActivity(), "The email has been sent successfully. Please verify your email.", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
-                }
-
+                        }
+                    }
+                });
             }
         });
 
-        signoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-            }
-        });
-
-        homeButton.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                StartupPageOneF startupFormF = new StartupPageOneF();
-                fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
+                Signup_FormF signupFormF = new Signup_FormF();
+                fm.beginTransaction().replace(R.id.fragment_container, signupFormF).commit();
             }
         });
-
         return v;
     }
 }

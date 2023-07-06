@@ -4,103 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="authentication.SignupF">
+    tools:context=".authentication.signup.SignupF">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="178dp"
         android:layout_height="50dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginBottom="62dp"
+        android:layout_marginBottom="35dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/fullname_edittext"
+        app:layout_constraintBottom_toTopOf="@+id/email_edittext"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/home_button" />
-
-    <EditText
-        android:id="@+id/fullname_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="190dp"
-        android:ems="10"
-        android:hint="Full Name"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/nic_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:hint="NIC"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullname_edittext" />
-
-    <EditText
-        android:id="@+id/email_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nic_edittext" />
-
-    <EditText
-        android:id="@+id/mobilenumber_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:hint="Mobile Number"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_edittext" />
-
-    <EditText
-        android:id="@+id/password_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mobilenumber_edittext" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/repassword_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="Re-Enter Password"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_edittext" />
 
-    <CheckBox
-        android:id="@+id/terms"
+    <EditText
+        android:id="@+id/password_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="78dp"
-        android:layout_marginBottom="75dp"
-        android:text="I accept the terms and conditions"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="158dp"
+        android:layout_marginBottom="158dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/next_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/repassword_edittext" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <EditText
+        android:id="@+id/email_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="189dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/prgressbar"
@@ -113,22 +65,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/register_button"
+        android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="10dp"
-        android:text="Register"
-        app:layout_constraintBottom_toBottomOf="@+id/mobilenumber_edittext"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginBottom="168dp"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/home_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:text="Home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/prgressbar"
+        app:layout_constraintTop_toTopOf="@+id/prgressbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

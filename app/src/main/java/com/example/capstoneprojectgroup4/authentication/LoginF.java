@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.authentication.signup.SignupF;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -137,8 +138,8 @@ public class LoginF extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                StartupPageTwoF startupPageTwoF = new StartupPageTwoF();
-                fm.beginTransaction().replace(R.id.fragment_container, startupPageTwoF).commit();
+                StartupPageOneF startupFormF = new StartupPageOneF();
+                fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
             }
         });
 

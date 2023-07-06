@@ -11,16 +11,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.authentication.signup.SignupF;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StartupPageTwoF#newInstance} factory method to
+ * Use the {@link StartupPageOneF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StartupPageTwoF extends Fragment {
+public class StartupPageOneF extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,7 +39,7 @@ public class StartupPageTwoF extends Fragment {
     private FirebaseAuth mAuth;
 
 
-    public StartupPageTwoF() {
+    public StartupPageOneF() {
         // Required empty public constructor
     }
 
@@ -51,8 +52,8 @@ public class StartupPageTwoF extends Fragment {
      * @return A new instance of fragment startup_page.
      */
     // TODO: Rename and change types and number of parameters
-    public static StartupPageTwoF newInstance(String param1, String param2) {
-        StartupPageTwoF fragment = new StartupPageTwoF();
+    public static StartupPageOneF newInstance(String param1, String param2) {
+        StartupPageOneF fragment = new StartupPageOneF();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

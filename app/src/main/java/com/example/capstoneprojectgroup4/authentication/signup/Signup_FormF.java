@@ -1,46 +1,36 @@
-package com.example.capstoneprojectgroup4.authentication;
-
-import static android.content.ContentValues.TAG;
+package com.example.capstoneprojectgroup4.authentication.signup;
 
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import com.example.capstoneprojectgroup4.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.example.capstoneprojectgroup4.authentication.StartupPageOneF;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-//import com.google.firebase.firestore.DocumentReference;
-//import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SignupF#newInstance} factory method to
+ * Use the {@link Signup_FormF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SignupF extends Fragment {
+public class Signup_FormF extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,11 +40,11 @@ public class SignupF extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private FirebaseAuth mAuth; // comment 1
+    private FirebaseAuth mAuth;
     FirebaseFirestore db;
     FirebaseUser currentUser;
 
-    public SignupF() {
+    public Signup_FormF() {
         // Required empty public constructor
     }
 
@@ -64,11 +54,11 @@ public class SignupF extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SignupF.
+     * @return A new instance of fragment SignupPageTwoF.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignupF newInstance(String param1, String param2) {
-        SignupF fragment = new SignupF();
+    public static Signup_FormF newInstance(String param1, String param2) {
+        Signup_FormF fragment = new Signup_FormF();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,34 +69,30 @@ public class SignupF extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_signup, container, false);
+        View v = inflater.inflate(R.layout.fragment_signup_form, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-        TextView fullName_ = (TextView) v.findViewById(R.id.fullname_edittext);
-        TextView nic_ = (TextView) v.findViewById(R.id.nic_edittext);
-        TextView email_ = (TextView) v.findViewById(R.id.email_edittext);
-        TextView mobileNumber_ = (TextView) v.findViewById(R.id.mobilenumber_edittext);
-        TextView password_ = (TextView) v.findViewById(R.id.password_edittext);
-        TextView rePassword_ = (TextView) v.findViewById(R.id.repassword_edittext);
-        CheckBox checkBox = v.findViewById(R.id.terms);
-        ProgressBar progressBar = v.findViewById(R.id.prgressbar);
-        Button register = v.findViewById(R.id.register_button);
+        TextView fullName_ = v.findViewById(R.id.fullname_edittext);
+        TextView nic_ = v.findViewById(R.id.nic_edittext);
+        TextView mobileNumber_ = v.findViewById(R.id.mobilenumber_edittext);
+        TextView dateOfBirth_ = v.findViewById(R.id.dob_edittext);
+        TextView gender_ = v.findViewById(R.id.gender_edittext);
+        Button register = v.findViewById(R.id.next_button);
         Button homeButton = v.findViewById(R.id.home_button);
+        CheckBox checkBox = v.findViewById(R.id.terms);
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -123,21 +109,14 @@ public class SignupF extends Fragment {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = email_.getText().toString();
-                String password = password_.getText().toString();
                 String fullName = fullName_.getText().toString();
                 String nic = nic_.getText().toString();
                 String mobileNumber = mobileNumber_.getText().toString();
+                String dateOfBirth = dateOfBirth_.getText().toString();
+                String gender = gender_.getText().toString();
+
 //                progressBar.setVisibility(View.VISIBLE);
 
-                if(TextUtils.isEmpty(email)){
-                    Toast.makeText(getActivity(), "Please enter the email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(password)){
-                    Toast.makeText(getActivity(), "Please enter the password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 if(TextUtils.isEmpty(fullName)){
                     Toast.makeText(getActivity(), "Please enter the Full name", Toast.LENGTH_SHORT).show();
                     return;
@@ -147,6 +126,14 @@ public class SignupF extends Fragment {
                     return;
                 }
                 if(TextUtils.isEmpty(mobileNumber)){
+                    Toast.makeText(getActivity(), "Please enter the mobile number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(dateOfBirth)){
+                    Toast.makeText(getActivity(), "Please enter the mobile number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(gender)){
                     Toast.makeText(getActivity(), "Please enter the mobile number", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -163,42 +150,27 @@ public class SignupF extends Fragment {
                 user.put("Full name", fullName);
                 user.put("NIC", nic);
                 user.put("Mobile number", mobileNumber);
+                user.put("Date of birth", dateOfBirth);
+                user.put("Gender", gender);
 
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                db.collection("users")
+                        .document(currentUser.getUid())
+                        .set(user)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-
-//                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(getActivity(), "Authentication successful.", Toast.LENGTH_SHORT).show();
-                                    // Add a new document with a generated ID
-                                    db.collection("users")
-//                        .document(currentUser.getEmail())
-                                            .document(email)
-                                            .set(user)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    Toast.makeText(getActivity(), "Successfully registered.", Toast.LENGTH_LONG).show();
-
-                                                }
-                                            });
-
-                                } else {
-                                    Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_LONG).show();
-                                }
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(getActivity(), "Successfully registered.", Toast.LENGTH_LONG).show();
                             }
                         });
-                }
+            }
         });
 
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                StartupPageTwoF startupPageTwoF = new StartupPageTwoF();
-                fm.beginTransaction().replace(R.id.fragment_container, startupPageTwoF).commit();
+                StartupPageOneF startupFormF = new StartupPageOneF();
+                fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
 
             }
         });
