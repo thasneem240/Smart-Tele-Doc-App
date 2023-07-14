@@ -20,7 +20,6 @@ public class SearchDrugsFirebase implements Callable<ArrayList<String>> {
     int pharmacyNumber;
     Map<String, Integer> prescription;
     Map<String, Object> map;
-    Map<String, Object> mapPharmacy;
     Map<String, Object> mapMedicine;
     Map<String, Object> qtyAndValue;
 
@@ -47,50 +46,6 @@ public class SearchDrugsFirebase implements Callable<ArrayList<String>> {
 
         ArrayList<String> availablePharmacies = new ArrayList<>();
 
-        // getPharmacycount through the Firebase
-/*        for(int i = 1; i <= 2; i++) {
-            try {
-                Thread.sleep(3000);
-            }
-            catch (Exception e){
-
-            }
-
-            pharmacyNumber = i;
-            myRef.child("Phar/Pharmacy "+i).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (task.isSuccessful()) {
-
-                        boolean allTheDrugsAreAvailable = true;
-
-                        for (Map.Entry<String, Integer> entry : prescription.entrySet()){
-                                
-                                String drug = entry.getKey();
-//                                int dosage = entry.getValue();
-                            int dosage = 0;
-
-                            Map<String, Object> drugsInEachPharmacy;
-                            drugsInEachPharmacy = (Map) task.getResult().getValue();
-
-                            Object temp = 55;
-                            String s = String.valueOf(drugsInEachPharmacy.get(drug)); // Check whether that drug available
-                            int qty = Integer.valueOf(s);
-
-                            if (qty <= dosage)
-                                allTheDrugsAreAvailable = false;
-                        }
-
-                        if(allTheDrugsAreAvailable)
-                                availablePharmacies.add("Pharmacy "+pharmacyNumber);
-
-                    } else {
-                        Log.e("firebase", "Error getting data", task.getException());
-
-                    }
-                }
-            });*/
-
         myRef.child("Phar").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -113,12 +68,6 @@ public class SearchDrugsFirebase implements Callable<ArrayList<String>> {
                             String sss = String.valueOf(qtyAndValue.get("qty"));
                             int qty = Integer.valueOf(sss);
 
-//                                Map<String, Object> drugsInEachPharmacy;
-//                                drugsInEachPharmacy = (Map) task.getResult().getValue();
-//
-//                                String ss = String.valueOf(drugsInEachPharmacy.get(drug)); // Check whether that drug available
-//                                int qty = Integer.valueOf(ss);
-
                             if (qty <= dosage)
                                 allTheDrugsAreAvailable = false;
 
@@ -127,23 +76,6 @@ public class SearchDrugsFirebase implements Callable<ArrayList<String>> {
                         if (allTheDrugsAreAvailable)
                             availablePharmacies.add(pharmacy);
 
-/*                            for(Map.Entry<String, Object> entryL2 : mapPharmacy.entrySet()){
-//                                String medicine = entryL2.getKey();
-                                mapMedicine = (Map)entryL2.getValue();
-
-                                String s = String.valueOf(mapMedicine.get("qty"));
-                                int qty = Integer.valueOf(s);
-
-//                                String sf1=String.format("%s: %s: qty = %d",pharmacy, medicine, qty);
-//                                Log.d("76^^", ""+sf1);
-
-                                if (qty <= dosage)
-                                    allTheDrugsAreAvailable = false;
-
-                            }
-
-                            if(allTheDrugsAreAvailable)
-                                availablePharmacies.add("Pharmacy "+pharmacyNumber);*/
                     }
 
                 }

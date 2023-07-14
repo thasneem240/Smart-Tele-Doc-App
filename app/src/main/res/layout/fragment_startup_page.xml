@@ -35,29 +35,29 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
         android:text="Pharmacies"
-        app:layout_constraintBottom_toTopOf="@+id/searchDoc_button"
+        app:layout_constraintBottom_toTopOf="@+id/extra1_button"
         app:layout_constraintStart_toStartOf="@+id/transaction_button"
         app:layout_constraintTop_toBottomOf="@+id/transaction_button" />
 
     <Button
-        android:id="@+id/searchDoc_button"
+        android:id="@+id/extra1_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="13dp"
         android:layout_marginBottom="3dp"
-        android:text="SearchDoc"
-        app:layout_constraintBottom_toTopOf="@+id/extra2_button"
+        android:text="Extra 1"
+        app:layout_constraintBottom_toTopOf="@+id/available_pharmacies_button"
         app:layout_constraintEnd_toEndOf="@+id/pharmacy_button"
         app:layout_constraintTop_toBottomOf="@+id/pharmacy_button" />
 
     <Button
-        android:id="@+id/extra2_button"
+        android:id="@+id/available_pharmacies_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Extra 2"
+        android:text="Available Pharmacies"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchDoc_button" />
+        app:layout_constraintTop_toBottomOf="@+id/extra1_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

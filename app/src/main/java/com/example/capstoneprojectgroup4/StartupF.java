@@ -9,6 +9,19 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.capstoneprojectgroup4.search_drugs.SearchDrugsF;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StartupF#newInstance} factory method to
@@ -27,8 +40,8 @@ public class StartupF extends Fragment {
     Button authenticationButton;
     Button transactionButton;
     Button pharmacyButton;
-    Button searchdoc;
-    Button extra2Button;
+    Button extra1Button;
+    Button availablePharmaciesButton;
     FragmentManager fm;
 
     public StartupF() {
@@ -71,8 +84,8 @@ public class StartupF extends Fragment {
         authenticationButton = v.findViewById(R.id.authentication_button);
         transactionButton = v.findViewById(R.id.transaction_button);
         pharmacyButton = v.findViewById(R.id.pharmacy_button);
-        searchdoc = v.findViewById(R.id.searchDoc_button);
-        extra2Button = v.findViewById(R.id.extra2_button);
+        extra1Button = v.findViewById(R.id.extra1_button);
+        availablePharmaciesButton = v.findViewById(R.id.available_pharmacies_button);
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,22 +118,50 @@ public class StartupF extends Fragment {
             }
         });
 
-        searchdoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fm = getActivity().getSupportFragmentManager();
-                SearchDocF searchDocF = new SearchDocF();
-                fm.beginTransaction().replace(R.id.fragment_container, searchDocF).commit();
-
-            }
-        });
-
-        extra2Button.setOnClickListener(new View.OnClickListener() {
+        extra1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                fm = getActivity().getSupportFragmentManager();
 //                WelcomeF welcomeF = new WelcomeF();
 //                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+
+            }
+        });
+
+        availablePharmaciesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Map<String, Integer> prescription = new HashMap<>();
+                prescription.put("Medicine 1", 11);
+                prescription.put("Medicine 2", 8);
+
+                SearchDrugsFirebase searchDrugsFirebase = new SearchDrugsFirebase(prescription);
+
+                Single<ArrayList<String>> searchObservable = Single.fromCallable(searchDrugsFirebase);
+                searchObservable = searchObservable.subscribeOn(Schedulers.io());
+                searchObservable = searchObservable.observeOn(AndroidSchedulers.mainThread());
+                searchObservable.subscribe(new SingleObserver<ArrayList<String>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull ArrayList<String> availablePharmacies) {
+
+                        fm = getActivity().getSupportFragmentManager();
+                        SearchDrugsF searchDrugsF = new SearchDrugsF(availablePharmacies);
+                        fm.beginTransaction().replace(R.id.fragment_container, searchDrugsF).commit();
+
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
 
             }
         });
