@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4;
+package com.example.capstoneprojectgroup4.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,18 +9,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.capstoneprojectgroup4.search_drugs.SearchDrugsF;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+import com.example.capstoneprojectgroup4.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -121,9 +110,9 @@ public class StartupF extends Fragment {
         extra1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+                fm = getActivity().getSupportFragmentManager();
+                HomeFragment homeFragment = new HomeFragment();
+                fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
 
             }
         });
@@ -131,38 +120,9 @@ public class StartupF extends Fragment {
         availablePharmaciesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Map<String, Integer> prescription = new HashMap<>();
-                prescription.put("Medicine 1", 11);
-                prescription.put("Medicine 2", 8);
-
-                SearchDrugsFirebase searchDrugsFirebase = new SearchDrugsFirebase(prescription);
-
-                Single<ArrayList<String>> searchObservable = Single.fromCallable(searchDrugsFirebase);
-                searchObservable = searchObservable.subscribeOn(Schedulers.io());
-                searchObservable = searchObservable.observeOn(AndroidSchedulers.mainThread());
-                searchObservable.subscribe(new SingleObserver<ArrayList<String>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(@NonNull ArrayList<String> availablePharmacies) {
-
-                        fm = getActivity().getSupportFragmentManager();
-                        SearchDrugsF searchDrugsF = new SearchDrugsF(availablePharmacies);
-                        fm.beginTransaction().replace(R.id.fragment_container, searchDrugsF).commit();
-
-
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-                });
-
+                //                fm = getActivity().getSupportFragmentManager();
+//                WelcomeF welcomeF = new WelcomeF();
+//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
             }
         });
 

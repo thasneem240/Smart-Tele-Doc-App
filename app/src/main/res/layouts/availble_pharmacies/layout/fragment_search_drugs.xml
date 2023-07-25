@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".search_drugs.SearchDrugsF">
+    tools:context=".available_pharmacies.AvailablePharmaciesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/availablePharmaciesRV"
+        android:id="@+id/availablePharmaciesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

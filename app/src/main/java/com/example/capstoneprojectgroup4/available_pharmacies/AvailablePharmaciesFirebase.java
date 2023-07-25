@@ -1,6 +1,4 @@
-package com.example.capstoneprojectgroup4;
-
-import android.util.Log;
+package com.example.capstoneprojectgroup4.available_pharmacies;
 
 import androidx.annotation.NonNull;
 
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-public class SearchDrugsFirebase implements Callable<ArrayList<String>> {
+public class AvailablePharmaciesFirebase implements Callable<ArrayList<String>> {
     FirebaseDatabase database;
 
     int pharmacyNumber;
@@ -23,7 +21,7 @@ public class SearchDrugsFirebase implements Callable<ArrayList<String>> {
     Map<String, Object> mapMedicine;
     Map<String, Object> qtyAndValue;
 
-    public SearchDrugsFirebase(Map<String, Integer> prescription) {
+    public AvailablePharmaciesFirebase(Map<String, Integer> prescription) {
         this.prescription = prescription;
     }
 
@@ -32,7 +30,7 @@ public class SearchDrugsFirebase implements Callable<ArrayList<String>> {
         ArrayList<String> availablePharmacies = getAvailablePharmacies();
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (Exception e) {
 
         }

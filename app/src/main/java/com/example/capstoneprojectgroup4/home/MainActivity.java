@@ -1,9 +1,11 @@
-package com.example.capstoneprojectgroup4;
+package com.example.capstoneprojectgroup4.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+
+import com.example.capstoneprojectgroup4.R;
 
 public class MainActivity extends AppCompatActivity {
 

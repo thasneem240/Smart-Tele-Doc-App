@@ -36,6 +36,17 @@ android {
         exclude 'META-INF/INDEX.LIST'
         exclude 'META-INF/DEPENDENCIES'
     }
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res/layouts/availble_pharmacies',
+                    'src/main/res/layouts/writing_prescriptions',
+                    'src/main/res/layouts',
+                    'src/main/res'
+            ]
+        }
+    }
+
 }
 
 dependencies {
