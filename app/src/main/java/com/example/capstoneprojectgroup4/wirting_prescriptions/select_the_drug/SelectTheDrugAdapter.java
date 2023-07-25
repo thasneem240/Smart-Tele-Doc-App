@@ -17,10 +17,12 @@ import java.util.ArrayList;
 public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugViewHolder> {
     ArrayList<String> listOfDrugs;
     int drugsCount;
+    int p;
     FragmentManager fm;
 
-    public SelectTheDrugAdapter(ArrayList<String> listOfDrugs){
+    public SelectTheDrugAdapter(ArrayList<String> listOfDrugs, int position){
         this.listOfDrugs = listOfDrugs;
+        p = position;
         drugsCount = listOfDrugs.size();
     }
     @NonNull
@@ -42,7 +44,7 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
 
-                DrugsContainers drugsContainers = new DrugsContainers(holder.drugName.getText().toString());
+                DrugsContainers drugsContainers = new DrugsContainers(holder.drugName.getText().toString(), p);
                 fm.beginTransaction().replace(R.id.fragment_container, drugsContainers).commit();
             }
         });

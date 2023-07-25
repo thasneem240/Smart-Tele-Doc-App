@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,14 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainersViewHolder>{
+    int p;
+    String selectedDrug;
+    int i;
+    public DrugsContainersAdapter(String selectedDrug, int p){
+        this.selectedDrug = selectedDrug;
+        this.p = p;
+    }
+
     @NonNull
     @Override
     public DrugsContainersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,7 +42,9 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
 
     @Override
     public void onBindViewHolder(@NonNull DrugsContainersViewHolder holder, int position) {
-        holder.drug1.setText("Drug 1");
+        Log.d("nnrp", "p = "+p);
+        if(position == p && position != 0)
+            holder.drug1.setText(selectedDrug);
         holder.addDrugs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +64,7 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
                         AppCompatActivity activity = (AppCompatActivity) view.getContext();
                         FragmentManager fm = activity.getSupportFragmentManager();
 
-                        SelectTheDrug selectTheDrug = new SelectTheDrug(listOfDrugs);
+                        SelectTheDrug selectTheDrug = new SelectTheDrug(listOfDrugs, position);
                         fm.beginTransaction().replace(R.id.fragment_container, selectTheDrug).commit();
                     }
 

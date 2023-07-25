@@ -34,13 +34,15 @@ public class DrugsContainers extends Fragment {
     private String mParam2;
     FragmentManager fm;
     Map<String, Object> prescription;
+    int position;
     String selectedDrug;
 
     public DrugsContainers() {
         // Required empty public constructor
     }
-    public DrugsContainers(String selectedDrug) {
+    public DrugsContainers(String selectedDrug, int position) {
         this.selectedDrug = selectedDrug;
+        this.position = position;
     }
     public DrugsContainers(Map<String, Object> prescription) {
         this.prescription = prescription;
@@ -136,7 +138,7 @@ public class DrugsContainers extends Fragment {
 
         RecyclerView rv = v.findViewById(R.id.drugs_container_recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter();
+        DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter(selectedDrug, position);
         rv.setAdapter(drugsContainersAdapter);
 
         return v;
