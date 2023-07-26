@@ -7,14 +7,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.available_pharmacies.AvailablePharmaciesAdapter;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.CreatePrescriptionFragment;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.PrescriptionActivity;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.select_the_drug.SelectTheDrug;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,20 +37,10 @@ public class DrugsContainers extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    FragmentManager fm;
     Map<String, Object> prescription;
-    int position;
-    String selectedDrug;
 
     public DrugsContainers() {
         // Required empty public constructor
-    }
-    public DrugsContainers(String selectedDrug, int position) {
-        this.selectedDrug = selectedDrug;
-        this.position = position;
-    }
-    public DrugsContainers(Map<String, Object> prescription) {
-        this.prescription = prescription;
     }
 
     /**
@@ -81,65 +76,22 @@ public class DrugsContainers extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_select_drugs_temp, container, false);
 
-/*        TextView drug1 = v.findViewById(R.id.text_drug1);
-        fm = getActivity().getSupportFragmentManager();
-//        Button backToPrescription = v.findViewById(R.id.button_to_prescription);
-        ImageButton addDrugs = (ImageButton) v.findViewById(R.id.button_add_drugs);
-
-        if(selectedDrug!=null)
-            drug1.setText(selectedDrug);*/
-
-/*        addDrugs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListOfDrugsFirebase listOfDrugsFirebase = new ListOfDrugsFirebase();
-
-                Single<ArrayList<String>> searchObservable = Single.fromCallable(listOfDrugsFirebase);
-                searchObservable = searchObservable.subscribeOn(Schedulers.io());
-                searchObservable = searchObservable.observeOn(AndroidSchedulers.mainThread());
-                searchObservable.subscribe(new SingleObserver<ArrayList<String>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(@NonNull ArrayList<String> listOfDrugs) {
-
-                        SelectTheDrug selectTheDrug = new SelectTheDrug(listOfDrugs);
-                        fm.beginTransaction().replace(R.id.fragment_container, selectTheDrug).commit();
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-                });
-            }
-        });*/
-
-/*        backToPrescription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Map<String, Object> drugs = new HashMap<>();
-                drugs.put("Medicine 14", 14);
-                drugs.put("Medicine 15", 44);
-                drugs.put("Medicine 16", 34);
-
-                CreatePrescriptionFragment createPrescriptionFragment = new CreatePrescriptionFragment(prescription);
-                fm.beginTransaction().replace(R.id.fragment_container, createPrescriptionFragment).commit();
-            }
-        });*/
-
-
-/*        fm = getActivity().getSupportFragmentManager();
-        SelectTheDrug selectTheDrug = new SelectTheDrug();
-        fm.beginTransaction().replace(R.id.fragment_container, selectTheDrug).commit();*/
+        Button backToPrescription = v.findViewById(R.id.button_to_prescription);
 
         RecyclerView rv = v.findViewById(R.id.drugs_container_recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter(selectedDrug, position);
+        PrescriptionActivity prescriptionActivity =  (PrescriptionActivity) getActivity();
+        DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter(prescriptionActivity.numberOfContainers);
         rv.setAdapter(drugsContainersAdapter);
+
+        backToPrescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                CreatePrescriptionFragment createPrescriptionFragment = new CreatePrescriptionFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, createPrescriptionFragment).commit();
+            }
+        });
 
         return v;
     }

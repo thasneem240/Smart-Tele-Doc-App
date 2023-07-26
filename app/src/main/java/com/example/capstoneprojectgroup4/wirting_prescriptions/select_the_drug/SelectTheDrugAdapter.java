@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.PrescriptionActivity;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers.DrugsContainers;
 
 import java.util.ArrayList;
@@ -17,12 +18,9 @@ import java.util.ArrayList;
 public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugViewHolder> {
     ArrayList<String> listOfDrugs;
     int drugsCount;
-    int p;
-    FragmentManager fm;
 
-    public SelectTheDrugAdapter(ArrayList<String> listOfDrugs, int position){
+    public SelectTheDrugAdapter(ArrayList<String> listOfDrugs){
         this.listOfDrugs = listOfDrugs;
-        p = position;
         drugsCount = listOfDrugs.size();
     }
     @NonNull
@@ -41,11 +39,15 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
         holder.drugName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PrescriptionActivity prescriptionActivity =  (PrescriptionActivity) view.getContext();
+//                prescriptionActivity.selectedDrug.
+                prescriptionActivity.selectedDrug = holder.drugName.getText().toString();
+
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
 
-                DrugsContainers drugsContainers = new DrugsContainers(holder.drugName.getText().toString(), p);
-                fm.beginTransaction().replace(R.id.fragment_container, drugsContainers).commit();
+                DrugsContainers drugsContainers = new DrugsContainers();
+                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();
             }
         });
     }

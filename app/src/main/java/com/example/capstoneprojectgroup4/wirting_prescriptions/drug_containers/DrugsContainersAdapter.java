@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.ListOfDrugsFirebase;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.PrescriptionActivity;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.select_the_drug.SelectTheDrug;
 
 import java.util.ArrayList;
@@ -23,12 +24,13 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainersViewHolder>{
-    int p;
+    int containerNo;
     String selectedDrug;
-    int i;
-    public DrugsContainersAdapter(String selectedDrug, int p){
-        this.selectedDrug = selectedDrug;
-        this.p = p;
+    PrescriptionActivity prescriptionActivity;
+    int numberOfContainers;
+
+    public DrugsContainersAdapter(int numberOfContainers){
+        this.numberOfContainers = numberOfContainers;
     }
 
     @NonNull
@@ -37,18 +39,25 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.list_drugs_containers,parent,false);
         DrugsContainersViewHolder drugsContainersViewHolder = new DrugsContainersViewHolder(view);
+        prescriptionActivity =  (PrescriptionActivity) parent.getContext();
+        containerNo = prescriptionActivity.containerNo;
+        selectedDrug = prescriptionActivity.selectedDrug;
+
         return drugsContainersViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull DrugsContainersViewHolder holder, int position) {
-        Log.d("nnrp", "p = "+p);
-        if(position == p && position != 0)
+
+        if(position == containerNo && position != 0)
             holder.drug1.setText(selectedDrug);
-        holder.addDrugs.setOnClickListener(new View.OnClickListener() {
+        holder.addDrugsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               ListOfDrugsFirebase listOfDrugsFirebase = new ListOfDrugsFirebase();
+                prescriptionActivity.containerNo = position;
+                ++prescriptionActivity.numberOfContainers;
+
+                ListOfDrugsFirebase listOfDrugsFirebase = new ListOfDrugsFirebase();
 
                 Single<ArrayList<String>> searchObservable = Single.fromCallable(listOfDrugsFirebase);
                 searchObservable = searchObservable.subscribeOn(Schedulers.io());
@@ -64,8 +73,8 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
                         AppCompatActivity activity = (AppCompatActivity) view.getContext();
                         FragmentManager fm = activity.getSupportFragmentManager();
 
-                        SelectTheDrug selectTheDrug = new SelectTheDrug(listOfDrugs, position);
-                        fm.beginTransaction().replace(R.id.fragment_container, selectTheDrug).commit();
+                        SelectTheDrug selectTheDrug = new SelectTheDrug(listOfDrugs);
+                        fm.beginTransaction().replace(R.id.fragmentContainerPrescription, selectTheDrug).commit();
                     }
 
                     @Override
@@ -80,6 +89,6 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
 
     @Override
     public int getItemCount() {
-        return 5;
+        return numberOfContainers;
     }
 }

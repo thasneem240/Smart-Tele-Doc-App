@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".wirting_prescriptions.PrescriptionActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerPrescription"
+        android:name="com.example.capstoneprojectgroup4.wirting_prescriptions.CreatePrescriptionFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="186dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

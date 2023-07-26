@@ -30,14 +30,12 @@ public class SelectTheDrug extends Fragment {
     private String mParam1;
     private String mParam2;
     ArrayList<String> listOfDrugs;
-    int position;
 
     public SelectTheDrug() {
         // Required empty public constructor
     }
-    public SelectTheDrug(ArrayList<String> listOfDrugs, int position) {
+    public SelectTheDrug(ArrayList<String> listOfDrugs) {
         this.listOfDrugs = listOfDrugs;
-        this.position = position;
     }
     /**
      * Use this factory method to create a new instance of
@@ -73,7 +71,7 @@ public class SelectTheDrug extends Fragment {
         View v = inflater.inflate(R.layout.fragment_select_the_drug, container, false);
         RecyclerView rv = v.findViewById(R.id.selectTheDrugRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        SelectTheDrugAdapter selectTheDrugAdapter = new SelectTheDrugAdapter(listOfDrugs, position);
+        SelectTheDrugAdapter selectTheDrugAdapter = new SelectTheDrugAdapter(listOfDrugs);
         rv.setAdapter(selectTheDrugAdapter);
 
         return v;

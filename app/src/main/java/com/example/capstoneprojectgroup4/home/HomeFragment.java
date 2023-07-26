@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.available_pharmacies.AvailablePharmaciesFirebase;
 import com.example.capstoneprojectgroup4.available_pharmacies.AvailablePharmaciesFragment;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.CreatePrescriptionFragment;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.PrescriptionActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,8 +125,8 @@ public class HomeFragment extends Fragment {
         createPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CreatePrescriptionFragment createPrescriptionFragment = new CreatePrescriptionFragment();
-                fm.beginTransaction().replace(R.id.fragment_container, createPrescriptionFragment).commit();
+                Intent prescriptionActivity = new Intent(getActivity(), PrescriptionActivity.class);
+                startActivity(prescriptionActivity);
             }
         });
 

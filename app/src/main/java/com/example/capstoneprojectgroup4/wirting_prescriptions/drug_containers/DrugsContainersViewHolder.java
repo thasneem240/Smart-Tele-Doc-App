@@ -11,12 +11,12 @@ import com.example.capstoneprojectgroup4.R;
 
 public class DrugsContainersViewHolder extends RecyclerView.ViewHolder{
     TextView drug1;
-    ImageButton addDrugs;
+    ImageButton addDrugsButton;
 
     public DrugsContainersViewHolder(@NonNull View itemView) {
         super(itemView);
 
          drug1 = itemView.findViewById(R.id.text_drug1);
-         addDrugs = itemView.findViewById(R.id.button_add_drugs);
+         addDrugsButton = itemView.findViewById(R.id.button_add_drugs);
     }
 }
