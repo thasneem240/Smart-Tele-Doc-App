@@ -40,8 +40,7 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
             @Override
             public void onClick(View view) {
                 PrescriptionActivity prescriptionActivity =  (PrescriptionActivity) view.getContext();
-//                prescriptionActivity.selectedDrug.
-                prescriptionActivity.selectedDrug = holder.drugName.getText().toString();
+                prescriptionActivity.setSelectedDrugs(holder.drugName.getText().toString());
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();

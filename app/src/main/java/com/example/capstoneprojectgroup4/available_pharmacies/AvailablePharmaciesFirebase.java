@@ -44,7 +44,7 @@ public class AvailablePharmaciesFirebase implements Callable<ArrayList<String>> 
 
         ArrayList<String> availablePharmacies = new ArrayList<>();
 
-        myRef.child("Phar").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+/*        myRef.child("Phar").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -73,6 +73,28 @@ public class AvailablePharmaciesFirebase implements Callable<ArrayList<String>> 
 
                         if (allTheDrugsAreAvailable)
                             availablePharmacies.add(pharmacy);
+
+                    }
+
+                }
+
+
+            }
+        });
+
+        return availablePharmacies;
+}*/
+                myRef.child("Phar").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    map = (Map) task.getResult().getValue();
+
+                    boolean allTheDrugsAreAvailable = true;
+
+                    for (Map.Entry<String, Object> entryL1 : map.entrySet()) {
+                        String pharmacy = entryL1.getKey();
+                        mapMedicine = (Map) entryL1.getValue();
 
                     }
 

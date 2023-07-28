@@ -9,24 +9,13 @@
         android:id="@+id/text_drug1"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="143dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
         android:clickable="true"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/button_add_drugs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/button_add_drugs"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/text_drug1"
-        app:layout_constraintStart_toStartOf="@+id/text_drug1"
-        app:layout_constraintTop_toBottomOf="@+id/text_drug1"
-        app:srcCompat="@drawable/plus_circle_2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

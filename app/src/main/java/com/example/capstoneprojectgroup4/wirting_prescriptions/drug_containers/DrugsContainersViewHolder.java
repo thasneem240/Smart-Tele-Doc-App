@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.capstoneprojectgroup4.R;
 
 public class DrugsContainersViewHolder extends RecyclerView.ViewHolder{
-    TextView drug1;
-    ImageButton addDrugsButton;
+    TextView drugsNames;
 
     public DrugsContainersViewHolder(@NonNull View itemView) {
         super(itemView);
 
-         drug1 = itemView.findViewById(R.id.text_drug1);
-         addDrugsButton = itemView.findViewById(R.id.button_add_drugs);
+         drugsNames = itemView.findViewById(R.id.text_drug1);
     }
 }

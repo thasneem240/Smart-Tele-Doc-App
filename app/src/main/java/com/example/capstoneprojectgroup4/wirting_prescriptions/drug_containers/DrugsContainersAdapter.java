@@ -24,13 +24,12 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainersViewHolder>{
-    int containerNo;
-    String selectedDrug;
     PrescriptionActivity prescriptionActivity;
     int numberOfContainers;
+    ArrayList<String> selectedDrugs;
 
-    public DrugsContainersAdapter(int numberOfContainers){
-        this.numberOfContainers = numberOfContainers;
+    public DrugsContainersAdapter(ArrayList<String> selectedDrugs){
+        this.selectedDrugs = selectedDrugs;
     }
 
     @NonNull
@@ -40,55 +39,18 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
         View view = layoutInflater.inflate(R.layout.list_drugs_containers,parent,false);
         DrugsContainersViewHolder drugsContainersViewHolder = new DrugsContainersViewHolder(view);
         prescriptionActivity =  (PrescriptionActivity) parent.getContext();
-        containerNo = prescriptionActivity.containerNo;
-        selectedDrug = prescriptionActivity.selectedDrug;
 
         return drugsContainersViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull DrugsContainersViewHolder holder, int position) {
+            holder.drugsNames.setText(selectedDrugs.get(position));
 
-        if(position == containerNo && position != 0)
-            holder.drug1.setText(selectedDrug);
-        holder.addDrugsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                prescriptionActivity.containerNo = position;
-                ++prescriptionActivity.numberOfContainers;
-
-                ListOfDrugsFirebase listOfDrugsFirebase = new ListOfDrugsFirebase();
-
-                Single<ArrayList<String>> searchObservable = Single.fromCallable(listOfDrugsFirebase);
-                searchObservable = searchObservable.subscribeOn(Schedulers.io());
-                searchObservable = searchObservable.observeOn(AndroidSchedulers.mainThread());
-                searchObservable.subscribe(new SingleObserver<ArrayList<String>>() {
-                    @Override
-                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull ArrayList<String> listOfDrugs) {
-                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                        FragmentManager fm = activity.getSupportFragmentManager();
-
-                        SelectTheDrug selectTheDrug = new SelectTheDrug(listOfDrugs);
-                        fm.beginTransaction().replace(R.id.fragmentContainerPrescription, selectTheDrug).commit();
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
-                    }
-                });
-            }
-
-        });
     }
 
     @Override
     public int getItemCount() {
-        return numberOfContainers;
+        return selectedDrugs.size();
     }
 }

@@ -1,12 +1,16 @@
 package com.example.capstoneprojectgroup4.wirting_prescriptions;
 
+import static android.content.ContentValues.TAG;
+
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,17 +19,24 @@ import java.util.concurrent.Callable;
 
 public class ListOfDrugsFirebase implements Callable<ArrayList<String>> {
     ArrayList<String> listOfDrugs;
+    Map <String, Object> doctors = new HashMap<>();
+    Map <String, Object> detailsOfEachDoctor = new HashMap<>();
+    ArrayList<String> locations;
 
     @Override
     public ArrayList<String> call() throws Exception {
         getListOfDrugs();
 
+/*        FirebaseRecyclerOptions<Doctors> options =
+                new FirebaseRecyclerOptions.Builder<Doctors>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Doctors"), Doctors.class)
+                        .build();*/
+
         try {
-            Thread.sleep(4000);
+            Thread.sleep(2000);
         } catch (Exception e) {
 
         }
-        Log.d("nnrp", "List of drugs "+listOfDrugs);
 
         return listOfDrugs;
     }
@@ -33,7 +44,24 @@ public class ListOfDrugsFirebase implements Callable<ArrayList<String>> {
     private void getListOfDrugs(){
         listOfDrugs = new ArrayList<>();
 
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+        Query query = FirebaseDatabase.getInstance().getReference("Drugs");
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    String s = ds.getKey();
+                    listOfDrugs.add(s);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+/*        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
         myRef.child("Drugs").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -42,7 +70,7 @@ public class ListOfDrugsFirebase implements Callable<ArrayList<String>> {
                     listOfDrugs.add(s);
                 }
             }
-        });
+        });*/
 
 
 

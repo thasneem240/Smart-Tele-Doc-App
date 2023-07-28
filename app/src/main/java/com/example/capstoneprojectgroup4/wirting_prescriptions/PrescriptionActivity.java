@@ -8,17 +8,13 @@ import android.util.Log;
 
 import com.example.capstoneprojectgroup4.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PrescriptionActivity extends AppCompatActivity {
-    public int containerNo;
-    public String selectedDrug;
     private Map<String, Object> prescription;
-
-
-
-    private Map<String, Object> selectedDrugs;
+    private ArrayList<String> selectedDrugs = new ArrayList<>();
     Boolean prescriptionIsAvailable = false;
 
     public int numberOfContainers = 1;
@@ -37,7 +33,6 @@ public class PrescriptionActivity extends AppCompatActivity {
         }
     }
     public Map<String, Object> getPrescription() {
-        Log.d("nnrp", ""+prescriptionIsAvailable);
         if(!prescriptionIsAvailable)
             prescription = new HashMap<>();
 
@@ -49,11 +44,11 @@ public class PrescriptionActivity extends AppCompatActivity {
         prescriptionIsAvailable = true;
 
     }
-/*    public Map<String, Object> getSelectedDrugs() {
+    public ArrayList<String> getSelectedDrugs() {
         return selectedDrugs;
     }
 
     public void setSelectedDrugs(String selectedDrug) {
-        this.selectedDrugs = selectedDrugs;
-    }*/
+        selectedDrugs.add(selectedDrug);
+    }
 }

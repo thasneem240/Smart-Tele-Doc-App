@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers.DrugsContainers;
@@ -39,6 +40,7 @@ public class CreatePrescriptionFragment extends Fragment {
     EditText date;
     EditText treatmentDuration;
     EditText prescriptionNotes;
+    TextView drugsCount;
     Map<String, Object> prescription = new HashMap<>();
     PrescriptionActivity prescriptionActivity;
 
@@ -79,15 +81,23 @@ public class CreatePrescriptionFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_create_prescription, container, false);
 
+
         selectDrugs = v.findViewById(R.id.button_select_drugs);
         doctorName = v.findViewById(R.id.edit_text_doctor_name);
         patientName = v.findViewById(R.id.edit_text_patient_name);
         date = v.findViewById(R.id.edit_text_date);
         treatmentDuration = v.findViewById(R.id.edit_text_treatment_duration);
         prescriptionNotes = v.findViewById(R.id.edit_text_prescription_notes);
+        drugsCount = v.findViewById(R.id.drugs_count);
+        Log.d("nnrp", "Flag");
 
         prescriptionActivity = (PrescriptionActivity) v.getContext();
         prescription = prescriptionActivity.getPrescription();
+
+        Log.d("nnrp", "selected drugs "+prescriptionActivity.getSelectedDrugs().isEmpty());
+
+        if(!prescriptionActivity.getSelectedDrugs().isEmpty())
+            drugsCount.setText(""+prescriptionActivity.getSelectedDrugs().size());
 
         if(!prescription.isEmpty()){
             if(prescription.containsKey("Doctor's name")){
@@ -124,6 +134,8 @@ public class CreatePrescriptionFragment extends Fragment {
                 fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();
             }
         });
+
+
 
         return v;
     }
