@@ -1,7 +1,11 @@
 package com.example.capstoneprojectgroup4.wirting_prescriptions;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -14,7 +18,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.home.HomeFragment;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers.DrugsContainers;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +45,7 @@ public class CreatePrescriptionFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     Button selectDrugs;
+    Button submitPrescription;
     EditText doctorName;
     EditText patientName;
     EditText date;
@@ -42,7 +53,7 @@ public class CreatePrescriptionFragment extends Fragment {
     EditText prescriptionNotes;
     TextView drugsCount;
     Map<String, Object> prescription = new HashMap<>();
-    PrescriptionActivity prescriptionActivity;
+    WritingPrescriptionActivity writingPrescriptionActivity;
 
     public CreatePrescriptionFragment() {
         // Required empty public constructor
@@ -83,6 +94,7 @@ public class CreatePrescriptionFragment extends Fragment {
 
 
         selectDrugs = v.findViewById(R.id.button_select_drugs);
+        submitPrescription = v.findViewById(R.id.button_submit_prescription);
         doctorName = v.findViewById(R.id.edit_text_doctor_name);
         patientName = v.findViewById(R.id.edit_text_patient_name);
         date = v.findViewById(R.id.edit_text_date);
@@ -91,13 +103,13 @@ public class CreatePrescriptionFragment extends Fragment {
         drugsCount = v.findViewById(R.id.drugs_count);
         Log.d("nnrp", "Flag");
 
-        prescriptionActivity = (PrescriptionActivity) v.getContext();
-        prescription = prescriptionActivity.getPrescription();
+        writingPrescriptionActivity = (WritingPrescriptionActivity) v.getContext();
+        prescription = writingPrescriptionActivity.getPrescription();
 
-        Log.d("nnrp", "selected drugs "+prescriptionActivity.getSelectedDrugs().isEmpty());
+        Log.d("nnrp", "selected drugs "+ writingPrescriptionActivity.getSelectedDrugs().isEmpty());
 
-        if(!prescriptionActivity.getSelectedDrugs().isEmpty())
-            drugsCount.setText(""+prescriptionActivity.getSelectedDrugs().size());
+        if(!writingPrescriptionActivity.getSelectedDrugs().isEmpty())
+            drugsCount.setText(""+ writingPrescriptionActivity.getSelectedDrugs().size());
 
         if(!prescription.isEmpty()){
             if(prescription.containsKey("Doctor's name")){
@@ -126,8 +138,8 @@ public class CreatePrescriptionFragment extends Fragment {
                 prescription.put("Duration of treatments", treatmentDuration.getText().toString());
                 prescription.put("Prescription notes", prescriptionNotes.getText().toString());
 
-                prescriptionActivity = (PrescriptionActivity) getActivity();
-                prescriptionActivity.setPrescription(prescription);
+                writingPrescriptionActivity = (WritingPrescriptionActivity) getActivity();
+                writingPrescriptionActivity.setPrescription(prescription);
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DrugsContainers drugsContainers = new DrugsContainers();
@@ -136,6 +148,40 @@ public class CreatePrescriptionFragment extends Fragment {
         });
 
 
+
+        submitPrescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prescription.put("Doctor's name", doctorName.getText().toString());
+                prescription.put("Patient's name", patientName.getText().toString());
+                prescription.put("Date", date.getText().toString());
+                prescription.put("Duration of treatments", treatmentDuration.getText().toString());
+                prescription.put("Prescription notes", prescriptionNotes.getText().toString());
+
+                writingPrescriptionActivity = (WritingPrescriptionActivity) getActivity();
+                prescription.put("Selected drugs", writingPrescriptionActivity.getSelectedDrugs());
+
+                long time= System.currentTimeMillis();
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Prescriptions2").child(""+doctorName.getText().toString()+"_"+System.currentTimeMillis());
+
+                myRef.setValue(prescription).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Intent mainActivity = new Intent(getActivity(), MainActivity.class);
+                        startActivity(mainActivity);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
+
+            }
+        });
 
         return v;
     }

@@ -1,30 +1,19 @@
 package com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.ListOfDrugsFirebase;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.PrescriptionActivity;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.select_the_drug.SelectTheDrug;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.WritingPrescriptionActivity;
 
 import java.util.ArrayList;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
 public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainersViewHolder>{
-    PrescriptionActivity prescriptionActivity;
+    WritingPrescriptionActivity writingPrescriptionActivity;
     int numberOfContainers;
     ArrayList<String> selectedDrugs;
 
@@ -38,7 +27,7 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.list_drugs_containers,parent,false);
         DrugsContainersViewHolder drugsContainersViewHolder = new DrugsContainersViewHolder(view);
-        prescriptionActivity =  (PrescriptionActivity) parent.getContext();
+        writingPrescriptionActivity =  (WritingPrescriptionActivity) parent.getContext();
 
         return drugsContainersViewHolder;
     }

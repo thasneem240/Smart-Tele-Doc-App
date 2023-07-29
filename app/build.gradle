@@ -41,6 +41,7 @@ android {
             res.srcDirs = [
                     'src/main/res/layouts/availble_pharmacies',
                     'src/main/res/layouts/writing_prescriptions',
+                    'src/main/res/layouts/view_prescriptions',
                     'src/main/res/layouts',
                     'src/main/res'
             ]

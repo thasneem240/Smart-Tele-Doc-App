@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.capstoneprojectgroup4.R;
 
@@ -12,12 +11,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PrescriptionActivity extends AppCompatActivity {
+public class WritingPrescriptionActivity extends AppCompatActivity {
     private Map<String, Object> prescription;
     private ArrayList<String> selectedDrugs = new ArrayList<>();
     Boolean prescriptionIsAvailable = false;
-
-    public int numberOfContainers = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -3,6 +3,7 @@ package com.example.capstoneprojectgroup4.home;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -12,21 +13,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.available_pharmacies.AvailablePharmaciesFirebase;
 import com.example.capstoneprojectgroup4.available_pharmacies.AvailablePharmaciesFragment;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.CreatePrescriptionFragment;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.PrescriptionActivity;
+import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.WritingPrescriptionActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +42,13 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     FragmentManager fm;
+    FirebaseDatabase database;
+
+    int pharmacyNumber;
+    Map<String, Object> map;
+    Map<String, Object> mapMedicine;
+    Map<String, Object> qtyAndValue;
+
 
 
     public HomeFragment() {
@@ -87,6 +92,7 @@ public class HomeFragment extends Fragment {
 
         Button availablePharmacies = v.findViewById(R.id.available_pharmacies);
         Button createPrescription = v.findViewById(R.id.create_prescription);
+        Button viewPrescriptions = v.findViewById(R.id.button_prescriptions);
 
         availablePharmacies.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,38 +101,64 @@ public class HomeFragment extends Fragment {
                 prescription.put("Medicine 1", 11);
                 prescription.put("Medicine 2", 8);
 
-                AvailablePharmaciesFirebase availablePharmaciesFirebase = new AvailablePharmaciesFirebase(prescription);
+                database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference();
 
-                Single<ArrayList<String>> searchObservable = Single.fromCallable(availablePharmaciesFirebase);
-                searchObservable = searchObservable.subscribeOn(Schedulers.io());
-                searchObservable = searchObservable.observeOn(AndroidSchedulers.mainThread());
-                searchObservable.subscribe(new SingleObserver<ArrayList<String>>() {
+                ArrayList<String> availablePharmacies = new ArrayList<>();
+                myRef.child("Phar").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            map = (Map) task.getResult().getValue();
 
-                    }
+                            boolean allTheDrugsAreAvailable = true;
 
-                    @Override
-                    public void onSuccess(@NonNull ArrayList<String> availablePharmacies) {
+                            for (Map.Entry<String, Object> entryL1 : map.entrySet()) {
+                                String pharmacy = entryL1.getKey();
+                                mapMedicine = (Map) entryL1.getValue();
+
+                                for (Map.Entry<String, Integer> entry : prescription.entrySet()) {
+
+                                    String drug = entry.getKey();
+                                    String s = String.valueOf(entry.getValue());
+                                    int dosage = Integer.valueOf(s);
+
+                                    qtyAndValue = (Map) mapMedicine.get(drug);
+                                    String sss = String.valueOf(qtyAndValue.get("qty"));
+                                    int qty = Integer.valueOf(sss);
+
+                                    if (qty <= dosage)
+                                        allTheDrugsAreAvailable = false;
+
+                                }
+
+                                if (allTheDrugsAreAvailable)
+                                    availablePharmacies.add(pharmacy);
+
+                            }
+
+                        }
                         AvailablePharmaciesFragment availablePharmaciesFragment = new AvailablePharmaciesFragment(availablePharmacies);
                         fm.beginTransaction().replace(R.id.fragment_container, availablePharmaciesFragment).commit();
-
-
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
                     }
                 });
+
             }
         });
 
         createPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent prescriptionActivity = new Intent(getActivity(), PrescriptionActivity.class);
+                Intent prescriptionActivity = new Intent(getActivity(), WritingPrescriptionActivity.class);
                 startActivity(prescriptionActivity);
+            }
+        });
+
+        viewPrescriptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragment_container, viewPrescriptionsFragment).commit();
             }
         });
 

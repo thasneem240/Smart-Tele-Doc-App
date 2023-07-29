@@ -20,8 +20,7 @@ import android.widget.ImageButton;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.CreatePrescriptionFragment;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.ListOfDrugsFirebase;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.PrescriptionActivity;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.WritingPrescriptionActivity;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.select_the_drug.SelectTheDrug;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,12 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Map;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,8 +90,8 @@ public class DrugsContainers extends Fragment {
 
         RecyclerView rv = v.findViewById(R.id.drugs_container_recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        PrescriptionActivity prescriptionActivity =  (PrescriptionActivity) getActivity();
-        DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter(prescriptionActivity.getSelectedDrugs());
+        WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getActivity();
+        DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter(writingPrescriptionActivity.getSelectedDrugs());
         rv.setAdapter(drugsContainersAdapter);
 
         backToPrescription.setOnClickListener(new View.OnClickListener() {
@@ -110,38 +103,6 @@ public class DrugsContainers extends Fragment {
             }
         });
 
-        /*addDrugs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                prescriptionActivity.numberOfContainers++;
-
-                ListOfDrugsFirebase listOfDrugsFirebase = new ListOfDrugsFirebase();
-
-                Single<ArrayList<String>> searchObservable = Single.fromCallable(listOfDrugsFirebase);
-                searchObservable = searchObservable.subscribeOn(Schedulers.io());
-                searchObservable = searchObservable.observeOn(AndroidSchedulers.mainThread());
-                searchObservable.subscribe(new SingleObserver<ArrayList<String>>() {
-                    @Override
-                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull ArrayList<String> listOfDrugs) {
-                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                        FragmentManager fm = activity.getSupportFragmentManager();
-
-                        SelectTheDrug selectTheDrug = new SelectTheDrug(listOfDrugs);
-                        fm.beginTransaction().replace(R.id.fragmentContainerPrescription, selectTheDrug).commit();
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
-                    }
-                });
-            }
-        });*/
         addDrugs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

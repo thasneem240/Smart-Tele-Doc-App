@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.PrescriptionActivity;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.WritingPrescriptionActivity;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers.DrugsContainers;
 
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
         holder.drugName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrescriptionActivity prescriptionActivity =  (PrescriptionActivity) view.getContext();
-                prescriptionActivity.setSelectedDrugs(holder.drugName.getText().toString());
+                WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) view.getContext();
+                writingPrescriptionActivity.setSelectedDrugs(holder.drugName.getText().toString());
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
