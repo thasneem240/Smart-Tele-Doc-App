@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,15 @@ import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.wirting_prescriptions.WritingPrescriptionActivity;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainersViewHolder>{
     WritingPrescriptionActivity writingPrescriptionActivity;
-    int numberOfContainers;
-    ArrayList<String> selectedDrugs;
+    ArrayList<Map.Entry<String, Integer>> selectedDrugsList;
 
-    public DrugsContainersAdapter(ArrayList<String> selectedDrugs){
-        this.selectedDrugs = selectedDrugs;
+
+    public DrugsContainersAdapter(ArrayList<Map.Entry<String, Integer>> selectedDrugsList){
+        this.selectedDrugsList = selectedDrugsList;
     }
 
     @NonNull
@@ -34,12 +36,14 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
 
     @Override
     public void onBindViewHolder(@NonNull DrugsContainersViewHolder holder, int position) {
-            holder.drugsNames.setText(selectedDrugs.get(position));
+        Map.Entry<String, Integer> entry = selectedDrugsList.get(position);
+
+            holder.drugsNames.setText(entry.getKey());
 
     }
 
     @Override
     public int getItemCount() {
-        return selectedDrugs.size();
+        return selectedDrugsList.size();
     }
 }

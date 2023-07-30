@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.wirting_prescriptions.select_the_drug;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
             @Override
             public void onClick(View view) {
                 WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) view.getContext();
-                writingPrescriptionActivity.setSelectedDrugs(holder.drugName.getText().toString());
+                writingPrescriptionActivity.setSelectedDrugs(holder.drugName.getText().toString(), 0);
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();

@@ -79,7 +79,6 @@ public class AvailablePharmaciesFragment extends Fragment {
         AvailablePharmaciesAdapter availablePharmaciesAdapter = new AvailablePharmaciesAdapter(availablePharmacies);
         rv.setAdapter(availablePharmaciesAdapter);
 
-
         return v;
     }
 }

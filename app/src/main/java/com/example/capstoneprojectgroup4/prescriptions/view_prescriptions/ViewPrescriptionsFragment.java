@@ -91,17 +91,22 @@ public class ViewPrescriptionsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 prescriptions = (Map) snapshot.getValue();
 
-                int i = 0;
+//                int i = 0;
+//
+//                prescriptionsV2 = new HashMap<>();
+//                for(Map.Entry<String, Object> entry : prescriptions.entrySet()){
+//                    prescriptionsV2.put(i, entry.getValue());
+//                    i++;
+//                }
 
-                prescriptionsV2 = new HashMap<>();
+                ArrayList<Map.Entry<String, Object>> prescriptionsList = new ArrayList<>();
                 for(Map.Entry<String, Object> entry : prescriptions.entrySet()){
-                    prescriptionsV2.put(i, entry.getValue());
-                    i++;
+                    prescriptionsList.add(entry);
                 }
 
                 RecyclerView rv = v.findViewById(R.id.recycler_view_prescriptions);
                 rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                ViewPrescriptionsAdapter viewPrescriptionsAdapter = new ViewPrescriptionsAdapter(prescriptionsV2);
+                ViewPrescriptionsAdapter viewPrescriptionsAdapter = new ViewPrescriptionsAdapter(prescriptionsList);
                 rv.setAdapter(viewPrescriptionsAdapter);
             }
 

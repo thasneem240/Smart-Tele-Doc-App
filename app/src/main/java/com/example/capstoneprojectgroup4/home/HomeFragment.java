@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +42,9 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    FragmentManager fm;
-    FirebaseDatabase database;
 
     int pharmacyNumber;
-    Map<String, Object> map;
-    Map<String, Object> mapMedicine;
-    Map<String, Object> qtyAndValue;
+
 
 
 
@@ -88,63 +85,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        fm = getActivity().getSupportFragmentManager();
-
-        Button availablePharmacies = v.findViewById(R.id.available_pharmacies);
         Button createPrescription = v.findViewById(R.id.create_prescription);
         Button viewPrescriptions = v.findViewById(R.id.button_prescriptions);
-
-        availablePharmacies.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Map<String, Integer> prescription = new HashMap<>();
-                prescription.put("Medicine 1", 11);
-                prescription.put("Medicine 2", 8);
-
-                database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference();
-
-                ArrayList<String> availablePharmacies = new ArrayList<>();
-                myRef.child("Phar").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            map = (Map) task.getResult().getValue();
-
-                            boolean allTheDrugsAreAvailable = true;
-
-                            for (Map.Entry<String, Object> entryL1 : map.entrySet()) {
-                                String pharmacy = entryL1.getKey();
-                                mapMedicine = (Map) entryL1.getValue();
-
-                                for (Map.Entry<String, Integer> entry : prescription.entrySet()) {
-
-                                    String drug = entry.getKey();
-                                    String s = String.valueOf(entry.getValue());
-                                    int dosage = Integer.valueOf(s);
-
-                                    qtyAndValue = (Map) mapMedicine.get(drug);
-                                    String sss = String.valueOf(qtyAndValue.get("qty"));
-                                    int qty = Integer.valueOf(sss);
-
-                                    if (qty <= dosage)
-                                        allTheDrugsAreAvailable = false;
-
-                                }
-
-                                if (allTheDrugsAreAvailable)
-                                    availablePharmacies.add(pharmacy);
-
-                            }
-
-                        }
-                        AvailablePharmaciesFragment availablePharmaciesFragment = new AvailablePharmaciesFragment(availablePharmacies);
-                        fm.beginTransaction().replace(R.id.fragment_container, availablePharmaciesFragment).commit();
-                    }
-                });
-
-            }
-        });
 
         createPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +99,7 @@ public class HomeFragment extends Fragment {
         viewPrescriptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
                 ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
                 fm.beginTransaction().replace(R.id.fragment_container, viewPrescriptionsFragment).commit();
             }
@@ -164,4 +107,6 @@ public class HomeFragment extends Fragment {
 
         return v;
     }
+
+
 }

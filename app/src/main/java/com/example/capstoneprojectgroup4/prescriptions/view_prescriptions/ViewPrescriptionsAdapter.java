@@ -1,22 +1,33 @@
 package com.example.capstoneprojectgroup4.prescriptions.view_prescriptions;
 
+import static android.app.PendingIntent.getActivity;
+
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.prescriptions.edit_prescription.EditPrescriptionFragment;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.WritingPrescriptionActivity;
+import com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers.DrugsContainers;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class ViewPrescriptionsAdapter extends RecyclerView.Adapter<ViewPrescriptionsViewHolder> {
-    Map<Integer, Object> prescriptions;
-    Map<Integer, Object> eachPrescription;
+    ArrayList<Map.Entry<String, Object>> prescriptionsList;
 
-    public ViewPrescriptionsAdapter(Map<Integer, Object> prescriptions){
-        this.prescriptions = prescriptions;
+    public ViewPrescriptionsAdapter(ArrayList<Map.Entry<String, Object>> prescriptionsList){
+        this.prescriptionsList = prescriptionsList;
     }
     @NonNull
     @Override
@@ -29,13 +40,25 @@ public class ViewPrescriptionsAdapter extends RecyclerView.Adapter<ViewPrescript
 
     @Override
     public void onBindViewHolder(@NonNull ViewPrescriptionsViewHolder holder, int position) {
-        eachPrescription = (Map) prescriptions.get(position);
+        Map.Entry<String, Object> entry = prescriptionsList.get(position);
+        Map<Integer, Object> eachPrescription = (Map) entry.getValue();
         holder.date.setText(eachPrescription.get("Date")+"");
         holder.doctor.setText(eachPrescription.get("Doctor's name")+"");
+
+        holder.date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                FragmentManager fm = activity.getSupportFragmentManager();
+                ArrayList<Map<String, Object>> selectedDrugs = (ArrayList<Map<String, Object>>) eachPrescription.get("Selected drugs");
+                EditPrescriptionFragment editPrescriptionFragment = new EditPrescriptionFragment(selectedDrugs);
+                fm.beginTransaction().replace(R.id.fragment_container, editPrescriptionFragment).commit();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return prescriptions.size();
+        return prescriptionsList.size();
     }
 }

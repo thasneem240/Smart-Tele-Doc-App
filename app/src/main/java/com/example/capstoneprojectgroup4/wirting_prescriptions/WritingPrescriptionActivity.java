@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class WritingPrescriptionActivity extends AppCompatActivity {
     private Map<String, Object> prescription;
-    private ArrayList<String> selectedDrugs = new ArrayList<>();
+    private Map<String, Integer> selectedDrugs = new HashMap<>();
     Boolean prescriptionIsAvailable = false;
 
     @Override
@@ -41,11 +41,15 @@ public class WritingPrescriptionActivity extends AppCompatActivity {
         prescriptionIsAvailable = true;
 
     }
-    public ArrayList<String> getSelectedDrugs() {
-        return selectedDrugs;
-    }
 
-    public void setSelectedDrugs(String selectedDrug) {
-        selectedDrugs.add(selectedDrug);
+    public void setSelectedDrugs(String drugName, Integer dosage) {
+        this.selectedDrugs.put(drugName, dosage);
+    }
+    public ArrayList<Map.Entry<String, Integer>> getSelectedDrugs() {
+        ArrayList<Map.Entry<String, Integer>> selectedDrugsList = new ArrayList<>();
+        for(Map.Entry<String, Integer> entry : selectedDrugs.entrySet()){
+            selectedDrugsList.add(entry);
+        }
+        return selectedDrugsList;
     }
 }

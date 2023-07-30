@@ -34,6 +34,7 @@ public class AvailablePharmaciesAdapter extends RecyclerView.Adapter<AvailablePh
     @Override
     public void onBindViewHolder(@NonNull AvailablePharmaciesViewHolder holder, int position) {
         holder.pharmacy_name.setText(String.valueOf(availablePharmacies.get(position)));
+//        holder.totalPrice.setText();
     }
 
     @Override

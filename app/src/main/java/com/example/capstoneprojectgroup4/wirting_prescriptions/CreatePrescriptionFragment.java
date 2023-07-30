@@ -101,12 +101,9 @@ public class CreatePrescriptionFragment extends Fragment {
         treatmentDuration = v.findViewById(R.id.edit_text_treatment_duration);
         prescriptionNotes = v.findViewById(R.id.edit_text_prescription_notes);
         drugsCount = v.findViewById(R.id.drugs_count);
-        Log.d("nnrp", "Flag");
 
         writingPrescriptionActivity = (WritingPrescriptionActivity) v.getContext();
         prescription = writingPrescriptionActivity.getPrescription();
-
-        Log.d("nnrp", "selected drugs "+ writingPrescriptionActivity.getSelectedDrugs().isEmpty());
 
         if(!writingPrescriptionActivity.getSelectedDrugs().isEmpty())
             drugsCount.setText(""+ writingPrescriptionActivity.getSelectedDrugs().size());
