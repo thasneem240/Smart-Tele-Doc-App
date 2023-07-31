@@ -31,13 +31,13 @@ public class AvailablePharmaciesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    ArrayList<String> availablePharmacies;
+    ArrayList<ObjectPharmacyAndPrice> availablePharmacies;
 
     public AvailablePharmaciesFragment() {
         // Required empty public constructor
     }
 
-    public AvailablePharmaciesFragment(ArrayList<String> availablePharmacies) {
+    public AvailablePharmaciesFragment(ArrayList<ObjectPharmacyAndPrice> availablePharmacies) {
         this.availablePharmacies = availablePharmacies;
     }
 

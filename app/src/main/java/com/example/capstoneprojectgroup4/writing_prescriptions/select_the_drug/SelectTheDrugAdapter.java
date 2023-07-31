@@ -1,6 +1,5 @@
-package com.example.capstoneprojectgroup4.wirting_prescriptions.select_the_drug;
+package com.example.capstoneprojectgroup4.writing_prescriptions.select_the_drug;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.WritingPrescriptionActivity;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers.DrugsContainers;
+import com.example.capstoneprojectgroup4.writing_prescriptions.WritingPrescriptionActivity;
+import com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers.DrugsContainers;
 
 import java.util.ArrayList;
 

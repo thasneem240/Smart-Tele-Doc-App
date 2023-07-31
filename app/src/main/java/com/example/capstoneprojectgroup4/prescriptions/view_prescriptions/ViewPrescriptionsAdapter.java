@@ -2,9 +2,6 @@ package com.example.capstoneprojectgroup4.prescriptions.view_prescriptions;
 
 import static android.app.PendingIntent.getActivity;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.prescriptions.edit_prescription.EditPrescriptionFragment;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.WritingPrescriptionActivity;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers.DrugsContainers;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -45,7 +39,7 @@ public class ViewPrescriptionsAdapter extends RecyclerView.Adapter<ViewPrescript
         holder.date.setText(eachPrescription.get("Date")+"");
         holder.doctor.setText(eachPrescription.get("Doctor's name")+"");
 
-        holder.date.setOnClickListener(new View.OnClickListener() {
+        holder.select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();

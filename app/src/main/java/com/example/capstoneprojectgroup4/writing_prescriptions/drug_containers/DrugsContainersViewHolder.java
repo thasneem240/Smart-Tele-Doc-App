@@ -1,7 +1,6 @@
-package com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers;
+package com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers;
 
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;

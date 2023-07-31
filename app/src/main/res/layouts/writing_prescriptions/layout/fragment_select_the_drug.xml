@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".wirting_prescriptions.select_the_drug.SelectTheDrug">
+    tools:context=".writing_prescriptions.select_the_drug.SelectTheDrug">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/selectTheDrugRecyclerView"

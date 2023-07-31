@@ -3,29 +3,17 @@ package com.example.capstoneprojectgroup4.home;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.available_pharmacies.AvailablePharmaciesFragment;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.WritingPrescriptionActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.example.capstoneprojectgroup4.writing_prescriptions.WritingPrescriptionActivity;
 
 /**
  * A simple {@link Fragment} subclass.

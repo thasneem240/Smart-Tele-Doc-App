@@ -26,13 +26,14 @@
         app:layout_constraintTop_toBottomOf="@+id/text_medicine"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/button_remove"
+    <TextView
+        android:id="@+id/text_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="118dp"
         android:text="Select"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

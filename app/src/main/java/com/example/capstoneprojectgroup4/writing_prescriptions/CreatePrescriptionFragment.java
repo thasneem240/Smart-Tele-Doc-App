@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.wirting_prescriptions;
+package com.example.capstoneprojectgroup4.writing_prescriptions;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
@@ -18,9 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.home.HomeFragment;
 import com.example.capstoneprojectgroup4.home.MainActivity;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers.DrugsContainers;
+import com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers.DrugsContainers;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;

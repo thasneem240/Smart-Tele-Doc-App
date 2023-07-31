@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.available_pharmacies;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,11 @@ import java.util.ArrayList;
 
 public class AvailablePharmaciesAdapter extends RecyclerView.Adapter<AvailablePharmaciesViewHolder> {
     FirebaseDatabase database;
-    ArrayList<String> availablePharmacies;
+    ArrayList<ObjectPharmacyAndPrice> availablePharmacies;
     int pharmacyCount;
 
-    public AvailablePharmaciesAdapter(ArrayList<String> availablePharmacies){
-        this. availablePharmacies = availablePharmacies;
+    public AvailablePharmaciesAdapter(ArrayList<ObjectPharmacyAndPrice> availablePharmacies){
+        this.availablePharmacies = availablePharmacies;
         pharmacyCount = availablePharmacies.size();
     }
 
@@ -33,8 +34,8 @@ public class AvailablePharmaciesAdapter extends RecyclerView.Adapter<AvailablePh
 
     @Override
     public void onBindViewHolder(@NonNull AvailablePharmaciesViewHolder holder, int position) {
-        holder.pharmacy_name.setText(String.valueOf(availablePharmacies.get(position)));
-//        holder.totalPrice.setText();
+        holder.pharmacy_name.setText(String.valueOf(availablePharmacies.get(position).pharmacy));
+        holder.totalPrice.setText(""+availablePharmacies.get(position).price);
     }
 
     @Override

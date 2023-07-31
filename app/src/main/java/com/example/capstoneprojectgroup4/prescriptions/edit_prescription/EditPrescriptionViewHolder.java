@@ -21,6 +21,6 @@ public class EditPrescriptionViewHolder extends RecyclerView.ViewHolder {
         editDosage = itemView.findViewById(R.id.edit_dosage);
         editButton = itemView.findViewById(R.id.button_edit);
         doneButton = itemView.findViewById(R.id.button_done);
-        removeButton = itemView.findViewById(R.id.button_remove);
+        removeButton = itemView.findViewById(R.id.text_select);
     }
 }

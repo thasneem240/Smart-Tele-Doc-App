@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.wirting_prescriptions;
+package com.example.capstoneprojectgroup4.writing_prescriptions;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;

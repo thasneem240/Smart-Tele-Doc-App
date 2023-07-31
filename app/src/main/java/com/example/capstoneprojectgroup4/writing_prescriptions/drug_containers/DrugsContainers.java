@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.wirting_prescriptions.drug_containers;
+package com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers;
 
 import static android.content.ContentValues.TAG;
 
@@ -19,9 +19,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.CreatePrescriptionFragment;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.WritingPrescriptionActivity;
-import com.example.capstoneprojectgroup4.wirting_prescriptions.select_the_drug.SelectTheDrug;
+import com.example.capstoneprojectgroup4.writing_prescriptions.CreatePrescriptionFragment;
+import com.example.capstoneprojectgroup4.writing_prescriptions.WritingPrescriptionActivity;
+import com.example.capstoneprojectgroup4.writing_prescriptions.select_the_drug.SelectTheDrug;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;

@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.wirting_prescriptions.select_the_drug;
+package com.example.capstoneprojectgroup4.writing_prescriptions.select_the_drug;
 
 import android.os.Bundle;
 

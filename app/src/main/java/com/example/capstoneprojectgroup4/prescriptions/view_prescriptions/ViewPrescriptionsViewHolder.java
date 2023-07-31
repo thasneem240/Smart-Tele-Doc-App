@@ -10,13 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.capstoneprojectgroup4.R;
 
 public class ViewPrescriptionsViewHolder extends RecyclerView.ViewHolder {
-    TextView date, doctor;
-    Button selectButton;
+    TextView date, doctor, select;
     public ViewPrescriptionsViewHolder(@NonNull View itemView) {
         super(itemView);
 
         date = itemView.findViewById(R.id.text_medicine);
         doctor = itemView.findViewById(R.id.text_dosage);
-        selectButton = itemView.findViewById(R.id.button_remove);
+        select = itemView.findViewById(R.id.text_select);
     }
 }
