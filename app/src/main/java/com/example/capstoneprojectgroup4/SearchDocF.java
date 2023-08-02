@@ -1,10 +1,13 @@
 package com.example.capstoneprojectgroup4;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,18 +20,30 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -36,11 +51,16 @@ import com.google.firebase.database.Query;
  * Use the {@link SearchDocF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchDocF extends Fragment {
+public class SearchDocF extends Fragment  {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    int searchType = -1; // Default to no specific search
+    Map <String, Object> doctors = new HashMap<>();
+    Map<String, Object> detailsOfEachDoctor = new HashMap<>();
+    String nameResult = "";
+    String specializationResult = "";
+    ArrayList<String> locations;
     private String mParam1;
     private String mParam2;
 
@@ -50,8 +70,16 @@ public class SearchDocF extends Fragment {
     private EditText searchEditText;
     private RecyclerView recyclerView;
     private DoctorAdapter doctorAdapter;
+
+    private DocSearchResultAdapter docSearchResultAdapter;
     private SearchView searchView;
 
+    Button button;
+    Query query;
+
+    Query query2;
+
+    FirebaseRecyclerOptions<Doctors> options;
     public SearchDocF() {
         // Required empty public constructor
     }
@@ -97,6 +125,7 @@ public class SearchDocF extends Fragment {
         doctorAdapter = new DoctorAdapter(options);
         recyclerView.setAdapter(doctorAdapter);
 
+
         return view;
     }
 
@@ -112,14 +141,25 @@ public class SearchDocF extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                performSearch(query);
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        performSearch(query);
+
+                    }
+                });
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                performSearch(query);
-                return false;
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        performSearch(query);
+
+                    }
+                });                return false;
             }
         });
 
@@ -129,40 +169,75 @@ public class SearchDocF extends Fragment {
     private void performSearch(String searchText) {
         int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
 
-        Query query;
-
         if (selectedRadioButtonId == R.id.radioName) {
-            query = FirebaseDatabase.getInstance().getReference().child("Doctors").orderByChild("Name").startAt(searchText).endAt(searchText + "\uf8ff");
+            searchType = 0;
         } else if (selectedRadioButtonId == R.id.radioSpecialization) {
-            query = FirebaseDatabase.getInstance().getReference().child("Doctors").orderByChild("Specialization").startAt(searchText).endAt(searchText + "\uf8ff");
+            searchType = 1;
         } else if (selectedRadioButtonId == R.id.radioLocation) {
-            query = FirebaseDatabase.getInstance().getReference().child("Doctors").orderByChild("Location").startAt(searchText).endAt(searchText + "\uf8ff");
-        } else {
-            query = FirebaseDatabase.getInstance().getReference().child("Doctors");
+            searchType = 2;
         }
 
-        FirebaseRecyclerOptions<Doctors> options = new FirebaseRecyclerOptions.Builder<Doctors>()
-                .setQuery(query, Doctors.class)
-                .build();
+        query = FirebaseDatabase.getInstance().getReference().child("Doctors");
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> doctors = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String name = (String) doctorSnapshot.child("Name").getValue();
+                    String specialization = (String) doctorSnapshot.child("Specialization").getValue();
+                    ArrayList<String> locations = (ArrayList<String>) doctorSnapshot.child("Locations").getValue();
+
+                    if (searchType == 0 && name != null && name.toLowerCase().contains(searchText.toLowerCase())) {
+                        Doctors doctor = new Doctors(name, specialization, locations);
+                        doctors.add(doctor);
+                    } else if (searchType == 1 && specialization != null && specialization.toLowerCase().contains(searchText.toLowerCase())) {
+                        Doctors doctor = new Doctors(name, specialization, locations);
+                        doctors.add(doctor);
+                    } else if (searchType == 2 && locations != null) {
+                        // Check if the searched location matches any location for this doctor (case-insensitive).
+                        for (String location : locations) {
+                            if (location.toLowerCase().contains(searchText.toLowerCase())) {
+                                // Convert the locations list to an ArrayList with a single element.
+                                ArrayList<String> locationList = new ArrayList<>();
+                                locationList.add(location);
+
+                                // Create the doctor instance only once with the matched location.
+                                Doctors doctor = new Doctors(name, specialization, locationList);
+                                doctors.add(doctor);
+                                break; // No need to check other locations for this doctor.
+                            }
+                        }
+                    }
 
 
-        doctorAdapter = new DoctorAdapter(options);
-        doctorAdapter.startListening();
-        recyclerView.setAdapter(doctorAdapter);
+                }
 
+                DocSearchResultAdapter docSearchResultAdapter = new DocSearchResultAdapter(doctors);
+                recyclerView.setAdapter(docSearchResultAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
-            doctorAdapter.startListening();
+        doctorAdapter.startListening();
 
     }
 
     @Override
     public void onStop() {
         super.onStop();
-            doctorAdapter.stopListening();
+        doctorAdapter.stopListening();
 
     }
+
+
 }

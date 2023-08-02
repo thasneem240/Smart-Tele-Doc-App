@@ -1,25 +1,40 @@
 package com.example.capstoneprojectgroup4;
 
+import static android.app.PendingIntent.getActivity;
+
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+
 
 public class DoctorAdapter extends FirebaseRecyclerAdapter<Doctors, DoctorAdapter.myViewHolder> {
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
      *
-     * @param options
      */
+    FragmentManager fm;
+
+    public interface OnItemClickListener {
+        void onButtonClick(String doctorName);
+    }
+
 
 
     public DoctorAdapter(@NonNull FirebaseRecyclerOptions<Doctors> options) {
@@ -31,7 +46,6 @@ public class DoctorAdapter extends FirebaseRecyclerAdapter<Doctors, DoctorAdapte
 
         holder.Name.setText(model.getName());
         holder.Specialization.setText(model.getSpecialization());
-        holder.Location.setText(model.getLocation());
 
 
 
@@ -46,16 +60,14 @@ public class DoctorAdapter extends FirebaseRecyclerAdapter<Doctors, DoctorAdapte
     }
 
     class myViewHolder extends RecyclerView.ViewHolder{
-        TextView Name,Specialization, Location;
+        TextView Name,Specialization;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
 
             Name = (TextView)itemView.findViewById(R.id.textName);
             Specialization = (TextView)itemView.findViewById(R.id.textSpecialization);
-            Location = (TextView)itemView.findViewById(R.id.textLocation);
         }
     }
 
 }
-
