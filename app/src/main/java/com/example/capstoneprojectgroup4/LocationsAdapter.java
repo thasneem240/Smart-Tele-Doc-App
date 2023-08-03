@@ -39,6 +39,17 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.Loca
         holder.Name.setText(doctorName);
         holder.Specialization.setText(specialization);
 
+       holder.Name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                FragmentManager fm = activity.getSupportFragmentManager();
+                DocAvailF fragment = DocAvailF.newInstance(doctorName, location);
+                fm.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            }
+        });
+
+
     }
 
     @Override
