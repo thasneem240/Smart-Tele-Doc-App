@@ -68,7 +68,12 @@ android:layout_height="match_parent">
         android:id="@+id/button_Prescriptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
-
+        android:layout_below="@+id/button_LabReports"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Prescription"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        />
 
 </RelativeLayout>
