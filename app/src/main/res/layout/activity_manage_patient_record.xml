@@ -6,12 +6,69 @@ android:layout_width="match_parent"
 android:layout_height="match_parent">
 
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="35dp"
+        layout android:layout_marginTop="20dp"
+        android:text="Medical Records" />
+
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_PatientDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Patient Details" />
+
+    <Button
+        android:id="@+id/button_MedicalHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_toRightOf="@id/button_PatientDetails"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Medical History" />
+
+    <Button
+        android:id="@+id/button_LabReports"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_PatientDetails"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Lab Reports" />
+
+    <Button
+        android:id="@+id/button_ConsNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consultation Notes"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_below="@+id/button_MedicalHistory"
+        android:layout_toRightOf="@+id/button_LabReports"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        />
+
+    <Button
+        android:id="@+id/button_Prescriptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button" />
-
 
 
 </RelativeLayout>
