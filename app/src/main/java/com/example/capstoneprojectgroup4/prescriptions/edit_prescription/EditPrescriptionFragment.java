@@ -43,6 +43,8 @@ public class EditPrescriptionFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     ArrayList<Map<String, Object>> selectedDrugs;
+    Button availablePharmacies;
+
     public EditPrescriptionFragment() {
         // Required empty public constructor
     }
@@ -82,14 +84,12 @@ public class EditPrescriptionFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_edit_prescription, container, false);
 
-
-        Button availablePharmacies = v.findViewById(R.id.button_available_pharmacies);
-
         RecyclerView rv = v.findViewById(R.id.recycler_view_edit_prescription);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         EditPrescriptionAdapter editPrescriptionAdapter = new EditPrescriptionAdapter(selectedDrugs);
         rv.setAdapter(editPrescriptionAdapter);
 
+        availablePharmacies = v.findViewById(R.id.button_available_pharmacies);
 
         availablePharmacies.setOnClickListener(new View.OnClickListener() {
             @Override
