@@ -14,7 +14,7 @@
         android:textStyle="bold"
         android:textSize="35dp"
         android:layout_marginTop="20dp"
-        android:text="Medical Records"
+        android:text="Medical History"
         />
 
 
