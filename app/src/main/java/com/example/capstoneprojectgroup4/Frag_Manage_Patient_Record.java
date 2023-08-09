@@ -111,6 +111,37 @@ public class Frag_Manage_Patient_Record extends Fragment
         });
 
 
+        button_LabReports.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = Activity_Common.getIntent(getActivity(),"Frag_LabReports");
+                startActivity(intent);
+            }
+        });
+
+        button_ConsNotes.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = Activity_Common.getIntent(getActivity(),"Frag_ConsNotes");
+                startActivity(intent);
+            }
+        });
+
+        button_Prescriptions.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = Activity_Common.getIntent(getActivity(),"Frag_Prescriptions");
+                startActivity(intent);
+            }
+        });
+
+
         return view;
     }
 }
