@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -87,6 +88,15 @@ public class Frag_Manage_Patient_Record extends Fragment
         button_ConsNotes = view.findViewById(R.id.button_ConsNotes);
         button_Prescriptions = view.findViewById(R.id.button_Prescriptions);
 
+        button_PatientDetails.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = Activity_Common.getIntent(getActivity(),"Frag_PatientDetails");
+                startActivity(intent);
+            }
+        });
 
 
         return view;
