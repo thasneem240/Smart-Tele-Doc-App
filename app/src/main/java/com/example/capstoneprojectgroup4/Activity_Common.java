@@ -76,6 +76,39 @@ public class Activity_Common extends AppCompatActivity
                     fragmentTransaction.replace(R.id.commonContainer,fragMedicalHistory);
                     fragmentTransaction.commit();
                 }
+                else
+                {
+                    if(fragmentName.equals("Frag_LabReports"))
+                    {
+                        Frag_LabReports fragLabReports = new Frag_LabReports();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.commonContainer,fragLabReports);
+                        fragmentTransaction.commit();
+                    }
+                    else
+                    {
+                        if(fragmentName.equals("Frag_ConsNotes"))
+                        {
+                            Frag_ConsNotes fragConsNotes = new Frag_ConsNotes();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.commonContainer,fragConsNotes);
+                            fragmentTransaction.commit();
+                        }
+                        else
+                        {
+                            if(fragmentName.equals("Frag_Prescriptions"))
+                            {
+                                Frag_Prescriptions fragPrescriptions = new Frag_Prescriptions();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.commonContainer,fragPrescriptions);
+                                fragmentTransaction.commit();
+                            }
+
+                        }
+
+                    }
+
+                }
 
             }
 
