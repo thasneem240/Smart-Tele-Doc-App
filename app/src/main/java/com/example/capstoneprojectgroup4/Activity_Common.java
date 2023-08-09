@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
-public class Manage_Patient_Record_Activity extends AppCompatActivity
+public class Activity_Common extends AppCompatActivity
 {
 
     /* Initialize Variables */
@@ -20,7 +20,7 @@ public class Manage_Patient_Record_Activity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_patient_record);
+        setContentView(R.layout.activity_common);
 
         /* Grab the  UI Variables from Layout file*/
 
