@@ -99,6 +99,18 @@ public class Frag_Manage_Patient_Record extends Fragment
         });
 
 
+
+        button_MedicalHistory.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = Activity_Common.getIntent(getActivity(),"Frag_MedicalHistory");
+                startActivity(intent);
+            }
+        });
+
+
         return view;
     }
 }
