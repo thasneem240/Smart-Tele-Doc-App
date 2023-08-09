@@ -15,10 +15,8 @@ import java.util.Map;
 
 public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainersViewHolder>{
     WritingPrescriptionActivity writingPrescriptionActivity;
-    ArrayList<Map.Entry<String, Integer>> selectedDrugsList;
-
-
-    public DrugsContainersAdapter(ArrayList<Map.Entry<String, Integer>> selectedDrugsList){
+    ArrayList<String> selectedDrugsList;
+    public DrugsContainersAdapter(ArrayList<String> selectedDrugsList){
         this.selectedDrugsList = selectedDrugsList;
     }
 
@@ -35,9 +33,7 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
 
     @Override
     public void onBindViewHolder(@NonNull DrugsContainersViewHolder holder, int position) {
-        Map.Entry<String, Integer> entry = selectedDrugsList.get(position);
-
-            holder.drugsNames.setText(entry.getKey());
+            holder.drugsNames.setText(selectedDrugsList.get(position));
 
     }
 

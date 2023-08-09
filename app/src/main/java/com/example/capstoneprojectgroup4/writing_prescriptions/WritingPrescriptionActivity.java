@@ -6,16 +6,16 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers.MedicineObject;
+import com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers.PrescriptionObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class WritingPrescriptionActivity extends AppCompatActivity {
-    private Map<String, Object> prescription;
-    private Map<String, Integer> selectedDrugs = new HashMap<>();
-    Boolean prescriptionIsAvailable = false;
-
+    private PrescriptionObject prescriptionObject = new PrescriptionObject();
+    private ArrayList<String> selectedDrug2s = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,27 +29,21 @@ public class WritingPrescriptionActivity extends AppCompatActivity {
             fm.beginTransaction().replace(R.id.fragmentContainerPrescription, createPrescriptionFragment).commit();
         }
     }
-    public Map<String, Object> getPrescription() {
-        if(!prescriptionIsAvailable)
-            prescription = new HashMap<>();
 
-        return prescription;
+    public ArrayList<String> getSelectedDrug2s() {
+        return selectedDrug2s;
     }
 
-    public void setPrescription(Map<String, Object> prescription) {
-        this.prescription = prescription;
-        prescriptionIsAvailable = true;
+    public void setSelectedDrug2s(String drugName) {
 
+        this.selectedDrug2s.add(drugName);
     }
 
-    public void setSelectedDrugs(String drugName, Integer dosage) {
-        this.selectedDrugs.put(drugName, dosage);
+    public PrescriptionObject getPrescriptionObject() {
+        return prescriptionObject;
     }
-    public ArrayList<Map.Entry<String, Integer>> getSelectedDrugs() {
-        ArrayList<Map.Entry<String, Integer>> selectedDrugsList = new ArrayList<>();
-        for(Map.Entry<String, Integer> entry : selectedDrugs.entrySet()){
-            selectedDrugsList.add(entry);
-        }
-        return selectedDrugsList;
+
+    public void setPrescriptionObject(PrescriptionObject prescriptionObject) {
+        this.prescriptionObject = prescriptionObject;
     }
 }

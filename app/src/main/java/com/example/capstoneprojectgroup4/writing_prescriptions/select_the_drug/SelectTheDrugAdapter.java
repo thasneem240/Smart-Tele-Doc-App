@@ -21,7 +21,6 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
 
     public SelectTheDrugAdapter(ArrayList<String> listOfDrugs){
         this.listOfDrugs = listOfDrugs;
-        drugsCount = listOfDrugs.size();
     }
     @NonNull
     @Override
@@ -40,7 +39,7 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
             @Override
             public void onClick(View view) {
                 WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) view.getContext();
-                writingPrescriptionActivity.setSelectedDrugs(holder.drugName.getText().toString(), 0);
+                writingPrescriptionActivity.setSelectedDrug2s(holder.drugName.getText().toString());
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
@@ -53,6 +52,6 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
 
     @Override
     public int getItemCount() {
-        return drugsCount;
+        return listOfDrugs.size();
     }
 }
