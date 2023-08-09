@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +27,12 @@ public class Frag_Manage_Patient_Record extends Fragment
     private String mParam1;
     private String mParam2;
 
-    public Frag_Manage_Patient_Record() {
+
+
+
+
+    public Frag_Manage_Patient_Record()
+    {
         // Required empty public constructor
     }
 
@@ -39,7 +45,8 @@ public class Frag_Manage_Patient_Record extends Fragment
      * @return A new instance of fragment Manage_Patient_Record.
      */
     // TODO: Rename and change types and number of parameters
-    public static Frag_Manage_Patient_Record newInstance(String param1, String param2) {
+    public static Frag_Manage_Patient_Record newInstance(String param1, String param2)
+    {
         Frag_Manage_Patient_Record fragment = new Frag_Manage_Patient_Record();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -49,9 +56,11 @@ public class Frag_Manage_Patient_Record extends Fragment
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null)
+        {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -59,8 +68,15 @@ public class Frag_Manage_Patient_Record extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage__patient__record, container, false);
+        View view = inflater.inflate(R.layout.fragment_manage__patient__record, container, false);
+
+
+
+
+
+        return view;
     }
 }

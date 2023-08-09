@@ -7,6 +7,7 @@ import android.widget.Button;
 
 public class Manage_Patient_Record_Activity extends AppCompatActivity
 {
+
     /* Initialize Variables */
 
     private Button button_PatientDetails;
@@ -15,14 +16,13 @@ public class Manage_Patient_Record_Activity extends AppCompatActivity
     private Button button_ConsNotes;
     private Button button_Prescriptions;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_patient_record);
 
-        /* Grab the  Variables from Layout file*/
+        /* Grab the  UI Variables from Layout file*/
 
         button_PatientDetails = findViewById(R.id.button_PatientDetails);
         button_MedicalHistory = findViewById(R.id.button_MedicalHistory);
