@@ -13,15 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.prescriptions.edit_prescription.EditPrescriptionFragment;
+import com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers.PrescriptionObject;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class ViewPrescriptionsAdapter extends RecyclerView.Adapter<ViewPrescriptionsViewHolder> {
     ArrayList<Map.Entry<String, Object>> prescriptionsList;
+    ArrayList<PrescriptionObject> prescriptionObjectList;
+    PrescriptionObject prescriptionObject;
 
-    public ViewPrescriptionsAdapter(ArrayList<Map.Entry<String, Object>> prescriptionsList){
-        this.prescriptionsList = prescriptionsList;
+    public ViewPrescriptionsAdapter(ArrayList<PrescriptionObject> prescriptionObjectList){
+        this.prescriptionObjectList = prescriptionObjectList;
     }
     @NonNull
     @Override
@@ -49,6 +52,21 @@ public class ViewPrescriptionsAdapter extends RecyclerView.Adapter<ViewPrescript
                 fm.beginTransaction().replace(R.id.fragment_container, editPrescriptionFragment).commit();
             }
         });
+
+        prescriptionObject = prescriptionObjectList.get(position);
+        holder.date.setText(prescriptionObject.getDateTime()+"");
+        holder.doctor.setText(prescriptionObject.getDoctorName()+"");
+        holder.select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                FragmentManager fm = activity.getSupportFragmentManager();
+                ArrayList<String> selectedDrugs = (ArrayList<String>) prescriptionObject.getSelectedDrugs();
+                EditPrescriptionFragment editPrescriptionFragment = new EditPrescriptionFragment(selectedDrugs);
+                fm.beginTransaction().replace(R.id.fragment_container, editPrescriptionFragment).commit();
+            }
+        });
+
     }
 
     @Override

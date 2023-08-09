@@ -42,7 +42,7 @@ public class EditPrescriptionFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    ArrayList<Map<String, Object>> selectedDrugs;
+    ArrayList<String> selectedDrugs;
     Button availablePharmacies;
 
     public EditPrescriptionFragment() {

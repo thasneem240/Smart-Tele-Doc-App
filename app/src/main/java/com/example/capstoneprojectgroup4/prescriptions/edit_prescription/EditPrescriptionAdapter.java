@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class EditPrescriptionAdapter extends RecyclerView.Adapter<EditPrescriptionViewHolder > {
-    ArrayList<Map<String, Object>> selectedDrugs;
+    ArrayList<String> selectedDrugs;
     public EditPrescriptionAdapter(ArrayList<Map<String, Object>> selectedDrugs){
         this.selectedDrugs = selectedDrugs;
     }
@@ -30,11 +30,10 @@ public class EditPrescriptionAdapter extends RecyclerView.Adapter<EditPrescripti
 
     @Override
     public void onBindViewHolder(@NonNull EditPrescriptionViewHolder holder, int position) {
-        Map<String, Object> selectedDrug = selectedDrugs.get(position);
-        if(selectedDrug.containsKey("key"))
-            holder.medicineName.setText(selectedDrug.get("key")+"");
-        if(selectedDrug.containsKey("value"))
-            holder.editDosage.setText(selectedDrug.get("value")+"");
+        String selectedDrug = selectedDrugs.get(position);
+        holder.medicineName.setText(selectedDrug+"");
+//        if(selectedDrug.containsKey("value"))
+//            holder.editDosage.setText(selectedDrug.get("value")+"");
 
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +45,7 @@ public class EditPrescriptionAdapter extends RecyclerView.Adapter<EditPrescripti
             @Override
             public void onClick(View view) {
                 holder.editDosage.setEnabled(false);
-                selectedDrug.put("value", holder.editDosage.getText()+"");
+//                selectedDrug.put("value", holder.editDosage.getText()+"");
             }
         });
         holder.removeButton.setOnClickListener(new View.OnClickListener() {

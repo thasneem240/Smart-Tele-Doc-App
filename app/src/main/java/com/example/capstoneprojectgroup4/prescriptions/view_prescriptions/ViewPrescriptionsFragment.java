@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.available_pharmacies.AvailablePharmaciesAdapter;
+import com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers.PrescriptionObject;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,8 +44,8 @@ public class ViewPrescriptionsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Map<String, Object> prescriptions;
-    Map<Integer, Object> prescriptionsV2;
+    Map<String, PrescriptionObject> prescriptionList;
+    ArrayList<PrescriptionObject> prescriptionsListRebuilt;
 
     public ViewPrescriptionsFragment() {
         // Required empty public constructor
@@ -84,7 +85,32 @@ public class ViewPrescriptionsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_view_prescriptions, container, false);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Prescriptions2");
+        DatabaseReference myRef = database.getReference("Prescriptions3");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                prescriptionList =  (Map) snapshot.getValue();
+                Log.d(TAG, ""+prescriptionList);
+
+                prescriptionsListRebuilt = new ArrayList<>();
+                for(Map.Entry<String, Object> entry : prescriptions.entrySet()){
+                    prescriptionsList.add(entry);
+                }
+
+                for()
+
+                RecyclerView rv = v.findViewById(R.id.recycler_view_prescriptions);
+                rv.setLayoutManager(new LinearLayoutManager(getContext()));
+                ViewPrescriptionsAdapter viewPrescriptionsAdapter = new ViewPrescriptionsAdapter(prescriptionsList);
+                rv.setAdapter(viewPrescriptionsAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        /*DatabaseReference myRef = database.getReference("Prescriptions2");
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -114,7 +140,7 @@ public class ViewPrescriptionsFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
         return v;
     }
