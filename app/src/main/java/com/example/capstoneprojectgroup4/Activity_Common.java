@@ -65,7 +65,20 @@ public class Activity_Common extends AppCompatActivity
                 fragmentTransaction.replace(R.id.commonContainer,fragPatientDetails);
                 fragmentTransaction.commit();
 
+
             }
+            else
+            {
+                if(fragmentName.equals("Frag_MedicalHistory"))
+                {
+                    Frag_MedicalHistory fragMedicalHistory = new Frag_MedicalHistory();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.commonContainer,fragMedicalHistory);
+                    fragmentTransaction.commit();
+                }
+
+            }
+
         }
     }
 
