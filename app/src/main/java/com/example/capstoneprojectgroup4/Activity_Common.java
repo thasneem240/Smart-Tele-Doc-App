@@ -2,6 +2,7 @@ package com.example.capstoneprojectgroup4;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
@@ -54,6 +55,17 @@ public class Activity_Common extends AppCompatActivity
                 fragmentManager.beginTransaction().add(R.id.commonContainer, fragManagePatientRecord).commit();
             }
 
+        }
+        else
+        {
+            if(fragmentName.equals("Frag_PatientDetails"))
+            {
+                Frag_PatientDetails fragPatientDetails = new Frag_PatientDetails();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.commonContainer,fragPatientDetails);
+                fragmentTransaction.commit();
+
+            }
         }
     }
 
