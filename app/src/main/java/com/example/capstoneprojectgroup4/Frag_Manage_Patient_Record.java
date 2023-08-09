@@ -29,7 +29,13 @@ public class Frag_Manage_Patient_Record extends Fragment
 
 
 
+    /* Initialize Variables */
 
+    private Button button_PatientDetails;
+    private Button button_MedicalHistory;
+    private Button button_LabReports;
+    private Button button_ConsNotes;
+    private Button button_Prescriptions;
 
     public Frag_Manage_Patient_Record()
     {
@@ -73,7 +79,13 @@ public class Frag_Manage_Patient_Record extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_manage__patient__record, container, false);
 
+        /* Grab the  UI Variables from Layout file*/
 
+        button_PatientDetails = view.findViewById(R.id.button_PatientDetails);
+        button_MedicalHistory = view.findViewById(R.id.button_MedicalHistory);
+        button_LabReports = view.findViewById(R.id.button_LabReports);
+        button_ConsNotes = view.findViewById(R.id.button_ConsNotes);
+        button_Prescriptions = view.findViewById(R.id.button_Prescriptions);
 
 
 
