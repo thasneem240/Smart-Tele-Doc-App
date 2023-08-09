@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Manage_Patient_Record#newInstance} factory method to
+ * Use the {@link Frag_Manage_Patient_Record#newInstance} factory method to
  * create an instance of this fragment.
+ * Fragment To Manage Patients Records
  */
-public class Manage_Patient_Record extends Fragment {
+public class Frag_Manage_Patient_Record extends Fragment
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class Manage_Patient_Record extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Manage_Patient_Record() {
+    public Frag_Manage_Patient_Record() {
         // Required empty public constructor
     }
 
@@ -37,8 +39,8 @@ public class Manage_Patient_Record extends Fragment {
      * @return A new instance of fragment Manage_Patient_Record.
      */
     // TODO: Rename and change types and number of parameters
-    public static Manage_Patient_Record newInstance(String param1, String param2) {
-        Manage_Patient_Record fragment = new Manage_Patient_Record();
+    public static Frag_Manage_Patient_Record newInstance(String param1, String param2) {
+        Frag_Manage_Patient_Record fragment = new Frag_Manage_Patient_Record();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
