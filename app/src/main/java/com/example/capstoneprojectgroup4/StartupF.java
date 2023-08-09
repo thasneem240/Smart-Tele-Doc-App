@@ -72,7 +72,7 @@ public class StartupF extends Fragment
         authenticationButton = v.findViewById(R.id.authentication_button);
         transactionButton = v.findViewById(R.id.transaction_button);
         pharmacyButton = v.findViewById(R.id.pharmacy_button);
-        extra1Button = v.findViewById(R.id.button_MedicalRecords);
+        buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
         extra2Button = v.findViewById(R.id.extra2_button);
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
