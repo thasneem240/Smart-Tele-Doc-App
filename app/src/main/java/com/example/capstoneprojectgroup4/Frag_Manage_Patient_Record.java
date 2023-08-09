@@ -79,7 +79,7 @@ public class Frag_Manage_Patient_Record extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_manage__patient__record, container, false);
 
-        /* Grab the  UI Variables from Layout file*/
+        /* Grab the  UI Variables from Layout file */
 
         button_PatientDetails = view.findViewById(R.id.button_PatientDetails);
         button_MedicalHistory = view.findViewById(R.id.button_MedicalHistory);

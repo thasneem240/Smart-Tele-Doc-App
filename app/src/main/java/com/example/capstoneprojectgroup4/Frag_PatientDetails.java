@@ -7,13 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Frag_PatientDetails#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag_PatientDetails extends Fragment {
+public class Frag_PatientDetails extends Fragment
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,17 @@ public class Frag_PatientDetails extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Frag_PatientDetails() {
+
+    private EditText editText_Title;
+    private EditText editText_FirName;
+    private EditText editText_SecName;
+    private EditText editText_NIC;
+    private EditText editText_Email;
+    private EditText editText_Address;
+
+
+    public Frag_PatientDetails()
+    {
         // Required empty public constructor
     }
 
@@ -57,8 +69,21 @@ public class Frag_PatientDetails extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_patient_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_patient_details, container, false);
+
+        /* Grab the  UI Variables from Layout file */
+
+        editText_Title = view.findViewById(R.id.editText_Title);
+        editText_FirName = view.findViewById(R.id.editText_FirName);
+        editText_SecName = view.findViewById(R.id.editText_SecName);
+        editText_NIC = view.findViewById(R.id.editText_NIC);
+        editText_Email = view.findViewById(R.id.editText_Email);
+        editText_Address = view.findViewById(R.id.editText_Address);
+
+
+        return view;
     }
 }
