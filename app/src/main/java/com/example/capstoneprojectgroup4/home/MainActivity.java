@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.example.capstoneprojectgroup4.R;
 
 public class MainActivity extends AppCompatActivity {
-    // commit for test one branch
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
