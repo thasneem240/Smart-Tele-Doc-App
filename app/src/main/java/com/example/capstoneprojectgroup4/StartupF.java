@@ -34,7 +34,7 @@ public class StartupF extends Fragment
     Button pharmacyButton;
     Button buttonMedicalRecords;
     Button searchdoc;
-    Button extra2Button;
+
     FragmentManager fm;
 
     public StartupF() {
@@ -80,7 +80,7 @@ public class StartupF extends Fragment
         pharmacyButton = v.findViewById(R.id.pharmacy_button);
         buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
         searchdoc = v.findViewById(R.id.searchDoc_button);
-        extra2Button = v.findViewById(R.id.extra2_button);
+
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,15 +137,7 @@ public class StartupF extends Fragment
             }
         });
 
-        extra2Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
 
-            }
-        });
 
         return v;
     }
