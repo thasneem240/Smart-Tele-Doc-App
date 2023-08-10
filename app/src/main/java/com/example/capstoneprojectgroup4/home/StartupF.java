@@ -1,5 +1,4 @@
-package com.example.capstoneprojectgroup4;
-
+package com.example.capstoneprojectgroup4.home;
 import android.content.Intent;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,13 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.capstoneprojectgroup4.Activity_Common;
+import com.example.capstoneprojectgroup4.PharmaciesF;
+import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.ResultActivity;
+import com.example.capstoneprojectgroup4.SearchDocF;
 import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
+import com.example.capstoneprojectgroup4.home.HomeFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,8 +40,8 @@ public class StartupF extends Fragment
     Button buttonMedicalRecords;
     Button searchdoc;
 
-    Button buttonMedicalRecords;
-    Button searchdoc;
+
+
     Button searchDrugs;
 
     FragmentManager fm;
@@ -84,9 +89,6 @@ public class StartupF extends Fragment
         pharmacyButton = v.findViewById(R.id.pharmacy_button);
         buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
         searchdoc = v.findViewById(R.id.searchDoc_button);
-
-        buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
-        searchdoc = v.findViewById(R.id.searchDoc_button);
         searchDrugs = v.findViewById(R.id.search_drugs_button);
 
 
@@ -130,23 +132,28 @@ public class StartupF extends Fragment
             }
         });
 
-        searchDrugs.setOnClickListener(new View.OnClickListener() {
+
         buttonMedicalRecords.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view) {
-                        fm = getActivity().getSupportFragmentManager();
-                HomeFragment homeFragment = new HomeFragment();
-                fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
             public void onClick(View view)
             {
 //                fm = getActivity().getSupportFragmentManager();
 //                WelcomeF welcomeF = new WelcomeF();
 //                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
 
-                Intent intent = new Intent(getActivity(),Activity_Common.class);
+                Intent intent = new Intent(getActivity(), Activity_Common.class);
                 startActivity(intent);
 
+            }
+        });
+
+        searchDrugs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fm = getActivity().getSupportFragmentManager();
+                HomeFragment homeFragment = new HomeFragment();
+                fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
             }
         });
 

@@ -8,7 +8,8 @@ import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
 
-public class MainActivity extends AppCompatActivity {
+
+
 public class MainActivity extends AppCompatActivity
 {
 
