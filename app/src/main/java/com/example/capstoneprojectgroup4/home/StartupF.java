@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.home;
+package com.example.capstoneprojectgroup4;
 
 import android.content.Intent;
 import android.content.Intent;
@@ -11,7 +11,8 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StartupF#newInstance} factory method to
@@ -31,6 +32,9 @@ public class StartupF extends Fragment
     Button authenticationButton;
     Button transactionButton;
     Button pharmacyButton;
+    Button buttonMedicalRecords;
+    Button searchdoc;
+
     Button buttonMedicalRecords;
     Button searchdoc;
     Button searchDrugs;
@@ -80,54 +84,73 @@ public class StartupF extends Fragment
         pharmacyButton = v.findViewById(R.id.pharmacy_button);
         buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
         searchdoc = v.findViewById(R.id.searchDoc_button);
+
+        buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
+        searchdoc = v.findViewById(R.id.searchDoc_button);
         searchDrugs = v.findViewById(R.id.search_drugs_button);
 
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fm = getActivity().getSupportFragmentManager();
+                AuthenticationHomeF startupFormF = new AuthenticationHomeF();
+                fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
+
             }
         });
 
         transactionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                  Intent intent = new Intent(getActivity(), ResultActivity.class);
+                  startActivity(intent);
+
             }
         });
 
         pharmacyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fm = getActivity().getSupportFragmentManager();
+                PharmaciesF pharmaciesF = new PharmaciesF();
+                fm.beginTransaction().replace(R.id.fragment_container, pharmaciesF).commit();
+
             }
         });
 
         searchdoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fm = getActivity().getSupportFragmentManager();
+                SearchDocF searchDocF = new SearchDocF();
+                fm.beginTransaction().replace(R.id.fragment_container, searchDocF).commit();
+
             }
         });
 
+        searchDrugs.setOnClickListener(new View.OnClickListener() {
         buttonMedicalRecords.setOnClickListener(new View.OnClickListener()
         {
             @Override
+            public void onClick(View view) {
+                        fm = getActivity().getSupportFragmentManager();
+                HomeFragment homeFragment = new HomeFragment();
+                fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
             public void onClick(View view)
             {
 //                fm = getActivity().getSupportFragmentManager();
 //                WelcomeF welcomeF = new WelcomeF();
 //                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
 
-            }
-        });
-
-        searchDrugs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                        fm = getActivity().getSupportFragmentManager();
-                HomeFragment homeFragment = new HomeFragment();
-                fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
+                Intent intent = new Intent(getActivity(),Activity_Common.class);
+                startActivity(intent);
 
             }
         });
+
+
 
         return v;
     }

@@ -19,6 +19,22 @@
             android:exported="false" />
         <activity
             android:name=".home.MainActivity"
+            android:name=".Activity_Common"
+            android:exported="false" />
+        <activity
+            android:name=".TransactionHistory"
+            android:exported="false" />
+        <activity
+            android:name=".PrescriptionTransaction"
+            android:exported="false" />
+        <activity
+            android:name=".AppointmentTransaction"
+            android:exported="false" />
+        <activity
+            android:name=".ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
