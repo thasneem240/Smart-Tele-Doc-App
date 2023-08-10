@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,8 @@ import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
  * Use the {@link StartupF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StartupF extends Fragment {
+public class StartupF extends Fragment
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +31,7 @@ public class StartupF extends Fragment {
     Button authenticationButton;
     Button transactionButton;
     Button pharmacyButton;
-    Button extra1Button;
+    Button buttonMedicalRecords;
     Button extra2Button;
     FragmentManager fm;
 
@@ -73,7 +75,7 @@ public class StartupF extends Fragment {
         authenticationButton = v.findViewById(R.id.authentication_button);
         transactionButton = v.findViewById(R.id.transaction_button);
         pharmacyButton = v.findViewById(R.id.pharmacy_button);
-        extra1Button = v.findViewById(R.id.extra1_button);
+        buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
         extra2Button = v.findViewById(R.id.extra2_button);
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
@@ -89,9 +91,9 @@ public class StartupF extends Fragment {
         transactionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+
+                  Intent intent = new Intent(getActivity(), ResultActivity.class);
+                  startActivity(intent);
 
             }
         });
@@ -106,12 +108,17 @@ public class StartupF extends Fragment {
             }
         });
 
-        extra1Button.setOnClickListener(new View.OnClickListener() {
+        buttonMedicalRecords.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
 //                fm = getActivity().getSupportFragmentManager();
 //                WelcomeF welcomeF = new WelcomeF();
 //                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+
+                Intent intent = new Intent(getActivity(),Activity_Common.class);
+                startActivity(intent);
 
             }
         });

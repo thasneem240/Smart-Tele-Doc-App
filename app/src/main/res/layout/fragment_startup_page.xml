@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,53 +11,50 @@
         android:id="@+id/authentication_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="Authentication"
-        app:layout_constraintBottom_toTopOf="@+id/transaction_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:id="@+id/transaction_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
         android:text="Transaction"
-        app:layout_constraintBottom_toTopOf="@+id/pharmacy_button"
-        app:layout_constraintEnd_toEndOf="@+id/authentication_button"
-        app:layout_constraintTop_toBottomOf="@+id/authentication_button" />
+        android:layout_below="@id/authentication_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+         />
 
     <Button
         android:id="@+id/pharmacy_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
         android:text="Pharmacies"
-        app:layout_constraintBottom_toTopOf="@+id/extra1_button"
-        app:layout_constraintStart_toStartOf="@+id/transaction_button"
-        app:layout_constraintTop_toBottomOf="@+id/transaction_button" />
+        android:layout_below="@id/transaction_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+
+        />
 
     <Button
-        android:id="@+id/extra1_button"
+        android:id="@+id/button_MedicalRecords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="13dp"
-        android:layout_marginBottom="3dp"
-        android:text="Extra 1"
-        app:layout_constraintBottom_toTopOf="@+id/extra2_button"
-        app:layout_constraintEnd_toEndOf="@+id/pharmacy_button"
-        app:layout_constraintTop_toBottomOf="@+id/pharmacy_button" />
+        android:text="Medical Records"
+        android:layout_below="@id/pharmacy_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+
+        />
 
     <Button
         android:id="@+id/extra2_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Extra 2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extra1_button" />
+        android:layout_below="@id/button_MedicalRecords"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -4,18 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         FragmentManager fm = getSupportFragmentManager();
         StartupF startupPage = (StartupF) fm.findFragmentById(R.id.fragment_container);
 
-        if (startupPage == null) {
+        if (startupPage == null)
+        {
             startupPage = new StartupF();
             fm.beginTransaction().add(R.id.fragment_container, startupPage).commit();
         }
