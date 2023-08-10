@@ -7,9 +7,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.BreakIterator;
+
 public class AvailViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView textDay;
+    public TextView textDay;
     private TextView textTime;
     private TextView textNoAppointments;
 
@@ -19,6 +21,8 @@ public class AvailViewHolder extends RecyclerView.ViewHolder {
         textDay = itemView.findViewById(R.id.textDay);
         textTime = itemView.findViewById(R.id.textTime);
         textNoAppointments = itemView.findViewById(R.id.textNoAppointments);
+
+
     }
 
     public void bind(Availability session) {

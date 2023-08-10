@@ -14,9 +14,17 @@ import java.util.ArrayList;
 public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
 
     private ArrayList<Availability> availabilities;
+    private String doctorName;
+    private String Day;
 
-    public AvailAdapter(ArrayList<Availability> availabilities) {
+    private String noApp ;
+
+
+    public AvailAdapter(ArrayList<Availability> availabilities, String doctorName, String Day, String noApp) {
         this.availabilities = availabilities;
+        this.doctorName = doctorName;
+        this.Day = Day;
+        this.noApp = noApp;
     }
 
     @NonNull
@@ -32,6 +40,19 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
         Availability availability = availabilities.get(position);
 
         holder.bind(availability);
+        //String Day = String.valueOf(holder.textDay);
+
+        holder.textDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                FragmentManager fm = activity.getSupportFragmentManager();
+
+                //BookAppointmentF fragment = new BookAppointmentF();
+                BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName,Day,noApp);
+                fm.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            }
+        });
 
 
     }
@@ -40,4 +61,9 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
     public int getItemCount() {
         return availabilities.size();
     }
+
+
+
 }
+
+

@@ -153,8 +153,8 @@ public class DocAvailF extends Fragment {
                                 List<String> daysOrder = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
                                 return Integer.compare(daysOrder.indexOf(day1), daysOrder.indexOf(day2));
                             });
-
-                            AvailAdapter availAdapter1 = new AvailAdapter(sessionDetails);
+                            // added param docName
+                            AvailAdapter availAdapter1 = new AvailAdapter(sessionDetails, doctorName, day, noApp );
                             recyclerView.setAdapter(availAdapter1);
 
 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookAppointmentF">
+
+    <TextView
+        android:id="@+id/textDoctorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Doctor name:"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/textDoctorNameValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDoctorName"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/textPatientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patient name:"
+        android:layout_below="@id/textDoctorNameValue"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/textPatientNameValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textPatientName"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/textDateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date/time:"
+        android:layout_below="@id/textPatientNameValue"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/textDateTimeValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDateTime"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/textAppointmentNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment number:"
+        android:layout_below="@id/textDateTimeValue"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/textAppointmentNumberValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textAppointmentNumber"
+        android:layout_marginTop="8dp"/>
+
+    <CheckBox
+        android:id="@+id/checkBoxVideoCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Video call"
+        android:layout_below="@id/textAppointmentNumberValue"
+        android:layout_marginTop="16dp"/>
+
+    <CheckBox
+        android:id="@+id/checkBoxVoiceCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voice call"
+        android:layout_below="@id/checkBoxVideoCall"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/buttonConfirmAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Appointment"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>
