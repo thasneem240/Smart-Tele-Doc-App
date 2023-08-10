@@ -52,6 +52,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //dialogFlow
-    implementation 'com.google.cloud:google-cloud-dialogflow:2.1.0'
-    implementation 'io.grpc:grpc-okhttp:1.30.0'
+
 }
