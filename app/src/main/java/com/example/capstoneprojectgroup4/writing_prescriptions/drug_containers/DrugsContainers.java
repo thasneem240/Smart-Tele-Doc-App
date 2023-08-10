@@ -46,7 +46,6 @@ public class DrugsContainers extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Map<String, Object> prescription;
 
     public DrugsContainers() {
         // Required empty public constructor
@@ -91,7 +90,7 @@ public class DrugsContainers extends Fragment {
         RecyclerView rv = v.findViewById(R.id.drugs_container_recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getActivity();
-        DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter(writingPrescriptionActivity.getSelectedDrugs());
+        DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter(writingPrescriptionActivity.getSelectedDrug2s());
         rv.setAdapter(drugsContainersAdapter);
 
         backToPrescription.setOnClickListener(new View.OnClickListener() {

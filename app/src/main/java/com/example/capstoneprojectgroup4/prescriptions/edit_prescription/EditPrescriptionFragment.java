@@ -42,13 +42,13 @@ public class EditPrescriptionFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    ArrayList<Map<String, Object>> selectedDrugs;
+    ArrayList<String> selectedDrugs;
     Button availablePharmacies;
 
     public EditPrescriptionFragment() {
         // Required empty public constructor
     }
-    public EditPrescriptionFragment(ArrayList<Map<String, Object>> selectedDrugs) {
+    public EditPrescriptionFragment(ArrayList<String> selectedDrugs) {
         this.selectedDrugs = selectedDrugs;
     }
     /**
@@ -95,10 +95,10 @@ public class EditPrescriptionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Map<String, Integer> selectedDrugsPrescription = new HashMap<>();
-
-                for(Map<String, Object> eachSelectedDrug : selectedDrugs){
-                    selectedDrugsPrescription.put(eachSelectedDrug.get("key").toString(), Integer.valueOf(eachSelectedDrug.get("value")+""));
-                }
+//
+//                for(Map<String, Object> eachSelectedDrug : selectedDrugs){
+//                    selectedDrugsPrescription.put(eachSelectedDrug.get("key").toString(), Integer.valueOf(eachSelectedDrug.get("value")+""));
+//                }
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference();

@@ -20,11 +20,15 @@ import android.widget.TextView;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers.DrugsContainers;
+import com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers.PrescriptionObject;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,8 +55,12 @@ public class CreatePrescriptionFragment extends Fragment {
     EditText treatmentDuration;
     EditText prescriptionNotes;
     TextView drugsCount;
-    Map<String, Object> prescription = new HashMap<>();
+    PrescriptionObject prescriptionObject;
     WritingPrescriptionActivity writingPrescriptionActivity;
+    String currentTimeObj;
+    int treatmentDurationObj; // treatment duration in days
+    ArrayList<String> selectedDrugsObj;
+    String doctorNameObj, patientNameObj, prescriptionNotesObj;
 
     public CreatePrescriptionFragment() {
         // Required empty public constructor
@@ -91,7 +99,6 @@ public class CreatePrescriptionFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_create_prescription, container, false);
 
-
         selectDrugs = v.findViewById(R.id.button_select_drugs);
         submitPrescription = v.findViewById(R.id.button_submit_prescription);
         doctorName = v.findViewById(R.id.edit_text_doctor_name);
@@ -102,40 +109,35 @@ public class CreatePrescriptionFragment extends Fragment {
         drugsCount = v.findViewById(R.id.drugs_count);
 
         writingPrescriptionActivity = (WritingPrescriptionActivity) v.getContext();
-        prescription = writingPrescriptionActivity.getPrescription();
+        prescriptionObject = writingPrescriptionActivity.getPrescriptionObject();
 
-        if(!writingPrescriptionActivity.getSelectedDrugs().isEmpty())
-            drugsCount.setText(""+ writingPrescriptionActivity.getSelectedDrugs().size());
+        doctorName.setText(prescriptionObject.getDoctorName());
+        patientName.setText(prescriptionObject.getPatientName());
+        date.setText(prescriptionObject.getDateTime()+"");
+        treatmentDuration.setText(prescriptionObject.getTreatmentDuration()+"");
+        prescriptionNotes.setText(prescriptionObject.getPrescriptionNotes());
 
-        if(!prescription.isEmpty()){
-            if(prescription.containsKey("Doctor's name")){
-                doctorName.setText(prescription.get("Doctor's name").toString());
-            }
-            if(prescription.containsKey("Patient's name")){
-                patientName.setText(prescription.get("Patient's name").toString());
-            }
-            if(prescription.containsKey("Date")){
-                date.setText(prescription.get("Date").toString());
-            }
-            if(prescription.containsKey("Duration of treatments")){
-                treatmentDuration.setText(prescription.get("Duration of treatments").toString());
-            }
-            if(prescription.containsKey("Prescription notes")){
-                prescriptionNotes.setText(prescription.get("Prescription notes").toString());
-            }
-        }
+        drugsCount.setText(""+ writingPrescriptionActivity.getSelectedDrug2s().size());
 
         selectDrugs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prescription.put("Doctor's name", doctorName.getText().toString());
-                prescription.put("Patient's name", patientName.getText().toString());
-                prescription.put("Date", date.getText().toString());
-                prescription.put("Duration of treatments", treatmentDuration.getText().toString());
-                prescription.put("Prescription notes", prescriptionNotes.getText().toString());
+                doctorNameObj = doctorName.getText().toString();
+                patientNameObj = patientName.getText().toString();
+                currentTimeObj = "Tuesday";
+//                currentTimeObj = Calendar.getInstance().getTime();
+                treatmentDurationObj = Integer.valueOf(treatmentDuration.getText().toString());
+                prescriptionNotesObj = prescriptionNotes.getText().toString();
+
+                prescriptionObject = new PrescriptionObject();
+                prescriptionObject.setDoctorName(doctorNameObj);
+                prescriptionObject.setPatientName(patientNameObj);
+                prescriptionObject.setDateTime(currentTimeObj+"");
+                prescriptionObject.setTreatmentDuration(treatmentDurationObj);
+                prescriptionObject.setPrescriptionNotes(prescriptionNotesObj);
 
                 writingPrescriptionActivity = (WritingPrescriptionActivity) getActivity();
-                writingPrescriptionActivity.setPrescription(prescription);
+                writingPrescriptionActivity.setPrescriptionObject(prescriptionObject);
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DrugsContainers drugsContainers = new DrugsContainers();
@@ -148,21 +150,29 @@ public class CreatePrescriptionFragment extends Fragment {
         submitPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prescription.put("Doctor's name", doctorName.getText().toString());
-                prescription.put("Patient's name", patientName.getText().toString());
-                prescription.put("Date", date.getText().toString());
-                prescription.put("Duration of treatments", treatmentDuration.getText().toString());
-                prescription.put("Prescription notes", prescriptionNotes.getText().toString());
-
+                doctorNameObj = doctorName.getText().toString();
+                patientNameObj = patientName.getText().toString();
+//                currentTimeObj = Calendar.getInstance().getTime();
+                currentTimeObj = "Tuesday";
+                treatmentDurationObj = Integer.valueOf(treatmentDuration.getText().toString());
+                prescriptionNotesObj = prescriptionNotes.getText().toString();
                 writingPrescriptionActivity = (WritingPrescriptionActivity) getActivity();
-                prescription.put("Selected drugs", writingPrescriptionActivity.getSelectedDrugs());
+                selectedDrugsObj = writingPrescriptionActivity.getSelectedDrug2s();
+
+                prescriptionObject = new PrescriptionObject();
+                prescriptionObject.setDoctorName(doctorNameObj);
+                prescriptionObject.setPatientName(patientNameObj);
+                prescriptionObject.setDateTime(currentTimeObj+"");
+                prescriptionObject.setTreatmentDuration(treatmentDurationObj);
+                prescriptionObject.setPrescriptionNotes(prescriptionNotesObj);
+                prescriptionObject.setSelectedDrugs(selectedDrugsObj);
 
                 long time= System.currentTimeMillis();
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Prescriptions2").child(""+doctorName.getText().toString()+"_"+System.currentTimeMillis());
+                DatabaseReference myRef = database.getReference("Prescriptions3").child(""+doctorName.getText().toString()+"_"+System.currentTimeMillis());
 
-                myRef.setValue(prescription).addOnSuccessListener(new OnSuccessListener<Void>() {
+                myRef.setValue(prescriptionObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Intent mainActivity = new Intent(getActivity(), MainActivity.class);
@@ -174,7 +184,6 @@ public class CreatePrescriptionFragment extends Fragment {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
-
 
             }
         });

@@ -2,6 +2,7 @@ package com.example.capstoneprojectgroup4.prescriptions.view_prescriptions;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,10 @@ import android.view.ViewGroup;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.available_pharmacies.AvailablePharmaciesAdapter;
+import com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers.PrescriptionObject;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,8 +47,8 @@ public class ViewPrescriptionsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Map<String, Object> prescriptions;
-    Map<Integer, Object> prescriptionsV2;
+    Map<String, PrescriptionObject> prescriptionMap;
+    ArrayList<Object> prescriptionsListRebuilt;
 
     public ViewPrescriptionsFragment() {
         // Required empty public constructor
@@ -84,7 +88,42 @@ public class ViewPrescriptionsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_view_prescriptions, container, false);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Prescriptions2");
+        DatabaseReference myRef = database.getReference("Prescriptions3/Dd_1691575670501");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                prescriptionMap =  (Map<String, PrescriptionObject>) snapshot.getValue();
+                for(Map.Entry<String, PrescriptionObject> entry : prescriptionMap.entrySet()){
+//                    prescriptionsListRebuilt.add((PrescriptionObject)entry.getValue());
+                    PrescriptionObject prescriptionObject =  entry.getValue();
+//                    PrescriptionObject prescriptionObject1 = (PrescriptionObject) prescriptionObject;
+                    Log.d(TAG, ""+ entry.getValue());
+
+                }
+
+//                PrescriptionObject prescriptionObject = snapshot.getValue(PrescriptionObject.class);
+//                Log.d(TAG, ""+prescriptionObject.getSelectedDrugs());
+
+//                PrescriptionObject prescriptionObject;
+//                if(prescriptionMap.containsKey("DD_1691480702900"))
+//                    prescriptionObject = prescriptionMap.get("DD_1691480702900");
+
+//                Log.d(TAG, ""+prescriptionsListRebuilt);
+
+                
+                
+//                RecyclerView rv = v.findViewById(R.id.recycler_view_prescriptions);
+//                rv.setLayoutManager(new LinearLayoutManager(getContext()));
+//                ViewPrescriptionsAdapter viewPrescriptionsAdapter = new ViewPrescriptionsAdapter(prescriptionsListRebuilt);
+//                rv.setAdapter(viewPrescriptionsAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        /*DatabaseReference myRef = database.getReference("Prescriptions2");
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -114,7 +153,7 @@ public class ViewPrescriptionsFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
         return v;
     }
