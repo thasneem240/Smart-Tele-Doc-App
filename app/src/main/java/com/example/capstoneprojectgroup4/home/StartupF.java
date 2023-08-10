@@ -1,5 +1,7 @@
 package com.example.capstoneprojectgroup4.home;
 
+import android.content.Intent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.R;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StartupF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StartupF extends Fragment {
+public class StartupF extends Fragment
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,8 +31,10 @@ public class StartupF extends Fragment {
     Button authenticationButton;
     Button transactionButton;
     Button pharmacyButton;
-    Button extra1Button;
-    Button availablePharmaciesButton;
+    Button buttonMedicalRecords;
+    Button searchdoc;
+    Button searchDrugs;
+
     FragmentManager fm;
 
     public StartupF() {
@@ -70,36 +74,44 @@ public class StartupF extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_startup_page, container, false);
 
+        //Hello
         authenticationButton = v.findViewById(R.id.authentication_button);
         transactionButton = v.findViewById(R.id.transaction_button);
         pharmacyButton = v.findViewById(R.id.pharmacy_button);
-        extra1Button = v.findViewById(R.id.extra1_button);
-        availablePharmaciesButton = v.findViewById(R.id.available_pharmacies_button);
+        buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
+        searchdoc = v.findViewById(R.id.searchDoc_button);
+        searchDrugs = v.findViewById(R.id.search_drugs_button);
+
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
-
             }
         });
 
         transactionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
-
             }
         });
 
         pharmacyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+            }
+        });
+
+        searchdoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+        buttonMedicalRecords.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
 //                fm = getActivity().getSupportFragmentManager();
 //                WelcomeF welcomeF = new WelcomeF();
 //                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
@@ -107,22 +119,13 @@ public class StartupF extends Fragment {
             }
         });
 
-        extra1Button.setOnClickListener(new View.OnClickListener() {
+        searchDrugs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fm = getActivity().getSupportFragmentManager();
+                        fm = getActivity().getSupportFragmentManager();
                 HomeFragment homeFragment = new HomeFragment();
                 fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
 
-            }
-        });
-
-        availablePharmaciesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
             }
         });
 
