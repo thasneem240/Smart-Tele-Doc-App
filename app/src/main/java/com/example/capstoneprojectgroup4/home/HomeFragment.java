@@ -87,9 +87,9 @@ public class HomeFragment extends Fragment {
         viewPrescriptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
+              /*  FragmentManager fm = getActivity().getSupportFragmentManager();
                 ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragment_container, viewPrescriptionsFragment).commit();
+                fm.beginTransaction().replace(R.id.fragment_container, viewPrescriptionsFragment).commit();*/
             }
         });
 
