@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,9 +89,9 @@ public class StartupF extends Fragment {
         transactionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+
+                  Intent intent = new Intent(getActivity(), ResultActivity.class);
+                  startActivity(intent);
 
             }
         });
