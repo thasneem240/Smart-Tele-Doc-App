@@ -9,11 +9,11 @@ import java.util.Map;
 public class PrescriptionObject {
     private String doctorName;
     private String patientName;
-    private Date dateTime;
+    private String dateTime;
     private int treatmentDuration; // treatment duration in days
     private String prescriptionNotes;
-//    private ArrayList<String> selectedDrugs;
     private ArrayList<String> selectedDrugs = new ArrayList<>();
+
 
     public void setDoctorName(String doctorName) {
         this.doctorName = doctorName;
@@ -23,7 +23,7 @@ public class PrescriptionObject {
         this.patientName = patientName;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -47,7 +47,7 @@ public class PrescriptionObject {
         return patientName;
     }
 
-    public Date getDateTime() {
+    public String getDateTime() {
         return dateTime;
     }
 

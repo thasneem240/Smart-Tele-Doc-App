@@ -57,7 +57,7 @@ public class CreatePrescriptionFragment extends Fragment {
     TextView drugsCount;
     PrescriptionObject prescriptionObject;
     WritingPrescriptionActivity writingPrescriptionActivity;
-    Date currentTimeObj;
+    String currentTimeObj;
     int treatmentDurationObj; // treatment duration in days
     ArrayList<String> selectedDrugsObj;
     String doctorNameObj, patientNameObj, prescriptionNotesObj;
@@ -124,14 +124,15 @@ public class CreatePrescriptionFragment extends Fragment {
             public void onClick(View view) {
                 doctorNameObj = doctorName.getText().toString();
                 patientNameObj = patientName.getText().toString();
-                currentTimeObj = Calendar.getInstance().getTime();
+                currentTimeObj = "Tuesday";
+//                currentTimeObj = Calendar.getInstance().getTime();
                 treatmentDurationObj = Integer.valueOf(treatmentDuration.getText().toString());
                 prescriptionNotesObj = prescriptionNotes.getText().toString();
 
                 prescriptionObject = new PrescriptionObject();
                 prescriptionObject.setDoctorName(doctorNameObj);
                 prescriptionObject.setPatientName(patientNameObj);
-                prescriptionObject.setDateTime(currentTimeObj);
+                prescriptionObject.setDateTime(currentTimeObj+"");
                 prescriptionObject.setTreatmentDuration(treatmentDurationObj);
                 prescriptionObject.setPrescriptionNotes(prescriptionNotesObj);
 
@@ -151,7 +152,8 @@ public class CreatePrescriptionFragment extends Fragment {
             public void onClick(View view) {
                 doctorNameObj = doctorName.getText().toString();
                 patientNameObj = patientName.getText().toString();
-                currentTimeObj = Calendar.getInstance().getTime();
+//                currentTimeObj = Calendar.getInstance().getTime();
+                currentTimeObj = "Tuesday";
                 treatmentDurationObj = Integer.valueOf(treatmentDuration.getText().toString());
                 prescriptionNotesObj = prescriptionNotes.getText().toString();
                 writingPrescriptionActivity = (WritingPrescriptionActivity) getActivity();
@@ -160,7 +162,7 @@ public class CreatePrescriptionFragment extends Fragment {
                 prescriptionObject = new PrescriptionObject();
                 prescriptionObject.setDoctorName(doctorNameObj);
                 prescriptionObject.setPatientName(patientNameObj);
-                prescriptionObject.setDateTime(currentTimeObj);
+                prescriptionObject.setDateTime(currentTimeObj+"");
                 prescriptionObject.setTreatmentDuration(treatmentDurationObj);
                 prescriptionObject.setPrescriptionNotes(prescriptionNotesObj);
                 prescriptionObject.setSelectedDrugs(selectedDrugsObj);

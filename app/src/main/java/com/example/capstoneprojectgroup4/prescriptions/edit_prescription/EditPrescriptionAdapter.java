@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class EditPrescriptionAdapter extends RecyclerView.Adapter<EditPrescriptionViewHolder > {
     ArrayList<String> selectedDrugs;
-    public EditPrescriptionAdapter(ArrayList<Map<String, Object>> selectedDrugs){
+    public EditPrescriptionAdapter(ArrayList<String> selectedDrugs){
         this.selectedDrugs = selectedDrugs;
     }
 
@@ -53,7 +53,7 @@ public class EditPrescriptionAdapter extends RecyclerView.Adapter<EditPrescripti
             @Override
             public void onClick(View view) {
                 holder.editDosage.setText(0+"");
-                selectedDrug.put("value", holder.editDosage.getText()+"");
+//                selectedDrug.put("value", holder.editDosage.getText()+"");
             }
         });
     }
