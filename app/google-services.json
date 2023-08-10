@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:237170391560:android:7dd3e8402ba53597f4efbd",
+        "android_client_info": {
+          "package_name": "com.example.capstoneprojectgroup4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237170391560-6n82bvo4q5gn5u0cpahb32490q4lgdjl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQEbKjhGcMenHlshj4jvBi-iy2tADC64o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237170391560-6n82bvo4q5gn5u0cpahb32490q4lgdjl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:237170391560:android:3d70c42cb2b15e2af4efbd",
         "android_client_info": {
           "package_name": "com.example.firebasesearch"

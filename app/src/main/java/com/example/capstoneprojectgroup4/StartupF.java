@@ -1,5 +1,7 @@
 package com.example.capstoneprojectgroup4;
 
+import android.content.Intent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +11,15 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StartupF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StartupF extends Fragment {
+public class StartupF extends Fragment
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +32,7 @@ public class StartupF extends Fragment {
     Button authenticationButton;
     Button transactionButton;
     Button pharmacyButton;
+    Button buttonMedicalRecords;
     Button searchdoc;
     Button extra2Button;
     FragmentManager fm;
@@ -68,19 +74,20 @@ public class StartupF extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_startup_page, container, false);
 
+        //Hello
         authenticationButton = v.findViewById(R.id.authentication_button);
         transactionButton = v.findViewById(R.id.transaction_button);
         pharmacyButton = v.findViewById(R.id.pharmacy_button);
+        buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
         searchdoc = v.findViewById(R.id.searchDoc_button);
         extra2Button = v.findViewById(R.id.extra2_button);
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+                fm = getActivity().getSupportFragmentManager();
+                AuthenticationHomeF startupFormF = new AuthenticationHomeF();
+                fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
 
             }
         });
@@ -88,9 +95,9 @@ public class StartupF extends Fragment {
         transactionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+
+                  Intent intent = new Intent(getActivity(), ResultActivity.class);
+                  startActivity(intent);
 
             }
         });
@@ -98,9 +105,9 @@ public class StartupF extends Fragment {
         pharmacyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                fm = getActivity().getSupportFragmentManager();
-//                WelcomeF welcomeF = new WelcomeF();
-//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+                fm = getActivity().getSupportFragmentManager();
+                PharmaciesF pharmaciesF = new PharmaciesF();
+                fm.beginTransaction().replace(R.id.fragment_container, pharmaciesF).commit();
 
             }
         });
@@ -111,6 +118,21 @@ public class StartupF extends Fragment {
                 fm = getActivity().getSupportFragmentManager();
                 SearchDocF searchDocF = new SearchDocF();
                 fm.beginTransaction().replace(R.id.fragment_container, searchDocF).commit();
+
+            }
+        });
+
+        buttonMedicalRecords.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+//                fm = getActivity().getSupportFragmentManager();
+//                WelcomeF welcomeF = new WelcomeF();
+//                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+
+                Intent intent = new Intent(getActivity(),Activity_Common.class);
+                startActivity(intent);
 
             }
         });
