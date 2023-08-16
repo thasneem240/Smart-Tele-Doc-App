@@ -106,7 +106,8 @@ public class DocAvailF extends Fragment {
                         Map <String, Object> detailsOfEachDoctor;
                         Map <String, Object> eachSession;
                         Map <String, Object> eachDay;
-                        String doctorName, endTime = null, location = null, startTime = null, noApp = null, day = null;
+                        String doctorName, endTime = null, location = null, startTime = null,  day = null, date=null;
+                        int noApp = 0;
                         ArrayList<Availability> sessionDetails = new ArrayList<>();
 
                         doctors = (Map) snapshot.getValue();
@@ -131,9 +132,9 @@ public class DocAvailF extends Fragment {
 
                                                     endTime = eachDay.get("EndTime") + "";
                                                     startTime = eachDay.get("StartTime") + "";
-                                                    noApp = eachDay.get("NoApp") + "";
+                                                    noApp = Math.toIntExact((Long) eachDay.get("NoApp"));                                                    date = eachDay.get("Date") + "";
 
-                                                    Availability sessionObject = new Availability(doctorName, location, day, noApp, endTime, startTime);
+                                                    Availability sessionObject = new Availability(doctorName, location, day, noApp, endTime, startTime, date);
                                                     sessionDetails.add(sessionObject);
                                                 }
                                             }
@@ -154,7 +155,7 @@ public class DocAvailF extends Fragment {
                                 return Integer.compare(daysOrder.indexOf(day1), daysOrder.indexOf(day2));
                             });
                             // added param docName
-                            AvailAdapter availAdapter1 = new AvailAdapter(sessionDetails, doctorName, day, noApp );
+                            AvailAdapter availAdapter1 = new AvailAdapter(sessionDetails, doctorName, day, noApp, date );
                             recyclerView.setAdapter(availAdapter1);
 
 

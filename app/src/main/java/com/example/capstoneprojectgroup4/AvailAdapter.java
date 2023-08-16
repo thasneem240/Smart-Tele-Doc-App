@@ -16,15 +16,17 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
     private ArrayList<Availability> availabilities;
     private String doctorName;
     private String Day;
+    private String date;
 
-    private String noApp ;
+    private int noApp ;
 
 
-    public AvailAdapter(ArrayList<Availability> availabilities, String doctorName, String Day, String noApp) {
+    public AvailAdapter(ArrayList<Availability> availabilities, String doctorName, String Day, int noApp, String date) {
         this.availabilities = availabilities;
         this.doctorName = doctorName;
         this.Day = Day;
         this.noApp = noApp;
+        this.date = date;
     }
 
     @NonNull
@@ -45,7 +47,7 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
         holder.textDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+               AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
 
                 //BookAppointmentF fragment = new BookAppointmentF();

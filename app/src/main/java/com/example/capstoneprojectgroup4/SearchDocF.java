@@ -2,6 +2,7 @@ package com.example.capstoneprojectgroup4;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import android.app.SearchManager;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -40,9 +42,11 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -75,6 +79,7 @@ public class SearchDocF extends Fragment  {
     private SearchView searchView;
 
     Button button;
+    Button datePickerButton;
     Query query;
 
     Query query2;
@@ -112,6 +117,14 @@ public class SearchDocF extends Fragment  {
         searchButton = view.findViewById(R.id.btnSearch);
         radioGroup = view.findViewById(R.id.radioGroupSearchBy);
         recyclerView = view.findViewById(R.id.rvDoctors);
+
+         datePickerButton = view.findViewById(R.id.btnDatePicker);
+        datePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog();
+            }
+        });
 
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("Search Doctors");
@@ -224,6 +237,125 @@ public class SearchDocF extends Fragment  {
             }
         });
     }
+
+    private void showDatePickerDialog() {
+        Log.d(TAG, "showDatePickerDialog() called");
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                // Do something with the selected date
+                String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
+                datePickerButton.setText(formattedDate); // Set the text of the datePickerButton to the selected date
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        Log.d(TAG, "1");
+
+                                                        performSearchDate(formattedDate); // Perform search using the selected date
+
+                                                    }
+                                                });
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    private void performSearchDate(String formattedDate) {
+        DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference("Availability");
+        Log.d(TAG, "2");
+
+        Query queryDate = availabilityRef.orderByChild("Name");
+        queryDate.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d(TAG, "3");
+
+                ArrayList<Availability> sessionDetailsDateList = new ArrayList<>();
+                ArrayList<Doctors> doctorsDateList = new ArrayList<>(); // New list to accumulate doctors with matching dates
+
+                for (DataSnapshot doctorSnapshotDate : snapshot.getChildren()) {
+                    String doctorNameDate = doctorSnapshotDate.child("Name").getValue(String.class);
+                    Log.d(TAG, "4");
+
+                    for (DataSnapshot sessionSnapshotDate : doctorSnapshotDate.getChildren()) {
+                        if (!sessionSnapshotDate.getKey().equals("Name")) {
+                            String locationDate = sessionSnapshotDate.child("LName").getValue(String.class);
+                            Log.d(TAG, "5");
+
+                            for (DataSnapshot daySnapshotDate : sessionSnapshotDate.getChildren()) {
+                                if (!daySnapshotDate.getKey().equals("LName")) {
+                                    String dayDate = daySnapshotDate.getKey();
+                                    String dateDate = daySnapshotDate.child("Date").getValue(String.class);
+                                    Log.d(TAG, "6");
+                                    Log.d(TAG, "formattedDate: " + formattedDate);
+                                    Log.d(TAG, "dateDate: " + dateDate);
+
+                                    if (formattedDate.equals(dateDate)) {
+                                        Log.d(TAG, "7");
+
+                                        Query query2Date = FirebaseDatabase.getInstance().getReference().child("Doctors");
+                                        query2Date.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                Log.d(TAG, "8");
+
+                                                for (DataSnapshot doctorSnapshotDate : snapshot.getChildren()) {
+                                                    String name2Date = doctorSnapshotDate.child("Name").getValue(String.class);
+                                                    String specializationDate = doctorSnapshotDate.child("Specialization").getValue(String.class);
+                                                    ArrayList<String> locationsDateList = new ArrayList<>();
+                                                    for (DataSnapshot locationSnapshotDate : doctorSnapshotDate.child("Locations").getChildren()) {
+                                                        String location = locationSnapshotDate.getValue(String.class);
+
+                                                        if (location != null && location.equals(locationDate)) {
+                                                            locationsDateList.add(location);
+                                                        }                                                    }
+
+                                                    if (name2Date != null && name2Date.toLowerCase().contains(doctorNameDate.toLowerCase())) {
+                                                        Doctors doctorDate = new Doctors(name2Date, specializationDate, locationsDateList);
+                                                        doctorsDateList.add(doctorDate);
+                                                        Log.d(TAG, "9");
+                                                    }
+                                                }
+                                                Log.d(TAG, "10");
+
+                                                DocSearchResultAdapter docSearchResultAdapterDate = new DocSearchResultAdapter(doctorsDateList);
+                                                recyclerView.setAdapter(docSearchResultAdapterDate);
+                                                // docSearchResultAdapterDate.notifyDataSetChanged();
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                Log.w(TAG, "Failed to read value.", error.toException());
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                Log.d(TAG, String.format("%s", sessionDetailsDateList + ""));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+
+
+
+
 
     @Override
     public void onStart() {
