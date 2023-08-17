@@ -6,55 +6,70 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:hint="Name"
+        android:padding="8dp"
+        android:textStyle="bold">
 
-        <RadioGroup
-            android:id="@+id/radioGroupSearchBy"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:inputType="text"
+            android:importantForAccessibility="yes" />
 
-            <RadioButton
-                android:id="@+id/radioName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="1"
-                android:text="Name" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <RadioButton
-                android:id="@+id/radioSpecialization"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="2"
-                android:text="Specialization" />
-
-            <RadioButton
-                android:id="@+id/radioLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="3"
-                android:text="Location" />
-
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/btnDatePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Date"
-            android:layout_gravity="center"
-            android:layout_marginLeft="16dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
-    </LinearLayout>
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter search query" />
+        android:hint="Specialization"
+        android:padding="8dp"
+        android:textStyle="bold">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSpecialization"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:importantForAccessibility="yes" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Location"
+        android:padding="8dp"
+        android:textStyle="bold">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:importantForAccessibility="yes" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:padding="8dp"
+        android:textStyle="bold">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:focusable="false"
+            android:importantForAccessibility="yes" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnSearch"
@@ -62,7 +77,7 @@
         android:layout_height="wrap_content"
         android:text="Search"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupSearchBy"
+        app:layout_constraintTop_toBottomOf="@id/etDate"
         style="@style/Widget.MaterialComponents.Button"/>
 
     <TextView

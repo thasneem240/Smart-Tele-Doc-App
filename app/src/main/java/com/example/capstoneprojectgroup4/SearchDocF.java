@@ -67,8 +67,12 @@ public class SearchDocF extends Fragment  {
     ArrayList<String> locations;
     private String mParam1;
     private String mParam2;
-
+    TextView etName ;
+    TextView etSpecialization ;
+    TextView etLocation;
+    TextView etDate ;
     private Toolbar toolbar;
+    String specializationV;
     private Button searchButton;
     private RadioGroup radioGroup;
     private EditText searchEditText;
@@ -79,6 +83,7 @@ public class SearchDocF extends Fragment  {
     private SearchView searchView;
 
     Button button;
+    int datesearchid =0;
     Button datePickerButton;
     Query query;
 
@@ -113,21 +118,32 @@ public class SearchDocF extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_doc, container, false);
 
-        toolbar = view.findViewById(R.id.toolbar);
+        //toolbar = view.findViewById(R.id.toolbar);
         searchButton = view.findViewById(R.id.btnSearch);
-        radioGroup = view.findViewById(R.id.radioGroupSearchBy);
         recyclerView = view.findViewById(R.id.rvDoctors);
 
-         datePickerButton = view.findViewById(R.id.btnDatePicker);
-        datePickerButton.setOnClickListener(new View.OnClickListener() {
+         etName = view.findViewById(R.id.etName);
+         etSpecialization = view.findViewById(R.id.etSpecialization);
+         etLocation = view.findViewById(R.id.etLocation);
+         etDate = view.findViewById(R.id.etDate);
+
+        etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDatePickerDialog();
+                openDateSearch();
             }
         });
 
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("Search Doctors");
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                performSearch();
+            }
+        });
+
+        //((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+       // ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle("Search Doctors");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         FirebaseRecyclerOptions<Doctors> options =
@@ -138,57 +154,88 @@ public class SearchDocF extends Fragment  {
         doctorAdapter = new DoctorAdapter(options);
         recyclerView.setAdapter(doctorAdapter);
 
-
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.search_doctor_menu, menu);
-        MenuItem searchItem = menu.findItem(R.id.search);
-        searchView = (SearchView) searchItem.getActionView();
+    private void openDateSearch()
+    {
+        String specializationV = etSpecialization.getText().toString().trim();
+        String nameV = etName.getText().toString().trim();
+        String locV = etLocation.getText().toString().trim();
 
-        SearchManager searchManager = (SearchManager) requireActivity().getSystemService(Context.SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().getComponentName()));
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                searchButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        performSearch(query);
+        Log.d(TAG, "Spec: " + specializationV);
 
-                    }
-                });
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String query) {
-                searchButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        performSearch(query);
+                if (!specializationV.isEmpty() && nameV.isEmpty()  && locV.isEmpty()  ) {
+                    showDatePickerDialogS(specializationV);
+                }
+                else if (!nameV.isEmpty() && specializationV.isEmpty() && locV.isEmpty() )
+                {
+                     showDatePickerDialogN(nameV);
+                }
+                else if (!locV.isEmpty() && specializationV.isEmpty() && nameV.isEmpty() )
+                {
+                    showDatePickerDialogL(locV);
+                }
+                else if (!locV.isEmpty() && !specializationV.isEmpty() && nameV.isEmpty() )
+                {
+                    showDatePickerDialogLS(specializationV, locV)    ;
+                }
+                else if (!locV.isEmpty() && !nameV.isEmpty() && specializationV.isEmpty() )
+                {
+                    showDatePickerDialogNL(nameV, locV);    ;
+                }
+                else if (!specializationV.isEmpty() && !nameV.isEmpty() && locV.isEmpty() )
+                {
+                    showDatePickerDialogNS(nameV, specializationV);    ;
+                }
+                else if (!specializationV.isEmpty() && !nameV.isEmpty() && !locV.isEmpty() )
+                {
+                    showDatePickerDialogEverything(nameV, specializationV, locV);    ;
+                }
+                else {
+                    showDatePickerDialogD();
+                }
 
-                    }
-                });                return false;
-            }
-        });
-
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
-    private void performSearch(String searchText) {
-        int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+    private void performSearch() {
+        String selectedDate = etDate.getText().toString();
+        String nameEd = etName.getText().toString().trim();
+        String specializationEd = etSpecialization.getText().toString().trim();
+        String locationEd = etLocation.getText().toString().trim();
 
-        if (selectedRadioButtonId == R.id.radioName) {
+        if (!nameEd.isEmpty() && areOtherEditTextsEmptyName()) {
+            Log.d(TAG, "Search by Name: " + nameEd);
             searchType = 0;
-        } else if (selectedRadioButtonId == R.id.radioSpecialization) {
+        } else if (!specializationEd.isEmpty() && areOtherEditTextsEmptySpec()) {
+            Log.d(TAG, "Search by Specialization: " + specializationEd);
             searchType = 1;
-        } else if (selectedRadioButtonId == R.id.radioLocation) {
+        } else if (!locationEd.isEmpty() && areOtherEditTextsEmptyLoc()) {
+            Log.d(TAG, "Search by Location: " + locationEd);
             searchType = 2;
+        } else if (selectedDate != null && areOtherEditTextsEmptyDate()) {
+            Log.d(TAG, "Search by Date");
+            searchType = 3;
         }
+        else if (!locationEd.isEmpty() && !specializationEd.isEmpty() && nameEd.isEmpty() && selectedDate.isEmpty())
+        {
+            searchType =4;
+        }
+        else if (!nameEd.isEmpty() && !specializationEd.isEmpty() && locationEd.isEmpty() && selectedDate.isEmpty())
+        {
+            searchType =5;
+        }
+        else if (!nameEd.isEmpty() && !locationEd.isEmpty() && specializationEd.isEmpty() && selectedDate.isEmpty())
+        {
+            searchType =6;
+        }
+        else if (!nameEd.isEmpty() && !locationEd.isEmpty() && !specializationEd.isEmpty() && selectedDate.isEmpty())
+        {
+            searchType =7;
+        }
+
 
         query = FirebaseDatabase.getInstance().getReference().child("Doctors");
 
@@ -202,16 +249,16 @@ public class SearchDocF extends Fragment  {
                     String specialization = (String) doctorSnapshot.child("Specialization").getValue();
                     ArrayList<String> locations = (ArrayList<String>) doctorSnapshot.child("Locations").getValue();
 
-                    if (searchType == 0 && name != null && name.toLowerCase().contains(searchText.toLowerCase())) {
+                    if (searchType == 0 && name != null && name.toLowerCase().contains(nameEd.toLowerCase())) {
                         Doctors doctor = new Doctors(name, specialization, locations);
                         doctors.add(doctor);
-                    } else if (searchType == 1 && specialization != null && specialization.toLowerCase().contains(searchText.toLowerCase())) {
+                    } else if (searchType == 1 && specialization != null && specialization.toLowerCase().contains(specializationEd.toLowerCase())) {
                         Doctors doctor = new Doctors(name, specialization, locations);
                         doctors.add(doctor);
-                    } else if (searchType == 2 && locations != null) {
+                    }  else if (searchType == 2 && locations != null) {
                         // Check if the searched location matches any location for this doctor (case-insensitive).
                         for (String location : locations) {
-                            if (location.toLowerCase().contains(searchText.toLowerCase())) {
+                            if (location.toLowerCase().contains(locationEd.toLowerCase())) {
                                 // Convert the locations list to an ArrayList with a single element.
                                 ArrayList<String> locationList = new ArrayList<>();
                                 locationList.add(location);
@@ -222,8 +269,18 @@ public class SearchDocF extends Fragment  {
                                 break; // No need to check other locations for this doctor.
                             }
                         }
+                    } else if (searchType == 4) {
+                        performSearchSpecializationAndLocation(specializationEd,locationEd );
                     }
-
+                    else if (searchType == 5) {
+                        performSearchSpecializationAndName(specializationEd,nameEd );
+                    }
+                    else if (searchType == 6) {
+                        performSearchLocationAndName(locationEd,nameEd );
+                    }
+                    else if (searchType == 7) {
+                        performSearchSpecializationLocationAndName(specializationEd, locationEd,nameEd );
+                    }
 
                 }
 
@@ -237,8 +294,1101 @@ public class SearchDocF extends Fragment  {
             }
         });
     }
+    private boolean areOtherEditTextsEmptyName() {
+        return etSpecialization.getText().toString().trim().isEmpty() &&
+                etLocation.getText().toString().trim().isEmpty() &&
+                etDate.getText().toString().trim().isEmpty();
+    }
 
-    private void showDatePickerDialog() {
+    private boolean areOtherEditTextsEmptySpec() {
+        return etName.getText().toString().trim().isEmpty() &&
+                etLocation.getText().toString().trim().isEmpty() &&
+                etDate.getText().toString().trim().isEmpty();
+    }
+
+    private boolean areOtherEditTextsEmptyLoc() {
+        return etSpecialization.getText().toString().trim().isEmpty() &&
+                etName.getText().toString().trim().isEmpty() &&
+                etDate.getText().toString().trim().isEmpty();
+    }
+
+    private boolean areOtherEditTextsEmptyDate() {
+        return etSpecialization.getText().toString().trim().isEmpty() &&
+                etLocation.getText().toString().trim().isEmpty() &&
+                etName.getText().toString().trim().isEmpty();
+    }
+
+    private void performSearchSpecializationLocationAndName(String specializationSLN, String locationSLN, String nameSLN) {
+        Log.d(TAG, "performSearchSpecializationLocationAndName started");
+        Log.d(TAG, "Specialization: " + specializationSLN);
+        Log.d(TAG, "Location: " + locationSLN);
+        Log.d(TAG, "Name: " + nameSLN);
+
+        DatabaseReference availabilityRefSLN = FirebaseDatabase.getInstance().getReference("Availability");
+
+        availabilityRefSLN.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> matchedDoctorsList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String doctorName = doctorSnapshot.child("Name").getValue(String.class);
+
+                    for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
+                        if (!sessionSnapshot.getKey().equals("Name")) {
+                            String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
+                            Log.d(TAG, "LName " + sessionLocation);
+
+                            if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationSLN.toLowerCase())) {
+                                Log.d(TAG, "Location matched for doctor: " + doctorName);
+                                String doctorId = doctorSnapshot.getKey();
+                                Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
+
+                                doctorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        String name2 = snapshot.child("Name").getValue(String.class);
+                                        String spec2 = snapshot.child("Specialization").getValue(String.class);
+                                        ArrayList<String> locationsList = new ArrayList<>();
+                                        for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
+                                            String doctorLocation = locationSnapshot.getValue(String.class);
+
+                                            if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                locationsList.add(doctorLocation);
+                                            }
+                                        }
+
+                                        Log.d(TAG, "Comparing specializationSLN: " + specializationSLN + " with spec2: " + spec2);
+                                        if (name2 != null && name2.toLowerCase().contains(nameSLN.toLowerCase()) &&
+                                                spec2 != null && spec2.toLowerCase().contains(specializationSLN.toLowerCase())) {
+                                            Log.d(TAG, "Doctor matched: " + name2);
+                                            Doctors doctor = new Doctors(name2, spec2, locationsList);
+                                            Log.d(TAG, "D: " + doctor);
+                                            matchedDoctorsList.add(doctor);
+                                        }
+
+                                        Log.d(TAG, "Doctors matched: " + matchedDoctorsList);
+
+                                        DocSearchResultAdapter docSearchResultAdapter = new DocSearchResultAdapter(matchedDoctorsList);
+                                        recyclerView.setAdapter(docSearchResultAdapter);
+                                        Log.d(TAG, "Setting adapter for RecyclerView");
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.w(TAG, "Failed to read value.", error.toException());
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+
+
+
+
+
+    private void performSearchLocationAndName(String locationLN, String nameLN) {
+        Log.d(TAG, "performSearchLocationAndName started");
+        Log.d(TAG, "Location: " + locationLN);
+        Log.d(TAG, "Name: " + nameLN);
+
+        DatabaseReference availabilityRefLN = FirebaseDatabase.getInstance().getReference("Availability");
+
+        availabilityRefLN.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> matchedDoctorsList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String doctorName = doctorSnapshot.child("Name").getValue(String.class);
+
+                    for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
+                        if (!sessionSnapshot.getKey().equals("Name")) {
+                            String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
+                            Log.d(TAG, "LName " + sessionLocation);
+
+                            if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationLN.toLowerCase())) {
+                                Log.d(TAG, "Location matched for doctor: " + doctorName);
+                                String doctorId = doctorSnapshot.getKey();
+                                Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
+
+                                doctorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        String name2 = snapshot.child("Name").getValue(String.class);
+                                        String spec2 = snapshot.child("Specialization").getValue(String.class);
+                                        ArrayList<String> locationsList = new ArrayList<>();
+                                        for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
+                                            String doctorLocation = locationSnapshot.getValue(String.class);
+
+                                            if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                locationsList.add(doctorLocation);
+                                            }
+                                        }
+
+                                        Log.d(TAG, "Comparing nameLN: " + nameLN + " with name2: " + name2);
+                                        if (name2 != null && name2.toLowerCase().contains(nameLN.toLowerCase())) {
+                                            Log.d(TAG, "Doctor matched: " + name2);
+                                            Doctors doctor = new Doctors(name2, spec2, locationsList);
+                                            Log.d(TAG, "D: " + doctor);
+                                            matchedDoctorsList.add(doctor);
+                                        }
+
+                                        Log.d(TAG, "Doctors matched: " + matchedDoctorsList);
+
+                                        DocSearchResultAdapter docSearchResultAdapter = new DocSearchResultAdapter(matchedDoctorsList);
+                                        recyclerView.setAdapter(docSearchResultAdapter);
+                                        Log.d(TAG, "Setting adapter for RecyclerView");
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.w(TAG, "Failed to read value.", error.toException());
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+
+    private void performSearchSpecializationLocationAndDate(String specializationSLD, String locationSLD, String selectedDateSLD) {
+        Log.d(TAG, "performSearchSpecializationLocationAndDate started");
+        Log.d(TAG, "Specialization: " + specializationSLD);
+        Log.d(TAG, "Location: " + locationSLD);
+        Log.d(TAG, "Date: " + selectedDateSLD);
+
+        DatabaseReference availabilityRefSLD = FirebaseDatabase.getInstance().getReference("Availability");
+
+        availabilityRefSLD.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> matchedDoctorsList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String doctorName = doctorSnapshot.child("Name").getValue(String.class);
+
+                    for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
+                        if (!sessionSnapshot.getKey().equals("Name")) {
+                            String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
+                            Log.d(TAG, "LName " + sessionLocation);
+
+                            if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationSLD.toLowerCase())) {
+                                for (DataSnapshot daySnapshot : sessionSnapshot.getChildren()) {
+                                    if (!daySnapshot.getKey().equals("LName")) {
+                                        String sessionDate = daySnapshot.child("Date").getValue(String.class);
+
+                                        Log.d(TAG, "Comparing selectedDateSLD: " + selectedDateSLD + " with sessionDate: " + sessionDate);
+
+                                        if (selectedDateSLD.equals(sessionDate)) {
+                                            Log.d(TAG, "Date matched for doctor: " + doctorName);
+                                            String doctorId = doctorSnapshot.getKey();
+                                            Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
+
+                                            doctorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    String name = snapshot.child("Name").getValue(String.class);
+                                                    String spec = snapshot.child("Specialization").getValue(String.class);
+                                                    ArrayList<String> locationsList = new ArrayList<>();
+                                                    for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
+                                                        String doctorLocation = locationSnapshot.getValue(String.class);
+
+                                                        if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                            locationsList.add(doctorLocation);
+                                                        }
+                                                    }
+
+                                                    Log.d(TAG, "Comparing specializationSLD: " + specializationSLD + " with spec: " + spec);
+                                                    if (name != null && name.toLowerCase().contains(doctorName.toLowerCase()) &&
+                                                            spec != null && spec.toLowerCase().contains(specializationSLD.toLowerCase())) {
+                                                        Log.d(TAG, "Doctor matched: " + name);
+                                                        Doctors doctor = new Doctors(name, spec, locationsList);
+                                                        Log.d(TAG, "D: " + doctor);
+                                                        matchedDoctorsList.add(doctor);
+                                                    }
+
+                                                    Log.d(TAG, "Doctors matched: " + matchedDoctorsList);
+
+                                                    DocSearchResultAdapter docSearchResultAdapter = new DocSearchResultAdapter(matchedDoctorsList);
+                                                    recyclerView.setAdapter(docSearchResultAdapter);
+                                                    Log.d(TAG, "Setting adapter for RecyclerView");
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+                                                    Log.w(TAG, "Failed to read value.", error.toException());
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    private void performSearchNameLocationAndDate(String nameNLD, String locationNLD, String selectedDateNLD) {
+        Log.d(TAG, "performSearchNameLocationAndDate started");
+        Log.d(TAG, "Name: " + nameNLD);
+        Log.d(TAG, "Location: " + locationNLD);
+        Log.d(TAG, "Date: " + selectedDateNLD);
+
+        DatabaseReference availabilityRefNLD = FirebaseDatabase.getInstance().getReference("Availability");
+
+        availabilityRefNLD.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> matchedDoctorsList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String doctorName = doctorSnapshot.child("Name").getValue(String.class);
+
+                    if (doctorName != null && doctorName.toLowerCase().contains(nameNLD.toLowerCase())) {
+                        for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
+                            if (!sessionSnapshot.getKey().equals("Name")) {
+                                String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
+                                Log.d(TAG, "LName " + sessionLocation);
+
+                                if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationNLD.toLowerCase())) {
+                                    for (DataSnapshot daySnapshot : sessionSnapshot.getChildren()) {
+                                        if (!daySnapshot.getKey().equals("LName")) {
+                                            String sessionDate = daySnapshot.child("Date").getValue(String.class);
+
+                                            Log.d(TAG, "Comparing selectedDateNLD: " + selectedDateNLD + " with sessionDate: " + sessionDate);
+
+                                            if (selectedDateNLD.equals(sessionDate)) {
+                                                Log.d(TAG, "Date matched for doctor: " + doctorName);
+                                                String doctorId = doctorSnapshot.getKey();
+                                                Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
+
+                                                doctorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        String name = snapshot.child("Name").getValue(String.class);
+                                                        String spec = snapshot.child("Specialization").getValue(String.class);
+                                                        ArrayList<String> locationsList = new ArrayList<>();
+                                                        for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
+                                                            String doctorLocation = locationSnapshot.getValue(String.class);
+
+                                                            if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                                locationsList.add(doctorLocation);
+                                                            }
+                                                        }
+
+                                                        Log.d(TAG, "Comparing nameNLD: " + nameNLD + " with name: " + name);
+                                                        if (spec != null) {
+                                                            Log.d(TAG, "Doctor matched: " + name);
+                                                            Doctors doctor = new Doctors(name, spec, locationsList);
+                                                            Log.d(TAG, "D: " + doctor);
+                                                            matchedDoctorsList.add(doctor);
+                                                        }
+
+                                                        Log.d(TAG, "Doctors matched: " + matchedDoctorsList);
+
+                                                        DocSearchResultAdapter docSearchResultAdapter = new DocSearchResultAdapter(matchedDoctorsList);
+                                                        recyclerView.setAdapter(docSearchResultAdapter);
+                                                        Log.d(TAG, "Setting adapter for RecyclerView");
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+                                                        Log.w(TAG, "Failed to read value.", error.toException());
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+
+    private void performSearchSpecializationAndName(String specializationSN, String nameSN) {
+        Log.d(TAG, "performSearchSpecializationAndName started");
+        Log.d(TAG, "Specialization: " + specializationSN);
+        Log.d(TAG, "Name: " + nameSN);
+
+        DatabaseReference doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors");
+
+        doctorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> matchedDoctorsList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String doctorName = doctorSnapshot.child("Name").getValue(String.class);
+                    String doctorSpec = doctorSnapshot.child("Specialization").getValue(String.class);
+
+                    if (doctorName != null && doctorName.toLowerCase().contains(nameSN.toLowerCase()) &&
+                            doctorSpec != null && doctorSpec.toLowerCase().contains(specializationSN.toLowerCase())) {
+                        Log.d(TAG, "Doctor matched: " + doctorName);
+                        ArrayList<String> locationsList = new ArrayList<>();
+                        for (DataSnapshot locationSnapshot : doctorSnapshot.child("Locations").getChildren()) {
+                            String doctorLocation = locationSnapshot.getValue(String.class);
+                            locationsList.add(doctorLocation);
+                        }
+
+                        Doctors doctor = new Doctors(doctorName, doctorSpec, locationsList);
+                        Log.d(TAG, "D: " + doctor);
+                        matchedDoctorsList.add(doctor);
+                    }
+                }
+
+                Log.d(TAG, "Doctors matched: " + matchedDoctorsList);
+
+                DocSearchResultAdapter docSearchResultAdapter = new DocSearchResultAdapter(matchedDoctorsList);
+                recyclerView.setAdapter(docSearchResultAdapter);
+                Log.d(TAG, "Setting adapter for RecyclerView");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    private void performSearchSpecializationAndLocation(String specializationSL, String locationSL) {
+        Log.d(TAG, "performSearchSpecializationAndLocation started");
+        Log.d(TAG, "Specialization: " + specializationSL);
+        Log.d(TAG, "Location: " + locationSL);
+
+        DatabaseReference availabilityRefSL = FirebaseDatabase.getInstance().getReference("Availability");
+
+        availabilityRefSL.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> matchedDoctorsList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String doctorName = doctorSnapshot.child("Name").getValue(String.class);
+
+                    for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
+                        if (!sessionSnapshot.getKey().equals("Name")) {
+                            String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
+                            Log.d(TAG, "LName " + sessionLocation);
+
+                            if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationSL.toLowerCase())) {
+                                Log.d(TAG, "Location matched for doctor: " + doctorName);
+                                String doctorId = doctorSnapshot.getKey();
+                                Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
+
+                                doctorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        String name2 = snapshot.child("Name").getValue(String.class);
+                                        String spec2 = snapshot.child("Specialization").getValue(String.class);
+                                        ArrayList<String> locationsList = new ArrayList<>();
+                                        for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
+                                            String doctorLocation = locationSnapshot.getValue(String.class);
+
+                                            if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                locationsList.add(doctorLocation);
+                                            }
+                                        }
+
+                                        Log.d(TAG, "Comparing specializationSL: " + specializationSL + " with spec2: " + spec2);
+                                        if (name2 != null && name2.toLowerCase().contains(doctorName.toLowerCase()) &&
+                                                spec2 != null && spec2.toLowerCase().contains(specializationSL.toLowerCase())) {
+                                            Log.d(TAG, "Doctor matched: " + name2);
+                                            Doctors doctor = new Doctors(name2, spec2, locationsList);
+                                            Log.d(TAG, "D: " + doctor);
+                                            matchedDoctorsList.add(doctor);
+                                        }
+
+                                        Log.d(TAG, "Doctors matched: " + matchedDoctorsList);
+
+                                        DocSearchResultAdapter docSearchResultAdapter = new DocSearchResultAdapter(matchedDoctorsList);
+                                        recyclerView.setAdapter(docSearchResultAdapter);
+                                        Log.d(TAG, "Setting adapter for RecyclerView");
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.w(TAG, "Failed to read value.", error.toException());
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+
+    private void performSearchSpecializationAndDate(String specializationS, String selectedDateS) {
+        Log.d(TAG, "performSearchSpecializationAndDate started");
+        Log.d(TAG, "D Spec: " + specializationS);
+
+        DatabaseReference availabilityRefS = FirebaseDatabase.getInstance().getReference("Availability");
+
+        availabilityRefS.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> doctorsSpecializationDateList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshotS : snapshot.getChildren()) {
+                    String doctorNameDateS = doctorSnapshotS.child("Name").getValue(String.class);
+
+                    for (DataSnapshot sessionSnapshotDateS : doctorSnapshotS.getChildren()) {
+                        if (!sessionSnapshotDateS.getKey().equals("Name")) {
+                            String locationDateS = sessionSnapshotDateS.child("LName").getValue(String.class);
+
+                            for (DataSnapshot daySnapshotDateS : sessionSnapshotDateS.getChildren()) {
+                                if (!daySnapshotDateS.getKey().equals("LName")) {
+                                    String dateDateS = daySnapshotDateS.child("Date").getValue(String.class);
+
+                                    Log.d(TAG, "Comparing selectedDateS: " + selectedDateS + " with dateDateS: " + dateDateS);
+
+                                    if (selectedDateS.equals(dateDateS)) {
+                                        Log.d(TAG, "Dates matched for doctor: " + doctorNameDateS);
+                                        Query query2DateS = FirebaseDatabase.getInstance().getReference().child("Doctors");
+                                        query2DateS.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                for (DataSnapshot doctorSnapshotDateS : snapshot.getChildren()) {
+                                                    String name2DateS = doctorSnapshotDateS.child("Name").getValue(String.class);
+                                                    String specDateS = doctorSnapshotDateS.child("Specialization").getValue(String.class);
+                                                    ArrayList<String> locationsDateListS = new ArrayList<>();
+                                                    for (DataSnapshot locationSnapshotDateS : doctorSnapshotDateS.child("Locations").getChildren()) {
+                                                        String locationS = locationSnapshotDateS.getValue(String.class);
+
+                                                        if (locationS != null && locationS.equals(locationDateS)) {
+                                                            locationsDateListS.add(locationS);
+                                                        }                                                    }
+
+                                                    if (name2DateS != null && name2DateS.toLowerCase().contains(doctorNameDateS.toLowerCase()) &&
+                                                            specDateS != null && specDateS.toLowerCase().contains(specializationS.toLowerCase())) {
+                                                        Log.d(TAG, "Doctor matched: " + name2DateS);
+                                                        Doctors doctorDateS = new Doctors(name2DateS, specDateS, locationsDateListS);
+                                                        Log.d(TAG, "D: " + doctorDateS);
+                                                        doctorsSpecializationDateList.add(doctorDateS);
+                                                    }
+                                                }
+
+                                                Log.d(TAG, "Doctors matched: " + doctorsSpecializationDateList);
+
+                                                    DocSearchResultAdapter docSearchResultAdapterSpecDateS = new DocSearchResultAdapter(doctorsSpecializationDateList);
+                                                    recyclerView.setAdapter(docSearchResultAdapterSpecDateS);
+                                                Log.d(TAG, "Setting adapter for RecyclerView");
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                Log.w(TAG, "Failed to read value.", error.toException());
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    private void performSearchNameSpecializationLocationAndDate(String nameNSLD, String specializationNSLD, String locationNSLD, String selectedDateNSLD) {
+        Log.d(TAG, "performSearchNameSpecializationLocationAndDate started");
+        Log.d(TAG, "Name: " + nameNSLD);
+        Log.d(TAG, "Specialization: " + specializationNSLD);
+        Log.d(TAG, "Location: " + locationNSLD);
+        Log.d(TAG, "Date: " + selectedDateNSLD);
+
+        DatabaseReference availabilityRefNSLD = FirebaseDatabase.getInstance().getReference("Availability");
+
+        availabilityRefNSLD.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> matchedDoctorsList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String doctorName = doctorSnapshot.child("Name").getValue(String.class);
+                    Log.d(TAG, "dN " + doctorName);
+
+                    if (doctorName != null && doctorName.toLowerCase().contains(nameNSLD.toLowerCase())) {
+
+                        for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
+                            if (!sessionSnapshot.getKey().equals("Name")) {
+                                String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
+                                Log.d(TAG, "LName " + sessionLocation);
+
+                                if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationNSLD.toLowerCase())) {
+
+                                    for (DataSnapshot daySnapshot : sessionSnapshot.getChildren()) {
+                                        if (!daySnapshot.getKey().equals("LName")) {
+                                            String sessionDate = daySnapshot.child("Date").getValue(String.class);
+
+                                            Log.d(TAG, "Comparing selectedDateNSLD: " + selectedDateNSLD + " with sessionDate: " + sessionDate);
+
+                                            if (selectedDateNSLD.equals(sessionDate)) {
+                                                Log.d(TAG, "Date matched for doctor: " + doctorName);
+                                                String doctorId = doctorSnapshot.getKey();
+                                                Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
+
+                                                doctorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        String name = snapshot.child("Name").getValue(String.class);
+                                                        String spec = snapshot.child("Specialization").getValue(String.class);
+                                                        ArrayList<String> locationsList = new ArrayList<>();
+                                                        for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
+                                                            String doctorLocation = locationSnapshot.getValue(String.class);
+
+                                                            if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                                locationsList.add(doctorLocation);
+                                                            }
+                                                        }
+
+                                                        Log.d(TAG, "Comparing nameNSLD: " + nameNSLD + " with name: " + name);
+                                                        if (spec != null && spec.toLowerCase().contains(specializationNSLD.toLowerCase())) {
+                                                            Log.d(TAG, "Doctor matched: " + name);
+                                                            Doctors doctor = new Doctors(name, spec, locationsList);
+                                                            Log.d(TAG, "D: " + doctor);
+                                                            matchedDoctorsList.add(doctor);
+                                                        }
+
+                                                        Log.d(TAG, "Doctors matched: " + matchedDoctorsList);
+
+                                                        DocSearchResultAdapter docSearchResultAdapter = new DocSearchResultAdapter(matchedDoctorsList);
+                                                        recyclerView.setAdapter(docSearchResultAdapter);
+                                                        Log.d(TAG, "Setting adapter for RecyclerView");
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+                                                        Log.w(TAG, "Failed to read value.", error.toException());
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+
+
+    private void performSearchNameSpecializationAndDate(String nameNSD, String specializationNSD, String selectedDateNSD) {
+        Log.d(TAG, "performSearchNameSpecializationAndDate started");
+        Log.d(TAG, "Name: " + nameNSD);
+        Log.d(TAG, "Specialization: " + specializationNSD);
+        Log.d(TAG, "Date: " + selectedDateNSD);
+
+        DatabaseReference availabilityRefNSD = FirebaseDatabase.getInstance().getReference("Availability");
+
+        availabilityRefNSD.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> matchedDoctorsList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String doctorName = doctorSnapshot.child("Name").getValue(String.class);
+                    Log.d(TAG, "dN " + doctorName);
+
+                    //String doctorSpecialization = doctorSnapshot.child("Specialization").getValue(String.class);
+                    //Log.d(TAG, "dS " + doctorSpecialization);
+
+                    if (doctorName != null && doctorName.toLowerCase().contains(nameNSD.toLowerCase())) {
+
+                        for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
+                            if (!sessionSnapshot.getKey().equals("Name")) {
+                                String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
+                                Log.d(TAG, "LName " + sessionLocation);
+
+                                for (DataSnapshot daySnapshot : sessionSnapshot.getChildren()) {
+                                    if (!daySnapshot.getKey().equals("LName")) {
+                                        String sessionDate = daySnapshot.child("Date").getValue(String.class);
+
+                                        Log.d(TAG, "Comparing selectedDateNSD: " + selectedDateNSD + " with sessionDate: " + sessionDate);
+
+                                        if (selectedDateNSD.equals(sessionDate)) {
+                                            Log.d(TAG, "Date matched for doctor: " + doctorName);
+                                            String doctorId = doctorSnapshot.getKey();
+                                            Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
+
+                                            doctorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    String name = snapshot.child("Name").getValue(String.class);
+                                                    String spec = snapshot.child("Specialization").getValue(String.class);
+                                                    ArrayList<String> locationsList = new ArrayList<>();
+                                                    for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
+                                                        String doctorLocation = locationSnapshot.getValue(String.class);
+
+                                                        if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                            locationsList.add(doctorLocation);
+                                                        }
+                                                    }
+
+                                                    Log.d(TAG, "Comparing nameNSD: " + nameNSD + " with name: " + name);
+                                                    if (spec != null  && spec.toLowerCase().contains(specializationNSD.toLowerCase()) )
+                                                    {
+                                                        Log.d(TAG, "Doctor matched: " + name);
+                                                        Doctors doctor = new Doctors(name, spec, locationsList);
+                                                        Log.d(TAG, "D: " + doctor);
+                                                        matchedDoctorsList.add(doctor);
+                                                    }
+
+                                                    Log.d(TAG, "Doctors matched: " + matchedDoctorsList);
+
+                                                    DocSearchResultAdapter docSearchResultAdapter = new DocSearchResultAdapter(matchedDoctorsList);
+                                                    recyclerView.setAdapter(docSearchResultAdapter);
+                                                    Log.d(TAG, "Setting adapter for RecyclerView");
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+                                                    Log.w(TAG, "Failed to read value.", error.toException());
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+
+
+    private void performSearchNameAndDate(String doctorNameS, String selectedDateS) {
+        Log.d(TAG, "performSearchNameAndDate started");
+        Log.d(TAG, "Doctor Name: " + doctorNameS);
+
+        DatabaseReference availabilityRefS = FirebaseDatabase.getInstance().getReference("Availability");
+
+        availabilityRefS.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> doctorsNameDateList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshotS : snapshot.getChildren()) {
+                    String doctorNameDateS = doctorSnapshotS.child("Name").getValue(String.class);
+
+                    if (doctorNameDateS != null && doctorNameDateS.toLowerCase().contains(doctorNameS.toLowerCase())) {
+                        for (DataSnapshot sessionSnapshotDateS : doctorSnapshotS.getChildren()) {
+                            if (!sessionSnapshotDateS.getKey().equals("Name")) {
+                                String locationDateS = sessionSnapshotDateS.child("LName").getValue(String.class);
+
+                                for (DataSnapshot daySnapshotDateS : sessionSnapshotDateS.getChildren()) {
+                                    if (!daySnapshotDateS.getKey().equals("LName")) {
+                                        String dateDateS = daySnapshotDateS.child("Date").getValue(String.class);
+
+                                        Log.d(TAG, "Comparing selectedDateS: " + selectedDateS + " with dateDateS: " + dateDateS);
+
+                                        if (selectedDateS.equals(dateDateS)) {
+                                            Log.d(TAG, "Dates matched for doctor: " + doctorNameDateS);
+                                            Query query2DateS = FirebaseDatabase.getInstance().getReference().child("Doctors");
+                                            query2DateS.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    for (DataSnapshot doctorSnapshotDateS : snapshot.getChildren()) {
+                                                        String name2DateS = doctorSnapshotDateS.child("Name").getValue(String.class);
+                                                        String specDateS = doctorSnapshotDateS.child("Specialization").getValue(String.class);
+                                                        ArrayList<String> locationsDateListS = new ArrayList<>();
+                                                        for (DataSnapshot locationSnapshotDateS : doctorSnapshotDateS.child("Locations").getChildren()) {
+                                                            String locationS = locationSnapshotDateS.getValue(String.class);
+
+                                                            if (locationS != null && locationS.equals(locationDateS)) {
+                                                                locationsDateListS.add(locationS);
+                                                            }                                                    }
+
+                                                        if (name2DateS != null && name2DateS.toLowerCase().contains(doctorNameDateS.toLowerCase())
+                                                               ) {
+                                                            Log.d(TAG, "Doctor matched: " + name2DateS);
+                                                            Doctors doctorDateS = new Doctors(name2DateS, specDateS, locationsDateListS);
+                                                            Log.d(TAG, "D: " + doctorDateS);
+                                                            doctorsNameDateList.add(doctorDateS);
+                                                        }
+                                                    }
+
+                                                    Log.d(TAG, "Doctors matched: " + doctorsNameDateList);
+
+                                                    DocSearchResultAdapter docSearchResultAdapterNameDateS = new DocSearchResultAdapter(doctorsNameDateList);
+                                                    recyclerView.setAdapter(docSearchResultAdapterNameDateS);
+                                                    Log.d(TAG, "Setting adapter for RecyclerView");
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+                                                    Log.w(TAG, "Failed to read value.", error.toException());
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    private void performSearchLocationAndDate(String locationSV, String selectedDateS) {
+        Log.d(TAG, "performSearchLocationAndDate started");
+        Log.d(TAG, "Location: " + locationSV);
+
+        DatabaseReference availabilityRefS = FirebaseDatabase.getInstance().getReference("Availability");
+
+        availabilityRefS.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Doctors> doctorsLocationDateList = new ArrayList<>();
+
+                for (DataSnapshot doctorSnapshotS : snapshot.getChildren()) {
+                    String doctorNameDateS = doctorSnapshotS.child("Name").getValue(String.class);
+
+                    for (DataSnapshot sessionSnapshotDateS : doctorSnapshotS.getChildren()) {
+                        if (!sessionSnapshotDateS.getKey().equals("Name")) {
+                            String locationDateS = sessionSnapshotDateS.child("LName").getValue(String.class);
+
+                            if (locationDateS != null && locationDateS.toLowerCase().contains(locationSV.toLowerCase())) {
+                                for (DataSnapshot daySnapshotDateS : sessionSnapshotDateS.getChildren()) {
+                                    if (!daySnapshotDateS.getKey().equals("LName")) {
+                                        String dateDateS = daySnapshotDateS.child("Date").getValue(String.class);
+
+                                        Log.d(TAG, "Comparing selectedDateS: " + selectedDateS + " with dateDateS: " + dateDateS);
+
+                                        if (selectedDateS.equals(dateDateS)) {
+                                            Log.d(TAG, "Dates matched for doctor: " + doctorNameDateS);
+                                            Query query2DateS = FirebaseDatabase.getInstance().getReference().child("Doctors");
+                                            query2DateS.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    for (DataSnapshot doctorSnapshotDateS : snapshot.getChildren()) {
+                                                        String name2DateS = doctorSnapshotDateS.child("Name").getValue(String.class);
+                                                        String specDateS = doctorSnapshotDateS.child("Specialization").getValue(String.class);
+                                                        ArrayList<String> locationsDateListS = new ArrayList<>();
+                                                        for (DataSnapshot locationSnapshotDateS : doctorSnapshotDateS.child("Locations").getChildren()) {
+                                                            String locationS = locationSnapshotDateS.getValue(String.class);
+
+                                                            if (locationS != null && locationS.equals(locationDateS)) {
+                                                                locationsDateListS.add(locationS);
+                                                            }
+                                                        }
+
+                                                        if (name2DateS != null && name2DateS.toLowerCase().contains(doctorNameDateS.toLowerCase()) &&
+                                                                specDateS != null ) {
+                                                            Log.d(TAG, "Doctor matched: " + name2DateS);
+                                                            Doctors doctorDateS = new Doctors(name2DateS, specDateS, locationsDateListS);
+                                                            Log.d(TAG, "D: " + doctorDateS);
+                                                            doctorsLocationDateList.add(doctorDateS);
+                                                        }
+                                                    }
+
+                                                    Log.d(TAG, "Doctors matched: " + doctorsLocationDateList);
+
+                                                    DocSearchResultAdapter docSearchResultAdapterLocationDateS = new DocSearchResultAdapter(doctorsLocationDateList);
+                                                    recyclerView.setAdapter(docSearchResultAdapterLocationDateS);
+                                                    Log.d(TAG, "Setting adapter for RecyclerView");
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+                                                    Log.w(TAG, "Failed to read value.", error.toException());
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+
+    private void showDatePickerDialogNL(String name , String loc) {
+        Log.d(TAG, "showDatePickerDialogD() called");
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                // Do something with the selected date
+                String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
+                etDate.setText(formattedDate); // Set the text of the datePickerButton to the selected date
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG, "1");
+
+                        performSearchNameLocationAndDate(name, loc, formattedDate);
+
+                    }
+                });
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    private void showDatePickerDialogEverything(String name , String spec, String loc) {
+        Log.d(TAG, "showDatePickerDialogD() called");
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                // Do something with the selected date
+                String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
+                etDate.setText(formattedDate); // Set the text of the datePickerButton to the selected date
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG, "1");
+
+                        performSearchNameSpecializationLocationAndDate(name, spec,loc, formattedDate);
+
+                    }
+                });
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+
+
+
+
+    private void showDatePickerDialogNS(String name , String spec) {
+        Log.d(TAG, "showDatePickerDialogD() called");
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                // Do something with the selected date
+                String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
+                etDate.setText(formattedDate); // Set the text of the datePickerButton to the selected date
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG, "1");
+
+                        performSearchNameSpecializationAndDate(name, spec, formattedDate);
+
+                    }
+                });
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+
+
+    private void showDatePickerDialogLS(String spec , String loc) {
+        Log.d(TAG, "showDatePickerDialogD() called");
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                // Do something with the selected date
+                String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
+                etDate.setText(formattedDate); // Set the text of the datePickerButton to the selected date
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG, "1");
+
+                        performSearchSpecializationLocationAndDate(spec, loc, formattedDate);
+
+                    }
+                });
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    private void showDatePickerDialogN(String name) {
+        Log.d(TAG, "showDatePickerDialogD() called");
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                // Do something with the selected date
+                String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
+                etDate.setText(formattedDate); // Set the text of the datePickerButton to the selected date
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG, "1");
+
+                        performSearchNameAndDate(name, formattedDate);
+
+                    }
+                });
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+    private void showDatePickerDialogL(String location) {
+        Log.d(TAG, "showDatePickerDialogD() called");
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                // Do something with the selected date
+                String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
+                etDate.setText(formattedDate); // Set the text of the datePickerButton to the selected date
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG, "1");
+
+                        performSearchLocationAndDate(location, formattedDate);
+
+                    }
+                });
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    private void showDatePickerDialogD() {
+        Log.d(TAG, "showDatePickerDialogD() called");
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                // Do something with the selected date
+                String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
+                etDate.setText(formattedDate); // Set the text of the datePickerButton to the selected date
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG, "1");
+
+                        performSearchDate(formattedDate);
+
+                    }
+                });
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+    private void showDatePickerDialogS(String specializationV) {
         Log.d(TAG, "showDatePickerDialog() called");
 
         Calendar calendar = Calendar.getInstance();
@@ -251,13 +1401,13 @@ public class SearchDocF extends Fragment  {
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
                 String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
-                datePickerButton.setText(formattedDate); // Set the text of the datePickerButton to the selected date
+                etDate.setText(formattedDate); // Set the text of the datePickerButton to the selected date
                 searchButton.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View view) {
                                                         Log.d(TAG, "1");
 
-                                                        performSearchDate(formattedDate); // Perform search using the selected date
+                                                        performSearchSpecializationAndDate(specializationV, formattedDate);
 
                                                     }
                                                 });
