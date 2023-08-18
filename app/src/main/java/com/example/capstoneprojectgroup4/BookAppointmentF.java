@@ -1,3 +1,4 @@
+
 package com.example.capstoneprojectgroup4;
 
 import android.os.Bundle;
@@ -97,7 +98,7 @@ public class BookAppointmentF extends Fragment {
 
 
                 databaseReference.child("Appointment Data")
-                        .child(getPatientName)
+                        //.child(getPatientName)
                         .setValue(hashMap);
                 Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
 

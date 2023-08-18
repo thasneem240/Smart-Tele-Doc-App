@@ -32,7 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textPatientName"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:text="Please Enter Your Name" />
 
     <TextView
         android:id="@+id/textDateTime"
@@ -48,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textDateTime"
         android:layout_marginTop="8dp"/>
+
 
     <TextView
         android:id="@+id/textAppointmentNumber"
@@ -68,9 +70,9 @@
         android:id="@+id/checkBoxVideoCall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Video call"
         android:layout_below="@id/textAppointmentNumberValue"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="137dp"
+        android:text="Video call" />
 
     <CheckBox
         android:id="@+id/checkBoxVoiceCall"
