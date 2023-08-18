@@ -1,104 +1,3 @@
-/*package com.example.capstoneprojectgroup4;
-
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-
-public class BookAppointmentF extends Fragment {
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-
-    private String mParam1;
-    private String mParam2;
-
-    public BookAppointmentF() {
-        // Required empty public constructor
-    }
-
-
-    // TODO: Rename and change types and number of parameters
-    public static BookAppointmentF newInstance(String param1, String param2) {
-        BookAppointmentF fragment = new BookAppointmentF();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_appointment, container, false);
-    }
-}*/
-/*package com.example.capstoneprojectgroup4;
-
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-public class BookAppointmentF extends Fragment {
-
-    private static final String ARG_DOCTOR_NAME = "doctorName";
-    private String doctorName;
-    private String Day ;
-
-    public BookAppointmentF() {
-        // Required empty public constructor
-    }
-
-    public static BookAppointmentF newInstance(String doctorName) {
-        BookAppointmentF fragment = new BookAppointmentF();
-        Bundle args = new Bundle();
-        args.putString(ARG_DOCTOR_NAME, doctorName);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            doctorName = getArguments().getString(ARG_DOCTOR_NAME);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_book_appointment, container, false);
-        TextView doctorNameTextView = view.findViewById(R.id.textDoctorNameValue);
-
-        // Set the doctor's name to the TextView
-        doctorNameTextView.setText(doctorName);
-
-
-        return view;
-    }
-}*/
 package com.example.capstoneprojectgroup4;
 
 import android.os.Bundle;
@@ -108,7 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -124,6 +32,12 @@ public class BookAppointmentF extends Fragment {
     private String doctorName;
     private String noApp;
     private String day;
+    private EditText patientName ;
+    private Button UploadAppointment ;
+    private FirebaseDatabase firebaseDatabase ;
+    private DatabaseReference databaseReference;
+
+
 
     public BookAppointmentF() {
         // Required empty public constructor
@@ -147,7 +61,9 @@ public class BookAppointmentF extends Fragment {
             day = getArguments().getString(ARG_DAY);
             noApp = getArguments().getString(ARG_NOAPP);
         }
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -162,9 +78,33 @@ public class BookAppointmentF extends Fragment {
         dayTextView.setText(day);
         noAppTextView.setText(noApp);
 
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
+        patientName = view.findViewById(R.id.textPatientNameValue);
+        UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment);
+
+        UploadAppointment.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String getPatientName = patientName.getText().toString();
+
+                HashMap<String, Object> hashMap = new HashMap<> ();
+                hashMap.put("Doctor Name", doctorName);
+                hashMap.put("Patient Name", getPatientName);
+                hashMap.put("Day", day);
+
+
+                databaseReference.child("Appointment Data")
+                        .child(getPatientName)
+                        .setValue(hashMap);
+                Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
         return view;
     }
 }
-
-
-
