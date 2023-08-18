@@ -3,18 +3,21 @@ package com.example.capstoneprojectgroup4;
 public class Availability {
     private String doctorName;
     private String location;
+
+    private String date;
     private String day;
-    private String noApp;
+    private int noApp;
     private String endTime;
     private String startTime;
 
-    public Availability(String doctorName, String location, String day, String noApp, String endTime, String startTime) {
+    public Availability(String doctorName, String location, String day, int noApp, String endTime, String startTime, String date) {
         this.doctorName = doctorName;
         this.location = location;
         this.day = day;
         this.noApp = noApp;
         this.endTime = endTime;
         this.startTime = startTime;
+        this.date = date;
     }
 
     public String getDoctorName() {
@@ -32,13 +35,18 @@ public class Availability {
     public String getLocation() {
         return location;
     }
-    public String getNoApp() {
+    public int getNoApp() {
         return noApp;
     }
 
     public String getDay() {
         return day;
     }
+
+    public String getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
         return "SessionObject{" +
