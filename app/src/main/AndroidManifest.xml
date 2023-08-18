@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".writing_prescriptions.WritingPrescriptionActivity"
+            android:name=".prescriptions.writing_prescriptions.WritingPrescriptionActivity"
             android:exported="false" />
         <activity
             android:name=".Activity_Common"

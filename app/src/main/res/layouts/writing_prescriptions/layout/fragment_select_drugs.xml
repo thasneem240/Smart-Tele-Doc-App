@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".writing_prescriptions.drug_containers.DrugsContainers">
+    tools:context=".prescriptions.writing_prescriptions.drug_containers.DrugsContainers">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/drugs_container_recycler_view"
