@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -41,12 +42,12 @@ public class PharmaciesF extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+    Button searchButton;
     Toolbar toolbar;
 
     Button orderButton;
 
-
+    RadioGroup radioGroup;
     RecyclerView recyclerView;
     PharmacyAdapter pharmacyAdapter;
     private SearchView searchView;
@@ -92,16 +93,19 @@ public class PharmaciesF extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_pharmacies, container, false);
 
+        radioGroup = v.findViewById(R.id.radioGroupSearchByPharmacy);
 
         toolbar = v.findViewById(R.id.toolbar);
         orderButton = v.findViewById(R.id.orderB);
+        searchButton = v.findViewById(R.id.searchButton);
+
 
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
                 Delivery_Track welcomeF = new Delivery_Track();
-               fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
+                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
 
             }
         });
@@ -155,13 +159,25 @@ public class PharmaciesF extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                textSearch(s);
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textSearch(s);
+
+                    }
+                });
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                textSearch(s);
+                searchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        textSearch(s);
+
+                    }
+                });
                 return false;
             }
         });
@@ -172,15 +188,30 @@ public class PharmaciesF extends Fragment {
 
 
 
-     public void textSearch(String str)
-     {
-         FirebaseRecyclerOptions<Pharmacy> options =
-                 new FirebaseRecyclerOptions.Builder<Pharmacy>()
-                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Pharmacies").orderByChild("Name").startAt(str).endAt(str+ "~"), Pharmacy.class)
-                         .build();
+    public void textSearch(String str)
+    {
+        int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
 
-         pharmacyAdapter = new PharmacyAdapter(options);
-         pharmacyAdapter.startListening();
-         recyclerView.setAdapter(pharmacyAdapter);
-     }
+        if (selectedRadioButtonId == R.id.radioNamePharmacy) {
+            FirebaseRecyclerOptions<Pharmacy> options =
+                    new FirebaseRecyclerOptions.Builder<Pharmacy>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Pharmacies").orderByChild("Name").startAt(str).endAt(str + "\uf8ff"), Pharmacy.class)
+                            .build();
+
+            pharmacyAdapter = new PharmacyAdapter(options);
+            pharmacyAdapter.startListening();
+            recyclerView.setAdapter(pharmacyAdapter);
+        }
+        if (selectedRadioButtonId == R.id.radioLocationPharmacy) {
+            FirebaseRecyclerOptions<Pharmacy> options =
+                    new FirebaseRecyclerOptions.Builder<Pharmacy>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Pharmacies").orderByChild("Address").startAt(str).endAt(str + "\uf8ff"), Pharmacy.class)
+                            .build();
+
+            pharmacyAdapter = new PharmacyAdapter(options);
+            pharmacyAdapter.startListening();
+            recyclerView.setAdapter(pharmacyAdapter);
+        }
+
+    }
 }
