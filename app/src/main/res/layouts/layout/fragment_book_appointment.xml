@@ -35,6 +35,13 @@
         android:layout_marginTop="8dp"
         android:text="Please Enter Your Name" />
 
+    <EditText
+        android:id="@+id/textAppointmentType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textPatientName"
+        android:layout_marginTop="234dp" />
+
     <TextView
         android:id="@+id/textDateTime"
         android:layout_width="wrap_content"
@@ -60,26 +67,18 @@
         android:layout_marginTop="16dp"/>
 
     <TextView
+        android:id="@+id/textAppointmentNumber2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDateTimeValue"
+        android:layout_marginTop="90dp"
+        android:text="Appointment Type (Video or Voice) :" />
+
+    <TextView
         android:id="@+id/textAppointmentNumberValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textAppointmentNumber"
-        android:layout_marginTop="8dp"/>
-
-    <CheckBox
-        android:id="@+id/checkBoxVideoCall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textAppointmentNumberValue"
-        android:layout_marginTop="137dp"
-        android:text="Video call" />
-
-    <CheckBox
-        android:id="@+id/checkBoxVoiceCall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Voice call"
-        android:layout_below="@id/checkBoxVideoCall"
         android:layout_marginTop="8dp"/>
 
     <Button

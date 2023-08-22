@@ -28,12 +28,14 @@ public class BookAppointmentF extends Fragment {
 
     private static final String ARG_DOCTOR_NAME = "doctorName";
     private static final String ARG_DAY = "day";
-
     private static final String ARG_NOAPP = "noApp";
+
     private String doctorName;
     private String noApp;
     private String day;
     private EditText patientName ;
+
+    private EditText AppointmentType;
     private Button UploadAppointment ;
     private FirebaseDatabase firebaseDatabase ;
     private DatabaseReference databaseReference;
@@ -83,6 +85,8 @@ public class BookAppointmentF extends Fragment {
         databaseReference = firebaseDatabase.getReference();
 
         patientName = view.findViewById(R.id.textPatientNameValue);
+        AppointmentType = view.findViewById(R.id.textAppointmentType);
+
         UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment);
 
         UploadAppointment.setOnClickListener(new View.OnClickListener() {
@@ -90,15 +94,16 @@ public class BookAppointmentF extends Fragment {
             @Override
             public void onClick(View v) {
                 String getPatientName = patientName.getText().toString();
+                String getAppointmentType = AppointmentType.getText().toString();
 
                 HashMap<String, Object> hashMap = new HashMap<> ();
                 hashMap.put("Doctor Name", doctorName);
                 hashMap.put("Patient Name", getPatientName);
                 hashMap.put("Day", day);
-
+                hashMap.put("Appointment Type", getAppointmentType);
 
                 databaseReference.child("Appointment Data")
-                        //.child(getPatientName)
+                        .child(getPatientName)
                         .setValue(hashMap);
                 Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
 
