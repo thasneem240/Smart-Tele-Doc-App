@@ -34,8 +34,8 @@ public class ResultActivity extends AppCompatActivity {
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(ResultActivity.this, AppointmentTransaction.class);
-                startActivity(intent);
+/*                Intent intent = new Intent(ResultActivity.this, AppointmentTransaction.class);
+                startActivity(intent);*/
 
             }
         });
@@ -43,8 +43,8 @@ public class ResultActivity extends AppCompatActivity {
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(ResultActivity.this, PrescriptionTransaction.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ResultActivity.this, PrescriptionTransaction.class);
+//                startActivity(intent);
 
 
             }
@@ -54,8 +54,8 @@ public class ResultActivity extends AppCompatActivity {
         Button button5 = findViewById(R.id.button5);
         button5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(ResultActivity.this, TransactionHistory.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ResultActivity.this, TransactionHistory.class);
+//                startActivity(intent);
 
 
             }

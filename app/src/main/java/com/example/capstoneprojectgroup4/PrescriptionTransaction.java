@@ -1,3 +1,4 @@
+/*
 package com.example.capstoneprojectgroup4;
 
 import static android.content.ContentValues.TAG;
@@ -132,4 +133,4 @@ public class PrescriptionTransaction extends AppCompatActivity {
             }
         }
     }
-}
+}*/

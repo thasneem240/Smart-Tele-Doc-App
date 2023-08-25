@@ -1,3 +1,4 @@
+/*
 package com.example.capstoneprojectgroup4.authentication.signup;
 
 import android.os.Bundle;
@@ -20,16 +21,17 @@ import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
+*/
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Signup_FormF#newInstance} factory method to
  * create an instance of this fragment.
- */
+ *//*
+
 public class Signup_FormF extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -48,14 +50,16 @@ public class Signup_FormF extends Fragment {
         // Required empty public constructor
     }
 
-    /**
+    */
+/**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment SignupPageTwoF.
-     */
+     *//*
+
     // TODO: Rename and change types and number of parameters
     public static Signup_FormF newInstance(String param1, String param2) {
         Signup_FormF fragment = new Signup_FormF();
@@ -177,4 +181,4 @@ public class Signup_FormF extends Fragment {
 
         return v;
     }
-}
+}*/

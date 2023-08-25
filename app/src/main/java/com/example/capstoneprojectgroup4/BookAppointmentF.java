@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -91,21 +90,51 @@ public class BookAppointmentF extends Fragment {
             public void onClick(View v) {
                 String getPatientName = patientName.getText().toString();
 
-                HashMap<String, Object> hashMap = new HashMap<> ();
-                hashMap.put("Doctor Name", doctorName);
-                hashMap.put("Patient Name", getPatientName);
-                hashMap.put("Day", day);
-
-
-                databaseReference.child("Appointment Data")
-                        //.child(getPatientName)
-                        .setValue(hashMap);
-                Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
-
+                uploadAppointment(doctorName,getPatientName, day);
             }
 
         });
 
         return view;
+    }
+    public void uploadAppointment(String pPatientName, String pDoctorName, String pDay){
+//        FirebaseUser currentUser;
+//        FirebaseAuth mAuth;
+//        mAuth = FirebaseAuth.getInstance();
+//        currentUser = mAuth.getCurrentUser();
+//        currentUser.getUid();
+
+        HashMap<String, Object> hashMap = new HashMap<> ();
+        hashMap.put("Doctor Name", pPatientName);
+        hashMap.put("Patient Name", pDoctorName);
+        hashMap.put("Day", pDay);
+
+        databaseReference.child("Appointment Data")
+                .child(pPatientName+pDoctorName+pDay)
+                .setValue(hashMap);
+        Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void uploadAppointmentSecond(String pPatientName, String pDoctorName, String pDay){
+//        FirebaseUser currentUser;
+//        FirebaseAuth mAuth;
+//        mAuth = FirebaseAuth.getInstance();
+//        currentUser = mAuth.getCurrentUser();
+//        currentUser.getUid();
+
+        HashMap<String, Object> hashMap = new HashMap<> ();
+        hashMap.put("Doctor Name", pPatientName);
+        hashMap.put("Patient Name", pDoctorName);
+        hashMap.put("Day", pDay);
+
+//        AppointmentObject newAppointment = new AppointmentObject(doctorName, getPatientName, day);
+
+        FirebaseDatabase firebaseDatabaseSecond ;
+        firebaseDatabaseSecond = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabaseSecond.getReference();
+        databaseReference.child("Appointment Data")
+                .child(pPatientName+pDoctorName+pDay)
+                .setValue(hashMap);
+//        Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
     }
 }

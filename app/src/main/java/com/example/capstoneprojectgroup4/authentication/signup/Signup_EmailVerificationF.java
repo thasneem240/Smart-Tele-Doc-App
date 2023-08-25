@@ -104,8 +104,8 @@ public class Signup_EmailVerificationF extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                Signup_FormF signupFormF = new Signup_FormF();
-                fm.beginTransaction().replace(R.id.fragment_container, signupFormF).commit();
+//                Signup_FormF signupFormF = new Signup_FormF();
+//                fm.beginTransaction().replace(R.id.fragment_container, signupFormF).commit();
             }
         });
         return v;
