@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
 
@@ -70,6 +71,7 @@ public class HomeFragment extends Fragment {
 
         Button createPrescription = v.findViewById(R.id.create_prescription);
         Button viewPrescriptions = v.findViewById(R.id.button_prescriptions);
+        Button chatbotButton = v.findViewById(R.id.button_chatbot);
 
         createPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +87,14 @@ public class HomeFragment extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
                 fm.beginTransaction().replace(R.id.fragment_container, viewPrescriptionsFragment).commit();
+            }
+        });
+
+        chatbotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
+                startActivity(chatbotActivity);
             }
         });
 

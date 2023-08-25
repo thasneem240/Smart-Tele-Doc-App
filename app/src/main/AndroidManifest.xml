@@ -41,6 +41,9 @@
         <activity
             android:name=".ResultActivity"
             android:exported="false" />
+        <activity
+            android:name=".chatbot.ChatbotActivity"
+            android:exported="false" />
 
         <activity
             android:name=".front_end.MainActivity2"

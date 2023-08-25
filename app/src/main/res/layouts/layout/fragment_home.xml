@@ -20,9 +20,19 @@
         android:id="@+id/button_prescriptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="267dp"
+        android:layout_marginTop="111dp"
         android:text="View prescriptions"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_prescription" />
+
+    <Button
+        android:id="@+id/button_chatbot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="33dp"
+        android:text="Chatbot"
+        app:layout_constraintEnd_toEndOf="@+id/button_prescriptions"
+        app:layout_constraintTop_toBottomOf="@+id/button_prescriptions" />
 </androidx.constraintlayout.widget.ConstraintLayout>
