@@ -153,7 +153,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     if(patient!="" & doctor!="" & dateAndTime!="" &
             patient!=null & doctor!=null & dateAndTime!=null){
 
-      BookAppointmentF.uploadAppointmentSecond(patient, dateAndTime, doctor);
+      BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
       Log.d("DialogFlow***", "Done");
     }
   }

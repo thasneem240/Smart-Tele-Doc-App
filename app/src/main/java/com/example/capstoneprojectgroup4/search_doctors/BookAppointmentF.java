@@ -91,7 +91,7 @@ public class BookAppointmentF extends Fragment {
             public void onClick(View v) {
                 String getPatientName = patientName.getText().toString();
 
-                uploadAppointment(doctorName,getPatientName, day);
+                uploadAppointment(getPatientName,doctorName, day);
             }
 
         });
