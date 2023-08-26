@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.signup.SignupF;
+import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
