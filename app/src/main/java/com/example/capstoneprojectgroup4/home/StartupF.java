@@ -16,6 +16,7 @@ import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.ResultActivity;
 import com.example.capstoneprojectgroup4.SearchDocF;
 import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
+import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.home.HomeFragment;
 
 /**
@@ -39,9 +40,7 @@ public class StartupF extends Fragment
     Button pharmacyButton;
     Button buttonMedicalRecords;
     Button searchdoc;
-
-
-
+    Button chatbotButton;
     Button searchDrugs;
 
     FragmentManager fm;
@@ -90,7 +89,7 @@ public class StartupF extends Fragment
         buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
         searchdoc = v.findViewById(R.id.searchDoc_button);
         searchDrugs = v.findViewById(R.id.search_drugs_button);
-
+        chatbotButton = v.findViewById(R.id.chatbot_button);
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +155,13 @@ public class StartupF extends Fragment
                 fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
             }
         });
-
+        chatbotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
+                startActivity(chatbotActivity);
+            }
+        });
 
 
         return v;
