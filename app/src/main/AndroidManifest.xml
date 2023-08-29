@@ -33,7 +33,7 @@
             android:name=".TransactionHistory"
             android:exported="false" />
         <activity
-            android:name=".PrescriptionTransaction"
+            android:name=".ssearch_pharmacy.PrescriptionTransaction"
             android:exported="false" />
         <activity
             android:name=".AppointmentTransaction"
@@ -41,6 +41,12 @@
         <activity
             android:name=".ResultActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".front_end.MainActivity2"
+            android:exported="true">
+        </activity>
+
 
     </application>
 
