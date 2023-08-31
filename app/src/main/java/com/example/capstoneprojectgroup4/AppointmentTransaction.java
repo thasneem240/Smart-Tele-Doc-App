@@ -1,4 +1,4 @@
-/*
+
 package com.example.capstoneprojectgroup4;
 
 import static android.content.ContentValues.TAG;
@@ -16,7 +16,9 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -35,7 +37,8 @@ import lk.payhere.androidsdk.model.StatusResponse;
 
 public class AppointmentTransaction extends AppCompatActivity {
     private static final int PAYHERE_REQUEST = 110;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
     Map<String, Object> Transaction = new HashMap<>();
     String item;
     @Override
@@ -99,22 +102,9 @@ public class AppointmentTransaction extends AppCompatActivity {
                         Date currentTime = Calendar.getInstance().getTime();
                         DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
                         String strDate = dateFormat.format(currentTime);
-                        String itemname = item + " " +strDate;
+                        String itemname = strDate + " " + item;
                         Transaction.put("name", itemname);
-                        db.collection("Transactions").document("ID " + strDate)
-                                .set(Transaction)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.w(TAG, "Error writing document", e);
-                                    }
-                                });
+                        myRef.child("Transaction").child("IDA " + strDate).setValue(Transaction);
                         msg = "Activity result:" + response.getData().toString();
                     }
 
@@ -133,4 +123,4 @@ public class AppointmentTransaction extends AppCompatActivity {
         }
     }
 }
-*/
+
