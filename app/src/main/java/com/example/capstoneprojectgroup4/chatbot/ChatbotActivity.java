@@ -135,6 +135,9 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     String doctor = null;
     String patient = null;
     String dateAndTime = null;
+    String medicine = null;
+    String pharmacy = null;
+    String transaction = null;
 
     if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient"))
       patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStringValue()+"";
@@ -154,6 +157,56 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
             patient!=null & doctor!=null & dateAndTime!=null){
 
       BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
+      Log.d("DialogFlow***", "Done");
+    }
+
+
+
+
+
+
+
+
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("medicine"))
+      medicine = returnResponse.getQueryResult().getParameters().getFieldsMap().get("medicine").getStringValue()+"";
+
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date-time"))
+      dateAndTime = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date-time").getStringValue()+"";
+
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("pharmacy")){
+      if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("pharmacy").getStructValue().getFieldsMap().containsKey("name")){
+        pharmacy = returnResponse.getQueryResult().getParameters().getFieldsMap().get("pharmacy").getStructValue().getFieldsMap().get("name").getStringValue();
+      }
+    }
+
+    Log.d("DialogFlow***", String.format("medicine = %s\nDate and time = %s\npharmacy = %s", medicine+"", dateAndTime, pharmacy));
+
+    if(medicine!="" & pharmacy!="" & dateAndTime!="" &
+            medicine!=null & pharmacy!=null & dateAndTime!=null){
+
+      BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
+      Log.d("DialogFlow***", "Done");
+    }
+
+
+
+
+
+
+
+
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("transaction"))
+      transaction = returnResponse.getQueryResult().getParameters().getFieldsMap().get("transaction").getStringValue()+"";
+
+
+
+
+    Log.d("DialogFlow***", String.format("transaction = %s", transaction));
+
+    if(transaction!=""  &
+    transaction!=null ){
+
+      BookAppointmentF.uploadAppointmentSecond(transaction, doctor, dateAndTime);
       Log.d("DialogFlow***", "Done");
     }
   }
