@@ -70,6 +70,8 @@ public class Frag_MedicalHistory extends Fragment
 
         List<MedicalHistoryItem> medicalHistoryItems = new ArrayList<>();
 
+        // Populate medicalHistoryItems with your data
+
         // Obtain the RecyclerView UI element
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.medicalHistoryRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
