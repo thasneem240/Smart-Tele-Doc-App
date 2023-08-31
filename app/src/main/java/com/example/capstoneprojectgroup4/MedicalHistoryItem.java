@@ -1,8 +1,6 @@
 package com.example.capstoneprojectgroup4;
 
-public class MedicalHistoryItem
-{
-    // MedicalHistoryItem.java
+// MedicalHistoryItem.java
     public class MedicalHistoryItem
     {
         private String date;
@@ -25,4 +23,3 @@ public class MedicalHistoryItem
         }
     }
 
-}
