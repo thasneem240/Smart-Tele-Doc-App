@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="home.StartupF">
+
+
+    <Button
+        android:id="@+id/button_MedicalRecords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/search_drugs_button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="38dp"
+        android:text="Medical Records"
+        app:layout_constraintBottom_toTopOf="@+id/searchDoc_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pharmacy_button" />
+
+    <Button
+        android:id="@+id/search_drugs_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/authentication_button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="154dp"
+        android:layout_marginBottom="34dp"
+        android:text="Search Drugs"
+        app:layout_constraintBottom_toTopOf="@+id/chatbot_button"
+        app:layout_constraintStart_toStartOf="@+id/searchDoc_button"
+        app:layout_constraintTop_toBottomOf="@+id/searchDoc_button" />
+
+    <Button
+        android:id="@+id/authentication_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/transaction_button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="147dp"
+        android:layout_marginBottom="36dp"
+        android:text="Authentication"
+        app:layout_constraintBottom_toTopOf="@+id/transaction_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/transaction_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pharmacy_button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="161dp"
+        android:layout_marginBottom="41dp"
+        android:text="Transaction"
+        app:layout_constraintBottom_toTopOf="@+id/pharmacy_button"
+        app:layout_constraintStart_toStartOf="@+id/authentication_button"
+        app:layout_constraintTop_toBottomOf="@+id/authentication_button" />
+
+    <Button
+        android:id="@+id/pharmacy_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@+id/searchDoc_button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="40dp"
+        android:text="Pharmacies"
+        app:layout_constraintBottom_toTopOf="@+id/button_MedicalRecords"
+        app:layout_constraintStart_toStartOf="@+id/button_MedicalRecords"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_button" />
+
+    <Button
+        android:id="@+id/searchDoc_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/chatbot_button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="146dp"
+        android:layout_marginBottom="41dp"
+        android:text="Search Doctors"
+        app:layout_constraintBottom_toTopOf="@+id/search_drugs_button"
+        app:layout_constraintEnd_toEndOf="@+id/button_MedicalRecords"
+        app:layout_constraintTop_toBottomOf="@+id/button_MedicalRecords" />
+
+    <Button
+        android:id="@+id/chatbot_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/front_end_button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="178dp"
+        android:layout_marginBottom="36dp"
+        android:text="Chatbot"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/search_drugs_button"
+        app:layout_constraintTop_toBottomOf="@+id/search_drugs_button" />
+
+    <Button
+        android:id="@+id/front_end_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="173dp"
+        android:layout_marginBottom="23dp"
+        android:text="Front End"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.904" />
+
+
+</RelativeLayout>

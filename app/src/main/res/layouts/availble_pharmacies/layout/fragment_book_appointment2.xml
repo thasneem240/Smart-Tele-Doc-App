@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".front_end.BookAppointment">
+
+    <TextView
+        android:id="@+id/book_appointmentTV"
+        android:layout_width="181dp"
+        android:layout_height="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="10sp"
+        android:text="Book Appointment"
+        android:textSize="20sp"
+        android:textColor="#0B0808"
+        android:translationY="-1.4sp" />
+
+    <TextView
+        android:id="@+id/doctor_name"
+        android:layout_width="115dp"
+        android:layout_height="22dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="172dp"
+        android:text="Doctor Name"
+        android:textSize="18sp"
+        android:textColor="#0B0808"
+        android:gravity="top"
+        />
+
+    <View
+        android:id="@+id/rectangle_3"
+        android:layout_width="320dp"
+        android:layout_height="41dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="33dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="215dp"
+        android:background="@drawable/rectangle_3"
+        />
+    <TextView
+        android:id="@+id/patient_name"
+        android:layout_width="117dp"
+        android:layout_height="22dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="38dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="287dp"
+        android:text="Patient Name"
+        android:textSize="18sp"
+        android:textColor="#0B0808"
+        android:gravity="top"
+        />
+
+    <View
+        android:id="@+id/rectangle_4"
+        android:layout_width="323dp"
+        android:layout_height="41dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="330dp"
+        android:background="@drawable/rectangle_4"
+        />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="37dp"
+        android:layout_height="19dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="34dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="402dp"
+        android:text="Date"
+        android:textSize="18sp"
+        android:gravity="top"
+        android:textColor="#0B0808"
+        />
+    <TextView
+        android:id="@+id/wednesday_j"
+        android:layout_width="251dp"
+        android:layout_height="17dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="81dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="456dp"
+        android:textSize="15sp"
+        android:textColor="#0B0808"
+        android:gravity="top"
+        />
+    <View
+        android:id="@+id/ellipse_5"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="447dp"
+        android:background="#E8F3F1"
+        />
+
+    <TextView
+        android:id="@+id/payment_det"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="552dp"
+        android:gravity="top"
+        android:text="Payment Details"
+        android:textColor="#0B0808"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/consultatio"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="592dp"
+        android:gravity="top"
+        android:text="Consultation fee : "
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/rs_3000_00"
+        android:layout_width="77dp"
+        android:layout_height="17dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="306dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="591dp"
+        android:text="Rs. 3000.00"
+        android:textSize="12sp"
+        android:gravity="top"
+        />
+
+    <TextView
+        android:id="@+id/admin_fee"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="620dp"
+        android:gravity="top"
+        android:text="Adminstration fees : "
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/rs_100_00"
+        android:layout_width="65dp"
+        android:layout_height="17dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="317dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="620dp"
+        android:text="Rs 100.00"
+        android:textSize="12sp"
+        android:gravity="top"
+        />
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="656dp"
+        android:gravity="top"
+        android:text="Total : "
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/rs_3100_00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="302dp"
+        android:layout_marginTop="655dp"
+        android:gravity="top"
+        android:text="Rs 3100.00"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/BookApp_Button"
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="88dp"
+        android:layout_marginEnd="83dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/rectangle_3"
+        android:text="Book Appointment"
+        android:textSize="18sp" />
+
+</RelativeLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".front_end.AccountSettings">
+
+
+    <TextView
+        android:id="@+id/Acc_Name"
+        android:layout_width="252dp"
+        android:layout_height="27dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="107dp"
+        android:layout_marginTop="110dp"
+        android:gravity="top"
+        android:text="Your Name"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/your_Info_TV"
+        android:layout_width="186dp"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:text="Your Information"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:lineSpacingExtra="3sp"
+        android:translationY="-1.61sp"
+        android:gravity="top"
+        />
+
+    <ImageView
+        android:id="@+id/ProfilePic_View"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="110dp"
+        android:background="@drawable/menu_profile_icon"
+        />
+
+
+</RelativeLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <!-- res/layout/remote_consultation_layout.xml -->
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activity_Remote_Consultation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!-- Title -->
+<TextView
+    android:id="@+id/titleTextView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Remote Consultation Setup"
+    android:textSize="24sp"
+    android:textAlignment="center"
+    android:padding="16dp"
+    android:layout_centerHorizontal="true"/>
+
+<!-- Patient Information -->
+<EditText
+    android:id="@+id/patientNameEditText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Patient's Name"
+    android:layout_below="@id/titleTextView"
+    android:padding="16dp"/>
+
+<EditText
+    android:id="@+id/issueEditText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Issue/Concern"
+    android:layout_below="@id/patientNameEditText"
+    android:padding="16dp"/>
+
+<!-- Video Conference Button -->
+<Button
+    android:id="@+id/videoConferenceButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Start Video Conference"
+    android:layout_below="@id/issueEditText"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="24dp"
+    android:padding="12dp"/>
+
+</RelativeLayout>
