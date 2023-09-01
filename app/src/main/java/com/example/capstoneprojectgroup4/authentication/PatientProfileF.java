@@ -1,10 +1,17 @@
 package com.example.capstoneprojectgroup4.authentication;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +21,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.prescriptions.PrescriptionObject;
+import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsAdapter;
+import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +55,6 @@ public class PatientProfileF extends Fragment {
     private String mParam1;
     private String mParam2;
     private FirebaseAuth mAuth;
-    FirebaseFirestore db;
     FirebaseUser currentUser;
     EditText fullName_, nic_, mobileNumber_, dob_, gender_;
     TextView edit, done;
@@ -82,7 +97,6 @@ public class PatientProfileF extends Fragment {
         View v = inflater.inflate(R.layout.fragment_patient_profile, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
         currentUser = mAuth.getCurrentUser();
         edit = v.findViewById(R.id.p_edit);
         done = v.findViewById(R.id.p_done);
@@ -96,19 +110,25 @@ public class PatientProfileF extends Fragment {
         homeButton = v.findViewById(R.id.p_home);
         updateButton = v.findViewById(R.id.p_update);
 
-        db.collection("users")
-                .document(currentUser.getUid())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        fullName_.setText("" + documentSnapshot.get("Full name"));
-                        nic_.setText("" + documentSnapshot.get("NIC"));
-                        mobileNumber_.setText("" + documentSnapshot.get("Mobile number"));
-                        dob_.setText("" + documentSnapshot.get("Date of birth"));
-                        gender_.setText("" + documentSnapshot.get("Gender"));
-                    }
-                });
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Patient").child(currentUser.getUid());
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                PatientObject patientObject = snapshot.getValue(PatientObject.class);
+
+                fullName_.setText(patientObject.getFullName());
+                nic_.setText(patientObject.getNic());
+                mobileNumber_.setText(patientObject.getMobileNumber());
+                dob_.setText(patientObject.getDob());
+                gender_.setText(patientObject.getGender());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Error adding document: "+ error);
+            }
+        });
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +162,6 @@ public class PatientProfileF extends Fragment {
                 fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
             }
         });
-
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,24 +171,34 @@ public class PatientProfileF extends Fragment {
                 String dob = dob_.getText().toString();
                 String gender = gender_.getText().toString();
 
-                Map<String, Object> user = new HashMap<>();
-                user.put("Full name", fullName);
-                user.put("NIC", nic);
-                user.put("Mobile number", mobileNumber);
-                user.put("Date of birth", dob);
-                user.put("Gender", gender);
+                PatientObject patientObject = new PatientObject();
+                patientObject.setFullName(fullName);
+                patientObject.setNic(nic);
+                patientObject.setMobileNumber(mobileNumber);
+                patientObject.setDob(dob);
+                patientObject.setGender(gender);
 
-                db.collection("users")
-                        .document(currentUser.getUid())
-                        .set(user)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(getActivity(), "Updated", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Patient").child(currentUser.getUid());
+
+                myRef.setValue(patientObject).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        MainActivity mainActivity2 = (MainActivity) getActivity();
+                        mainActivity2.setPatientObject(patientObject);
+
+                        Intent mainActivity = new Intent(getActivity(), MainActivity.class);
+                        startActivity(mainActivity);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding data", e);
+                    }
+                });
             }
         });
+
         return v;
     }
 }

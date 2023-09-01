@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".writing_prescriptions.WritingPrescriptionActivity">
+    tools:context=".prescriptions.writing_prescriptions.WritingPrescriptionActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerPrescription"
-        android:name="com.example.capstoneprojectgroup4.writing_prescriptions.CreatePrescriptionFragment"
+        android:name="com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.CreatePrescriptionFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="146dp"

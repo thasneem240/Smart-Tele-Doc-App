@@ -45,7 +45,7 @@ public class EditPrescriptionAdapter extends RecyclerView.Adapter<EditPrescripti
             @Override
             public void onClick(View view) {
                 holder.editDosage.setEnabled(false);
-//                selectedDrug.put("value", holder.editDosage.getText()+"");
+//                selectedDrug.add("value", holder.editDosage.getText()+"");
             }
         });
         holder.removeButton.setOnClickListener(new View.OnClickListener() {

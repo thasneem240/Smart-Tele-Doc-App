@@ -12,8 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
-import com.example.capstoneprojectgroup4.writing_prescriptions.WritingPrescriptionActivity;
+import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,11 +31,6 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    int pharmacyNumber;
-
-
-
 
     public HomeFragment() {
         // Required empty public constructor
@@ -87,9 +83,9 @@ public class HomeFragment extends Fragment {
         viewPrescriptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              /*  FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
                 ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragment_container, viewPrescriptionsFragment).commit();*/
+                fm.beginTransaction().replace(R.id.fragment_container, viewPrescriptionsFragment).commit();
             }
         });
 

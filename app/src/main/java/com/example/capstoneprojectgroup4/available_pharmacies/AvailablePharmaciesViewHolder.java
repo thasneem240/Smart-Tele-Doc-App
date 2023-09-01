@@ -14,7 +14,7 @@ public class AvailablePharmaciesViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         totalPrice = itemView.findViewById(R.id.text_totalPrice);
-        pharmacy_name = itemView.findViewById(R.id.text_drug1);
+        pharmacy_name = itemView.findViewById(R.id.medicineName_textView);
     }
 
 }

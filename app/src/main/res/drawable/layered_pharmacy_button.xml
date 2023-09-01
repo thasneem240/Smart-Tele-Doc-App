@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Bottom layer: Green eclipse background -->
+    <item android:drawable="@drawable/yellow_eclipse" />
+
+    <!-- Top layer: Vector inside the green eclipse -->
+    <item android:drawable="@drawable/pharmacy_icon"
+        android:gravity="center" />
+</layer-list>

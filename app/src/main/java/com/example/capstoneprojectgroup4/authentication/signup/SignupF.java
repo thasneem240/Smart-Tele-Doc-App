@@ -21,10 +21,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-//import com.google.firebase.firestore.DocumentReference;
-//import com.google.firebase.firestore.FirebaseFirestore;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,7 +38,6 @@ public class SignupF extends Fragment {
     private String mParam1;
     private String mParam2;
     private FirebaseAuth mAuth;
-    FirebaseFirestore db;
     FirebaseUser currentUser;
 
     public SignupF() {
@@ -85,7 +80,6 @@ public class SignupF extends Fragment {
         View v = inflater.inflate(R.layout.fragment_signup, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
         currentUser = mAuth.getCurrentUser();
 
         TextView email_ = (TextView) v.findViewById(R.id.email_edittext);
