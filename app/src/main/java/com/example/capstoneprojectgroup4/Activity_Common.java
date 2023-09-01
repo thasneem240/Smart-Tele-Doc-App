@@ -7,7 +7,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+
+import com.example.capstoneprojectgroup4.ssearch_pharmacy.Frag_Prescriptions;
 
 public class Activity_Common extends AppCompatActivity
 {

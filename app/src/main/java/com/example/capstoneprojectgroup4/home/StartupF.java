@@ -1,6 +1,5 @@
 package com.example.capstoneprojectgroup4.home;
 import android.content.Intent;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.Activity_Common;
-import com.example.capstoneprojectgroup4.PharmaciesF;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
+import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
+import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.ResultActivity;
-import com.example.capstoneprojectgroup4.SearchDocF;
+import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.home.HomeFragment;
@@ -41,6 +42,11 @@ public class StartupF extends Fragment
     Button buttonMedicalRecords;
     Button searchdoc;
     Button chatbotButton;
+    Button frontend;
+
+
+
+
     Button searchDrugs;
 
     FragmentManager fm;
@@ -90,6 +96,8 @@ public class StartupF extends Fragment
         searchdoc = v.findViewById(R.id.searchDoc_button);
         searchDrugs = v.findViewById(R.id.search_drugs_button);
         chatbotButton = v.findViewById(R.id.chatbot_button);
+        frontend = v.findViewById(R.id.front_end_button);
+
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +170,16 @@ public class StartupF extends Fragment
                 startActivity(chatbotActivity);
             }
         });
+
+        frontend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity2.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
         return v;

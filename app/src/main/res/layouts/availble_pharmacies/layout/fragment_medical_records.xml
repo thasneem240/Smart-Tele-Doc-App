@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".front_end.MedicalRecords">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/medical_rec"
+        android:layout_width="252dp"
+        android:layout_height="27dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="122dp"
+        android:text="Medical Records"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal|top"
+        />
+
+    <TextView
+        android:id="@+id/your_health"
+        android:layout_width="272dp"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="183dp"
+        android:layout_marginEnd="36dp"
+        android:gravity="top"
+        android:lineSpacingExtra="3sp"
+        android:text="Your Health History at a Glance !"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:translationY="-1.61sp" />
+
+    <View
+        android:id="@+id/rectangle_1"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="38dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="246dp"
+        android:background="@drawable/rectangle_4"
+        />
+    <TextView
+        android:id="@+id/patient_det"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="339dp"
+        android:gravity="center_horizontal|top"
+        android:text="Patient Details"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+    <View
+        android:id="@+id/rectangle_2"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="232dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="244dp"
+        android:background="#E6ECF7"
+        />
+
+    <TextView
+        android:id="@+id/medical_his"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="227dp"
+        android:layout_marginTop="337dp"
+        android:gravity="center_horizontal|top"
+        android:text="Medical History"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+    <View
+        android:id="@+id/rectangle_3"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="413dp"
+        android:background="@drawable/rectangle_3"
+        />
+
+    <TextView
+        android:id="@+id/lab_reports"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="504dp"
+        android:gravity="center_horizontal|top"
+        android:text="Lab Reports"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+    <View
+        android:id="@+id/rectangle_4"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="231dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="413dp"
+        android:background="@drawable/rectangle_4"
+        />
+
+    <TextView
+        android:id="@+id/consultatio"
+        android:layout_width="139dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="222dp"
+        android:layout_marginTop="504dp"
+        android:gravity="center_horizontal|top"
+        android:text="Consultation     Notes"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+    <View
+        android:id="@+id/rectangle_5"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="130dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="582dp"
+        android:background="#E8F3F1"
+        />
+
+    <TextView
+        android:id="@+id/prescriptions"
+        android:layout_width="138dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="126dp"
+        android:layout_marginTop="675dp"
+        android:gravity="center_horizontal|top"
+        android:text="Prescriptions"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+    <View
+        android:id="@+id/ellipse_1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="71dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="265dp"
+        android:background="#F6F8E2"
+        android:elevation="4dp"
+        />
+    <View
+        android:id="@+id/ellipse_2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="266dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="265dp"
+        android:background="#E6ECF7"
+        android:elevation="4dp"
+        />
+    <View
+        android:id="@+id/ellipse_3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="71dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="433dp"
+        android:background="#E6ECF7"
+        android:elevation="4dp"
+        />
+    <View
+        android:id="@+id/ellipse_4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="266dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="436dp"
+        android:background="#F6F8E2"
+        android:elevation="4dp"
+        />
+    <View
+        android:id="@+id/ellipse_5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="167dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="604dp"
+        android:background="#E8F3F1"
+        android:elevation="4dp"
+        />
+
+</RelativeLayout>
