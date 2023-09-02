@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="117dp"
+        android:layout_height="166dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="267dp"
+        android:layout_marginBottom="525dp"
+        app:srcCompat="@drawable/rectangle_7" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="94dp"
+        android:layout_height="96dp"
+        android:layout_alignBottom="@+id/imageView8"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="279dp"
+        android:layout_marginBottom="64dp"
+        app:srcCompat="@drawable/medicine" />
+
+
+    <TextView
+        android:id="@+id/panadol"
+        android:layout_width="42.2dp"
+        android:layout_height="13.73dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="152dp"
+        android:gravity="top"
+        android:text="Panadol"
+        android:textColor="#101623"
+        android:textSize="10sp" />
+
+
+    <TextView
+        android:id="@+id/pcs"
+        android:layout_width="24.24dp"
+        android:layout_height="10.07dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="169dp"
+        android:gravity="top"
+        android:text="20pcs"
+        android:textColor="#ADADAD"
+        android:textSize="7sp" />
+
+    <TextView
+        android:id="@+id/rs_150"
+        android:layout_width="44dp"
+        android:layout_height="15.56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="184dp"
+        android:gravity="top"
+        android:text="Rs. 150"
+        android:textColor="#000000"
+        android:textSize="11sp" />
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="22dp"
+        android:layout_height="21dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="276dp"
+        android:layout_marginBottom="536dp"
+        android:background="@drawable/add_icon" />
+
+
+</RelativeLayout>
