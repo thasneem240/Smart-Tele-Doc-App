@@ -8,8 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.capstoneprojectgroup4.ssearch_pharmacy.Frag_Prescriptions;
-
 public class Activity_Common extends AppCompatActivity
 {
 
