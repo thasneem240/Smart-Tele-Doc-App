@@ -1,11 +1,16 @@
 package com.example.capstoneprojectgroup4.authentication;
 
 public class PatientObject {
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private String nic;
     private String mobileNumber;
+    private String fullName; // remove
     private String dob;
     private String gender;
+    private String address;
+    private String city;
+    private String country;
 
     public String getFullName() {
         return fullName;

@@ -34,8 +34,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +55,6 @@ public class PatientProfileF extends Fragment {
     private String mParam1;
     private String mParam2;
     private FirebaseAuth mAuth;
-    FirebaseFirestore db;
     FirebaseUser currentUser;
     EditText fullName_, nic_, mobileNumber_, dob_, gender_;
     TextView edit, done;
@@ -100,7 +97,6 @@ public class PatientProfileF extends Fragment {
         View v = inflater.inflate(R.layout.fragment_patient_profile, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
         currentUser = mAuth.getCurrentUser();
         edit = v.findViewById(R.id.p_edit);
         done = v.findViewById(R.id.p_done);
@@ -116,16 +112,20 @@ public class PatientProfileF extends Fragment {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Patient").child(currentUser.getUid());
+
+
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 PatientObject patientObject = snapshot.getValue(PatientObject.class);
 
-                fullName_.setText(patientObject.getFullName());
-                nic_.setText(patientObject.getNic());
-                mobileNumber_.setText(patientObject.getMobileNumber());
-                dob_.setText(patientObject.getDob());
-                gender_.setText(patientObject.getGender());
+                if(patientObject != null){
+                    fullName_.setText(patientObject.getFullName());
+                    nic_.setText(patientObject.getNic());
+                    mobileNumber_.setText(patientObject.getMobileNumber());
+                    dob_.setText(patientObject.getDob());
+                    gender_.setText(patientObject.getGender());
+                }
             }
 
             @Override
@@ -202,6 +202,7 @@ public class PatientProfileF extends Fragment {
                 });
             }
         });
+
 
         return v;
     }

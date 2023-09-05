@@ -1,22 +1,33 @@
 package com.example.capstoneprojectgroup4.home;
-import android.content.Intent;
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.Activity_Common;
+import com.example.capstoneprojectgroup4.authentication.LoginF;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
+import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
+import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
+import com.example.capstoneprojectgroup4.Activity_Remote_Consultation;
 import com.example.capstoneprojectgroup4.PharmaciesF;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.ResultActivity;
-import com.example.capstoneprojectgroup4.SearchDocF;
+import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
+import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.home.HomeFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,12 +50,19 @@ public class StartupF extends Fragment
     Button pharmacyButton;
     Button buttonMedicalRecords;
     Button searchdoc;
+    Button chatbotButton;
+    Button frontend;
+
+
+    Button consultations;
 
 
 
     Button searchDrugs;
 
     FragmentManager fm;
+    FirebaseAuth auth;
+    FirebaseUser currentUser;
 
     public StartupF() {
         // Required empty public constructor
@@ -90,6 +108,9 @@ public class StartupF extends Fragment
         buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
         searchdoc = v.findViewById(R.id.searchDoc_button);
         searchDrugs = v.findViewById(R.id.search_drugs_button);
+        chatbotButton = v.findViewById(R.id.chatbot_button);
+        frontend = v.findViewById(R.id.front_end_button);
+        consultations = v.findViewById(R.id.consultations);
 
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +119,19 @@ public class StartupF extends Fragment
                 fm = getActivity().getSupportFragmentManager();
                 AuthenticationHomeF startupFormF = new AuthenticationHomeF();
                 fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
-
+//
+//                auth = FirebaseAuth.getInstance();
+//                currentUser = auth.getCurrentUser();
+//                Log.d(TAG, "CurrentUser "+currentUser);
+//
+//                if(currentUser == null){
+//                    fm = getActivity().getSupportFragmentManager();
+//                    LoginF LoginF = new LoginF();
+//                    fm.beginTransaction().replace(R.id.fragment_container, LoginF).commit();
+//                }
+//                else{
+//                    Toast.makeText(getActivity(), auth.getCurrentUser().getEmail()+" already signed in.", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
 
@@ -154,6 +187,33 @@ public class StartupF extends Fragment
                 fm = getActivity().getSupportFragmentManager();
                 HomeFragment homeFragment = new HomeFragment();
                 fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
+            }
+        });
+        chatbotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
+                startActivity(chatbotActivity);
+            }
+        });
+
+        frontend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity2.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+        consultations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getActivity(), Activity_Remote_Consultation.class);
+                startActivity(intent);
+
             }
         });
 

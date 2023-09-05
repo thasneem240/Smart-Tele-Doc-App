@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".front_end.PrescriptionWriting">
+
+    <TextView
+        android:id="@+id/create_pres"
+        android:layout_width="188dp"
+        android:layout_height="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="124dp"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="3sp"
+        android:text="Create Prescription"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:translationY="-1.4sp" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="360dp"
+        android:layout_height="504dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="117dp"
+        android:src="@drawable/rectangle_8" />
+
+
+    <TextView
+        android:id="@+id/patientName"
+        android:layout_width="285dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="181dp"
+        android:background="@drawable/rectangle_4"
+        android:text="Patient Name :"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/doctor_s_na"
+        android:layout_width="285dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="244dp"
+        android:background="@drawable/rectangle_4"
+        android:text="Doctor's Name :"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/presc_date"
+        android:layout_width="285dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="310dp"
+        android:background="@drawable/rectangle_4"
+        android:text="Date : "
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/pres_details"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="365dp"
+        android:background="@drawable/rectangle_9"
+        android:text="Presscription Details"
+        android:textSize="14sp" />
+
+
+    <EditText
+        android:id="@+id/pres_notes"
+        android:layout_width="285dp"
+        android:layout_height="147dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="426dp"
+        android:background="#F6F8E2"
+        android:text="Prescription Notes : "
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/SubmitButton"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="106dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="58dp"
+        android:background="@drawable/rectangle_6"
+        android:text="Submit " />
+
+
+</RelativeLayout>
