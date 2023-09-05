@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +30,9 @@ public class StartUpFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
+
 
     public StartUpFragment() {
         // Required empty public constructor
@@ -67,9 +73,20 @@ public class StartUpFragment extends Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                PatientLogin patientLogin = new PatientLogin();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();            }
+                mAuth = FirebaseAuth.getInstance();
+                currentUser = mAuth.getCurrentUser();
+                if(currentUser == null){
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    PatientLogin patientLogin = new PatientLogin();
+                    fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();
+                }
+                else{
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    MainMenu mainMenu = new MainMenu();
+                    fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                }
+
+            }
         });
 
         return v;

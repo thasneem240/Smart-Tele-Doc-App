@@ -1,17 +1,29 @@
 package com.example.capstoneprojectgroup4.front_end;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.home.StartupF;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +40,7 @@ public class PatientLogin extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    FirebaseAuth auth;
 
     public PatientLogin() {
         // Required empty public constructor
@@ -66,12 +79,47 @@ public class PatientLogin extends Fragment {
         View v = inflater.inflate(R.layout.fragment_patient_login, container, false);
         Button login = v.findViewById(R.id.login_button);
         TextView signup = v.findViewById(R.id.sign_up_link);
+        EditText email_ = v.findViewById(R.id.loginenter_email);
+        EditText password_ = v.findViewById(R.id.enter_password);
+
+        auth = FirebaseAuth.getInstance();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                UserDetail mainMenu = new UserDetail();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();            }
+
+                String email = email_.getText().toString();
+                String password = password_.getText().toString();
+
+                if(TextUtils.isEmpty(email)){
+                    Toast.makeText(getActivity(), "Please enter the email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(password)){
+                    Toast.makeText(getActivity(), "Please enter the password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+//                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(getActivity(), "Login successful.", Toast.LENGTH_SHORT).show();
+
+                                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                                    MainMenu mainMenu = new MainMenu();
+                                    fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+
+
+                                } else {
+                                    Toast.makeText(getActivity(), "Login failed. "+task.getException(), Toast.LENGTH_LONG).show();
+
+                                }
+                            }
+                        });
+
+            }
         });
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +127,8 @@ public class PatientLogin extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientSignUp patientSignUp = new PatientSignUp();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientSignUp).commit();            }
+                fm.beginTransaction().replace(R.id.fragmentContainerView, patientSignUp).commit();
+            }
         });
 
         return v;
