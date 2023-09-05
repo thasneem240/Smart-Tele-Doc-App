@@ -1,14 +1,32 @@
 package com.example.capstoneprojectgroup4.front_end;
 
+import static android.content.ContentValues.TAG;
+
+import static com.google.android.material.color.utilities.MaterialDynamicColors.error;
+
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.search_doctors.DocSearchResultAdapter;
+import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmacyAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +43,16 @@ public class Pharmacy extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    TextView etPharmName ;
+    int searchType=-1;
+
+    TextView etPharmLocation;
+    TextView etPharmDrugs ;
+    RecyclerView recyclerView;
+
+
+    Button search;
 
     public Pharmacy() {
         // Required empty public constructor
@@ -60,7 +88,90 @@ public class Pharmacy extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pharmacy, container, false);
+        View view = inflater.inflate(R.layout.fragment_pharmacy, container, false);
+
+        etPharmName= view.findViewById(R.id.searchPharmName);
+        etPharmLocation = view.findViewById(R.id.searchPharmLoc);
+        etPharmDrugs = view.findViewById(R.id.searchDrugs);
+        recyclerView = view.findViewById(R.id.pharmrv);
+
+        search = view.findViewById(R.id.pharmsearchButton);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                performSearch();
+            }
+        });
+
+        return view;
     }
-}
+
+    private void performSearch() {
+        String nameEd = etPharmName.getText().toString().trim();
+        String drugsEd = etPharmDrugs.getText().toString().trim();
+        String locationEd = etPharmLocation.getText().toString().trim();
+
+        Query query = FirebaseDatabase.getInstance().getReference().child("Pharmacies");
+
+        if (!nameEd.isEmpty() && locationEd.isEmpty())
+        {
+            Log.d(TAG, "Search by Name: " + nameEd);
+            searchType = 0;
+        }else {
+            Log.d(TAG, "Search by Location: " + locationEd);
+            searchType = 2;
+        }
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy> pharmacies = new ArrayList<>();
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String name = (String) doctorSnapshot.child("Name").getValue();
+                    String location = (String) doctorSnapshot.child("Address").getValue();
+                    String phoneNum = (String) doctorSnapshot.child("PhoneNumber").getValue();
+
+                    if (searchType == 0 && name != null && name.toLowerCase().contains(nameEd.toLowerCase())) {
+                        com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum);
+                        pharmacies.add(doctor);
+                    } else if (searchType == 1 && location != null && location.toLowerCase().contains(locationEd.toLowerCase())) {
+                        com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum);
+                        pharmacies.add(doctor);
+
+                    }
+                }
+                PharmacyAdapter pharmacyAdapter = new PharmacyAdapter(pharmacies);
+                recyclerView.setAdapter(pharmacyAdapter);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+

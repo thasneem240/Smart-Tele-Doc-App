@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4;
+package com.example.capstoneprojectgroup4.ssearch_pharmacy;
 
 import android.os.Bundle;
 
@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.capstoneprojectgroup4.PrescriptionAdapter;
+import com.example.capstoneprojectgroup4.PrescriptionItem;
+import com.example.capstoneprojectgroup4.R;
 
 import java.util.ArrayList;
 import java.util.List;

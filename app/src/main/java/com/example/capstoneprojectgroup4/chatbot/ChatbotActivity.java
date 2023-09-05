@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.BookAppointmentF;
+import com.example.capstoneprojectgroup4.search_doctors.BookAppointmentF;
 import com.example.capstoneprojectgroup4.chatbot.adapters.ChatAdapter;
 import com.example.capstoneprojectgroup4.chatbot.helpers.SendMessageInBg;
 import com.example.capstoneprojectgroup4.chatbot.interfaces.BotReply;

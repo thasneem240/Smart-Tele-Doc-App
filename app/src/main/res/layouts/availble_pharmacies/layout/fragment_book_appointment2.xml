@@ -10,99 +10,96 @@
         android:layout_width="181dp"
         android:layout_height="27dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="125dp"
         android:gravity="center_horizontal|top"
         android:lineSpacingExtra="10sp"
         android:text="Book Appointment"
-        android:textSize="20sp"
         android:textColor="#0B0808"
+        android:textSize="20sp"
         android:translationY="-1.4sp" />
+
+    <TextView
+        android:id="@+id/presc_date"
+        android:layout_width="320dp"
+        android:layout_height="41dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="163dp"
+        android:background="@drawable/rectangle_3" />
 
     <TextView
         android:id="@+id/doctor_name"
         android:layout_width="115dp"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="37dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="172dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="120dp"
+        android:gravity="top"
         android:text="Doctor Name"
-        android:textSize="18sp"
         android:textColor="#0B0808"
-        android:gravity="top"
-        />
+        android:textSize="16sp" />
 
-    <View
-        android:id="@+id/rectangle_3"
-        android:layout_width="320dp"
-        android:layout_height="41dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="33dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="215dp"
-        android:background="@drawable/rectangle_3"
-        />
     <TextView
-        android:id="@+id/patient_name"
-        android:layout_width="117dp"
-        android:layout_height="22dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="38dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="287dp"
-        android:text="Patient Name"
-        android:textSize="18sp"
-        android:textColor="#0B0808"
-        android:gravity="top"
-        />
-
-    <View
-        android:id="@+id/rectangle_4"
+        android:id="@+id/pres_details"
         android:layout_width="323dp"
         android:layout_height="41dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="30dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="330dp"
-        android:background="@drawable/rectangle_4"
-        />
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="278dp"
+        android:background="@drawable/rectangle_4" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="37dp"
         android:layout_height="19dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="34dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="402dp"
-        android:text="Date"
-        android:textSize="18sp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="350dp"
         android:gravity="top"
+        android:text="Date"
         android:textColor="#0B0808"
-        />
+        android:textSize="16sp" />
+
     <TextView
         android:id="@+id/wednesday_j"
         android:layout_width="251dp"
         android:layout_height="17dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="81dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="456dp"
-        android:textSize="15sp"
-        android:textColor="#0B0808"
+        android:layout_marginLeft="79dp"
+        android:layout_marginTop="404dp"
         android:gravity="top"
-        />
+        android:textColor="#0B0808"
+        android:textSize="15sp" />
+
     <View
         android:id="@+id/ellipse_5"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="30dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="447dp"
-        android:background="#E8F3F1"
-        />
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="395dp"
+        android:background="@drawable/layered_green_calendar" />
+
+    <TextView
+        android:id="@+id/patient_name"
+        android:layout_width="117dp"
+        android:layout_height="22dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="235dp"
+        android:gravity="top"
+        android:text="Patient Name"
+        android:textColor="#0B0808"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/payment_det"
@@ -111,35 +108,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="27dp"
-        android:layout_marginTop="552dp"
+        android:layout_marginTop="467dp"
         android:gravity="top"
         android:text="Payment Details"
         android:textColor="#0B0808"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/consultatio"
-        android:layout_width="154dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="592dp"
-        android:gravity="top"
-        android:text="Consultation fee : "
-        android:textSize="12sp" />
-    <TextView
-        android:id="@+id/rs_3000_00"
-        android:layout_width="77dp"
-        android:layout_height="17dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="306dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="591dp"
-        android:text="Rs. 3000.00"
-        android:textSize="12sp"
-        android:gravity="top"
-        />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/admin_fee"
@@ -148,22 +121,22 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="27dp"
-        android:layout_marginTop="620dp"
+        android:layout_marginTop="535dp"
         android:gravity="top"
         android:text="Adminstration fees : "
         android:textSize="12sp" />
+
     <TextView
         android:id="@+id/rs_100_00"
         android:layout_width="65dp"
         android:layout_height="17dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="317dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="620dp"
-        android:text="Rs 100.00"
-        android:textSize="12sp"
+        android:layout_marginLeft="317dp"
+        android:layout_marginTop="535dp"
         android:gravity="top"
-        />
+        android:text="Rs 100.00"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/total"
@@ -172,7 +145,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="23dp"
-        android:layout_marginTop="656dp"
+        android:layout_marginTop="571dp"
         android:gravity="top"
         android:text="Total : "
         android:textColor="@color/black"
@@ -185,24 +158,61 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="302dp"
-        android:layout_marginTop="655dp"
+        android:layout_marginTop="570dp"
         android:gravity="top"
         android:text="Rs 3100.00"
         android:textColor="@color/black"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/consultatio"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="507dp"
+        android:gravity="top"
+        android:text="Consultation fee : "
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/rs_3000_00"
+        android:layout_width="77dp"
+        android:layout_height="17dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="306dp"
+        android:layout_marginTop="506dp"
+        android:gravity="top"
+        android:text="Rs. 3000.00"
+        android:textSize="12sp" />
+
     <Button
         android:id="@+id/BookApp_Button"
-        android:layout_width="239dp"
-        android:layout_height="wrap_content"
+        android:layout_width="213dp"
+        android:layout_height="43dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="88dp"
-        android:layout_marginEnd="83dp"
-        android:layout_marginBottom="7dp"
-        android:background="@drawable/rectangle_3"
+        android:layout_marginStart="97dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/rectangle_1"
         android:text="Book Appointment"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/change"
+        android:layout_width="44dp"
+        android:layout_height="15dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="330dp"
+        android:layout_marginTop="351dp"
+        android:gravity="top"
+        android:text="Change"
+        android:textColor="#ADADAD"
+        android:textSize="12sp" />
 
 </RelativeLayout>
