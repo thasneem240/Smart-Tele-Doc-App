@@ -26,7 +26,8 @@ android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:textSize="22sp"
-        android:text="Title"
+        android:textStyle="bold"
+        android:text="PROFILE"
         />
 
     <EditText
