@@ -1,5 +1,7 @@
 package com.example.capstoneprojectgroup4.authentication.signup;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -84,7 +87,6 @@ public class Signup_EmailVerificationF extends Fragment {
         emailVarificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("123", mAuth.getCurrentUser()+".");
                 mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -103,7 +105,22 @@ public class Signup_EmailVerificationF extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
+                mAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        currentUser = mAuth.getCurrentUser();
+                        if(currentUser.isEmailVerified()){
+                            Toast.makeText(getActivity(), "The email is verified", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else{
+                            Toast.makeText(getActivity(), "Please verify your email first.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
 //                Signup_FormF signupFormF = new Signup_FormF();
 //                fm.beginTransaction().replace(R.id.fragment_container, signupFormF).commit();
             }

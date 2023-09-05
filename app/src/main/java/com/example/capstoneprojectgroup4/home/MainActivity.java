@@ -17,6 +17,7 @@ import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.dialogflow.v2.SessionsClient;
 import com.google.cloud.dialogflow.v2.SessionsSettings;
 import com.google.common.collect.Lists;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.apache.commons.lang3.builder.Builder;
 

@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.front_end;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,12 +68,29 @@ public class MainMenu extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main_menu, container, false);
         Button doctorButton = v.findViewById(R.id.doctor_Button);
+        ImageView chatBot = v.findViewById(R.id.Ai_square);
+        Button chatbotButton = v.findViewById(R.id.aiButton);
         doctorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 SearchDoctors searchDoctors = new SearchDoctors();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();            }
+        });
+
+        chatBot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
+                startActivity(chatbotActivity);
+            }
+        });
+        chatbotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
+                startActivity(chatbotActivity);
+            }
         });
 
         return v;

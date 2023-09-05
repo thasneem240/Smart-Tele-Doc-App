@@ -80,6 +80,7 @@ public class Frag_Prescriptions extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //Create Adapter for the recyclerview
+
         PrescriptionAdapter adapter = new PrescriptionAdapter(prescriptionItems);
         recyclerView.setAdapter(adapter);
 

@@ -112,16 +112,20 @@ public class PatientProfileF extends Fragment {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Patient").child(currentUser.getUid());
+
+
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 PatientObject patientObject = snapshot.getValue(PatientObject.class);
 
-                fullName_.setText(patientObject.getFullName());
-                nic_.setText(patientObject.getNic());
-                mobileNumber_.setText(patientObject.getMobileNumber());
-                dob_.setText(patientObject.getDob());
-                gender_.setText(patientObject.getGender());
+                if(patientObject != null){
+                    fullName_.setText(patientObject.getFullName());
+                    nic_.setText(patientObject.getNic());
+                    mobileNumber_.setText(patientObject.getMobileNumber());
+                    dob_.setText(patientObject.getDob());
+                    gender_.setText(patientObject.getGender());
+                }
             }
 
             @Override
@@ -198,6 +202,7 @@ public class PatientProfileF extends Fragment {
                 });
             }
         });
+
 
         return v;
     }

@@ -199,6 +199,7 @@
         android:textColor="#000000"
         android:textSize="16sp" />
 
+
     <ImageView
         android:id="@+id/Ai_square"
         android:layout_width="139.29dp"
@@ -206,11 +207,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="214dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginLeft="234dp"
+        android:layout_marginTop="399dp"
         android:layout_marginEnd="38dp"
         android:background="@drawable/green_square" />
-
 
     <TextView
         android:id="@+id/ai_helper"
