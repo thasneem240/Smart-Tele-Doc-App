@@ -15,7 +15,7 @@
         android:layout_marginBottom="11dp"
         android:ems="10"
         android:enabled="false"
-        android:text="Gender"
+        android:hint="Gender"
         app:layout_constraintBottom_toTopOf="@+id/p_update"
         app:layout_constraintStart_toStartOf="@+id/p_update" />
 
@@ -27,7 +27,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="text"
-        android:text="Full name"
+        android:hint="Full name"
         app:layout_constraintEnd_toEndOf="@+id/p_nic_edittext"
         app:layout_constraintStart_toStartOf="@+id/p_nic_edittext"
         app:layout_constraintTop_toBottomOf="@+id/p_home" />
@@ -39,7 +39,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="text"
-        android:text="NIC"
+        android:hint="NIC"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="@+id/p_mobilenumber_edittext"
         app:layout_constraintStart_toStartOf="@+id/p_mobilenumber_edittext" />
@@ -53,7 +53,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="text"
-        android:text="DOB"
+        android:hint="DOB"
         app:layout_constraintBottom_toBottomOf="@+id/p_gender_edittext"
         app:layout_constraintEnd_toEndOf="@+id/p_gender_edittext"
         app:layout_constraintStart_toStartOf="@+id/p_gender_edittext"
@@ -66,7 +66,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="text"
-        android:text="Mobile number"
+        android:hint="Mobile number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/p_dob_edittext"
         app:layout_constraintStart_toStartOf="@+id/p_dob_edittext"
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
-        android:text="Home"
+        android:hint="Home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,7 +89,7 @@
         android:layout_marginStart="94dp"
         android:layout_marginEnd="96dp"
         android:layout_marginBottom="25dp"
-        android:text="Update"
+        android:hint="Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/p_done"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.signup.SignupF;
+import com.example.capstoneprojectgroup4.authentication.signup.Signup_EmailVerificationF;
+import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -37,6 +40,7 @@ public class AuthenticationHomeF extends Fragment {
     Button loginButton;
     Button signoutButton;
     Button patientProfileButton;
+    Button emailVerification;
     private FirebaseAuth mAuth;
 
 
@@ -61,7 +65,6 @@ public class AuthenticationHomeF extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +84,7 @@ public class AuthenticationHomeF extends Fragment {
         loginButton = v.findViewById(R.id.login_button);
         signoutButton = v.findViewById(R.id.signout_button);
         patientProfileButton = v.findViewById(R.id.patient_profile_button);
+        emailVerification = v.findViewById(R.id.email_verification_button2);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -90,7 +94,7 @@ public class AuthenticationHomeF extends Fragment {
 
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 if(currentUser != null){
-                    Toast.makeText(getActivity(), currentUser.getEmail()+"This user is already signed in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), mAuth.getCurrentUser().getEmail()+" already signed in.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -125,6 +129,15 @@ public class AuthenticationHomeF extends Fragment {
                 fm = getActivity().getSupportFragmentManager();
                 PatientProfileF patientProfileF = new PatientProfileF();
                 fm.beginTransaction().replace(R.id.fragment_container, patientProfileF).commit();
+            }
+        });
+
+        emailVerification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
+                fm.beginTransaction().replace(R.id.fragment_container, signup_emailVerificationF).commit();
             }
         });
 
