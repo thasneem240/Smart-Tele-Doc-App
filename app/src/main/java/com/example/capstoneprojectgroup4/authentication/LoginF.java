@@ -1,7 +1,10 @@
 package com.example.capstoneprojectgroup4.authentication;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +18,12 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.signup.SignupF;
+import com.example.capstoneprojectgroup4.home.StartupF;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,7 +41,7 @@ public class LoginF extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private FirebaseAuth auth;
+    FirebaseAuth auth;
 
 
     public LoginF() {
@@ -89,13 +94,11 @@ public class LoginF extends Fragment {
         password_name.setText("Password");
         signUpButton.setText("Sign Up");
 
+        auth = FirebaseAuth.getInstance();
+
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                auth = FirebaseAuth.getInstance();
-
-
                 String email = email_.getText().toString();
                 String password = password_.getText().toString();
 
@@ -115,6 +118,10 @@ public class LoginF extends Fragment {
                                 if (task.isSuccessful()) {
 //                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getActivity(), "Login successful.", Toast.LENGTH_SHORT).show();
+
+                                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                                    StartupF startupF = new StartupF();
+                                    fm.beginTransaction().replace(R.id.fragment_container, startupF).commit();
 
 
                                 } else {
@@ -138,8 +145,8 @@ public class LoginF extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                AuthenticationHomeF startupFormF = new AuthenticationHomeF();
-                fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
+                StartupF startupF = new StartupF();
+                fm.beginTransaction().replace(R.id.fragment_container, startupF).commit();
             }
         });
 

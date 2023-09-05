@@ -113,7 +113,7 @@ public class SignupF extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
 //                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(getActivity(), "Authentication successful.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Please verify your email.", Toast.LENGTH_SHORT).show();
 
                                     FragmentManager fm = getActivity().getSupportFragmentManager();
                                     Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
