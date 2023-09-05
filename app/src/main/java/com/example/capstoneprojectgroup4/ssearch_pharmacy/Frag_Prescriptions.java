@@ -74,6 +74,7 @@ public class Frag_Prescriptions extends Fragment {
         List<PrescriptionItem> prescriptionItems = new ArrayList<>();
         // Populate prescriptionItems with your data
 
+        prescriptionItems = PrescriptionItemGenerator.generateRandomPrescriptionItems(200);
 
         // Obtain the RecyclerView UI element
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.prescriptionRecyclerView);

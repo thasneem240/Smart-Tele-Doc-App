@@ -72,6 +72,8 @@ public class Frag_MedicalHistory extends Fragment
 
         // Populate medicalHistoryItems with your data
 
+        medicalHistoryItems = MedicalHistoryItemGenerator.generateRandomMedicalHistoryItems(200);
+
         // Obtain the RecyclerView UI element
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.medicalHistoryRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
