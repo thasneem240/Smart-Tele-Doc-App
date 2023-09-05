@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.Activity_Common;
+import com.example.capstoneprojectgroup4.Activity_Remote_Consultation;
 import com.example.capstoneprojectgroup4.PharmaciesF;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.ResultActivity;
@@ -39,6 +40,8 @@ public class StartupF extends Fragment
     Button pharmacyButton;
     Button buttonMedicalRecords;
     Button searchdoc;
+
+    Button consultations;
 
 
 
@@ -90,6 +93,7 @@ public class StartupF extends Fragment
         buttonMedicalRecords = v.findViewById(R.id.button_MedicalRecords);
         searchdoc = v.findViewById(R.id.searchDoc_button);
         searchDrugs = v.findViewById(R.id.search_drugs_button);
+        consultations = v.findViewById(R.id.consultations);
 
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +158,17 @@ public class StartupF extends Fragment
                 fm = getActivity().getSupportFragmentManager();
                 HomeFragment homeFragment = new HomeFragment();
                 fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
+            }
+        });
+
+
+        consultations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getActivity(), Activity_Remote_Consultation.class);
+                startActivity(intent);
+
             }
         });
 
