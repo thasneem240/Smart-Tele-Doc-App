@@ -15,22 +15,26 @@
             android:id="@+id/textLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:textColor="#407C87"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold"
             android:layout_marginBottom="4dp"/>
 
         <TextView
             android:id="@+id/textSpecialization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="13sp"
             android:layout_marginBottom="8dp"/>
 
     </LinearLayout>

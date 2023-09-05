@@ -10,6 +10,7 @@
         android:id="@+id/textDoctorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#101623"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp" />
@@ -19,6 +20,7 @@
         android:id="@+id/textDoctorLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#15195A"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp" />

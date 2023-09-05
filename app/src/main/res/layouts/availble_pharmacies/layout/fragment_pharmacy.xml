@@ -186,6 +186,7 @@
         android:textSize="12sp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pharmrv"
         android:layout_width="373dp"
         android:layout_height="92dp"
         android:layout_alignParentEnd="true"

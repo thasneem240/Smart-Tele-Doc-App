@@ -107,13 +107,13 @@ public class SearchDocF extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_search_doc, container, false);
 
         //toolbar = view.findViewById(R.id.toolbar);
-        searchButton = view.findViewById(R.id.btnSearch);
-        recyclerView = view.findViewById(R.id.rvDoctors);
+        searchButton = view.findViewById(R.id.searchButton);
+        recyclerView = view.findViewById(R.id.searchrv);
 
-         etName = view.findViewById(R.id.etName);
-         etSpecialization = view.findViewById(R.id.etSpecialization);
-         etLocation = view.findViewById(R.id.etLocation);
-         etDate = view.findViewById(R.id.etDate);
+         etName = view.findViewById(R.id.searchName);
+         etSpecialization = view.findViewById(R.id.searchSpec);
+         etLocation = view.findViewById(R.id.searchLoc);
+         etDate = view.findViewById(R.id.searchDate);
 
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override

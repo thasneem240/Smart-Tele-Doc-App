@@ -1,8 +1,11 @@
 package com.example.capstoneprojectgroup4.ssearch_pharmacy;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -23,7 +28,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,7 +58,15 @@ public class PharmaciesF extends Fragment {
     Button orderButton;
 
     RadioGroup radioGroup;
+    TextView etPharmName ;
+    int searchType=-1;
+
+    TextView etPharmLocation;
+    TextView etPharmDrugs ;
     RecyclerView recyclerView;
+
+
+    Button search;
     PharmacyAdapter pharmacyAdapter;
     private SearchView searchView;
     FragmentManager fm;
@@ -90,127 +109,79 @@ public class PharmaciesF extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_pharmacies, container, false);
+        View view = inflater.inflate(R.layout.fragment_pharmacies, container, false);
 
-        radioGroup = v.findViewById(R.id.radioGroupSearchByPharmacy);
+        etPharmName= view.findViewById(R.id.searchPharmName);
+        etPharmLocation = view.findViewById(R.id.searchPharmLoc);
+        etPharmDrugs = view.findViewById(R.id.searchDrugs);
+        recyclerView = view.findViewById(R.id.pharmrv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        toolbar = v.findViewById(R.id.toolbar);
-        orderButton = v.findViewById(R.id.orderB);
-        searchButton = v.findViewById(R.id.searchButton);
 
+        search = view.findViewById(R.id.pharmsearchButton);
 
-        orderButton.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fm = getActivity().getSupportFragmentManager();
-                Delivery_Track welcomeF = new Delivery_Track();
-                fm.beginTransaction().replace(R.id.fragment_container, welcomeF).commit();
-
+                performSearch();
             }
         });
 
-
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setTitle("Search Pharmacies");
-
-
-        recyclerView = v.findViewById(R.id.recyclerviewId);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        FirebaseRecyclerOptions<Pharmacy> options =
-                new FirebaseRecyclerOptions.Builder<Pharmacy>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Pharmacies"), Pharmacy.class)
-                        .build();
-
-        pharmacyAdapter = new PharmacyAdapter(options);
-        recyclerView.setAdapter(pharmacyAdapter);
-
-
-
-        return v;
+        return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        pharmacyAdapter.startListening();;
-    }
+    private void performSearch() {
+        String nameEd = etPharmName.getText().toString().trim();
+        String drugsEd = etPharmDrugs.getText().toString().trim();
+        String locationEd = etPharmLocation.getText().toString().trim();
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        pharmacyAdapter.stopListening();
-    }
+        Query query = FirebaseDatabase.getInstance().getReference().child("Pharmacies");
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.search_pharma, menu);
-        MenuItem menuItem = menu.findItem(R.id.search);
-        searchView = (SearchView) menuItem.getActionView();
-        searchView.setIconified(true);
+        if (!nameEd.isEmpty() && locationEd.isEmpty())
+        {
+            Log.d(TAG, "Search by Name: " + nameEd);
+            searchType = 0;
+        }else {
+            Log.d(TAG, "Search by Location: " + locationEd);
+            searchType = 1;
+        }
 
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-
-
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                searchButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        textSearch(s);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Pharmacy> pharmacies = new ArrayList<>();
+                for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                    String name = (String) doctorSnapshot.child("Name").getValue();
+                    String location = (String) doctorSnapshot.child("Address").getValue();
+                    String phoneNum = (String) doctorSnapshot.child("PhoneNumber").getValue();
+
+                    if (searchType == 0 && name != null && name.toLowerCase().contains(nameEd.toLowerCase())) {
+                        com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum);
+                        pharmacies.add(doctor);
+                    } else if (searchType == 1 && location != null && location.toLowerCase().contains(locationEd.toLowerCase())) {
+                        com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum);
+                        pharmacies.add(doctor);
 
                     }
-                });
-                return false;
+                }
+                PharmacyAdapter pharmacyAdapter = new PharmacyAdapter(pharmacies);
+                recyclerView.setAdapter(pharmacyAdapter);
+                pharmacyAdapter.notifyDataSetChanged();
+
+
+
+
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                searchButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        textSearch(s);
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-                return false;
             }
+
         });
 
 
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
-
-
-    public void textSearch(String str)
-    {
-        int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
-
-        if (selectedRadioButtonId == R.id.radioNamePharmacy) {
-            FirebaseRecyclerOptions<Pharmacy> options =
-                    new FirebaseRecyclerOptions.Builder<Pharmacy>()
-                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Pharmacies").orderByChild("Name").startAt(str).endAt(str + "\uf8ff"), Pharmacy.class)
-                            .build();
-
-            pharmacyAdapter = new PharmacyAdapter(options);
-            pharmacyAdapter.startListening();
-            recyclerView.setAdapter(pharmacyAdapter);
-        }
-        if (selectedRadioButtonId == R.id.radioLocationPharmacy) {
-            FirebaseRecyclerOptions<Pharmacy> options =
-                    new FirebaseRecyclerOptions.Builder<Pharmacy>()
-                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Pharmacies").orderByChild("Address").startAt(str).endAt(str + "\uf8ff"), Pharmacy.class)
-                            .build();
-
-            pharmacyAdapter = new PharmacyAdapter(options);
-            pharmacyAdapter.startListening();
-            recyclerView.setAdapter(pharmacyAdapter);
-        }
 
     }
 }
