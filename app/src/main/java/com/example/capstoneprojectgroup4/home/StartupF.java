@@ -18,6 +18,8 @@ import com.example.capstoneprojectgroup4.authentication.LoginF;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
+import com.example.capstoneprojectgroup4.Activity_Remote_Consultation;
+import com.example.capstoneprojectgroup4.PharmaciesF;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.ResultActivity;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
@@ -51,6 +53,8 @@ public class StartupF extends Fragment
     Button chatbotButton;
     Button frontend;
 
+
+    Button consultations;
 
 
 
@@ -106,6 +110,7 @@ public class StartupF extends Fragment
         searchDrugs = v.findViewById(R.id.search_drugs_button);
         chatbotButton = v.findViewById(R.id.chatbot_button);
         frontend = v.findViewById(R.id.front_end_button);
+        consultations = v.findViewById(R.id.consultations);
 
 
         authenticationButton.setOnClickListener(new View.OnClickListener() {
@@ -200,6 +205,17 @@ public class StartupF extends Fragment
             }
         });
 
+
+
+        consultations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getActivity(), Activity_Remote_Consultation.class);
+                startActivity(intent);
+
+            }
+        });
 
 
 
