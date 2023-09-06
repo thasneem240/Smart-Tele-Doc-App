@@ -2,6 +2,7 @@ package com.example.capstoneprojectgroup4.chatbot;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,11 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.ResultActivity;
+import com.example.capstoneprojectgroup4.TransactionHistory;
 import com.example.capstoneprojectgroup4.search_doctors.BookAppointmentF;
 import com.example.capstoneprojectgroup4.chatbot.adapters.ChatAdapter;
 import com.example.capstoneprojectgroup4.chatbot.helpers.SendMessageInBg;
 import com.example.capstoneprojectgroup4.chatbot.interfaces.BotReply;
 import com.example.capstoneprojectgroup4.chatbot.models.Message;
+import com.example.capstoneprojectgroup4.ssearch_pharmacy.PrescriptionTransaction;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
@@ -33,7 +37,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 
 public class ChatbotActivity extends AppCompatActivity implements BotReply {
@@ -61,15 +67,17 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     chatView.setAdapter(chatAdapter);
 
     // Welcome message
-    messageList.add(new Message("Hi, I'm Teledoc AI chatbot.\n" +
-            "\tI can help you to make an appointment.\n" +
-            "\tTell me your name?", true));
+    messageList.add(new Message("Hi, I'm the Teledoc AI chatbot.\n" +
+            "I am able to  help you to make an appointment, purchase medicine and view the transaction history page.\n" , true));
+    messageList.add(new Message("Please choose what you want me to do.", true));
     chatAdapter.notifyDataSetChanged();
     Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
 
     btnSend.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         String message = editMessage.getText().toString();
+        Log.d("DialogFlow***", message);
+
         if (!message.isEmpty()) {
           messageList.add(new Message(message, false));
           editMessage.setText("");
@@ -116,7 +124,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
      if(returnResponse!=null) {
        String doctor = null;
 
-        String botReply = returnResponse.getQueryResult().getFulfillmentText();
+       String botReply = returnResponse.getQueryResult().getFulfillmentText();
        DialogFlowParameters(returnResponse);
 
        if(!botReply.isEmpty()){
@@ -135,12 +143,14 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     String doctor = null;
     String patient = null;
     String dateAndTime = null;
-    String medicine = null;
-    String pharmacy = null;
-    String transaction = null;
+    String drug = null;
+    String quantity = null;
+    String price = null;
+
 
     if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient"))
       patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStringValue()+"";
+
 
     if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date-time"))
       dateAndTime = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date-time").getStringValue()+"";
@@ -151,7 +161,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
       }
     }
 
-    Log.d("DialogFlow***", String.format("Patient = %s\nDate and time = %s\nDoctor = %s", patient+"", dateAndTime, doctor));
+    Log.d("DialogFlow***", String.format("Patient = %s\nDate and time = %s\nDoctor = %s", patient, dateAndTime, doctor));
 
     if(patient!="" & doctor!="" & dateAndTime!="" &
             patient!=null & doctor!=null & dateAndTime!=null){
@@ -160,55 +170,35 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
       Log.d("DialogFlow***", "Done");
     }
 
+    if (returnResponse.getQueryResult().getAction().equals("OpenTransactionHistorypage")){
+      Intent intent = new Intent(this, TransactionHistory.class);
+      startActivity(intent);
+    }
 
+    if (returnResponse.getQueryResult().getAction().equals("BuyMedicine")){
+      drug = returnResponse.getQueryResult().getParameters().getFieldsMap().get("drug").getStringValue()+"";
+      quantity = returnResponse.getQueryResult().getParameters().getFieldsMap().get("quantity").getStringValue()+"";
+      Log.d("DialogFlow***", drug);
+      Log.d("DialogFlow***", quantity);
+      if (drug!="" & quantity!="" & drug!=null & quantity!=null ){
+        Random ran = new Random();
+        double next = ran.nextInt(46);
+        double result = 500 + (next * 100);
+        if (result > 5000) {
+          result = 5000;
+        }
+        price = Double.toString(result);
+        String item = drug + " " + quantity;
 
+        Intent senderIntent = new Intent( this, PrescriptionTransaction.class);
+        senderIntent.putExtra("ITEM", item);
+        senderIntent.putExtra("PRICE",price);
+        startActivity(senderIntent);
 
-
-
-
-
-    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("medicine"))
-      medicine = returnResponse.getQueryResult().getParameters().getFieldsMap().get("medicine").getStringValue()+"";
-
-    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date-time"))
-      dateAndTime = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date-time").getStringValue()+"";
-
-    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("pharmacy")){
-      if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("pharmacy").getStructValue().getFieldsMap().containsKey("name")){
-        pharmacy = returnResponse.getQueryResult().getParameters().getFieldsMap().get("pharmacy").getStructValue().getFieldsMap().get("name").getStringValue();
       }
+
     }
 
-    Log.d("DialogFlow***", String.format("medicine = %s\nDate and time = %s\npharmacy = %s", medicine+"", dateAndTime, pharmacy));
-
-    if(medicine!="" & pharmacy!="" & dateAndTime!="" &
-            medicine!=null & pharmacy!=null & dateAndTime!=null){
-
-      BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
-      Log.d("DialogFlow***", "Done");
-    }
-
-
-
-
-
-
-
-
-    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("transaction"))
-      transaction = returnResponse.getQueryResult().getParameters().getFieldsMap().get("transaction").getStringValue()+"";
-
-
-
-
-    Log.d("DialogFlow***", String.format("transaction = %s", transaction));
-
-    if(transaction!=""  &
-    transaction!=null ){
-
-      BookAppointmentF.uploadAppointmentSecond(transaction, doctor, dateAndTime);
-      Log.d("DialogFlow***", "Done");
-    }
   }
 }
 

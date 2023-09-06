@@ -40,7 +40,8 @@ public class PrescriptionTransaction extends AppCompatActivity {
     DatabaseReference myRef = database.getReference();
     Map<String, Object> Transaction = new HashMap<>();
 
-    String item;
+    String item = null;
+    double price = 0.0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +51,22 @@ public class PrescriptionTransaction extends AppCompatActivity {
         TextView Item = findViewById(R.id.Item2);
         TextView Price = findViewById(R.id.Price2);
 
+        Intent recive = getIntent();
 
+        Item.setText(recive.getStringExtra("ITEM"));
+        Price.setText(recive.getStringExtra("PRICE"));
+        item = recive.getStringExtra("ITEM");
+        price = Double.parseDouble(recive.getStringExtra("PRICE"));
 
 
         Button button = findViewById(R.id.button4);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                item = Item.getText().toString();
-                double price = Double.parseDouble(Price.getText().toString());
+                if (item == null & price == 0.0){
+                    item = Item.getText().toString();
+                    price = Double.parseDouble(Price.getText().toString());
+                }
+
                 InitRequest req = new InitRequest();
                 req.setMerchantId("1223432");
                 req.setMerchantSecret("MTczNTk3NTUzNDEzMjE5ODgyNTAzNzk2MzAxNTgzMzEwNTk2NTgw");// Merchant ID

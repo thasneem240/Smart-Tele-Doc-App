@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.capstoneprojectgroup4.PrescriptionAdapter;
 import com.example.capstoneprojectgroup4.PrescriptionItem;
+import com.example.capstoneprojectgroup4.PrescriptionItemGenerator;
 import com.example.capstoneprojectgroup4.R;
 
 import java.util.ArrayList;

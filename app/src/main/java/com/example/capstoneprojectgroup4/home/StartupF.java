@@ -19,7 +19,6 @@ import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.example.capstoneprojectgroup4.Activity_Remote_Consultation;
-import com.example.capstoneprojectgroup4.PharmaciesF;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.ResultActivity;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
