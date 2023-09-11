@@ -81,7 +81,7 @@ public class PatientSignUp extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                MainMenu mainMenu = new MainMenu();
+                UserDetail mainMenu = new UserDetail();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();            }
         });
 

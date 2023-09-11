@@ -98,23 +98,23 @@ public class BookAppointmentF extends Fragment {
 
         return view;
     }
-    public void uploadAppointment(String pPatientName, String pDoctorName, String pDay){
-//        FirebaseUser currentUser;
-//        FirebaseAuth mAuth;
-//        mAuth = FirebaseAuth.getInstance();
-//        currentUser = mAuth.getCurrentUser();
-//        currentUser.getUid();
+    public void uploadAppointment(String pPatientName, String pDoctorName, String pDay) {
+        // Sanitize the strings to remove invalid characters
+        String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
+        String sanitizedDoctorName = pDoctorName.replaceAll("[.#$\\[\\]]", "_");
+        String sanitizedDay = pDay.replaceAll("[.#$\\[\\]]", "_");
 
-        HashMap<String, Object> hashMap = new HashMap<> ();
-        hashMap.put("Doctor Name", pPatientName);
-        hashMap.put("Patient Name", pDoctorName);
-        hashMap.put("Day", pDay);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("Doctor Name", sanitizedDoctorName);
+        hashMap.put("Patient Name", sanitizedPatientName);
+        hashMap.put("Day", sanitizedDay);
 
         databaseReference.child("Appointment Data")
-                .child(pPatientName+pDoctorName+pDay)
+                .child(sanitizedPatientName + sanitizedDoctorName + sanitizedDay)
                 .setValue(hashMap);
         Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
     }
+
 
     public static void uploadAppointmentSecond(String pPatientName, String pDoctorName, String pDay){
 //        FirebaseUser currentUser;

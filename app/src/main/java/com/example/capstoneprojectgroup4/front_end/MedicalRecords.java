@@ -3,10 +3,12 @@ package com.example.capstoneprojectgroup4.front_end;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
 
@@ -60,7 +62,18 @@ public class MedicalRecords extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_medical_records, container, false);
+        Button doctorButton = v.findViewById(R.id.button6);
+
+        doctorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PrescriptionWriting searchDoctors = new PrescriptionWriting();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_medical_records, container, false);
+        return v;
     }
 }

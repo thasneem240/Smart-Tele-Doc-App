@@ -68,6 +68,8 @@ public class MainMenu extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main_menu, container, false);
         Button doctorButton = v.findViewById(R.id.doctor_Button);
+        Button recordsButton = v.findViewById(R.id.records_Button);
+
         ImageView chatBot = v.findViewById(R.id.Ai_square);
         Button chatbotButton = v.findViewById(R.id.aiButton);
         doctorButton.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +92,16 @@ public class MainMenu extends Fragment {
             public void onClick(View view) {
                 Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
                 startActivity(chatbotActivity);
+            }
+        });
+
+        recordsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MedicalRecords searchDoctors = new MedicalRecords();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+
             }
         });
 
