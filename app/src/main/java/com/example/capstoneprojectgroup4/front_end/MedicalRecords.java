@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.capstoneprojectgroup4.Frag_LabReports;
+import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
+import com.example.capstoneprojectgroup4.Frag_PatientDetails;
 import com.example.capstoneprojectgroup4.R;
 
 /**
@@ -28,6 +31,7 @@ public class MedicalRecords extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public MedicalRecords() {
         // Required empty public constructor
@@ -68,6 +72,10 @@ public class MedicalRecords extends Fragment {
 
         ImageView backButton = v.findViewById(R.id.backButtonMedicalRecords);
 
+        ImageView patientDetailImageView = v.findViewById(R.id.patientDetailImageView);
+        ImageView medicalHistoryImageView = v.findViewById(R.id.medicalHistoryImageView);
+        ImageView labReportsImageView = v.findViewById(R.id.labReportsImageView);
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,6 +94,51 @@ public class MedicalRecords extends Fragment {
                 PrescriptionWriting searchDoctors = new PrescriptionWriting();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();            }
         });
+
+
+        patientDetailImageView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Frag_PatientDetails fragPatientDetails = new Frag_PatientDetails();
+
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragPatientDetails).commit();
+            }
+        });
+
+
+        medicalHistoryImageView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Frag_MedicalHistory fragMedicalHistory = new Frag_MedicalHistory();
+
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragMedicalHistory).commit();
+            }
+        });
+
+
+        labReportsImageView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Frag_LabReports fragLabReports = new Frag_LabReports();
+
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragLabReports).commit();
+            }
+        });
+
+
+
+
+
+
 
         // Inflate the layout for this fragment
         return v;

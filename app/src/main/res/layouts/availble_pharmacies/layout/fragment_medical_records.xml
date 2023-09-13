@@ -10,7 +10,7 @@
 
 
     <ImageView
-        android:id="@+id/square2"
+        android:id="@+id/medicalHistoryImageView"
         android:layout_width="139.29dp"
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
@@ -52,7 +52,7 @@
         android:translationY="-1.61sp" />
 
     <ImageView
-        android:id="@+id/square1"
+        android:id="@+id/patientDetailImageView"
         android:layout_width="139.29dp"
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
@@ -126,7 +126,7 @@
         android:textSize="16sp" />
 
     <ImageView
-        android:id="@+id/square3"
+        android:id="@+id/labReportsImageView"
         android:layout_width="139.29dp"
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
