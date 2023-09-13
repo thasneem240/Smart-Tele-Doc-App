@@ -12,6 +12,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
         android:text="TextView"
+        android:textColor="#407C87"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="TextView"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/text_medicine"
         app:layout_constraintTop_toBottomOf="@+id/text_medicine"
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="118dp"
         android:text="Select"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
