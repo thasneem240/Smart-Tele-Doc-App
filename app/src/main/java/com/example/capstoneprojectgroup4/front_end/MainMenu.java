@@ -12,9 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.content.Intent;
+
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
+import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,6 +73,7 @@ public class MainMenu extends Fragment {
         View v = inflater.inflate(R.layout.fragment_main_menu, container, false);
         Button doctorButton = v.findViewById(R.id.doctor_Button);
         Button recordsButton = v.findViewById(R.id.records_Button);
+        Button pharmacyButton = v.findViewById(R.id.pharma_Button);
 
         ImageView chatBot = v.findViewById(R.id.Ai_square);
         Button chatbotButton = v.findViewById(R.id.aiButton);
@@ -76,7 +81,15 @@ public class MainMenu extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                SearchDoctors searchDoctors = new SearchDoctors();
+                SearchDocF searchDoctors = new SearchDocF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();            }
+        });
+
+        pharmacyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PharmaciesF searchDoctors = new PharmaciesF();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();            }
         });
 
