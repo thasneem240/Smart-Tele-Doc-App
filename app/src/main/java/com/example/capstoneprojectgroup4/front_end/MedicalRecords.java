@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
 
@@ -64,6 +65,19 @@ public class MedicalRecords extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_medical_records, container, false);
         Button doctorButton = v.findViewById(R.id.button6);
+
+        ImageView backButton = v.findViewById(R.id.backButtonMedicalRecords);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MainMenu searchDoctors = new MainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
 
         doctorButton.setOnClickListener(new View.OnClickListener() {
             @Override

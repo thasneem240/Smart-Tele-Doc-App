@@ -13,27 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="9dp"
         android:layout_marginEnd="33dp"
         android:src="@drawable/spec_row_1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="273dp"
-        android:text="Search Doctors"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="96dp" />
 
     <EditText
         android:id="@+id/searchName"
@@ -42,7 +27,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="43dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="42dp"
         android:background="@drawable/rounded_rec"
         android:hint="Name"
@@ -50,6 +35,7 @@
         android:textColor="#A1A8B0"
         android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -60,7 +46,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="42dp"
         android:background="@drawable/rounded_rec"
         android:hint="Specialization"
@@ -68,6 +54,7 @@
         android:textColor="#A1A8B0"
         android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchName" />
 
@@ -78,7 +65,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="42dp"
         android:background="@drawable/rounded_rec"
         android:hint="Date"
@@ -86,6 +73,7 @@
         android:textColor="#A1A8B0"
         android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchLoc" />
 
@@ -96,7 +84,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="42dp"
         android:background="@drawable/rounded_rec"
         android:hint="Location"
@@ -104,6 +92,7 @@
         android:textColor="#A1A8B0"
         android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchSpec" />
 
@@ -114,8 +103,8 @@
 
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="300dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="284dp"
         android:src="@drawable/search_icon"
         app:layout_constraintEnd_toEndOf="@+id/searchLoc"
         app:layout_constraintTop_toTopOf="@+id/searchLoc" />
@@ -127,8 +116,8 @@
 
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="300dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="284dp"
         android:src="@drawable/calendar_icon"
         app:layout_constraintEnd_toEndOf="@+id/searchDate"
         app:layout_constraintTop_toTopOf="@+id/searchDate" />
@@ -139,8 +128,8 @@
         android:layout_height="28dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rectangle_1"
         android:text="Search"
         android:textColor="#FFFFFF"
@@ -154,8 +143,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
         android:text="Search Results"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -172,8 +161,10 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/nameIcon"
@@ -182,8 +173,8 @@
 
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="300dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="280dp"
         android:src="@drawable/search_icon"
         app:layout_constraintEnd_toEndOf="@+id/searchName"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -194,11 +185,36 @@
         android:layout_height="24dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="300dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="284dp"
         android:src="@drawable/search_icon"
         app:layout_constraintEnd_toEndOf="@+id/searchSpec"
         app:layout_constraintTop_toBottomOf="@+id/searchName" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginEnd="263dp"
+        android:text="Search Doctors"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="68dp" />
+
+    <ImageView
+        android:id="@+id/backButtonSearchDoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="368dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

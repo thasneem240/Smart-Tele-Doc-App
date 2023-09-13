@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
@@ -66,6 +67,8 @@ public class PatientSignUp extends Fragment {
         View v = inflater.inflate(R.layout.fragment_patient_sign_up, container, false);
         Button signUp = v.findViewById(R.id.sign_up_button);
         TextView login = v.findViewById(R.id.login_link);
+        ImageView backButton = v.findViewById(R.id.backButtonSignUp);
+
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +87,15 @@ public class PatientSignUp extends Fragment {
                 UserDetail mainMenu = new UserDetail();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();            }
         });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PatientLogin patientLogin = new PatientLogin();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();            }
+        });
+
 
 
         return v;
