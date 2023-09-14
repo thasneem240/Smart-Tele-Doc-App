@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.home;
+package com.example.capstoneprojectgroup4.prescriptions;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
 

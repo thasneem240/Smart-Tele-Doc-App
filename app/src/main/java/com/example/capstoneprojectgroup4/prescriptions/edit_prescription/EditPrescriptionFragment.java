@@ -113,7 +113,7 @@ public class EditPrescriptionFragment extends Fragment {
 
                             FragmentManager fm = getActivity().getSupportFragmentManager();
                             AvailablePharmaciesFragment availablePharmaciesFragment = new AvailablePharmaciesFragment(availablePharmacies);
-                            fm.beginTransaction().replace(R.id.fragment_container, availablePharmaciesFragment).commit();
+                            fm.beginTransaction().replace(R.id.fragmentContainerView, availablePharmaciesFragment).commit();
                         }
                     }
                 });

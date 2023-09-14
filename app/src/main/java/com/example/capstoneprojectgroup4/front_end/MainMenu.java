@@ -17,6 +17,7 @@ import android.content.Intent;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 
@@ -74,7 +75,8 @@ public class MainMenu extends Fragment {
         Button doctorButton = v.findViewById(R.id.doctor_Button);
         Button recordsButton = v.findViewById(R.id.records_Button);
         Button pharmacyButton = v.findViewById(R.id.pharma_Button);
-
+        ImageView pharmaciesImageView = v.findViewById(R.id.pharmacySquare);
+        Button pharmaciesButton = v.findViewById(R.id.pharma_Button);
         ImageView chatBot = v.findViewById(R.id.Ai_square);
         Button chatbotButton = v.findViewById(R.id.aiButton);
         doctorButton.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +107,22 @@ public class MainMenu extends Fragment {
             public void onClick(View view) {
                 Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
                 startActivity(chatbotActivity);
+            }
+        });
+        pharmaciesImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+            }
+        });
+        pharmacyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
             }
         });
 

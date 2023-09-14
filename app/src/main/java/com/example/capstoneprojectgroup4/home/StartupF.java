@@ -1,22 +1,17 @@
 package com.example.capstoneprojectgroup4.home;
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.capstoneprojectgroup4.Activity_Common;
-import com.example.capstoneprojectgroup4.authentication.LoginF;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
-import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.example.capstoneprojectgroup4.Activity_Remote_Consultation;
 import com.example.capstoneprojectgroup4.R;
@@ -24,7 +19,7 @@ import com.example.capstoneprojectgroup4.ResultActivity;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
-import com.example.capstoneprojectgroup4.home.HomeFragment;
+import com.example.capstoneprojectgroup4.prescriptions.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
