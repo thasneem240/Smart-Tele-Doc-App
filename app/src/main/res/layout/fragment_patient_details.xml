@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
@@ -8,88 +8,199 @@ android:layout_height="match_parent"
 
 
     <TextView
-        android:id="@+id/editText_Profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:textSize="35dp"
-        android:layout_marginTop="20dp"
-        android:text="Patient's Profile" />
-
-    <EditText
-        android:id="@+id/editText_Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_below="@id/editText_Profile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:text="PROFILE"
-        />
-
-    <EditText
-        android:id="@+id/editText_FirName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text="Abdul Saleem"
-
-        android:layout_below="@id/editText_Title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:textSize="22sp"
-        />
-
-    <EditText
-        android:id="@+id/editText_SecName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text="Mohamed Thasneem"
-        android:layout_below="@id/editText_FirName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:textSize="22sp"
-        />
-
-    <EditText
-        android:id="@+id/editText_NIC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text="980033511V"
-        android:layout_below="@id/editText_SecName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:textSize="22sp"
-        />
-
-    <EditText
-        android:id="@+id/editText_Email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:layout_below="@id/editText_NIC"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:textSize="22sp"
-        android:text="asmthasneem240@gmail.com"
-        />
-
-    <EditText
-        android:id="@+id/editText_Address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text="No 86, Keechar lane"
-        android:layout_below="@id/editText_Email"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:textSize="22sp"
-        />
+        android:id="@+id/Patient_Title"
+        android:layout_width="252dp"
+        android:layout_height="27dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="top"
+        android:text="Patient Details"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/ProfilePic_View"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/profile_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/userName"
+        android:layout_width="375dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="53dp"
+        android:hint="Name"
+        android:textColorHint="#013073"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/user_profile_rectangle"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePic_View">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="#3174D4"
+            android:text="Nethmi Silva" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/email"
+        android:layout_width="375dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="Email"
+        android:textColorHint="#013073"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        android:background="@drawable/user_profile_rectangle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="#3174D4"
+            android:text="nethmi.nawanga@gmail.com" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/phoneNum"
+        android:layout_width="375dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="Phone Number"
+        android:textColorHint="#013073"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/user_profile_rectangle"
+        app:layout_constraintTop_toBottomOf="@+id/email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPhoneNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="#3174D4"
+            android:text="0789652345" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/NIC"
+        android:layout_width="375dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="NIC"
+        android:textColorHint="#013073"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/user_profile_rectangle"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNum">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNIC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="#3174D4"
+            android:text="15568745632256" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/age"
+        android:layout_width="375dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="Age"
+        android:textColorHint="#013073"
+        android:background="@drawable/user_profile_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NIC">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="#3174D4"
+            android:text="20" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/Height"
+        android:layout_width="375dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="Height"
+        android:textColorHint="#013073"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/user_profile_rectangle"
+        app:layout_constraintTop_toBottomOf="@+id/age">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="#3174D4"
+            android:text="154cm" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/Weight"
+        android:layout_width="375dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="Weight"
+        android:textColorHint="#013073"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/user_profile_rectangle"
+        app:layout_constraintTop_toBottomOf="@+id/Height">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="#3174D4"
+            android:text="50kg" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

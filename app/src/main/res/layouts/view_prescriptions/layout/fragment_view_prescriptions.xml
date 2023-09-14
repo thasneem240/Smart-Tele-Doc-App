@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".prescriptions.view_prescriptions.ViewPrescriptionsFragment">
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/recycler_view_prescriptions"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="154dp"
+        android:layout_marginBottom="49dp"
+        android:text="Prescriptions"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_prescriptions"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="469dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="76dp" />
+
+
+</RelativeLayout>

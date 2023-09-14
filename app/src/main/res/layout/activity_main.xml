@@ -9,8 +9,8 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="425dp"
+        android:layout_height="659dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
@@ -21,5 +21,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+
+    <Button
+        android:id="@+id/homePageButton"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="340dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/menu_home_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/menu_home_icon" />
+
+    <Button
+        android:id="@+id/chatBotButton"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="244dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/menu_message_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/menu_message_icon" />
+
+    <Button
+        android:id="@+id/appointmentButton"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/menu_appointment_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/menu_appointment_icon" />
+
+    <Button
+        android:id="@+id/userProfileButton"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/menu_profile_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/menu_profile_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

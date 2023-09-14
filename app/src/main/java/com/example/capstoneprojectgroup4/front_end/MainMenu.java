@@ -78,7 +78,6 @@ public class MainMenu extends Fragment {
         ImageView recordsImageView = v.findViewById(R.id.records_square);
         Button pharmacyButton = v.findViewById(R.id.pharma_Button);
         ImageView pharmaciesImageView = v.findViewById(R.id.pharmacySquare);
-        Button pharmaciesButton = v.findViewById(R.id.pharma_Button);
         ImageView chatBot = v.findViewById(R.id.Ai_square);
         Button chatbotButton = v.findViewById(R.id.aiButton);
         doctorButton.setOnClickListener(new View.OnClickListener() {
@@ -97,13 +96,8 @@ public class MainMenu extends Fragment {
             }
         });
 
-        pharmacyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                PharmaciesF searchDoctors = new PharmaciesF();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();            }
-        });
+
+
 
         chatBot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,13 +116,17 @@ public class MainMenu extends Fragment {
         pharmaciesImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PharmaciesF pharmacies = new PharmaciesF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, pharmacies).commit();
             }
         });
         pharmacyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PharmaciesF pharmacies = new PharmaciesF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, pharmacies).commit();
             }
         });
 

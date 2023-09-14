@@ -76,12 +76,6 @@ public class Frag_PatientDetails extends Fragment
 
         /* Grab the  UI Variables from Layout file */
 
-        editText_Title = view.findViewById(R.id.editText_Title);
-        editText_FirName = view.findViewById(R.id.editText_FirName);
-        editText_SecName = view.findViewById(R.id.editText_SecName);
-        editText_NIC = view.findViewById(R.id.editText_NIC);
-        editText_Email = view.findViewById(R.id.editText_Email);
-        editText_Address = view.findViewById(R.id.editText_Address);
 
 
         return view;

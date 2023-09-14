@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="6dp"
+    app:cardUseCompatPadding="true">
+
 <LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
+    android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:orientation="vertical"
 android:padding="8dp">
 
-<TextView
-    android:id="@+id/dateTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Date: "
-    android:textColor="#407C87"
-    android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date: "
+        android:textColor="#407C87"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
-<TextView
-    android:id="@+id/descriptionTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="#000000"
-    android:text="Description: "/>
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description: "
+        android:textColor="#000000"
+        android:textSize="13sp" />
 
 </LinearLayout>
+
+</androidx.cardview.widget.CardView>

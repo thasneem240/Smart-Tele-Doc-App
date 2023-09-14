@@ -3,11 +3,19 @@ package com.example.capstoneprojectgroup4.home;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.PatientObject;
+import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.front_end.AccountSettings;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
+import com.example.capstoneprojectgroup4.front_end.MainMenu;
+import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
@@ -21,17 +29,67 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity
 {
     private PatientObject patientObject;
+    Button homePage;
+    Button chatBot;
+    Button appointments;
+    Button userProfile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        homePage = findViewById(R.id.homePageButton);
+        chatBot = findViewById(R.id.chatBotButton);
+        appointments = findViewById(R.id.appointmentButton);
+        userProfile = findViewById(R.id.userProfileButton);
+
+        homePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getSupportFragmentManager();
+                MainMenu searchDoctors = new MainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
+
+        chatBot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chatbotActivity = new Intent(MainActivity.this, ChatbotActivity.class);
+                startActivity(chatbotActivity);
+            }
+        });
+
+        appointments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getSupportFragmentManager();
+                MainMenu searchDoctors = new MainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
+
+
+        userProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getSupportFragmentManager();
+                AccountSettings searchDoctors = new AccountSettings();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
+
+
+
         FragmentManager fm = getSupportFragmentManager();
-        StartupF startupPage = (StartupF) fm.findFragmentById(R.id.fragmentContainerView);
+        StartUpFragment startupPage = (StartUpFragment) fm.findFragmentById(R.id.fragmentContainerView);
 
         if (startupPage == null)
         {
-            startupPage = new StartupF();
+            startupPage = new StartUpFragment();
             fm.beginTransaction().add(R.id.fragmentContainerView, startupPage).commit();
         }
     }
