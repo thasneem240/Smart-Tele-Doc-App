@@ -1,6 +1,5 @@
 package com.example.capstoneprojectgroup4.authentication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import androidx.fragment.app.FragmentManager;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.signup.SignupF;
 import com.example.capstoneprojectgroup4.authentication.signup.Signup_EmailVerificationF;
-import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -100,7 +98,7 @@ public class AuthenticationHomeF extends Fragment {
 
                 fm = getActivity().getSupportFragmentManager();
                 SignupF signupF = new SignupF();
-                fm.beginTransaction().replace(R.id.fragment_container, signupF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, signupF).commit();
 
             }
         });
@@ -110,7 +108,7 @@ public class AuthenticationHomeF extends Fragment {
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
                 LoginF LoginF = new LoginF();
-                fm.beginTransaction().replace(R.id.fragment_container, LoginF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, LoginF).commit();
             }
         });
 
@@ -119,7 +117,7 @@ public class AuthenticationHomeF extends Fragment {
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
                 SignoutF signoutF = new SignoutF();
-                fm.beginTransaction().replace(R.id.fragment_container, signoutF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, signoutF).commit();
             }
         });
 
@@ -128,7 +126,7 @@ public class AuthenticationHomeF extends Fragment {
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
                 PatientProfileF patientProfileF = new PatientProfileF();
-                fm.beginTransaction().replace(R.id.fragment_container, patientProfileF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, patientProfileF).commit();
             }
         });
 
@@ -137,7 +135,7 @@ public class AuthenticationHomeF extends Fragment {
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
-                fm.beginTransaction().replace(R.id.fragment_container, signup_emailVerificationF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, signup_emailVerificationF).commit();
             }
         });
 

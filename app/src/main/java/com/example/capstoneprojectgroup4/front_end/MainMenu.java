@@ -73,7 +73,9 @@ public class MainMenu extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main_menu, container, false);
         Button doctorButton = v.findViewById(R.id.doctor_Button);
+        ImageView doctorImageView = v.findViewById(R.id.docSquare);
         Button recordsButton = v.findViewById(R.id.records_Button);
+        ImageView recordsImageView = v.findViewById(R.id.records_square);
         Button pharmacyButton = v.findViewById(R.id.pharma_Button);
         ImageView pharmaciesImageView = v.findViewById(R.id.pharmacySquare);
         Button pharmaciesButton = v.findViewById(R.id.pharma_Button);
@@ -85,6 +87,14 @@ public class MainMenu extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 SearchDocF searchDoctors = new SearchDocF();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();            }
+        });
+        doctorImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                SearchDocF searchDoctors = new SearchDocF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
         });
 
         pharmacyButton.setOnClickListener(new View.OnClickListener() {
@@ -112,17 +122,13 @@ public class MainMenu extends Fragment {
         pharmaciesImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+
             }
         });
         pharmacyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+
             }
         });
 
@@ -133,6 +139,14 @@ public class MainMenu extends Fragment {
                 MedicalRecords searchDoctors = new MedicalRecords();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
 
+            }
+        });
+        recordsImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MedicalRecords searchDoctors = new MedicalRecords();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
 

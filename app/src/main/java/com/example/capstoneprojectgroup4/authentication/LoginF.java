@@ -1,10 +1,7 @@
 package com.example.capstoneprojectgroup4.authentication;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +20,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -121,7 +117,7 @@ public class LoginF extends Fragment {
 
                                     FragmentManager fm = getActivity().getSupportFragmentManager();
                                     StartupF startupF = new StartupF();
-                                    fm.beginTransaction().replace(R.id.fragment_container, startupF).commit();
+                                    fm.beginTransaction().replace(R.id.fragmentContainerView, startupF).commit();
 
 
                                 } else {
@@ -137,7 +133,7 @@ public class LoginF extends Fragment {
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 SignupF signupF = new SignupF();
-                fm.beginTransaction().replace(R.id.fragment_container, signupF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, signupF).commit();
             }
         });
 
@@ -146,7 +142,7 @@ public class LoginF extends Fragment {
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 StartupF startupF = new StartupF();
-                fm.beginTransaction().replace(R.id.fragment_container, startupF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, startupF).commit();
             }
         });
 

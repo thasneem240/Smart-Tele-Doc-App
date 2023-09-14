@@ -112,7 +112,7 @@ public class StartupF extends Fragment
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
                 AuthenticationHomeF startupFormF = new AuthenticationHomeF();
-                fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, startupFormF).commit();
 //
 //                auth = FirebaseAuth.getInstance();
 //                currentUser = auth.getCurrentUser();
@@ -144,7 +144,7 @@ public class StartupF extends Fragment
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
                 PharmaciesF pharmaciesF = new PharmaciesF();
-                fm.beginTransaction().replace(R.id.fragment_container, pharmaciesF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, pharmaciesF).commit();
 
             }
         });
@@ -154,7 +154,7 @@ public class StartupF extends Fragment
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
                 SearchDocF searchDocF = new SearchDocF();
-                fm.beginTransaction().replace(R.id.fragment_container, searchDocF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDocF).commit();
 
             }
         });
@@ -180,7 +180,7 @@ public class StartupF extends Fragment
             public void onClick(View v) {
                 fm = getActivity().getSupportFragmentManager();
                 HomeFragment homeFragment = new HomeFragment();
-                fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, homeFragment).commit();
             }
         });
         chatbotButton.setOnClickListener(new View.OnClickListener() {

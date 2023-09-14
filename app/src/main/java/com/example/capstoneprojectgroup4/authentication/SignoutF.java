@@ -112,7 +112,7 @@ public class SignoutF extends Fragment {
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 AuthenticationHomeF startupFormF = new AuthenticationHomeF();
-                fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, startupFormF).commit();
             }
         });
 
