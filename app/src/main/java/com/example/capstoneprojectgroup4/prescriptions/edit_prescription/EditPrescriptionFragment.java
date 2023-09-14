@@ -13,10 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.available_pharmacies.AvailablePharmaciesFragment;
 import com.example.capstoneprojectgroup4.available_pharmacies.ObjectPharmacyAndPrice;
+import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -83,6 +85,18 @@ public class EditPrescriptionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_edit_prescription, container, false);
+
+        ImageView backButton = v.findViewById(R.id.backButtonSearchDrugs);
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MedicalRecords searchDoctors = new MedicalRecords();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
 
         RecyclerView rv = v.findViewById(R.id.recycler_view_edit_prescription);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
