@@ -74,7 +74,6 @@ public class MedicalRecords extends Fragment {
 
         ImageView backButton = v.findViewById(R.id.backButtonMedicalRecords);
 
-        ImageView patientDetailImageView = v.findViewById(R.id.patientDetailImageView);
         Button patientDetailButton = v.findViewById(R.id.button1);
         ImageView medicalHistoryImageView = v.findViewById(R.id.medicalHistoryImageView);
         Button medicalHistoryButton = v.findViewById(R.id.button2);
@@ -103,17 +102,7 @@ public class MedicalRecords extends Fragment {
         });
 
 
-        patientDetailImageView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                Frag_PatientDetails fragPatientDetails = new Frag_PatientDetails();
 
-                fm.beginTransaction().replace(R.id.fragmentContainerView, fragPatientDetails).commit();
-            }
-        });
         patientDetailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

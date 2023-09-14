@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,11 +13,13 @@
         android:layout_height="17dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="85dp"
-        android:layout_marginTop="409dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="62dp"
         android:gravity="top"
         android:textColor="#555555"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/ellipse_5"
+        app:layout_constraintTop_toBottomOf="@+id/textAppointmentNumberValue" />
 
     <TextView
         android:id="@+id/textDoctorName"
@@ -25,12 +27,14 @@
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="39dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="36dp"
         android:gravity="top"
         android:text="Doctor Name"
         android:textColor="#0B0808"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButtonAppoint" />
 
     <TextView
         android:id="@+id/textPatientName"
@@ -38,12 +42,14 @@
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="243dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:gravity="top"
         android:text="Patient Name"
         android:textColor="#0B0808"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDoctorNameValue" />
 
     <EditText
         android:id="@+id/textPatientNameValue"
@@ -51,11 +57,13 @@
         android:layout_height="26dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="286dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rectangle_4"
         android:textColor="#15195A"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPatientName" />
 
     <TextView
         android:id="@+id/textDoctorNameValue"
@@ -63,14 +71,17 @@
         android:layout_height="26dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="171dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rectangle_3"
         android:gravity="bottom|start"
         android:paddingStart="8sp"
         android:paddingTop="8sp"
         android:textColor="#15195A"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDoctorName" />
+
 
     <TextView
         android:id="@+id/textDateTime"
@@ -78,22 +89,26 @@
         android:layout_height="19dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="38dp"
-        android:layout_marginTop="355dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:gravity="top"
         android:text="Date"
         android:textColor="#0B0808"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAppointmentNumberValue" />
 
     <View
         android:id="@+id/ellipse_5"
-        android:layout_width="26dp"
-        android:layout_height="24dp"
+        android:layout_width="30dp"
+        android:layout_height="28dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="34dp"
-        android:layout_marginTop="400dp"
-        android:background="@drawable/layered_green_calendar" />
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/layered_green_calendar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDateTime" />
 
     <TextView
         android:id="@+id/change"
@@ -101,12 +116,14 @@
         android:layout_height="15dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="336dp"
-        android:layout_marginTop="356dp"
+        android:layout_marginTop="384dp"
+        android:layout_marginEnd="48dp"
         android:gravity="top"
         android:text="Change"
         android:textColor="#ADADAD"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textAppointmentNumberValue"
@@ -114,11 +131,13 @@
         android:layout_height="22dp"
         android:layout_below="@id/textAppointmentNumber"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rectangle_3"
         android:textColor="#0B0808"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAppointmentNumber" />
 
     <TextView
         android:id="@+id/textAppointmentNumber2"
@@ -126,11 +145,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textDateTimeValue"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="114dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:text="Appointment Type (Video or Voice) :"
         android:textColor="#0B0808"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPatientNameValue" />
 
     <EditText
         android:id="@+id/textAppointmentType"
@@ -138,10 +159,12 @@
         android:layout_height="22dp"
         android:layout_below="@id/textPatientName"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rectangle_9"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAppointmentNumber2" />
 
     <TextView
         android:id="@+id/textAppointmentNumber"
@@ -149,12 +172,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textDateTimeValue"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:text="Appointment number:"
         android:textColor="#0B0808"
-        android:textSize="14sp" />
-
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAppointmentType" />
 
     <Button
         android:id="@+id/buttonConfirmAppointment"
@@ -163,21 +187,27 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginBottom="51dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="69dp"
         android:background="@drawable/rectangle_1"
         android:text="Book Appointment"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDateTimeValue" />
 
     <ImageView
         android:id="@+id/backButtonAppoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="361dp"
-        android:layout_marginBottom="653dp"
-        android:src="@drawable/baseline_keyboard_arrow_left_24" />
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="368dp"
+        android:src="@drawable/baseline_keyboard_arrow_left_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,13 +7,25 @@ android:layout_height="match_parent"
     tools:context=".Frag_PatientDetails">
 
 
+    <ImageView
+        android:id="@+id/backButtonPatProf"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="368dp"
+        app:layout_constraintEnd_toStartOf="@+id/pharmacy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
+
     <TextView
         android:id="@+id/Patient_Title"
         android:layout_width="252dp"
         android:layout_height="27dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="16dp"
         android:gravity="top"
         android:text="Patient Details"
@@ -22,11 +34,10 @@ android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <ImageView
         android:id="@+id/ProfilePic_View"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="64dp"
+        android:layout_height="61dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp"
@@ -34,28 +45,28 @@ android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/backButtonPatProf" />
 
     <com.google.android.material.textfield.TextInputLayout
 
         android:id="@+id/userName"
         android:layout_width="375dp"
         android:layout_height="50dp"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/user_profile_rectangle"
         android:hint="Name"
         android:textColorHint="#013073"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/user_profile_rectangle"
         app:layout_constraintTop_toBottomOf="@+id/ProfilePic_View">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
+            android:text="Nethmi Silva"
             android:textColor="#3174D4"
-            android:text="Nethmi Silva" />
+            android:textSize="15dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

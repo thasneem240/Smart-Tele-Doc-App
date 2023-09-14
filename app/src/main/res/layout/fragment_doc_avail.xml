@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- Doctor Name -->
-
-    <!-- Doctor Location -->
-
-    <!-- RecyclerView for weekdays -->
 
     <TextView
         android:id="@+id/textDoctorName"
@@ -18,11 +14,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/textDoctorLocation"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="345dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="12dp"
         android:textColor="#101623"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButtonDocAvail" />
 
     <TextView
         android:id="@+id/textDoctorLocation"
@@ -30,18 +28,25 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/recyclerView"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="342dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
         android:textColor="#15195A"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDoctorName" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="397dp"
         android:layout_height="467dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp" />
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDoctorLocation" />
 
     <ImageView
         android:id="@+id/backButtonDocAvail"
@@ -49,8 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/textDoctorName"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="358dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="368dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
