@@ -13,8 +13,12 @@ import android.widget.EditText;
 
 import android.app.Activity;
 import android.net.Uri;
-import androidx.annotation.Nullable;
+import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+
+import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
 import com.google.firebase.database.DatabaseReference;
 
 
@@ -95,6 +99,19 @@ public class Frag_LabReports extends Fragment
         selectFileButton = view.findViewById(R.id.selectFileButton);
         selectedFileNameEditText = view.findViewById(R.id.selectedFileNameEditText);
         uploadButton = view.findViewById(R.id.uploadButton);
+
+        ImageView backButton = view.findViewById(R.id.backButtonLabReports);
+
+        /* Grab the  UI Variables from Layout file */
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MedicalRecords searchDoctors = new MedicalRecords();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
 
         selectFileButton.setOnClickListener(new View.OnClickListener()
         {
