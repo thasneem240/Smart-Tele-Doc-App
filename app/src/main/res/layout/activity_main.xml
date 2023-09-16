@@ -8,7 +8,7 @@
 
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/fragmentContainerView2"
         android:layout_width="407dp"
         android:layout_height="637dp"
         android:layout_marginStart="2dp"
@@ -22,65 +22,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-
-    <Button
-        android:id="@+id/homePageButton"
-        android:layout_width="28dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="340dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/menu_home_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"
-        app:srcCompat="@drawable/menu_home_icon" />
-
-    <Button
-        android:id="@+id/chatBotButton"
-        android:layout_width="28dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="244dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/menu_message_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/homePageButton"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"
-        app:srcCompat="@drawable/menu_message_icon" />
-
-    <Button
-        android:id="@+id/appointmentButton"
-        android:layout_width="28dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/menu_appointment_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chatBotButton"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"
-        app:srcCompat="@drawable/menu_appointment_icon" />
-
-    <Button
-        android:id="@+id/userProfileButton"
-        android:layout_width="28dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/menu_profile_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/appointmentButton"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"
-        app:srcCompat="@drawable/menu_profile_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

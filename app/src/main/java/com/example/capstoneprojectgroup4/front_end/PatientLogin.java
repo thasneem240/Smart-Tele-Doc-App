@@ -111,7 +111,7 @@ public class PatientLogin extends Fragment {
 
                                     FragmentManager fm = getActivity().getSupportFragmentManager();
                                     MainMenu mainMenu = new MainMenu();
-                                    fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                                    fm.beginTransaction().replace(R.id.fragmentContainerView2, mainMenu).commit();
 
 
                                 } else {
@@ -129,7 +129,7 @@ public class PatientLogin extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientSignUp patientSignUp = new PatientSignUp();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientSignUp).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView2, patientSignUp).commit();
             }
         });
 
@@ -139,7 +139,7 @@ public class PatientLogin extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 StartUpFragment patientSignUp = new StartUpFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientSignUp).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView2, patientSignUp).commit();
             }
         });
 

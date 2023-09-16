@@ -29,10 +29,7 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity
 {
     private PatientObject patientObject;
-    Button homePage;
-    Button chatBot;
-    Button appointments;
-    Button userProfile;
+
 
 
     @Override
@@ -41,56 +38,16 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
 
-        homePage = findViewById(R.id.homePageButton);
-        chatBot = findViewById(R.id.chatBotButton);
-        appointments = findViewById(R.id.appointmentButton);
-        userProfile = findViewById(R.id.userProfileButton);
-
-        homePage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = getSupportFragmentManager();
-                MainMenu searchDoctors = new MainMenu();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
-            }
-        });
-
-        chatBot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent chatbotActivity = new Intent(MainActivity.this, ChatbotActivity.class);
-                startActivity(chatbotActivity);
-            }
-        });
-
-        appointments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = getSupportFragmentManager();
-                MainMenu searchDoctors = new MainMenu();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
-            }
-        });
-
-
-        userProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = getSupportFragmentManager();
-                AccountSettings searchDoctors = new AccountSettings();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
-            }
-        });
 
 
 
         FragmentManager fm = getSupportFragmentManager();
-        StartUpFragment startupPage = (StartUpFragment) fm.findFragmentById(R.id.fragmentContainerView);
+        StartUpFragment startupPage = (StartUpFragment) fm.findFragmentById(R.id.fragmentContainerView2);
 
         if (startupPage == null)
         {
             startupPage = new StartUpFragment();
-            fm.beginTransaction().add(R.id.fragmentContainerView, startupPage).commit();
+            fm.beginTransaction().add(R.id.fragmentContainerView2, startupPage).commit();
         }
     }
 

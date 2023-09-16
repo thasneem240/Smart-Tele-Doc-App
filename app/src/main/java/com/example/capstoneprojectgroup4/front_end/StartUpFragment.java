@@ -78,12 +78,12 @@ public class StartUpFragment extends Fragment {
                 if(currentUser == null){
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     PatientLogin patientLogin = new PatientLogin();
-                    fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();
+                    fm.beginTransaction().replace(R.id.fragmentContainerView2, patientLogin).commit();
                 }
                 else{
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     MainMenu mainMenu = new MainMenu();
-                    fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                    fm.beginTransaction().replace(R.id.fragmentContainerView2, mainMenu).commit();
                 }
 
             }

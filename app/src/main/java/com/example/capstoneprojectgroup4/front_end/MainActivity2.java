@@ -66,12 +66,8 @@ public class MainActivity2 extends AppCompatActivity {
 
 
         FragmentManager fm = getSupportFragmentManager();
-        StartUpFragment startupPage = (StartUpFragment) fm.findFragmentById(R.id.fragmentContainerView);
+        MainMenu startupPageFragment = new MainMenu();
+        fm.beginTransaction().replace(R.id.fragmentContainerView, startupPageFragment).commit();
 
-        if (startupPage == null)
-        {
-            startupPage = new StartUpFragment();
-            fm.beginTransaction().add(R.id.fragmentContainerView, startupPage).commit();
-        }
     }
 }
