@@ -39,7 +39,7 @@ public class AuthenticationHomeF extends Fragment {
     Button signoutButton;
     Button patientProfileButton;
     Button emailVerification;
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
 
 
     public AuthenticationHomeF() {
@@ -89,6 +89,7 @@ public class AuthenticationHomeF extends Fragment {
         patientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 if(currentUser != null){

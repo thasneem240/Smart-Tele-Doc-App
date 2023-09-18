@@ -24,8 +24,11 @@ import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.dru
 import com.example.capstoneprojectgroup4.prescriptions.PrescriptionObject;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -139,6 +142,7 @@ public class CreatePrescriptionFragment extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DrugsContainers drugsContainers = new DrugsContainers();
                 fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();
+
             }
         });
 

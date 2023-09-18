@@ -11,11 +11,15 @@ import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.PatientObject;
+import com.example.capstoneprojectgroup4.authentication.PatientProfileF;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.front_end.AccountSettings;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
 import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
+import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorHomePage;
+import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.SearchWordByWord;
+import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
@@ -45,6 +49,15 @@ public class MainActivity extends AppCompatActivity
         chatBot = findViewById(R.id.chatBotButton);
         appointments = findViewById(R.id.appointmentButton);
         userProfile = findViewById(R.id.userProfileButton);
+
+        FragmentManager fm = getSupportFragmentManager();
+        StartUpFragment startupPage = (StartUpFragment) fm.findFragmentById(R.id.fragmentContainerView);
+
+        if (startupPage == null)
+        {
+            startupPage = new StartUpFragment();
+            fm.beginTransaction().add(R.id.fragmentContainerView, startupPage).commit();
+        }
 
         homePage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,28 +89,18 @@ public class MainActivity extends AppCompatActivity
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                FragmentManager fm = getSupportFragmentManager();
+//                AccountSettings searchDoctors = new AccountSettings();
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+
                 FragmentManager fm = getSupportFragmentManager();
-                AccountSettings searchDoctors = new AccountSettings();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+                PatientProfileF patientProfileF = new PatientProfileF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, patientProfileF).commit();
             }
         });
-
-
-
-        FragmentManager fm = getSupportFragmentManager();
-        StartUpFragment startupPage = (StartUpFragment) fm.findFragmentById(R.id.fragmentContainerView);
-
-        if (startupPage == null)
-        {
-            startupPage = new StartUpFragment();
-            fm.beginTransaction().add(R.id.fragmentContainerView, startupPage).commit();
-        }
     }
 
     public void setPatientObject(PatientObject patientObject) {
-//        this.patientObject = patientObject;
-//        Log.d(TAG, patientObject.toString());
-
         try{
             InputStream stream = this.getResources().openRawResource(R.raw.credential);
             GoogleCredentials credentials = GoogleCredentials.fromStream(stream)
@@ -106,7 +109,6 @@ public class MainActivity extends AppCompatActivity
             SessionsSettings.Builder settingsBuilder = SessionsSettings.newBuilder();
             SessionsSettings sessionsSettings = settingsBuilder.setCredentialsProvider(
                     FixedCredentialsProvider.create(credentials)).build();
-            Log.d("WhereAreYou", "I'm here4");
             SessionsClient sessionsClient = SessionsClient.create(sessionsSettings);
         }catch (Exception e){
 

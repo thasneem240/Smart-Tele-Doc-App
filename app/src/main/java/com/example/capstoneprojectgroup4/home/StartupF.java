@@ -19,7 +19,6 @@ import com.example.capstoneprojectgroup4.ResultActivity;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.authentication.AuthenticationHomeF;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
-import com.example.capstoneprojectgroup4.prescriptions.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -46,12 +45,7 @@ public class StartupF extends Fragment
     Button searchdoc;
     Button chatbotButton;
     Button frontend;
-
-
     Button consultations;
-
-
-
     Button searchDrugs;
 
     FragmentManager fm;
@@ -178,9 +172,9 @@ public class StartupF extends Fragment
         searchDrugs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fm = getActivity().getSupportFragmentManager();
-                HomeFragment homeFragment = new HomeFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, homeFragment).commit();
+//                fm = getActivity().getSupportFragmentManager();
+//                HomeFragment homeFragment = new HomeFragment();
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, homeFragment).commit();
             }
         });
         chatbotButton.setOnClickListener(new View.OnClickListener() {

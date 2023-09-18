@@ -15,7 +15,6 @@ import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
 import com.example.capstoneprojectgroup4.Frag_PatientDetails;
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.prescriptions.HomeFragment;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 
 /**
@@ -70,7 +69,7 @@ public class MedicalRecords extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_medical_records, container, false);
-        Button doctorButton = v.findViewById(R.id.button6);
+        Button doctorButton = v.findViewById(R.id.Button_UploadPrescription);
 
         ImageView backButton = v.findViewById(R.id.backButtonMedicalRecords);
 
@@ -80,7 +79,7 @@ public class MedicalRecords extends Fragment {
         ImageView labReportsImageView = v.findViewById(R.id.labReportsImageView);
         Button labReportsButton = v.findViewById(R.id.button3);
         ImageView prescriptionsImageView = v.findViewById(R.id.square5);
-        Button prescriptionsButton = v.findViewById(R.id.button6);
+        Button prescriptionsButton = v.findViewById(R.id.Button_UploadPrescription);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,16 +159,16 @@ public class MedicalRecords extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                HomeFragment homeFragment = new HomeFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, homeFragment).commit();
+                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
             }
         });
         prescriptionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                HomeFragment homeFragment = new HomeFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, homeFragment).commit();
+                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
             }
         });
 

@@ -179,7 +179,7 @@ public class PatientProfileF extends Fragment {
                     @Override
                     public void onSuccess(Void unused) {
                         MainActivity mainActivity2 = (MainActivity) getActivity();
-                        mainActivity2.setPatientObject(patientObject);
+//                        mainActivity2.setPatientObject(patientObject);
 
                         Intent mainActivity = new Intent(getActivity(), MainActivity.class);
                         startActivity(mainActivity);

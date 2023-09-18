@@ -41,7 +41,8 @@ android {
                     'src/main/res/layouts',
                     'src/main/res/layouts/writing_prescriptions',
                     'src/main/res/layouts/view_prescriptions',
-                    'src/main/res/layouts/chatbot'
+                    'src/main/res/layouts/chatbot',
+                    'src/main/res/layouts/interface_of_doctors'
             ]
         }
     }

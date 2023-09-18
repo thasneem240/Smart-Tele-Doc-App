@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.authentication.PatientProfileF;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 
@@ -27,6 +28,15 @@ public class MainActivity2 extends AppCompatActivity {
         chatBot = findViewById(R.id.chatBotButton);
         appointments = findViewById(R.id.appointmentButton);
         userProfile = findViewById(R.id.userProfileButton);
+
+        FragmentManager fm = getSupportFragmentManager();
+        StartUpFragment startupPage = (StartUpFragment) fm.findFragmentById(R.id.fragmentContainerView);
+
+        if (startupPage == null)
+        {
+            startupPage = new StartUpFragment();
+            fm.beginTransaction().add(R.id.fragmentContainerView, startupPage).commit();
+        }
 
         homePage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,17 +71,9 @@ public class MainActivity2 extends AppCompatActivity {
                 FragmentManager fm = getSupportFragmentManager();
                 AccountSettings searchDoctors = new AccountSettings();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+
+
             }
         });
-
-
-        FragmentManager fm = getSupportFragmentManager();
-        StartUpFragment startupPage = (StartUpFragment) fm.findFragmentById(R.id.fragmentContainerView);
-
-        if (startupPage == null)
-        {
-            startupPage = new StartUpFragment();
-            fm.beginTransaction().add(R.id.fragmentContainerView, startupPage).commit();
-        }
     }
 }
