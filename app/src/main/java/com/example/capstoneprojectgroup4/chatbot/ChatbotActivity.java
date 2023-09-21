@@ -199,6 +199,32 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
 
     }
 
+  /*  if (returnResponse.getQueryResult().getAction().equals("BuyMedicine")){
+      drug = returnResponse.getQueryResult().getParameters().getFieldsMap().get("drug").getStringValue()+"";
+      quantity = returnResponse.getQueryResult().getParameters().getFieldsMap().get("quantity").getStringValue()+"";
+      Log.d("DialogFlow***", drug);
+      Log.d("DialogFlow***", quantity);
+      if (drug!="" & quantity!="" & drug!=null & quantity!=null ){
+        Random ran = new Random();
+        double next = ran.nextInt(46);
+        double result = 500 + (next * 100);
+        if (result > 5000) {
+          result = 5000;
+        }
+        price = Double.toString(result);
+        String item = drug + " " + quantity;
+
+        Intent senderIntent = new Intent( this, PrescriptionTransaction.class);
+        senderIntent.putExtra("ITEM", item);
+        senderIntent.putExtra("PRICE",price);
+        startActivity(senderIntent);
+
+      }
+
+    }*/
+
+
+
   }
 }
 
