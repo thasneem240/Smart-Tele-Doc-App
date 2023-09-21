@@ -110,37 +110,30 @@ public class BookAppointmentF extends Fragment {
 
         return view;
     }
-    public void uploadAppointment(String pPatientName, String pDoctorName, String pDay, String pAppointmentType) {
+    public void uploadAppointment(String pPatientName, String pDoctorName, String pDay, String VoiceVideoCallType) {
         // Sanitize the strings to remove invalid characters
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedDoctorName = pDoctorName.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedDay = pDay.replaceAll("[.#$\\[\\]]", "_");
 
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("Doctor Name", sanitizedDoctorName);
-        hashMap.put("Patient Name", sanitizedPatientName);
-        hashMap.put("Day", sanitizedDay);
-        hashMap.put("Appointment Type", pAppointmentType); // Include the appointment type
+        HashMap<String, Object> phashMap = new HashMap<>();
+        phashMap.put("Doctor Name", sanitizedDoctorName);
+        phashMap.put("Patient Name", sanitizedPatientName);
+        phashMap.put("Day", sanitizedDay);
+        phashMap.put("Appointment Type", VoiceVideoCallType); // Include the appointment type
 
         databaseReference.child("Appointment Data")
                 .child(sanitizedPatientName + sanitizedDoctorName + sanitizedDay)
-                .setValue(hashMap);
+                .setValue(phashMap);
         Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
     }
 
     public static void uploadAppointmentSecond(String pPatientName, String pDoctorName, String pDay){
-//        FirebaseUser currentUser;
-//        FirebaseAuth mAuth;
-//        mAuth = FirebaseAuth.getInstance();
-//        currentUser = mAuth.getCurrentUser();
-//        currentUser.getUid();
 
         HashMap<String, Object> hashMap = new HashMap<> ();
         hashMap.put("Doctor Name", pPatientName);
         hashMap.put("Patient Name", pDoctorName);
         hashMap.put("Day", pDay);
-
-//        AppointmentObject newAppointment = new AppointmentObject(doctorName, getPatientName, day);
 
         FirebaseDatabase firebaseDatabaseSecond ;
         firebaseDatabaseSecond = FirebaseDatabase.getInstance();
@@ -148,6 +141,6 @@ public class BookAppointmentF extends Fragment {
         databaseReference.child("Appointment Data")
                 .child(pPatientName+pDoctorName+pDay)
                 .setValue(hashMap);
-//        Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
+
     }
 }
