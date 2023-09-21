@@ -2,11 +2,14 @@ package com.example.capstoneprojectgroup4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.UUID;
 
 public class Activity_NoteTaking extends AppCompatActivity
 {
@@ -36,13 +39,13 @@ public class Activity_NoteTaking extends AppCompatActivity
                 String note = noteEditText.getText().toString();
 
                 // Save the note using SharedPreferences
-               // saveNoteToSharedPreferences(note);
+                saveNoteToSharedPreferences(note);
 
                 // Clear the EditText
                 noteEditText.setText("");
 
                 // Display the saved notes
-               // displaySavedNotes();
+                // displaySavedNotes();
             }
         });
 
@@ -55,5 +58,25 @@ public class Activity_NoteTaking extends AppCompatActivity
             }
         });
 
-
     }
+
+    private void saveNoteToSharedPreferences (String note)
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("Notes", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Generate a unique key for each note (you can use a timestamp or UUID)
+        String uniqueKey = UUID.randomUUID().toString();
+
+        // Save the note with the unique key
+        editor.putString(uniqueKey, note);
+
+        // Apply the changes
+        editor.apply();
+    }
+
+
+
+
+}
+
