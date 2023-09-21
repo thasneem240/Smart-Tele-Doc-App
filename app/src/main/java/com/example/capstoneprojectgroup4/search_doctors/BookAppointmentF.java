@@ -4,12 +4,14 @@ package com.example.capstoneprojectgroup4.search_doctors;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,12 +75,24 @@ public class BookAppointmentF extends Fragment {
         TextView doctorNameTextView = view.findViewById(R.id.textDoctorNameValue);
         TextView dayTextView = view.findViewById(R.id.textDateTimeValue);
         TextView noAppTextView = view.findViewById(R.id.textAppointmentNumberValue);
+        ImageView backButton = view.findViewById(R.id.backButtonAppoint);
 
         // Set the doctor's name and day to the TextViews
         doctorNameTextView.setText(doctorName);
         dayTextView.setText(day);
         noAppTextView.setText(noApp);
 
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                DocAvailF searchDoctors = new DocAvailF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
@@ -114,6 +128,7 @@ public class BookAppointmentF extends Fragment {
                 .setValue(hashMap);
         Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
     }
+
 
     public static void uploadAppointmentSecond(String pPatientName, String pDoctorName, String pDay){
 //        FirebaseUser currentUser;

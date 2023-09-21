@@ -46,7 +46,7 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.Loca
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
                 DocAvailF fragment = DocAvailF.newInstance(doctorName, location);
-                fm.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
             }
         });
 

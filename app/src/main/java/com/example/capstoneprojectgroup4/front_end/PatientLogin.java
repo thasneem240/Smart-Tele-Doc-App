@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +82,7 @@ public class PatientLogin extends Fragment {
         TextView signup = v.findViewById(R.id.sign_up_link);
         EditText email_ = v.findViewById(R.id.loginenter_email);
         EditText password_ = v.findViewById(R.id.enter_password);
+        ImageView backButton = v.findViewById(R.id.backButton);
 
         auth = FirebaseAuth.getInstance();
         login.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +129,16 @@ public class PatientLogin extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientSignUp patientSignUp = new PatientSignUp();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, patientSignUp).commit();
+            }
+        });
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                StartUpFragment patientSignUp = new StartUpFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, patientSignUp).commit();
             }
         });

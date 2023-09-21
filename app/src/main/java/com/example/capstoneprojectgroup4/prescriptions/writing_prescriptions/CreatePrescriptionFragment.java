@@ -24,8 +24,11 @@ import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.dru
 import com.example.capstoneprojectgroup4.prescriptions.PrescriptionObject;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -94,16 +97,16 @@ public class CreatePrescriptionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_create_prescription, container, false);
+        View v = inflater.inflate(R.layout.fragment_prescription_writing, container, false);
 
-        selectDrugs = v.findViewById(R.id.button_select_drugs);
-        submitPrescription = v.findViewById(R.id.button_submit_prescription);
-        doctorName = v.findViewById(R.id.edit_text_doctor_name);
-        patientName = v.findViewById(R.id.edit_text_patient_name);
-        date = v.findViewById(R.id.edit_text_date);
-        treatmentDuration = v.findViewById(R.id.edit_text_treatment_duration);
-        prescriptionNotes = v.findViewById(R.id.edit_text_prescription_notes);
-        drugsCount = v.findViewById(R.id.drugs_count);
+        selectDrugs = v.findViewById(R.id.select_drugs_button);
+        submitPrescription = v.findViewById(R.id.SubmitButton);
+        doctorName = v.findViewById(R.id.doctor_s_na);
+        patientName = v.findViewById(R.id.patientName);
+        date = v.findViewById(R.id.presc_date);
+        treatmentDuration = v.findViewById(R.id.treatment_duration);
+        prescriptionNotes = v.findViewById(R.id.pres_notes);
+        drugsCount = v.findViewById(R.id.drugs_count_textView);
 
         writingPrescriptionActivity = (WritingPrescriptionActivity) v.getContext();
         prescriptionObject = writingPrescriptionActivity.getPrescriptionObject();
@@ -139,6 +142,7 @@ public class CreatePrescriptionFragment extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DrugsContainers drugsContainers = new DrugsContainers();
                 fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();
+
             }
         });
 

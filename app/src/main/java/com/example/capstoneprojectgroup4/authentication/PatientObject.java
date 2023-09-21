@@ -4,20 +4,28 @@ public class PatientObject {
     private String firstName;
     private String lastName;
     private String nic;
-    private String mobileNumber;
-    private String fullName; // remove
     private String dob;
     private String gender;
-    private String address;
-    private String city;
+    private String mobile;
+    private String height;
+    private String weight;
     private String country;
-
-    public String getFullName() {
-        return fullName;
+    private String city;
+    private String address;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getNic() {
@@ -26,14 +34,6 @@ public class PatientObject {
 
     public void setNic(String nic) {
         this.nic = nic;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
     }
 
     public String getDob() {
@@ -52,14 +52,52 @@ public class PatientObject {
         this.gender = gender;
     }
 
-    @Override
-    public String toString() {
-        return "PatientObject{" +
-                "fullName='" + fullName + '\'' +
-                ", nic='" + nic + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", dob='" + dob + '\'' +
-                ", gender='" + gender + '\'' +
-                '}';
+    public String getMobile() {
+        return mobile;
     }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
 }

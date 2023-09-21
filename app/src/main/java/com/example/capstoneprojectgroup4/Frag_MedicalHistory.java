@@ -3,12 +3,16 @@ package com.example.capstoneprojectgroup4;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +71,18 @@ public class Frag_MedicalHistory extends Fragment
     {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_medical_history, container, false);
+        ImageView backButton = view.findViewById(R.id.backButtonMedicalHistory);
+
+        /* Grab the  UI Variables from Layout file */
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MedicalRecords searchDoctors = new MedicalRecords();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
 
         List<MedicalHistoryItem> medicalHistoryItems = new ArrayList<>();
 

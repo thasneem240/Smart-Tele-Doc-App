@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -19,10 +20,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.front_end.MainMenu;
+import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -109,6 +113,7 @@ public class SearchDocF extends Fragment  {
         //toolbar = view.findViewById(R.id.toolbar);
         searchButton = view.findViewById(R.id.searchButton);
         recyclerView = view.findViewById(R.id.searchrv);
+        ImageView backButton = view.findViewById(R.id.backButtonSearchDoc);
 
          etName = view.findViewById(R.id.searchName);
          etSpecialization = view.findViewById(R.id.searchSpec);
@@ -119,6 +124,18 @@ public class SearchDocF extends Fragment  {
             @Override
             public void onClick(View view) {
                 openDateSearch();
+            }
+        });
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MainMenu searchDoctors = new MainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
 

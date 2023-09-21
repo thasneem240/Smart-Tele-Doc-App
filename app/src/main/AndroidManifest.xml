@@ -37,13 +37,13 @@
             android:name=".Activity_Common"
             android:exported="false" />
         <activity
-            android:name=".TransactionHistory"
+            android:name=".transaction.TransactionHistory"
             android:exported="false" />
         <activity
             android:name=".ssearch_pharmacy.PrescriptionTransaction"
             android:exported="false" />
         <activity
-            android:name=".AppointmentTransaction"
+            android:name=".transaction.AppointmentTransaction"
             android:exported="false" />
         <activity
             android:name=".ResultActivity"
@@ -51,13 +51,9 @@
         <activity
             android:name=".chatbot.ChatbotActivity"
             android:exported="false" />
-
         <activity
             android:name=".front_end.MainActivity2"
-            android:exported="true">
-        </activity>
-
-
+            android:exported="true"></activity>
     </application>
 
 </manifest>
