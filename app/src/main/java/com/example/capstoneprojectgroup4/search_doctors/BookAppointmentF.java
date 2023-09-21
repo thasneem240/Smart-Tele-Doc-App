@@ -75,14 +75,14 @@ public class BookAppointmentF extends Fragment {
         TextView doctorNameTextView = view.findViewById(R.id.textDoctorNameValue);
         TextView dayTextView = view.findViewById(R.id.textDateTimeValue);
         TextView noAppTextView = view.findViewById(R.id.textAppointmentNumberValue);
-        ImageView backButton = view.findViewById(R.id.backButtonAppoint);
+        ImageView previousButton = view.findViewById(R.id.backButtonAppoint);
 
         // Set the doctor's name and day to the TextViews
         doctorNameTextView.setText(doctorName);
         dayTextView.setText(day);
         noAppTextView.setText(noApp);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
