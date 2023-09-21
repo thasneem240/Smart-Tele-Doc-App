@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class Activity_NoteTaking extends AppCompatActivity
@@ -45,7 +46,7 @@ public class Activity_NoteTaking extends AppCompatActivity
                 noteEditText.setText("");
 
                 // Display the saved notes
-                // displaySavedNotes();
+                 displaySavedNotes();
             }
         });
 
@@ -75,6 +76,21 @@ public class Activity_NoteTaking extends AppCompatActivity
         editor.apply();
     }
 
+
+    private void displaySavedNotes()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("Notes", MODE_PRIVATE);
+        Map<String, ?> allNotes = sharedPreferences.getAll();
+
+        // Concatenate and display all saved notes
+        StringBuilder notesText = new StringBuilder();
+        for (Map.Entry<String, ?> entry : allNotes.entrySet()) {
+            String note = entry.getValue().toString();
+            notesText.append(note).append("\n\n");
+        }
+
+        displayNotesTextView.setText(notesText.toString());
+    }
 
 
 
