@@ -1,6 +1,7 @@
 package com.example.capstoneprojectgroup4.front_end;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,9 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.content.Intent;
+
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
+import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
+import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,15 +74,45 @@ public class MainMenu extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main_menu, container, false);
         Button doctorButton = v.findViewById(R.id.doctor_Button);
+        ImageView doctorImageView = v.findViewById(R.id.docSquare);
+        Button recordsButton = v.findViewById(R.id.records_Button);
+        ImageView recordsImageView = v.findViewById(R.id.records_square);
+        Button pharmacyButton = v.findViewById(R.id.pharma_Button);
+        ImageView pharmaciesImageView = v.findViewById(R.id.pharmacySquare);
         ImageView chatBot = v.findViewById(R.id.Ai_square);
+        Button emergency = v.findViewById(R.id.emergencyButton);
         Button chatbotButton = v.findViewById(R.id.aiButton);
+
+        emergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:119"));
+
+                // Start the dialer activity
+                startActivity(callIntent);
+            }
+        });
+
+
         doctorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                SearchDoctors searchDoctors = new SearchDoctors();
+                SearchDocF searchDoctors = new SearchDocF();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();            }
         });
+        doctorImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                SearchDocF searchDoctors = new SearchDocF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
+
+
+
 
         chatBot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +126,40 @@ public class MainMenu extends Fragment {
             public void onClick(View view) {
                 Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
                 startActivity(chatbotActivity);
+            }
+        });
+        pharmaciesImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PharmaciesF pharmacies = new PharmaciesF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, pharmacies).commit();
+            }
+        });
+        pharmacyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PharmaciesF pharmacies = new PharmaciesF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, pharmacies).commit();
+            }
+        });
+
+        recordsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MedicalRecords searchDoctors = new MedicalRecords();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+
+            }
+        });
+        recordsImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MedicalRecords searchDoctors = new MedicalRecords();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
 

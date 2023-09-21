@@ -45,7 +45,7 @@ public class ViewPrescriptionsAdapter extends RecyclerView.Adapter<ViewPrescript
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
                 EditPrescriptionFragment editPrescriptionFragment = new EditPrescriptionFragment(selectedDrugs);
-                fm.beginTransaction().replace(R.id.fragment_container, editPrescriptionFragment).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, editPrescriptionFragment).commit();
             }
         });
     }

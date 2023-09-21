@@ -7,15 +7,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.front_end.MainMenu;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -88,6 +91,20 @@ public class DocAvailF extends Fragment {
         View view = inflater.inflate(R.layout.fragment_doc_avail, container, false);
         TextView textDoctorName = view.findViewById(R.id.textDoctorName);
         TextView textDoctorLocation = view.findViewById(R.id.textDoctorLocation);
+        ImageView backButton = view.findViewById(R.id.backButtonDocAvail);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                SearchDocF searchDoctors = new SearchDocF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
+
+
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
