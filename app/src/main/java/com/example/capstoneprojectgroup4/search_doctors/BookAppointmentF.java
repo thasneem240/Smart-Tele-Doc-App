@@ -82,37 +82,35 @@ public class BookAppointmentF extends Fragment {
         dayTextView.setText(day);
         noAppTextView.setText(noApp);
 
-
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DocAvailF searchDoctors = new DocAvailF();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
         patientName = view.findViewById(R.id.textPatientNameValue);
+        EditText appointmentType = view.findViewById(R.id.textAppointmentType); // Add this line
         UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment);
 
         UploadAppointment.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 String getPatientName = patientName.getText().toString();
+                String getAppointmentType = appointmentType.getText().toString(); // Get the appointment type from EditText
 
-                uploadAppointment(getPatientName,doctorName, day);
+                uploadAppointment(getPatientName, doctorName, day, getAppointmentType); // Pass appointment type
             }
-
         });
 
         return view;
     }
-    public void uploadAppointment(String pPatientName, String pDoctorName, String pDay) {
+    public void uploadAppointment(String pPatientName, String pDoctorName, String pDay, String pAppointmentType) {
         // Sanitize the strings to remove invalid characters
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedDoctorName = pDoctorName.replaceAll("[.#$\\[\\]]", "_");
@@ -122,13 +120,13 @@ public class BookAppointmentF extends Fragment {
         hashMap.put("Doctor Name", sanitizedDoctorName);
         hashMap.put("Patient Name", sanitizedPatientName);
         hashMap.put("Day", sanitizedDay);
+        hashMap.put("Appointment Type", pAppointmentType); // Include the appointment type
 
         databaseReference.child("Appointment Data")
                 .child(sanitizedPatientName + sanitizedDoctorName + sanitizedDay)
                 .setValue(hashMap);
         Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
     }
-
 
     public static void uploadAppointmentSecond(String pPatientName, String pDoctorName, String pDay){
 //        FirebaseUser currentUser;
