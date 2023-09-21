@@ -8,9 +8,31 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerPrescription"
-        android:name="com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.CreatePrescriptionFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="186dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--android:name="com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.CreatePrescriptionFragment"-->
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/FragmentContainerView_SelectTheDrug"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/FragmentContainerView_Search" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/FragmentContainerView_Search"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!--        android:name="com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.SearchWordByWord"-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,14 +74,15 @@ public class PatientLogin extends Fragment {
         }
     }
 
-  /*  @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_patient_login, container, false); //these lines give errors
-        Button login = v.findViewById(R.id.login_button);                             //these lines give errors
-        TextView signup = v.findViewById(R.id.sign_up_link);                          //these lines give errors
-        EditText email_ = v.findViewById(R.id.loginenter_email);                      //these lines give errors
-        EditText password_ = v.findViewById(R.id.enter_password);                     //these lines give errors
+        View v = inflater.inflate(R.layout.fragment_patient_login, container, false);
+        Button login = v.findViewById(R.id.login_button);
+        TextView signup = v.findViewById(R.id.sign_up_link);
+        EditText email_ = v.findViewById(R.id.loginenter_email);
+        EditText password_ = v.findViewById(R.id.enter_password);
+        ImageView backButton = v.findViewById(R.id.backButton);
 
         auth = FirebaseAuth.getInstance();
         login.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +111,7 @@ public class PatientLogin extends Fragment {
 
                                     FragmentManager fm = getActivity().getSupportFragmentManager();
                                     MainMenu mainMenu = new MainMenu();
-                                    fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                                    fm.beginTransaction().replace(R.id.fragmentContainerView2, mainMenu).commit();
 
 
                                 } else {
@@ -127,10 +129,20 @@ public class PatientLogin extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientSignUp patientSignUp = new PatientSignUp();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientSignUp).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView2, patientSignUp).commit();
+            }
+        });
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                StartUpFragment patientSignUp = new StartUpFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView2, patientSignUp).commit();
             }
         });
 
         return v;
-    }*/
+    }
 }

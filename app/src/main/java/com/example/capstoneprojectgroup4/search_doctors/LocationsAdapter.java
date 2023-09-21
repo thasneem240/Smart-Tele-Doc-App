@@ -19,6 +19,9 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.Loca
     private String doctorName;
     private String specialization;
 
+    private String doctorName2;
+    private String specialization2;
+
     public LocationsAdapter(ArrayList<String> locations, String doctorName, String specialization) {
         this.locations = locations;
         this.doctorName = doctorName;
@@ -46,7 +49,7 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.Loca
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
                 DocAvailF fragment = DocAvailF.newInstance(doctorName, location);
-                fm.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
             }
         });
 

@@ -53,7 +53,7 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
 
                 //BookAppointmentF fragment = new BookAppointmentF();
                 BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName,date, String.valueOf(noApp));
-                fm.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
             }
         });
 

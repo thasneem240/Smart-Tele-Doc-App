@@ -45,6 +45,7 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
                 FragmentManager fm = activity.getSupportFragmentManager();
 
                 DrugsContainers drugsContainers = new DrugsContainers();
+                fm.beginTransaction().remove(fm.findFragmentById(R.id.FragmentContainerView_SelectTheDrug)).commit();
                 fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();
             }
         });

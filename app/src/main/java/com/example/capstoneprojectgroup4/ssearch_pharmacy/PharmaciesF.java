@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -27,6 +28,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.front_end.MainMenu;
+import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -116,7 +119,18 @@ public class PharmaciesF extends Fragment {
         etPharmDrugs = view.findViewById(R.id.searchDrugs);
         recyclerView = view.findViewById(R.id.pharmrv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        ImageView backButton = view.findViewById(R.id.backButtonPharma);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MainMenu searchDoctors = new MainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
 
         search = view.findViewById(R.id.pharmsearchButton);
 

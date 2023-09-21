@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -117,7 +116,7 @@ public class SignupF extends Fragment {
 
                                     FragmentManager fm = getActivity().getSupportFragmentManager();
                                     Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
-                                    fm.beginTransaction().replace(R.id.fragment_container, signup_emailVerificationF).commit();
+                                    fm.beginTransaction().replace(R.id.fragmentContainerView, signup_emailVerificationF).commit();
 
                                 } else {
                                     Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_LONG).show();
@@ -132,7 +131,7 @@ public class SignupF extends Fragment {
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 AuthenticationHomeF startupFormF = new AuthenticationHomeF();
-                fm.beginTransaction().replace(R.id.fragment_container, startupFormF).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, startupFormF).commit();
 
             }
         });
