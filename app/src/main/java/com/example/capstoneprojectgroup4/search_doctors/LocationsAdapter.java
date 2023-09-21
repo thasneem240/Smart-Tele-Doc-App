@@ -19,6 +19,9 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.Loca
     private String doctorName;
     private String specialization;
 
+    private String doctorName2;
+    private String specialization2;
+
     public LocationsAdapter(ArrayList<String> locations, String doctorName, String specialization) {
         this.locations = locations;
         this.doctorName = doctorName;

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.TransactionHistory;
+import com.example.capstoneprojectgroup4.transaction.TransactionHistory;
 import com.example.capstoneprojectgroup4.search_doctors.BookAppointmentF;
 import com.example.capstoneprojectgroup4.chatbot.adapters.ChatAdapter;
 import com.example.capstoneprojectgroup4.chatbot.helpers.SendMessageInBg;
@@ -164,7 +164,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     if(patient!="" & doctor!="" & dateAndTime!="" &
             patient!=null & doctor!=null & dateAndTime!=null){
 
-      BookAppointmentF.uploadAppointment(patient, doctor, dateAndTime);
+      BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
       Log.d("DialogFlow***", "Done");
     }
 
