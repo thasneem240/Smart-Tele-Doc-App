@@ -168,8 +168,7 @@ public class Frag_LabReports extends Fragment
 
 
     // Function to retrieve and display patient's records and lab reports
-    private void displayPatientRecords(String patientID)
-    {
+    private void displayPatientRecords(String patientID) {
         // Query the database for patient information
         DatabaseReference patientRef = databaseReference.child("patients").child(patientID);
         patientRef.addValueEventListener(new ValueEventListener() {
@@ -183,6 +182,37 @@ public class Frag_LabReports extends Fragment
                     patientNameTextView.setText(patient.getPatientName());
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors
+            }
+        });
+
+        // Query the database for lab reports
+        DatabaseReference labReportsRef = databaseReference.child("lab_reports").child(patientID);
+        labReportsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Iterate through lab reports
+                    for (DataSnapshot reportSnapshot : dataSnapshot.getChildren()) {
+                        LabReport labReport = reportSnapshot.getValue(LabReport.class);
+                        // Display each lab report in your UI (e.g., add to a ListView)
+                        // You can also create a new fragment to display lab reports individually.
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors
+            }
+        });
+    }
+
+    // Call this method when you want to display patient records (e.g., in onCreateView)
+    displayPatientRecords(patientID); // Pass the patient's unique ID as a parameter
 
 
 
