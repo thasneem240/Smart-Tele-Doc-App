@@ -61,6 +61,12 @@ public class PharmaciesF extends Fragment {
     Button orderButton;
 
     RadioGroup radioGroup;
+
+    Toolbar toolbar2;
+
+    Button orderButton2;
+
+    RadioGroup radioGroup2;
     TextView etPharmName ;
     int searchType=-1;
 
