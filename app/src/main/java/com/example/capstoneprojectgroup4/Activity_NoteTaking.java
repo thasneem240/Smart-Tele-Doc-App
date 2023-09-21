@@ -77,6 +77,7 @@ public class Activity_NoteTaking extends AppCompatActivity
     }
 
 
+
     private void displaySavedNotes()
     {
         SharedPreferences sharedPreferences = getSharedPreferences("Notes", MODE_PRIVATE);

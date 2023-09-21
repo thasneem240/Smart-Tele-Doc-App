@@ -22,7 +22,8 @@ public class Activity_VideoConference extends AppCompatActivity
     private SurfaceView remoteVideoView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_conference);
 
@@ -43,11 +44,14 @@ public class Activity_VideoConference extends AppCompatActivity
         }
     }
 
+
+
     // Initialize your video conferencing components here
     private void initializeVideoConference()
     {
         // Initialize camera, connect to video streams, etc.
     }
+
 
     // Handle permission request results
     @Override

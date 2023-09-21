@@ -26,6 +26,7 @@ public class Activity_Remote_Consultation extends AppCompatActivity
 
         Intent intent = new Intent(this, Activity_VideoConference.class);
 
+
         videoConferenceButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
