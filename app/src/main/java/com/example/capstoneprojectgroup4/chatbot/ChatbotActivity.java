@@ -223,7 +223,27 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
 
     }*/
 
+    /*    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient"))
+      patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStringValue()+"";
 
+
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date-time"))
+      dateAndTime = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date-time").getStringValue()+"";
+
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("doctor")){
+      if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().containsKey("name")){
+        doctor = returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().get("name").getStringValue();
+      }
+    }
+
+    Log.d("DialogFlow***", String.format("Patient = %s\nDate and time = %s\nDoctor = %s", patient, dateAndTime, doctor));
+
+    if(patient!="" & doctor!="" & dateAndTime!="" &
+            patient!=null & doctor!=null & dateAndTime!=null){
+
+      BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
+      Log.d("DialogFlow***", "Done");
+    }*/
 
   }
 }
