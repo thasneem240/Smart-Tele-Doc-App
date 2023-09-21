@@ -13,8 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.ResultActivity;
-import com.example.capstoneprojectgroup4.TransactionHistory;
+import com.example.capstoneprojectgroup4.transaction.TransactionHistory;
 import com.example.capstoneprojectgroup4.search_doctors.BookAppointmentF;
 import com.example.capstoneprojectgroup4.chatbot.adapters.ChatAdapter;
 import com.example.capstoneprojectgroup4.chatbot.helpers.SendMessageInBg;
@@ -39,7 +38,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 
 public class ChatbotActivity extends AppCompatActivity implements BotReply {

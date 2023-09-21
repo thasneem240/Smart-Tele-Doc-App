@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
+import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -30,8 +32,7 @@ public class StartUpFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    FirebaseAuth mAuth;
-    FirebaseUser currentUser;
+
 
 
     public StartUpFragment() {
@@ -73,18 +74,11 @@ public class StartUpFragment extends Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth = FirebaseAuth.getInstance();
-                currentUser = mAuth.getCurrentUser();
-                if(currentUser == null){
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    PatientLogin patientLogin = new PatientLogin();
-                    fm.beginTransaction().replace(R.id.fragmentContainerView2, patientLogin).commit();
-                }
-                else{
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    MainMenu mainMenu = new MainMenu();
-                    fm.beginTransaction().replace(R.id.fragmentContainerView2, mainMenu).commit();
-                }
+
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                A_Patient_Or_A_Doctor a_patient_or_a_doctor = new A_Patient_Or_A_Doctor();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, a_patient_or_a_doctor).commit();
 
             }
         });

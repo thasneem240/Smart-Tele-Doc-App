@@ -129,7 +129,7 @@
         app:layout_constraintTop_toBottomOf="@+id/square4" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/Button_UploadPrescription"
         android:layout_width="63dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -154,7 +154,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/square5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6"
+        app:layout_constraintTop_toBottomOf="@+id/Button_UploadPrescription"
         app:layout_constraintVertical_bias="0.764" />
 
     <TextView

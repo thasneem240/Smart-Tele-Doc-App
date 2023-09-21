@@ -110,9 +110,9 @@ public class PatientProfileF extends Fragment {
                 PatientObject patientObject = snapshot.getValue(PatientObject.class);
 
                 if(patientObject != null){
-                    fullName_.setText(patientObject.getFullName());
+//                    fullName_.setText(patientObject.getFullName());
                     nic_.setText(patientObject.getNic());
-                    mobileNumber_.setText(patientObject.getMobileNumber());
+//                    mobileNumber_.setText(patientObject.getMobileNumber());
                     dob_.setText(patientObject.getDob());
                     gender_.setText(patientObject.getGender());
                 }
@@ -166,20 +166,20 @@ public class PatientProfileF extends Fragment {
                 String gender = gender_.getText().toString();
 
                 PatientObject patientObject = new PatientObject();
-                patientObject.setFullName(fullName);
+//                patientObject.setFullName(fullName);
                 patientObject.setNic(nic);
-                patientObject.setMobileNumber(mobileNumber);
+//                patientObject.setMobileNumber(mobileNumber);
                 patientObject.setDob(dob);
                 patientObject.setGender(gender);
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Patient").child(currentUser.getUid());
+                    DatabaseReference myRef = database.getReference("Patient").child(currentUser.getUid());
 
                 myRef.setValue(patientObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         MainActivity mainActivity2 = (MainActivity) getActivity();
-                        mainActivity2.setPatientObject(patientObject);
+//                        mainActivity2.setPatientObject(patientObject);
 
                         Intent mainActivity = new Intent(getActivity(), MainActivity.class);
                         startActivity(mainActivity);

@@ -20,11 +20,13 @@ import android.widget.ImageButton;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.prescriptions.edit_prescription.EditPrescriptionAdapter;
+import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.SearchWordByWord;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.select_the_drug.SelectTheDrug;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.CreatePrescriptionFragment;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -105,31 +107,32 @@ public class DrugsContainers extends Fragment {
         addDrugs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
+//                SelectTheDrug selectTheDrug = new SelectTheDrug(listOfDrugs);
+//                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, selectTheDrug).commit();
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Drugs");
                 ArrayList<String> listOfDrugs = new ArrayList<>();
-
-                Query query = FirebaseDatabase.getInstance().getReference("Drugs");
-
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                myRef.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot ds: snapshot.getChildren()){
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot ds: dataSnapshot.getChildren()){
                             String s = ds.getKey();
                             listOfDrugs.add(s);
                         }
 
-                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                        FragmentManager fm = activity.getSupportFragmentManager();
-
-                        SelectTheDrug selectTheDrug = new SelectTheDrug(listOfDrugs);
-                        fm.beginTransaction().replace(R.id.fragmentContainerPrescription, selectTheDrug).commit();
-
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        SearchWordByWord searchWordByWord = new SearchWordByWord(listOfDrugs);
+//                fm.beginTransaction().remove(fm.findFragmentById(R.id.fragmentContainerPrescription));
+                        fm.beginTransaction().replace(R.id.fragmentContainerPrescription, searchWordByWord).commit();
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.w(TAG, "Failed to read value.", error.toException());
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
                     }
                 });
-
             }
         });
 

@@ -4,10 +4,12 @@ import static android.content.ContentValues.TAG;
 
 import static com.google.android.material.color.utilities.MaterialDynamicColors.error;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -18,6 +20,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
+import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
 import com.example.capstoneprojectgroup4.search_doctors.DocSearchResultAdapter;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmacyAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +54,7 @@ public class Pharmacy extends Fragment {
     TextView etPharmLocation;
     TextView etPharmDrugs ;
     RecyclerView recyclerView;
+    Button buttonUploadPrescription;
 
 
     Button search;
@@ -94,13 +99,21 @@ public class Pharmacy extends Fragment {
         etPharmLocation = view.findViewById(R.id.searchPharmLoc);
         etPharmDrugs = view.findViewById(R.id.searchDrugs);
         recyclerView = view.findViewById(R.id.pharmrv);
-
         search = view.findViewById(R.id.pharmsearchButton);
+        buttonUploadPrescription = view.findViewById(R.id.Button_UploadPrescription);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 performSearch();
+            }
+        });
+        buttonUploadPrescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
             }
         });
 
