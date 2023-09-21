@@ -8,14 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PrescriptionTransaction;
-
-import lk.payhere.androidsdk.PHConfigs;
-import lk.payhere.androidsdk.PHConstants;
-import lk.payhere.androidsdk.PHMainActivity;
-import lk.payhere.androidsdk.PHResponse;
-import lk.payhere.androidsdk.model.InitRequest;
-import lk.payhere.androidsdk.model.Item;
-import lk.payhere.androidsdk.model.StatusResponse;
+import com.example.capstoneprojectgroup4.transaction.AppointmentTransaction;
+import com.example.capstoneprojectgroup4.transaction.TransactionHistory;
 
 public class ResultActivity extends AppCompatActivity
 {

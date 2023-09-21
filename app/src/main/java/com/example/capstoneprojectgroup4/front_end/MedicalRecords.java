@@ -13,7 +13,6 @@ import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
-import com.example.capstoneprojectgroup4.Frag_PatientDetails;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 
@@ -106,9 +105,9 @@ public class MedicalRecords extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                Frag_PatientDetails fragPatientDetails = new Frag_PatientDetails();
+                AccountSettings accountSettings = new AccountSettings();
 
-                fm.beginTransaction().replace(R.id.fragmentContainerView, fragPatientDetails).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, accountSettings).commit();
             }
         });
 

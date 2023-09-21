@@ -14,7 +14,6 @@ import com.example.capstoneprojectgroup4.authentication.PatientObject;
 import com.example.capstoneprojectgroup4.authentication.PatientProfileF;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.front_end.AccountSettings;
-import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
 import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
 import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorHomePage;
@@ -89,13 +88,13 @@ public class MainActivity extends AppCompatActivity
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                FragmentManager fm = getSupportFragmentManager();
-//                AccountSettings searchDoctors = new AccountSettings();
-//                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
-
                 FragmentManager fm = getSupportFragmentManager();
-                PatientProfileF patientProfileF = new PatientProfileF();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientProfileF).commit();
+                AccountSettings searchDoctors = new AccountSettings();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+
+//                FragmentManager fm = getSupportFragmentManager();
+//                PatientProfileF patientProfileF = new PatientProfileF();
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, patientProfileF).commit();
             }
         });
     }

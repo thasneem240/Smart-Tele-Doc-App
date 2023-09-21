@@ -1,5 +1,5 @@
 
-package com.example.capstoneprojectgroup4;
+package com.example.capstoneprojectgroup4.transaction;
 
 import static android.content.ContentValues.TAG;
 
@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.capstoneprojectgroup4.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

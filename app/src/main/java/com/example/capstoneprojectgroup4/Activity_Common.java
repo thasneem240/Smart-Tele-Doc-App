@@ -8,7 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.capstoneprojectgroup4.front_end.AccountSettings;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.Frag_Prescriptions;
+import com.google.android.gms.common.internal.AccountType;
 
 public class Activity_Common extends AppCompatActivity
 {
@@ -61,9 +63,9 @@ public class Activity_Common extends AppCompatActivity
         {
             if(fragmentName.equals("Frag_PatientDetails"))
             {
-                Frag_PatientDetails fragPatientDetails = new Frag_PatientDetails();
+                AccountSettings accountSettings = new AccountSettings();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.commonContainer,fragPatientDetails);
+                fragmentTransaction.replace(R.id.commonContainer,accountSettings);
                 fragmentTransaction.commit();
 
 

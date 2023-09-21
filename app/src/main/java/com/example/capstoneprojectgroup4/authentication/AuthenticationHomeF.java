@@ -108,8 +108,8 @@ public class AuthenticationHomeF extends Fragment {
             @Override
             public void onClick(View view) {
                 fm = getActivity().getSupportFragmentManager();
-                LoginF LoginF = new LoginF();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, LoginF).commit();
+//                LoginF LoginF = new LoginF();
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, LoginF).commit();
             }
         });
 

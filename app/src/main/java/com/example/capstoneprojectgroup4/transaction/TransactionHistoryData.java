@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4;
+package com.example.capstoneprojectgroup4.transaction;
 
 public class TransactionHistoryData {
     private String name;

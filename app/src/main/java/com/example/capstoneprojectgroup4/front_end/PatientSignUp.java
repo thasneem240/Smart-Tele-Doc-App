@@ -76,7 +76,8 @@ public class PatientSignUp extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientLogin patientLogin = new PatientLogin();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();            }
+                fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();
+            }
         });
 
 
@@ -85,7 +86,8 @@ public class PatientSignUp extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 UserDetail mainMenu = new UserDetail();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();            }
+                fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+            }
         });
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +95,8 @@ public class PatientSignUp extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientLogin patientLogin = new PatientLogin();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();            }
+                fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();
+            }
         });
 
 

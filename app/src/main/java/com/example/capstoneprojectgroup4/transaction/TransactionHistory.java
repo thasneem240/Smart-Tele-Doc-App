@@ -1,5 +1,5 @@
 
-package com.example.capstoneprojectgroup4;
+package com.example.capstoneprojectgroup4.transaction;
 
 import static android.content.ContentValues.TAG;
 
@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 
+import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.REcyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
