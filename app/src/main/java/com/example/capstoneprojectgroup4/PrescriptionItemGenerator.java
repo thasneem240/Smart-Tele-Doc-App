@@ -19,7 +19,9 @@ public class PrescriptionItemGenerator
                     "Atorvastatin",
                     "Metformin",
                     "Panadol"
+
             };
+
 
     private static final String[] dosages =
             {
