@@ -126,7 +126,7 @@ public class SearchDocF extends Fragment  {
                 openDateSearch();
             }
         });
-
+//Comment
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

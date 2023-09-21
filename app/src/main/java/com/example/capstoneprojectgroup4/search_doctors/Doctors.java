@@ -9,6 +9,11 @@ public class Doctors {
     String Location;
     String Location2;
 
+    String Name1;
+    String Specialization1;
+    String Location11;
+
+
     private ArrayList<String> Locations;
 
 
