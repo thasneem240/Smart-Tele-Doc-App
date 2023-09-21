@@ -128,7 +128,7 @@ public class BookAppointmentF extends Fragment {
         Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
     }
 
-    public static void uploadAppointmentSecond(String pPatientName, String pDoctorName, String pDay){
+    public static void uploadAppointment(String pPatientName, String pDoctorName, String pDay){
 
         HashMap<String, Object> hashMap = new HashMap<> ();
         hashMap.put("Doctor Name", pPatientName);
