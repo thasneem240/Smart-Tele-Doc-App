@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Frag_Manage_Patient_Record">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="35dp"
+        android:layout_marginTop="20dp"
+        android:text="Medical Records" />
+
+
+    <Button
+        android:id="@+id/button_PatientDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Patient Details" />
+
+    <Button
+        android:id="@+id/button_MedicalHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_toRightOf="@id/button_PatientDetails"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Medical History" />
+
+    <Button
+        android:id="@+id/button_LabReports"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_PatientDetails"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="100dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Lab Reports" />
+
+    <Button
+        android:id="@+id/button_ConsNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consultation Notes"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_below="@+id/button_MedicalHistory"
+        android:layout_toRightOf="@+id/button_LabReports"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/button_Prescriptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_MedicalHistory"
+        android:text="Prescription"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_toRightOf="@+id/button_LabReports"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="100dp"
+        />
+
+</RelativeLayout>

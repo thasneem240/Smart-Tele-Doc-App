@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <TextView
+        android:id="@+id/medicineName_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="4dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/text_select"
+        app:layout_constraintEnd_toStartOf="@+id/dosage_editText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_edit" />
+
+    <Button
+        android:id="@+id/text_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="45dp"
+        android:text="Remove"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dosage_editText"
+        app:layout_constraintTop_toBottomOf="@+id/button_done" />
+
+    <EditText
+        android:id="@+id/dosage_editText"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="19dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_done"
+        app:layout_constraintStart_toEndOf="@+id/medicineName_textView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/button_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Edit"
+        app:layout_constraintBottom_toTopOf="@+id/button_done"
+        app:layout_constraintStart_toStartOf="@+id/button_done"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <TextView
+        android:id="@+id/button_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="111dp"
+        android:layout_marginBottom="2dp"
+        android:editable="false"
+        android:text="Done"
+        app:layout_constraintBottom_toTopOf="@+id/text_select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dosage_editText"
+        app:layout_constraintTop_toBottomOf="@+id/button_edit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
