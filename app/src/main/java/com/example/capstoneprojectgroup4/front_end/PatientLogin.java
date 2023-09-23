@@ -1,7 +1,5 @@
 package com.example.capstoneprojectgroup4.front_end;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.home.StartupF;
+import com.example.capstoneprojectgroup4.authentication.signup.Signup_EmailVerificationF;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +41,10 @@ public class PatientLogin extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    FirebaseAuth auth;
+    FragmentManager fm;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
+
 
     public PatientLogin() {
         // Required empty public constructor
@@ -81,10 +84,11 @@ public class PatientLogin extends Fragment {
         Button login = v.findViewById(R.id.login_button);
         TextView signup = v.findViewById(R.id.sign_up_link);
         EditText email_ = v.findViewById(R.id.loginenter_email);
-        EditText password_ = v.findViewById(R.id.enter_password);
+        EditText password_ = v.findViewById(R.id.EditText_EnterPassword);
         ImageView backButton = v.findViewById(R.id.backButton);
 
-        auth = FirebaseAuth.getInstance();
+        fm = getActivity().getSupportFragmentManager();
+        mAuth = FirebaseAuth.getInstance();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,19 +105,23 @@ public class PatientLogin extends Fragment {
                     return;
                 }
 
-                auth.signInWithEmailAndPassword(email, password)
+                mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-//                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(getActivity(), "Login successful.", Toast.LENGTH_SHORT).show();
+                                    currentUser = mAuth.getCurrentUser();
 
-                                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                                    MainMenu mainMenu = new MainMenu();
-                                    fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                                    if(currentUser.isEmailVerified()){
+                                        MainMenu mainMenu = new MainMenu();
+                                        fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                                    }
+                                    else{
+                                        Toast.makeText(getActivity(), "Please verify your email", Toast.LENGTH_SHORT).show();
 
-
+                                        Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
+                                        fm.beginTransaction().replace(R.id.fragmentContainerView, signup_emailVerificationF).commit();
+                                    }
                                 } else {
                                     Toast.makeText(getActivity(), "Login failed. "+task.getException(), Toast.LENGTH_LONG).show();
 

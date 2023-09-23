@@ -1,7 +1,5 @@
 package com.example.capstoneprojectgroup4.authentication.signup;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +14,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.front_end.AccountSettings;
+import com.google.android.gms.common.internal.AccountType;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -105,24 +106,24 @@ public class Signup_EmailVerificationF extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+                currentUser.reload().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        currentUser = mAuth.getCurrentUser();
                         if(currentUser.isEmailVerified()){
-                            Toast.makeText(getActivity(), "The email is verified", Toast.LENGTH_SHORT).show();
-
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            AccountSettings accountSettings = new AccountSettings();
+                            fm.beginTransaction().replace(R.id.fragmentContainerView, accountSettings).commit();
                         }
                         else{
-                            Toast.makeText(getActivity(), "Please verify your email first.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Please verify your email", Toast.LENGTH_SHORT).show();
                         }
-
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-//                FragmentManager fm = getActivity().getSupportFragmentManager();
-//                Signup_FormF signupFormF = new Signup_FormF();
-//                fm.beginTransaction().replace(R.id.fragment_container, signupFormF).commit();
             }
         });
         return v;

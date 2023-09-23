@@ -111,17 +111,17 @@ public class AccountSettings extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 PatientObject patientObject = snapshot.getValue(PatientObject.class);
 
-                firstNameEditText.setText(patientObject.getFirstName());
-                lastNameEditText.setText(patientObject.getLastName());
-                nicEditText.setText(patientObject.getNic());
-                dobEditText.setText(patientObject.getDob());
-                genderEditText.setText(patientObject.getGender());
-                mobileEditText.setText(patientObject.getMobile());
-                heightEditText.setText(patientObject.getHeight());
-                weightEditText.setText(patientObject.getWeight());
-                countryEditText.setText(patientObject.getCountry());
-                cityEditText.setText(patientObject.getCity());
-                countryEditText.setText(patientObject.getCountry());
+//                firstNameEditText.setText(patientObject.getFirstName());
+//                lastNameEditText.setText(patientObject.getLastName());
+//                nicEditText.setText(patientObject.getNic());
+//                dobEditText.setText(patientObject.getDob());
+//                genderEditText.setText(patientObject.getGender());
+//                mobileEditText.setText(patientObject.getMobile());
+//                heightEditText.setText(patientObject.getHeight());
+//                weightEditText.setText(patientObject.getWeight());
+//                countryEditText.setText(patientObject.getCountry());
+//                cityEditText.setText(patientObject.getCity());
+//                countryEditText.setText(patientObject.getCountry());
             }
 
             @Override
