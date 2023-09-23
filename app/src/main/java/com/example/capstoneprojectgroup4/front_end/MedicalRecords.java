@@ -69,10 +69,10 @@ public class MedicalRecords extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_medical_records, container, false);
         Button doctorButton = v.findViewById(R.id.Button_UploadPrescription);
-
         ImageView backButton = v.findViewById(R.id.backButtonMedicalRecords);
 
         Button patientDetailButton = v.findViewById(R.id.button1);
+        ImageView patientDetailsImageView = v.findViewById(R.id.ImageView_PatientDetails);
         ImageView medicalHistoryImageView = v.findViewById(R.id.medicalHistoryImageView);
         Button medicalHistoryButton = v.findViewById(R.id.button2);
         ImageView labReportsImageView = v.findViewById(R.id.labReportsImageView);
@@ -108,6 +108,17 @@ public class MedicalRecords extends Fragment {
                 AccountSettings accountSettings = new AccountSettings();
 
                 fm.beginTransaction().replace(R.id.fragmentContainerView, accountSettings).commit();
+            }
+        });
+
+        patientDetailsImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                AccountSettings accountSettings = new AccountSettings();
+
+                fm.beginTransaction().replace(R.id.fragmentContainerView, accountSettings).commit();
+
             }
         });
 

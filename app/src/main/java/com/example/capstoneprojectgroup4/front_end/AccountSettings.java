@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.PatientObject;
-import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -106,10 +105,12 @@ public class AccountSettings extends Fragment {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        database.getReference("Users").child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                PatientObject patientObject = snapshot.getValue(PatientObject.class);
+
+        if(currentUser != null){
+            database.getReference("Users").child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    PatientObject patientObject = snapshot.getValue(PatientObject.class);
 
 //                firstNameEditText.setText(patientObject.getFirstName());
 //                lastNameEditText.setText(patientObject.getLastName());
@@ -122,13 +123,15 @@ public class AccountSettings extends Fragment {
 //                countryEditText.setText(patientObject.getCountry());
 //                cityEditText.setText(patientObject.getCity());
 //                countryEditText.setText(patientObject.getCountry());
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getActivity(), "Error while loading the user details.", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getActivity(), "Error while loading the user details.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
 
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override

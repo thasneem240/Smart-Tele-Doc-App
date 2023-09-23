@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.prescriptions.edit_prescription.EditPrescriptionFragment;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.drug_containers.DrugsContainers;
 import com.example.capstoneprojectgroup4.prescriptions.PrescriptionObject;
@@ -176,8 +176,8 @@ public class CreatePrescriptionFragment extends Fragment {
                 myRef.setValue(prescriptionObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Intent mainActivity = new Intent(getActivity(), MainActivity.class);
-                        startActivity(mainActivity);
+                        Intent MainActivity2 = new Intent(getActivity(), MainActivity2.class);
+                        startActivity(MainActivity2);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

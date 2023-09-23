@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -178,11 +178,11 @@ public class PatientProfileF extends Fragment {
                 myRef.setValue(patientObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        MainActivity mainActivity2 = (MainActivity) getActivity();
-//                        mainActivity2.setPatientObject(patientObject);
+                        MainActivity2 MainActivity22 = (MainActivity2) getActivity();
+//                        MainActivity22.setPatientObject(patientObject);
 
-                        Intent mainActivity = new Intent(getActivity(), MainActivity.class);
-                        startActivity(mainActivity);
+                        Intent MainActivity2 = new Intent(getActivity(), MainActivity2.class);
+                        startActivity(MainActivity2);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
