@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.front_end;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.authentication.signup.Signup_EmailVerificationF;
 import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,8 +34,8 @@ public class StartUpFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
 
     public StartUpFragment() {
         // Required empty public constructor
@@ -71,15 +73,30 @@ public class StartUpFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_start_up, container, false);
         Button startButton = v.findViewById(R.id.Startbutton);
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if(currentUser == null){
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    A_Patient_Or_A_Doctor a_patient_or_a_doctor = new A_Patient_Or_A_Doctor();
+                    fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, a_patient_or_a_doctor).commit();
+                }
+                else{
+                    if(currentUser.isEmailVerified()){
+                        startActivity(new Intent(getActivity(), MainActivity2.class));
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "You have already signed-in using "+currentUser.getEmail()+"\nPlease verify your email.", Toast.LENGTH_SHORT).show();
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        Signup_EmailVerificationF signupEmailVerificationF = new Signup_EmailVerificationF();
+                        fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signupEmailVerificationF).commit();
+                    }
 
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                A_Patient_Or_A_Doctor a_patient_or_a_doctor = new A_Patient_Or_A_Doctor();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, a_patient_or_a_doctor).commit();
-
+                }
             }
         });
 

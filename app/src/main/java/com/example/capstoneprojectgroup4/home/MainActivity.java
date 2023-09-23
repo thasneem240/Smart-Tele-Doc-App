@@ -35,6 +35,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(MainActivity.this, MainActivity2.class));
+        setContentView(R.layout.activity_main);
+
+
+        FragmentManager fm = getSupportFragmentManager();
+        StartUpFragment startupPage = (StartUpFragment) fm.findFragmentById(R.id.FragmentContainer_MainActivity);
+
+        if (startupPage == null)
+        {
+            startupPage = new StartUpFragment();
+            fm.beginTransaction().add(R.id.FragmentContainer_MainActivity, startupPage).commit();
+        }
+
     }
 }

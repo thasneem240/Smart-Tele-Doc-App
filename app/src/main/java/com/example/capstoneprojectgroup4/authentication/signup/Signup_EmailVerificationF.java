@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.authentication.signup;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.AccountSettings;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.android.gms.common.internal.AccountType;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -110,9 +113,7 @@ public class Signup_EmailVerificationF extends Fragment {
                     @Override
                     public void onSuccess(Void unused) {
                         if(currentUser.isEmailVerified()){
-                            FragmentManager fm = getActivity().getSupportFragmentManager();
-                            AccountSettings accountSettings = new AccountSettings();
-                            fm.beginTransaction().replace(R.id.fragmentContainerView, accountSettings).commit();
+                            startActivity(new Intent(getActivity(), MainActivity2.class));
                         }
                         else{
                             Toast.makeText(getActivity(), "Please verify your email", Toast.LENGTH_SHORT).show();

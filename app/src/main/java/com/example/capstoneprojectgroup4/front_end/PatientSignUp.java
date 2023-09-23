@@ -95,7 +95,7 @@ public class PatientSignUp extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientLogin patientLogin = new PatientLogin();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientLogin).commit();
             }
         });
 
@@ -129,7 +129,7 @@ public class PatientSignUp extends Fragment {
 
                                     FragmentManager fm = getActivity().getSupportFragmentManager();
                                     Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
-                                    fm.beginTransaction().replace(R.id.fragmentContainerView, signup_emailVerificationF).commit();
+                                    fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
 
                                 } else {
                                     Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_LONG).show();
@@ -144,7 +144,7 @@ public class PatientSignUp extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientLogin patientLogin = new PatientLogin();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientLogin).commit();
             }
         });
 

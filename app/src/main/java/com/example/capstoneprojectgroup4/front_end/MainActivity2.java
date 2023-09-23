@@ -41,12 +41,12 @@ public class MainActivity2 extends AppCompatActivity {
         userProfile = findViewById(R.id.userProfileButton);
 
         FragmentManager fm = getSupportFragmentManager();
-        StartUpFragment startupPage = (StartUpFragment) fm.findFragmentById(R.id.fragmentContainerView);
+        MainMenu mainMenu = (MainMenu) fm.findFragmentById(R.id.fragmentContainerView);
 
-        if (startupPage == null)
+        if (mainMenu == null)
         {
-            startupPage = new StartUpFragment();
-            fm.beginTransaction().add(R.id.fragmentContainerView, startupPage).commit();
+            mainMenu = new MainMenu();
+            fm.beginTransaction().add(R.id.fragmentContainerView, mainMenu).commit();
         }
 
         homePage.setOnClickListener(new View.OnClickListener() {

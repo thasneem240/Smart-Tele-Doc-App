@@ -9,8 +9,10 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/FragmentContainer_MainActivity"
         android:name="com.example.capstoneprojectgroup4.front_end.StartUpFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="234dp"
-        tools:layout_editor_absoluteY="314dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

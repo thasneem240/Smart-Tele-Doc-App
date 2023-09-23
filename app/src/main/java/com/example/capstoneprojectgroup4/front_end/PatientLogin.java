@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.front_end;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.signup.Signup_EmailVerificationF;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -113,14 +115,13 @@ public class PatientLogin extends Fragment {
                                     currentUser = mAuth.getCurrentUser();
 
                                     if(currentUser.isEmailVerified()){
-                                        MainMenu mainMenu = new MainMenu();
-                                        fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                                        startActivity(new Intent(getActivity(), MainActivity2.class));
                                     }
                                     else{
                                         Toast.makeText(getActivity(), "Please verify your email", Toast.LENGTH_SHORT).show();
 
                                         Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
-                                        fm.beginTransaction().replace(R.id.fragmentContainerView, signup_emailVerificationF).commit();
+                                        fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
                                     }
                                 } else {
                                     Toast.makeText(getActivity(), "Login failed. "+task.getException(), Toast.LENGTH_LONG).show();
@@ -137,7 +138,7 @@ public class PatientLogin extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientSignUp patientSignUp = new PatientSignUp();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientSignUp).commit();
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientSignUp).commit();
             }
         });
 
@@ -147,7 +148,7 @@ public class PatientLogin extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 StartUpFragment patientSignUp = new StartUpFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, patientSignUp).commit();
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientSignUp).commit();
             }
         });
 

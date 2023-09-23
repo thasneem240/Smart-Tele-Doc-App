@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.authentication.signup.Signup_EmailVerificationF;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
 import com.example.capstoneprojectgroup4.front_end.PatientLogin;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
@@ -33,8 +35,6 @@ public class A_Patient_Or_A_Doctor extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    FirebaseAuth mAuth;
-    FirebaseUser currentUser;
 
     public A_Patient_Or_A_Doctor() {
         // Required empty public constructor
@@ -78,18 +78,11 @@ public class A_Patient_Or_A_Doctor extends Fragment {
         patientInterfaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth = FirebaseAuth.getInstance();
-                currentUser = mAuth.getCurrentUser();
-                if(currentUser == null){
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    PatientLogin patientLogin = new PatientLogin();
-                    fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();
-                }
-                else{
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    MainMenu mainMenu = new MainMenu();
-                    fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
-                }            }
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PatientLogin patientLogin = new PatientLogin();
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientLogin).commit();
+
+            }
         });
         doctorInterfaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
