@@ -74,7 +74,6 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     btnSend.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         String message = editMessage.getText().toString();
-        Log.d("DialogFlow***", message);
 
         if (!message.isEmpty()) {
           messageList.add(new Message(message, false));
@@ -146,9 +145,14 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     String price = null;
 
 
-    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient"))
-      patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStringValue()+"";
+//    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient"))
+//      patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStringValue()+"";
 
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient")){
+      if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStructValue().getFieldsMap().containsKey("name")){
+        patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStructValue().getFieldsMap().get("name").getStringValue();
+      }
+    }
 
     if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date-time"))
       dateAndTime = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date-time").getStringValue()+"";
@@ -159,7 +163,10 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
       }
     }
 
-    Log.d("DialogFlow***", String.format("Patient = %s\nDate and time = %s\nDoctor = %s", patient, dateAndTime, doctor));
+//    Log.d("DialogFlow***", ""+returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getListValue().getValues(0).getStructValue().getFieldsMap().get("name").getStringValue());
+    Log.d("DialogFlow***", ""+returnResponse.getQueryResult());
+        Log.d("DialogFlow***", String.format("Patient = %s\nDate and time = %s\nDoctor = %s", patient, dateAndTime, doctor));
+
 
     if(patient!="" & doctor!="" & dateAndTime!="" &
             patient!=null & doctor!=null & dateAndTime!=null){

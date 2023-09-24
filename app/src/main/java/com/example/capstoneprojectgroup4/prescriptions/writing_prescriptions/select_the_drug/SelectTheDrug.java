@@ -69,6 +69,7 @@ public class SelectTheDrug extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_select_the_drug, container, false);
+
         RecyclerView rv = v.findViewById(R.id.selectTheDrugRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         SelectTheDrugAdapter selectTheDrugAdapter = new SelectTheDrugAdapter(listOfDrugs);

@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.signup.Signup_EmailVerificationF">
+    tools:context=".authentication.Signup_EmailVerificationF">
 
     <Button
         android:id="@+id/email_verification_button"
         android:layout_width="250dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="206dp"
         android:layout_marginBottom="162dp"
         android:text="Send email verification"

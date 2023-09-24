@@ -15,10 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.prescriptions.edit_prescription.EditPrescriptionFragment;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.drug_containers.DrugsContainers;
 import com.example.capstoneprojectgroup4.prescriptions.PrescriptionObject;
@@ -47,6 +49,7 @@ public class CreatePrescriptionFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ImageView backButton;
     Button selectDrugs;
     Button submitPrescription;
     EditText doctorName;
@@ -107,6 +110,7 @@ public class CreatePrescriptionFragment extends Fragment {
         treatmentDuration = v.findViewById(R.id.treatment_duration);
         prescriptionNotes = v.findViewById(R.id.pres_notes);
         drugsCount = v.findViewById(R.id.drugs_count_textView);
+        backButton = v.findViewById(R.id.ImageView_PrescriptionWritingBackButton);
 
         writingPrescriptionActivity = (WritingPrescriptionActivity) v.getContext();
         prescriptionObject = writingPrescriptionActivity.getPrescriptionObject();
@@ -176,8 +180,9 @@ public class CreatePrescriptionFragment extends Fragment {
                 myRef.setValue(prescriptionObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Intent mainActivity = new Intent(getActivity(), MainActivity.class);
-                        startActivity(mainActivity);
+                        Toast.makeText(writingPrescriptionActivity, "Prescription has submitted successfully", Toast.LENGTH_SHORT).show();
+//                        Intent MainActivity2 = new Intent(getActivity(), MainActivity2.class);
+//                        startActivity(MainActivity2);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -186,6 +191,14 @@ public class CreatePrescriptionFragment extends Fragment {
                     }
                 });
 
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // do nothing
+                // needs to change later
             }
         });
 

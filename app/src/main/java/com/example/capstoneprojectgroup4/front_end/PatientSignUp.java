@@ -2,17 +2,28 @@ package com.example.capstoneprojectgroup4.front_end;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.authentication.Signup_EmailVerificationF;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +40,11 @@ public class PatientSignUp extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    String email;
+    String password;
+    String passwordRepeat;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
     public PatientSignUp() {
         // Required empty public constructor
     }
@@ -67,8 +82,14 @@ public class PatientSignUp extends Fragment {
         View v = inflater.inflate(R.layout.fragment_patient_sign_up, container, false);
         Button signUp = v.findViewById(R.id.sign_up_button);
         TextView login = v.findViewById(R.id.login_link);
-        ImageView backButton = v.findViewById(R.id.backButtonSignUp);
+        ImageView backButton = v.findViewById(R.id.ImageView_SignupBack);
+        EditText enterEmail = v.findViewById(R.id.EditText_EnterEmail);
+        EditText enterPassword = v.findViewById(R.id.EditText_EnterPassword);
+        EditText reEnterPassword = v.findViewById(R.id.EditText_ReEnterPassword);
+        CheckBox termsConditions = v.findViewById(R.id.CheckBox_Terms);
 
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -76,16 +97,53 @@ public class PatientSignUp extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientLogin patientLogin = new PatientLogin();
-                fm.beginTransaction().replace(R.id.fragmentContainerView2, patientLogin).commit();            }
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientLogin).commit();
+            }
         });
 
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                UserDetail mainMenu = new UserDetail();
-                fm.beginTransaction().replace(R.id.fragmentContainerView2, mainMenu).commit();            }
+                email = enterEmail.getText().toString();
+                password = enterPassword.getText().toString();
+                passwordRepeat = reEnterPassword.getText().toString();
+
+                if(TextUtils.isEmpty(email)){
+                    Toast.makeText(getActivity(), "Please enter the email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(password)){
+                    Toast.makeText(getActivity(), "Please enter the password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!password.equals(passwordRepeat)){
+                    Toast.makeText(getActivity(), "Passwords don't match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!termsConditions.isChecked()){
+                    Toast.makeText(getActivity(), "Please indicate that you accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getActivity(), "Please verify your email.", Toast.LENGTH_SHORT).show();
+
+                                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                                    Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
+                                    fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
+
+                                } else {
+                                    Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+            }
         });
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +151,8 @@ public class PatientSignUp extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientLogin patientLogin = new PatientLogin();
-                fm.beginTransaction().replace(R.id.fragmentContainerView2, patientLogin).commit();            }
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientLogin).commit();
+            }
         });
 
 

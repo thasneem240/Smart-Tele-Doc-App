@@ -8,7 +8,7 @@
     <!-- Sign up As Patient -->
 
     <ImageView
-        android:id="@+id/backButtonSignUp"
+        android:id="@+id/ImageView_SignupBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -28,14 +28,41 @@
         android:textColor="#407C87"
         android:gravity="center_horizontal" />
 
+    <!-- Enter Your Name -->
+
+    <EditText
+        android:id="@+id/EditText_EnterName"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/sign_up_title"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_rec"
+        android:gravity="center"
+        android:hint="Enter your name"
+        android:textColorHint="#A1A8B0"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/name_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/EditText_EnterName"
+        android:layout_alignTop="@+id/EditText_EnterName"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/user_outline" />
+
+
 
     <!-- Enter Your Email -->
 
     <EditText
-        android:id="@+id/enter_email"
+        android:id="@+id/EditText_EnterEmail"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_below="@+id/sign_up_title"
+        android:layout_below="@+id/EditText_EnterName"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
@@ -45,32 +72,78 @@
         android:textColorHint="#A1A8B0"
         android:textSize="16sp" />
 
-    <!-- Enter Your Password -->
     <ImageView
         android:id="@+id/email_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/enter_name"
-        android:layout_alignTop="@+id/enter_name"
+        android:layout_alignStart="@+id/EditText_EnterName"
+        android:layout_alignTop="@+id/EditText_EnterName"
         android:layout_marginStart="24dp"
         android:layout_marginTop="70dp"
         android:src="@drawable/message_icon" />
 
+
+
+    <!-- Enter Your NIC -->
+
+
+
+    <EditText
+        android:id="@+id/enter_nic"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/EditText_EnterEmail"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_rec"
+        android:gravity="center"
+        android:hint="Enter your NIC"
+        android:textColorHint="#A1A8B0"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/nic_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/EditText_EnterName"
+        android:layout_alignTop="@+id/EditText_EnterName"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="130dp"
+        android:src="@drawable/security_icon" />
+
+    <!-- Enter Your Mobile -->
+    <EditText
+        android:id="@+id/enter_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/enter_nic"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_rec"
+        android:gravity="center"
+        android:hint="Enter your mobile number"
+        android:textColorHint="#A1A8B0"
+        android:textSize="16sp" />
+
+
+    <!-- Enter Your Password -->
     <ImageView
         android:id="@+id/mobile_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/enter_name"
-        android:layout_alignTop="@+id/enter_name"
+        android:layout_alignStart="@+id/EditText_EnterName"
+        android:layout_alignTop="@+id/EditText_EnterName"
         android:layout_marginStart="23dp"
         android:layout_marginTop="187dp"
         android:src="@drawable/mobile_icon" />
 
     <EditText
-        android:id="@+id/enter_password"
+        android:id="@+id/EditText_EnterPassword"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_below="@+id/enter_email"
+        android:layout_below="@+id/enter_mobile"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
@@ -83,8 +156,8 @@
         android:id="@+id/password_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/enter_name"
-        android:layout_alignTop="@+id/enter_name"
+        android:layout_alignStart="@+id/EditText_EnterName"
+        android:layout_alignTop="@+id/EditText_EnterName"
         android:layout_marginStart="24dp"
         android:layout_marginTop="246dp"
         android:src="@drawable/password_icon" />
@@ -97,8 +170,8 @@
         android:id="@+id/eye_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/enter_name"
-        android:layout_alignTop="@+id/enter_name"
+        android:layout_alignStart="@+id/EditText_EnterName"
+        android:layout_alignTop="@+id/EditText_EnterName"
         android:layout_marginStart="334dp"
         android:layout_marginTop="248dp"
         android:src="@drawable/eye_slash" />
@@ -106,10 +179,10 @@
 
 
     <EditText
-        android:id="@+id/reenter_password"
+        android:id="@+id/EditText_ReEnterPassword"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_below="@+id/enter_password"
+        android:layout_below="@+id/EditText_EnterPassword"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
@@ -125,17 +198,27 @@
         android:id="@+id/repassword_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/enter_name"
-        android:layout_alignTop="@+id/sign_up_title"
+        android:layout_alignStart="@+id/EditText_EnterName"
+        android:layout_alignTop="@+id/EditText_EnterName"
         android:layout_marginStart="24dp"
         android:layout_marginTop="303dp"
         android:src="@drawable/password_icon" />
 
-    <CheckBox
-        android:id="@+id/agree_to_terms_checkbox"
+    <ImageView
+        android:id="@+id/eye_icon2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/reenter_password"
+        android:layout_alignStart="@+id/EditText_EnterName"
+        android:layout_alignTop="@+id/EditText_EnterName"
+        android:layout_marginStart="335dp"
+        android:layout_marginTop="302dp"
+        android:src="@drawable/eye_slash" />
+
+    <CheckBox
+        android:id="@+id/CheckBox_Terms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditText_ReEnterPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:minHeight="48dp"
@@ -148,7 +231,7 @@
         android:id="@+id/sign_up_button"
         android:layout_width="286dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/agree_to_terms_checkbox"
+        android:layout_below="@+id/CheckBox_Terms"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="62dp"
