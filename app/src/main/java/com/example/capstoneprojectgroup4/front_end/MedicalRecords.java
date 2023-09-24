@@ -68,7 +68,7 @@ public class MedicalRecords extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_medical_records, container, false);
-        Button doctorButton = v.findViewById(R.id.Button_UploadPrescription);
+
         ImageView backButton = v.findViewById(R.id.backButtonMedicalRecords);
 
         Button patientDetailButton = v.findViewById(R.id.button1);
@@ -77,8 +77,8 @@ public class MedicalRecords extends Fragment {
         Button medicalHistoryButton = v.findViewById(R.id.button2);
         ImageView labReportsImageView = v.findViewById(R.id.labReportsImageView);
         Button labReportsButton = v.findViewById(R.id.button3);
-        ImageView prescriptionsImageView = v.findViewById(R.id.square5);
-        Button prescriptionsButton = v.findViewById(R.id.Button_UploadPrescription);
+        ImageView prescriptionsImageView = v.findViewById(R.id.ImageView_ViewPrescriptions);
+        Button prescriptionsButton = v.findViewById(R.id.Button_ViewPrescriptions);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,16 +90,6 @@ public class MedicalRecords extends Fragment {
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
-
-        doctorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                PrescriptionWriting searchDoctors = new PrescriptionWriting();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();            }
-        });
-
-
 
         patientDetailButton.setOnClickListener(new View.OnClickListener() {
             @Override

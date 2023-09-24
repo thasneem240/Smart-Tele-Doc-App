@@ -163,7 +163,8 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
       }
     }
 
-    Log.d("DialogFlow***", ""+returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getListValue().getValues(0).getStructValue().getFieldsMap().get("name").getStringValue());
+//    Log.d("DialogFlow***", ""+returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getListValue().getValues(0).getStructValue().getFieldsMap().get("name").getStringValue());
+    Log.d("DialogFlow***", ""+returnResponse.getQueryResult());
         Log.d("DialogFlow***", String.format("Patient = %s\nDate and time = %s\nDoctor = %s", patient, dateAndTime, doctor));
 
 

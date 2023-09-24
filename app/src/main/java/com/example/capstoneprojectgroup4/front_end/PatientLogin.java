@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,9 +87,16 @@ public class PatientLogin extends Fragment {
         EditText email_ = v.findViewById(R.id.loginenter_email);
         EditText password_ = v.findViewById(R.id.EditText_EnterPassword);
         ImageView backButton = v.findViewById(R.id.backButton);
+        ImageView hidePassword = v.findViewById(R.id.ImageView_HidePassword);
 
         fm = getActivity().getSupportFragmentManager();
         mAuth = FirebaseAuth.getInstance();
+
+//        password_.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//        password_.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

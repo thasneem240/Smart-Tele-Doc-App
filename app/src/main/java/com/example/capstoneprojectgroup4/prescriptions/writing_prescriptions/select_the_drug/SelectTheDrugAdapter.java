@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.select_the_drug;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,6 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
     @Override
     public void onBindViewHolder(@NonNull SelectTheDrugViewHolder holder, int position) {
         holder.drugName.setText(listOfDrugs.get(position));
-
         holder.drugName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,7 +43,6 @@ public class SelectTheDrugAdapter extends RecyclerView.Adapter<SelectTheDrugView
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
-
                 DrugsContainers drugsContainers = new DrugsContainers();
                 fm.beginTransaction().remove(fm.findFragmentById(R.id.FragmentContainerView_SelectTheDrug)).commit();
                 fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();

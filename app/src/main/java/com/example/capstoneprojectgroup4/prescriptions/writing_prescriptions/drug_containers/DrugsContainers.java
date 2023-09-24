@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.prescriptions.edit_prescription.EditPrescriptionAdapter;
+import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.AddDrugsManually;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.SearchWordByWord;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.select_the_drug.SelectTheDrug;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.CreatePrescriptionFragment;
@@ -87,7 +88,8 @@ public class DrugsContainers extends Fragment {
         View v = inflater.inflate(R.layout.fragment_select_drugs, container, false);
 
         Button backToPrescription = v.findViewById(R.id.button_to_prescription);
-        ImageButton addDrugs = v.findViewById(R.id.button_add_drugs);
+        Button addDrugsFromTheList = v.findViewById(R.id.button_add_drugs);
+        Button addDrugsManuallyButton = v.findViewById(R.id.Button_AddDrugsManually);
 
         RecyclerView rv = v.findViewById(R.id.drugs_container_recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -104,7 +106,16 @@ public class DrugsContainers extends Fragment {
             }
         });
 
-        addDrugs.setOnClickListener(new View.OnClickListener() {
+        addDrugsManuallyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                AddDrugsManually addDrugsManually = new AddDrugsManually();
+                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, addDrugsManually).commit();
+            }
+        });
+
+        addDrugsFromTheList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                FragmentManager fm = getActivity().getSupportFragmentManager();

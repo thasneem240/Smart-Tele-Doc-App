@@ -58,7 +58,7 @@
         android:background="#E6ECF7" />
 
     <Button
-        android:id="@+id/Button_UploadPrescription"
+        android:id="@+id/Button_ViewPrescriptions"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_alignBottom="@+id/rectangle_8"

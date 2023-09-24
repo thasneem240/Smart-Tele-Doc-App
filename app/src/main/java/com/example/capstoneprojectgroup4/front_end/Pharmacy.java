@@ -2,9 +2,6 @@ package com.example.capstoneprojectgroup4.front_end;
 
 import static android.content.ContentValues.TAG;
 
-import static com.google.android.material.color.utilities.MaterialDynamicColors.error;
-
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,8 +18,6 @@ import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
-import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
-import com.example.capstoneprojectgroup4.search_doctors.DocSearchResultAdapter;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmacyAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -100,7 +95,7 @@ public class Pharmacy extends Fragment {
         etPharmDrugs = view.findViewById(R.id.searchDrugs);
         recyclerView = view.findViewById(R.id.pharmrv);
         search = view.findViewById(R.id.pharmsearchButton);
-        buttonUploadPrescription = view.findViewById(R.id.Button_UploadPrescription);
+        buttonUploadPrescription = view.findViewById(R.id.Button_ViewPrescriptions);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -88,6 +90,10 @@ public class SearchWordByWord extends Fragment {
 
         EditText nameOfTheDrug = v.findViewById(R.id.EditText_name_of_the_drug);
         FragmentManager fm = getActivity().getSupportFragmentManager();
+
+        InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        nameOfTheDrug.requestFocus();
+        imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
         nameOfTheDrug.addTextChangedListener(new TextWatcher() {
             char s;

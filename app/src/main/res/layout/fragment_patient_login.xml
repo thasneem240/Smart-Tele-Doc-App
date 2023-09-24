@@ -57,7 +57,7 @@
         android:strokeWidth="2"
         android:strokeColor="#E5E7EB"
         android:textColorHint="#A1A8B0"
-        android:textSize="16sp" />
+        android:textSize="16sp"/>
 
 
     <ImageView
@@ -72,7 +72,7 @@
 
 
     <ImageView
-        android:id="@+id/login_eye"
+        android:id="@+id/ImageView_HidePassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/EditText_EnterPassword"
