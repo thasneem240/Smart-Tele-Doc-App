@@ -73,6 +73,8 @@ public class Activity_VideoConference extends AppCompatActivity
     {
         // Query the database or API to retrieve patient data by name
         // Return a Patient object with the fetched data
+        Patient pat = new Patient();
+        return  pat;
     }
 
 

@@ -164,11 +164,11 @@ public class Frag_LabReports extends Fragment
     }
 
     // Query the database for lab reports
-    DatabaseReference labReportsRef = databaseReference.child("lab_reports").child(patientID);
+  //  DatabaseReference labReportsRef = databaseReference.child("lab_reports").child(patientID);
 
 
     // Function to retrieve and display patient's records and lab reports
-    private void displayPatientRecords(String patientID) {
+ /*   private void displayPatientRecords(String patientID) {
         // Query the database for patient information
         DatabaseReference patientRef = databaseReference.child("patients").child(patientID);
         patientRef.addValueEventListener(new ValueEventListener() {
@@ -212,7 +212,7 @@ public class Frag_LabReports extends Fragment
     }
 
     // Call this method when you want to display patient records (e.g., in onCreateView)
-    displayPatientRecords(patientID); // Pass the patient's unique ID as a parameter
+    displayPatientRecords(patientID); // Pass the patient's unique ID as a parameter*/
 
 
 
