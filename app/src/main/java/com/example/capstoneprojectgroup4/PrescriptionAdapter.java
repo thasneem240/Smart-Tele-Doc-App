@@ -18,6 +18,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
 
     public PrescriptionAdapter(List<PrescriptionItem> prescriptionItems)
     {
+
         this.prescriptionItems = prescriptionItems;
     }
 
@@ -32,6 +33,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
+
         PrescriptionItem item = prescriptionItems.get(position);
         holder.medicationTextView.setText("Medication: " + item.getMedication());
         holder.dosageTextView.setText("Dosage: " + item.getDosage());

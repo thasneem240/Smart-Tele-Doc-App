@@ -84,9 +84,11 @@ public class Frag_MedicalHistory extends Fragment
             }
         });
 
+
         List<MedicalHistoryItem> medicalHistoryItems = new ArrayList<>();
 
         // Populate medicalHistoryItems with your data
+
 
         medicalHistoryItems = MedicalHistoryItemGenerator.generateRandomMedicalHistoryItems(200);
 

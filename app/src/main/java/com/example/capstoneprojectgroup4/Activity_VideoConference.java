@@ -10,8 +10,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
-
-
+import android.widget.TextView;
 
 
 public class Activity_VideoConference extends AppCompatActivity
@@ -22,7 +21,8 @@ public class Activity_VideoConference extends AppCompatActivity
     private SurfaceView remoteVideoView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_conference);
 
@@ -41,13 +41,40 @@ public class Activity_VideoConference extends AppCompatActivity
             // Initialize video conferencing components
             initializeVideoConference();
         }
+
+
+        Patient patient = getPatientData("A.S.M. Thasneem"); // Fetch patient data by name
+        TextView patientNameTextView = findViewById(R.id.patientNameTextView);
+        TextView patientMedicalHistoryTextView = findViewById(R.id.patientMedicalHistoryTextView);
+
+        if (patient != null) {
+            patientNameTextView.setText("Patient Name: " + patient.getPatientName());
+            //patientMedicalHistoryTextView.setText("Medical History: " + patient.getMedicalHistory());
+        }
+
+
+
+
+
+
+
     }
+
+
 
     // Initialize your video conferencing components here
     private void initializeVideoConference()
     {
         // Initialize camera, connect to video streams, etc.
     }
+
+
+    private Patient getPatientData(String patientName)
+    {
+        // Query the database or API to retrieve patient data by name
+        // Return a Patient object with the fetched data
+    }
+
 
     // Handle permission request results
     @Override

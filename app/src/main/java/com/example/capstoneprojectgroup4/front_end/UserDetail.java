@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.front_end;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -115,14 +118,11 @@ public class UserDetail extends Fragment {
         continueB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                MainMenu mainMenu = new MainMenu();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                // Open MainActivity2
+                Intent mainActivity2Intent = new Intent(getActivity(), MainActivity2.class);
+                startActivity(mainActivity2Intent);
             }
         });
-
-
-
 
         return v;
     }

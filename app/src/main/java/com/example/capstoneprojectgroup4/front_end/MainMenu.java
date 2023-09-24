@@ -1,6 +1,7 @@
 package com.example.capstoneprojectgroup4.front_end;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -79,7 +80,21 @@ public class MainMenu extends Fragment {
         Button pharmacyButton = v.findViewById(R.id.pharma_Button);
         ImageView pharmaciesImageView = v.findViewById(R.id.pharmacySquare);
         ImageView chatBot = v.findViewById(R.id.Ai_square);
+        Button emergency = v.findViewById(R.id.emergencyButton);
         Button chatbotButton = v.findViewById(R.id.aiButton);
+
+        emergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:119"));
+
+                // Start the dialer activity
+                startActivity(callIntent);
+            }
+        });
+
+
         doctorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

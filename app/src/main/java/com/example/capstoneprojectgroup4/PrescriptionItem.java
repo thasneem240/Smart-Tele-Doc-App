@@ -12,6 +12,7 @@ public class PrescriptionItem
         this.dosage = dosage;
     }
 
+
     public String getMedication()
     {
         return medication;
