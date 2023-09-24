@@ -12,13 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.signup.Signup_EmailVerificationF;
-import com.example.capstoneprojectgroup4.front_end.MainActivity2;
-import com.example.capstoneprojectgroup4.front_end.MainMenu;
 import com.example.capstoneprojectgroup4.front_end.PatientLogin;
 import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.

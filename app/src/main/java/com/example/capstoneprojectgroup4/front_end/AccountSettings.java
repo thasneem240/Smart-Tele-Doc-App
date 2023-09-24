@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.front_end;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.PatientObject;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -41,13 +44,13 @@ public class AccountSettings extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    TextInputEditText firstNameEditText, lastNameEditText,
+    TextInputEditText emailEditText, firstNameEditText, lastNameEditText,
     nicEditText, dobEditText, genderEditText, mobileEditText,
     heightEditText, weightEditText, countryEditText, cityEditText, addressEditText;
+    ImageView backButton;
     Button logoutButton;
     Button updateButton;
-    String firstName, lastName, nic, dob, gender, mobileNumber, height, weight, country, city, address;
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
     FirebaseUser currentUser;
     FirebaseDatabase database;
 
@@ -88,6 +91,7 @@ public class AccountSettings extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_account_settings, container, false);
 
+        emailEditText = v.findViewById(R.id.EditText_Email);
         firstNameEditText = v.findViewById(R.id.EditText_FirstName);
         lastNameEditText = v.findViewById(R.id.EditText_LastName);
         nicEditText = v.findViewById(R.id.EditText_Nic);
@@ -101,6 +105,9 @@ public class AccountSettings extends Fragment {
         addressEditText = v.findViewById(R.id.EditText_Address);
         updateButton = v.findViewById(R.id.Button_Update);
         logoutButton = v.findViewById(R.id.Button_Logout);
+        backButton = v.findViewById(R.id.ImageView_AccountSettings_backbutton);
+
+        emailEditText.setEnabled(false);
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -112,17 +119,18 @@ public class AccountSettings extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     PatientObject patientObject = snapshot.getValue(PatientObject.class);
 
-//                firstNameEditText.setText(patientObject.getFirstName());
-//                lastNameEditText.setText(patientObject.getLastName());
-//                nicEditText.setText(patientObject.getNic());
-//                dobEditText.setText(patientObject.getDob());
-//                genderEditText.setText(patientObject.getGender());
-//                mobileEditText.setText(patientObject.getMobile());
-//                heightEditText.setText(patientObject.getHeight());
-//                weightEditText.setText(patientObject.getWeight());
-//                countryEditText.setText(patientObject.getCountry());
-//                cityEditText.setText(patientObject.getCity());
-//                countryEditText.setText(patientObject.getCountry());
+                    emailEditText.setText(patientObject.getEmail());
+                    firstNameEditText.setText(patientObject.getFirstName());
+                    lastNameEditText.setText(patientObject.getLastName());
+                    nicEditText.setText(patientObject.getNic());
+                    dobEditText.setText(patientObject.getDob());
+                    genderEditText.setText(patientObject.getGender());
+                    mobileEditText.setText(patientObject.getMobile());
+                    heightEditText.setText(patientObject.getHeight());
+                    weightEditText.setText(patientObject.getWeight());
+                    countryEditText.setText(patientObject.getCountry());
+                    cityEditText.setText(patientObject.getCity());
+                    countryEditText.setText(patientObject.getCountry());
                 }
 
                 @Override
@@ -154,19 +162,35 @@ public class AccountSettings extends Fragment {
 
                 setEditTextEnable(true);
 
-                DatabaseReference myRef = database.getReference("Users").child(currentUser.getUid());
+                if(patientObject.getCountry().equals("Sri Lanka")){
+                    patientObject.setCompleted(true);
+                }
+                else{
+                    patientObject.setCompleted(false);
 
-                myRef.setValue(patientObject).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(getActivity(), "Successfully updated", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(), "Updating cannot be completed.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                }
+
+
+                if(patientObject.isCompleted()){
+                    DatabaseReference myRef = database.getReference("Users").child(currentUser.getUid());
+
+                    myRef.setValue(patientObject).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(getActivity(), "Successfully updated", Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(getActivity(), MainActivity2.class));
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getActivity(), "Updating cannot be completed.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else{
+                    Toast.makeText(getActivity(), "Please fill in all the required details.", Toast.LENGTH_SHORT).show();
+                }
             }
 
             private void setEditTextEnable(boolean enable){
@@ -191,9 +215,7 @@ public class AccountSettings extends Fragment {
                 if(mAuth.getCurrentUser() == null){
                     Toast.makeText(getActivity(), "Successfully Logged-out", Toast.LENGTH_SHORT).show();
 
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    PatientLogin patientLogin = new PatientLogin();
-                    fm.beginTransaction().replace(R.id.fragmentContainerView, patientLogin).commit();
+                    startActivity(new Intent(getActivity(), MainActivity.class));
                 }
                 else{
                     Toast.makeText(getActivity(), "Logging-out failed", Toast.LENGTH_SHORT).show();
@@ -201,6 +223,16 @@ public class AccountSettings extends Fragment {
             }
         });
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MainMenu mainMenu = new MainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+            }
+        });
+
         return v;
     }
+
 }

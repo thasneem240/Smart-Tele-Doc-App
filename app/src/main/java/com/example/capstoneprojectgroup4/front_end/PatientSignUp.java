@@ -11,13 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.signup.Signup_EmailVerificationF;
+import com.example.capstoneprojectgroup4.authentication.Signup_EmailVerificationF;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -85,6 +86,7 @@ public class PatientSignUp extends Fragment {
         EditText enterEmail = v.findViewById(R.id.EditText_EnterEmail);
         EditText enterPassword = v.findViewById(R.id.EditText_EnterPassword);
         EditText reEnterPassword = v.findViewById(R.id.EditText_ReEnterPassword);
+        CheckBox termsConditions = v.findViewById(R.id.CheckBox_Terms);
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -117,6 +119,11 @@ public class PatientSignUp extends Fragment {
                 }
                 if(!password.equals(passwordRepeat)){
                     Toast.makeText(getActivity(), "Passwords don't match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!termsConditions.isChecked()){
+                    Toast.makeText(getActivity(), "Please indicate that you accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

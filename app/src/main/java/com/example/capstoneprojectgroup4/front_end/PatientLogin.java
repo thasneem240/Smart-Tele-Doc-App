@@ -18,11 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.signup.Signup_EmailVerificationF;
-import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.authentication.Signup_EmailVerificationF;
+import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -147,8 +145,8 @@ public class PatientLogin extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                StartUpFragment patientSignUp = new StartUpFragment();
-                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientSignUp).commit();
+                A_Patient_Or_A_Doctor aPatientOrADoctor = new A_Patient_Or_A_Doctor();
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, aPatientOrADoctor).commit();
             }
         });
 

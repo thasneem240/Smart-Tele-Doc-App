@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.authentication.signup;
+package com.example.capstoneprojectgroup4.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,17 +15,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.AccountSettings;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
-import com.example.capstoneprojectgroup4.home.MainActivity;
-import com.google.android.gms.common.internal.AccountType;
+import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,8 +47,9 @@ public class Signup_EmailVerificationF extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
     FirebaseUser currentUser;
+    FirebaseDatabase database;
 
     public Signup_EmailVerificationF() {
         // Required empty public constructor
@@ -81,6 +88,7 @@ public class Signup_EmailVerificationF extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_signup__email_verification, container, false);
 
+        database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
@@ -113,7 +121,9 @@ public class Signup_EmailVerificationF extends Fragment {
                     @Override
                     public void onSuccess(Void unused) {
                         if(currentUser.isEmailVerified()){
-                            startActivity(new Intent(getActivity(), MainActivity2.class));
+
+                            addingEmailToTheUserDetails();
+
                         }
                         else{
                             Toast.makeText(getActivity(), "Please verify your email", Toast.LENGTH_SHORT).show();
@@ -129,4 +139,60 @@ public class Signup_EmailVerificationF extends Fragment {
         });
         return v;
     }
+    private void addingEmailToTheUserDetails(){
+        database.getReference("Users").child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                PatientObject patientObject = new PatientObject();
+
+                patientObject.setEmail(currentUser.getEmail());
+
+                DatabaseReference myRef = database.getReference("Users").child(currentUser.getUid());
+
+                myRef.setValue(patientObject).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getActivity(), "Your email is verified.", Toast.LENGTH_SHORT).show();
+                        userDetailsOrMainMenu(); // Check whether user details filled and open the Account settings
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "Updating cannot be completed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), "Error while loading the user details.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void userDetailsOrMainMenu(){
+        database.getReference("Users").child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                PatientObject patientObject = snapshot.getValue(PatientObject.class);
+
+                if(patientObject.isCompleted()){
+                    startActivity(new Intent(getActivity(), MainActivity2.class));
+
+                }
+                else{
+                    Toast.makeText(getActivity(), "Please fill in all the required details.", Toast.LENGTH_SHORT).show();
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    AccountSettings accountSettings = new AccountSettings();
+                    fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, accountSettings).commit();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), "Error while loading the user details.", Toast.LENGTH_SHORT).show();
+            }
+        });}
 }

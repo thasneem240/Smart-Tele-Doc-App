@@ -1,6 +1,7 @@
 package com.example.capstoneprojectgroup4.authentication;
 
 public class PatientObject {
+    private String email;
     private String firstName;
     private String lastName;
     private String nic;
@@ -12,6 +13,16 @@ public class PatientObject {
     private String country;
     private String city;
     private String address;
+    private boolean completed;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -98,6 +109,13 @@ public class PatientObject {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
 }

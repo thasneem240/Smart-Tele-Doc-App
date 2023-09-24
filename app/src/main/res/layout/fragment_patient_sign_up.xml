@@ -215,7 +215,7 @@
         android:src="@drawable/eye_slash" />
 
     <CheckBox
-        android:id="@+id/agree_to_terms_checkbox"
+        android:id="@+id/CheckBox_Terms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/EditText_ReEnterPassword"
@@ -231,7 +231,7 @@
         android:id="@+id/sign_up_button"
         android:layout_width="286dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/agree_to_terms_checkbox"
+        android:layout_below="@+id/CheckBox_Terms"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="62dp"
