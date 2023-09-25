@@ -87,11 +87,9 @@ public class MainMenu extends Fragment {
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                callIntent.setData(Uri.parse("tel:119"));
-
-                // Start the dialer activity
-                startActivity(callIntent);
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                EmergencyFragment searchDoctors = new EmergencyFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
 
