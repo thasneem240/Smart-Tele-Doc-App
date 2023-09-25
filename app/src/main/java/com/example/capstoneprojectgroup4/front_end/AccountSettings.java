@@ -119,7 +119,7 @@ public class AccountSettings extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     PatientObject patientObject = snapshot.getValue(PatientObject.class);
 
-                    emailEditText.setText(patientObject.getEmail());
+                    emailEditText.setText(currentUser.getEmail());
                     firstNameEditText.setText(patientObject.getFirstName());
                     lastNameEditText.setText(patientObject.getLastName());
                     nicEditText.setText(patientObject.getNic());
@@ -148,6 +148,7 @@ public class AccountSettings extends Fragment {
                 setEditTextEnable(false);
 
                 PatientObject patientObject = new PatientObject();
+                patientObject.setEmail(emailEditText.getText().toString());
                 patientObject.setFirstName(firstNameEditText.getText().toString());
                 patientObject.setLastName(lastNameEditText.getText().toString());
                 patientObject.setNic(nicEditText.getText().toString());
@@ -177,6 +178,8 @@ public class AccountSettings extends Fragment {
                     myRef.setValue(patientObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            MainActivity.setPatientObject(patientObject);
+
                             Toast.makeText(getActivity(), "Successfully updated", Toast.LENGTH_SHORT).show();
 
                             startActivity(new Intent(getActivity(), MainActivity2.class));
