@@ -83,6 +83,7 @@ public class MainMenu extends Fragment {
         ImageView chatBot = v.findViewById(R.id.Ai_square);
         Button emergency = v.findViewById(R.id.emergencyButton);
         Button chatbotButton = v.findViewById(R.id.aiButton);
+
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

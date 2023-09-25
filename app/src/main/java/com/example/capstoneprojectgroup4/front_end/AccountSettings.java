@@ -148,6 +148,7 @@ public class AccountSettings extends Fragment {
                 setEditTextEnable(false);
 
                 PatientObject patientObject = new PatientObject();
+                patientObject.setUid(currentUser.getUid());
                 patientObject.setEmail(emailEditText.getText().toString());
                 patientObject.setFirstName(firstNameEditText.getText().toString());
                 patientObject.setLastName(lastNameEditText.getText().toString());
