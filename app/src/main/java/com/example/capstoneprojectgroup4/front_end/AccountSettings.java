@@ -3,6 +3,7 @@ package com.example.capstoneprojectgroup4.front_end;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -53,6 +54,7 @@ public class AccountSettings extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     FirebaseDatabase database;
+    PatientObject patientObjectOnline;
 
     public AccountSettings() {
         // Required empty public constructor
@@ -117,20 +119,20 @@ public class AccountSettings extends Fragment {
             database.getReference("Users").child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    PatientObject patientObject = snapshot.getValue(PatientObject.class);
+                    patientObjectOnline = snapshot.getValue(PatientObject.class);
 
                     emailEditText.setText(currentUser.getEmail());
-                    firstNameEditText.setText(patientObject.getFirstName());
-                    lastNameEditText.setText(patientObject.getLastName());
-                    nicEditText.setText(patientObject.getNic());
-                    dobEditText.setText(patientObject.getDob());
-                    genderEditText.setText(patientObject.getGender());
-                    mobileEditText.setText(patientObject.getMobile());
-                    heightEditText.setText(patientObject.getHeight());
-                    weightEditText.setText(patientObject.getWeight());
-                    countryEditText.setText(patientObject.getCountry());
-                    cityEditText.setText(patientObject.getCity());
-                    countryEditText.setText(patientObject.getCountry());
+                    firstNameEditText.setText(patientObjectOnline.getFirstName());
+                    lastNameEditText.setText(patientObjectOnline.getLastName());
+                    nicEditText.setText(patientObjectOnline.getNic());
+                    dobEditText.setText(patientObjectOnline.getDob());
+                    genderEditText.setText(patientObjectOnline.getGender());
+                    mobileEditText.setText(patientObjectOnline.getMobile());
+                    heightEditText.setText(patientObjectOnline.getHeight());
+                    weightEditText.setText(patientObjectOnline.getWeight());
+                    countryEditText.setText(patientObjectOnline.getCountry());
+                    cityEditText.setText(patientObjectOnline.getCity());
+                    countryEditText.setText(patientObjectOnline.getCountry());
                 }
 
                 @Override
@@ -230,11 +232,30 @@ public class AccountSettings extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                MainMenu mainMenu = new MainMenu();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                if(patientObjectOnline.isCompleted()){
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    MainMenu mainMenu = new MainMenu();
+                    fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                }
+                else{
+                        Toast.makeText(getActivity(), "Please fill in and update the details.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(patientObjectOnline.isCompleted()){
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    MainMenu mainMenu = new MainMenu();
+                    fm.beginTransaction().replace(R.id.fragmentContainerView, mainMenu).commit();
+                }
+                else{
+                    Toast.makeText(getActivity(), "Please fill in and update the details.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
         return v;
     }
