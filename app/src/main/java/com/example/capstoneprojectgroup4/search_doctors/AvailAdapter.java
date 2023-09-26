@@ -48,7 +48,7 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
         holder.textDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
 
                 //BookAppointmentF fragment = new BookAppointmentF();
@@ -63,10 +63,8 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
     @Override
     public int getItemCount() {
         return availabilities.size();
-    }
+}
 
 
 
 }
-
-

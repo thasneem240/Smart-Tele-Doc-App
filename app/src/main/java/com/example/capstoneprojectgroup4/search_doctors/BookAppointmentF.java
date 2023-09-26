@@ -1,4 +1,3 @@
-
 package com.example.capstoneprojectgroup4.search_doctors;
 
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,12 +35,10 @@ public class BookAppointmentF extends Fragment {
     private String doctorName;
     private String noApp;
     private String day;
-    private EditText patientName ;
+    private TextView patientName ;
     private Button UploadAppointment ;
     private FirebaseDatabase firebaseDatabase ;
     private DatabaseReference databaseReference;
-
-
 
     public BookAppointmentF() {
         // Required empty public constructor
@@ -65,13 +63,17 @@ public class BookAppointmentF extends Fragment {
             noApp = getArguments().getString(ARG_NOAPP);
         }
 
+        // Initialize the Firebase Database reference here
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference(); // You can adjust the reference path as needed
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_book_appointment, container, false);
+
+        // Initialize TextViews and other views
         TextView doctorNameTextView = view.findViewById(R.id.textDoctorNameValue);
         TextView dayTextView = view.findViewById(R.id.textDateTimeValue);
         TextView noAppTextView = view.findViewById(R.id.textAppointmentNumberValue);
@@ -82,6 +84,15 @@ public class BookAppointmentF extends Fragment {
         dayTextView.setText(day);
         noAppTextView.setText(noApp);
 
+        // Get patient's name and set it to the patientName TextView
+        String patientName = MainActivity.getPatientObject().getFirstName();
+        TextView patientNameTextView = view.findViewById(R.id.textPatientNameValue);
+        patientNameTextView.setText(patientName);
+
+        // Initialize appointmentType EditText and UploadAppointment Button
+        EditText appointmentType = view.findViewById(R.id.textAppointmentType);
+        UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment);
+
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,55 +102,68 @@ public class BookAppointmentF extends Fragment {
             }
         });
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
 
-        patientName = view.findViewById(R.id.textPatientNameValue);
-        EditText appointmentType = view.findViewById(R.id.textAppointmentType); // Add this line
-        UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment);
 
+
+
+        // Set an OnClickListener for the UploadAppointment Button
         UploadAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getPatientName = patientName.getText().toString();
-                String getAppointmentType = appointmentType.getText().toString(); // Get the appointment type from EditText
-
-                uploadAppointment(getPatientName, doctorName, day, getAppointmentType); // Pass appointment type
+                String getPatientName = MainActivity.getPatientObject().getFirstName();
+                String email = MainActivity.getPatientObject().getEmail();
+                String getAppointmentType = appointmentType.getText().toString();
+                uploadAppointment(email, getPatientName, doctorName, day, getAppointmentType);
             }
         });
 
         return view;
     }
-    public void uploadAppointment(String pPatientName, String pDoctorName, String pDay, String VoiceVideoCallType) {
-        // Sanitize the strings to remove invalid characters
+
+    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String VoiceVideoCallType) {
+        // Sanitize the email to remove invalid characters
+        String sanitizedEmail = email.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedDoctorName = pDoctorName.replaceAll("[.#$\\[\\]]", "_");
-        String sanitizedDay = pDay.replaceAll("[.#$\\[\\]]", "_");
 
-        HashMap<String, Object> phashMap = new HashMap<>();
-        phashMap.put("Doctor Name", sanitizedDoctorName);
-        phashMap.put("Patient Name", sanitizedPatientName);
-        phashMap.put("Day", sanitizedDay);
-        phashMap.put("Appointment Type", VoiceVideoCallType); // Include the appointment type
+        // Create a HashMap to store appointment data
+        HashMap<String, Object> appointmentData = new HashMap<>();
+        appointmentData.put("PatientName", sanitizedPatientName);
+        appointmentData.put("PatientEmail", sanitizedEmail);
+        appointmentData.put("DoctorName", sanitizedDoctorName);
+        appointmentData.put("AppointmentType", VoiceVideoCallType);
+        appointmentData.put("Date", pDay);
 
-        databaseReference.child("Appointment Data")
-                .child(sanitizedPatientName + sanitizedDoctorName + sanitizedDay)
-                .setValue(phashMap);
-        Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
+        // Use the sanitized email as the unique key for the patient
+        String patientKey = MainActivity.getPatientObject().getUid();
+
+        // Generate a unique key for the appointment
+        String appointmentKey = databaseReference.child("Appointment Data").child(patientKey).push().getKey();
+
+        // Use the generated key to store the appointment data under the patient's appointments
+        databaseReference.child("Appointment Data").child(patientKey).child(appointmentKey).setValue(appointmentData)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
+                    // Clear the appointment type EditText
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(requireContext(), "Error booking appointment", Toast.LENGTH_SHORT).show();
+                });
     }
+
 
     public static void uploadAppointmentSecond(String pPatientName, String pDoctorName, String pDay){
 
         HashMap<String, Object> hashMap = new HashMap<> ();
-        hashMap.put("Doctor Name", pPatientName);
-        hashMap.put("Patient Name", pDoctorName);
+        hashMap.put("Doctor Name", pDoctorName);
+        hashMap.put("Patient Name", pPatientName);
         hashMap.put("Day", pDay);
 
         FirebaseDatabase firebaseDatabaseSecond ;
         firebaseDatabaseSecond = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabaseSecond.getReference();
         databaseReference.child("Appointment Data")
-                .child(pPatientName+pDoctorName+pDay)
+                .child(pPatientName + pDoctorName + pDay)
                 .setValue(hashMap);
 
     }
