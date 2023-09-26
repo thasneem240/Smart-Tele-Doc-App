@@ -10,9 +10,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
+import com.example.capstoneprojectgroup4.front_end.MainMenu;
+import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.transaction.TransactionHistory;
 import com.example.capstoneprojectgroup4.search_doctors.BookAppointmentF;
 import com.example.capstoneprojectgroup4.chatbot.adapters.ChatAdapter;
@@ -66,7 +70,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
 
     // Welcome message
     messageList.add(new Message("Hi, I'm the Teledoc AI chatbot.\n" +
-            "I am able to  help you to make an appointment, purchase medicine and view the transaction history page.\n" , true));
+            "I am able to  help you to make an appointment, purchase medicine and view the pages in the application.\n" , true));
     messageList.add(new Message("Please choose what you want me to do.", true));
     chatAdapter.notifyDataSetChanged();
     Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
@@ -163,8 +167,8 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
       }
     }
 
-//    Log.d("DialogFlow***", ""+returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getListValue().getValues(0).getStructValue().getFieldsMap().get("name").getStringValue());
-    Log.d("DialogFlow***", ""+returnResponse.getQueryResult());
+   // Log.d("DialogFlow***", ""+returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getListValue().getValues(0).getStructValue().getFieldsMap().get("name").getStringValue());
+   // Log.d("DialogFlow***", ""+returnResponse.getQueryResult());
         Log.d("DialogFlow***", String.format("Patient = %s\nDate and time = %s\nDoctor = %s", patient, dateAndTime, doctor));
 
 
@@ -179,6 +183,52 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
       Intent intent = new Intent(this, TransactionHistory.class);
       startActivity(intent);
     }
+
+    if (returnResponse.getQueryResult().getAction().equals("OpenDoctorSearchpage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","searchDoctor");
+      startActivity(senderIntent);
+
+    }
+
+    if (returnResponse.getQueryResult().getAction().equals("OpenPharmacySearchpage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","searchPharm");
+      startActivity(senderIntent);
+
+    }
+
+    if (returnResponse.getQueryResult().getAction().equals("OpenPatientRecordsPage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","patientRecords");
+      startActivity(senderIntent);
+
+    }
+
+    if (returnResponse.getQueryResult().getAction().equals("OpenPatientDetialspage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","patientDetails");
+      startActivity(senderIntent);
+    }
+
+    if (returnResponse.getQueryResult().getAction().equals("OpenMedicalHistorypage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","medicalHistory");
+      startActivity(senderIntent);
+    }
+
+    if (returnResponse.getQueryResult().getAction().equals("OpenPrescriptionspage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","prescriptionsPage");
+      startActivity(senderIntent);
+    }
+
+    if (returnResponse.getQueryResult().getAction().equals("OpenLabReportspage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","labReport");
+      startActivity(senderIntent);
+    }
+
 
     if (returnResponse.getQueryResult().getAction().equals("BuyMedicine")){
       drug = returnResponse.getQueryResult().getParameters().getFieldsMap().get("drug").getStringValue()+"";
@@ -204,51 +254,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
 
     }
 
-  /*  if (returnResponse.getQueryResult().getAction().equals("BuyMedicine")){
-      drug = returnResponse.getQueryResult().getParameters().getFieldsMap().get("drug").getStringValue()+"";
-      quantity = returnResponse.getQueryResult().getParameters().getFieldsMap().get("quantity").getStringValue()+"";
-      Log.d("DialogFlow***", drug);
-      Log.d("DialogFlow***", quantity);
-      if (drug!="" & quantity!="" & drug!=null & quantity!=null ){
-        Random ran = new Random();
-        double next = ran.nextInt(46);
-        double result = 500 + (next * 100);
-        if (result > 5000) {
-          result = 5000;
-        }
-        price = Double.toString(result);
-        String item = drug + " " + quantity;
 
-        Intent senderIntent = new Intent( this, PrescriptionTransaction.class);
-        senderIntent.putExtra("ITEM", item);
-        senderIntent.putExtra("PRICE",price);
-        startActivity(senderIntent);
-
-      }
-
-    }*/
-
-    /*    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient"))
-      patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStringValue()+"";
-
-
-    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date-time"))
-      dateAndTime = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date-time").getStringValue()+"";
-
-    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("doctor")){
-      if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().containsKey("name")){
-        doctor = returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().get("name").getStringValue();
-      }
-    }
-
-    Log.d("DialogFlow***", String.format("Patient = %s\nDate and time = %s\nDoctor = %s", patient, dateAndTime, doctor));
-
-    if(patient!="" & doctor!="" & dateAndTime!="" &
-            patient!=null & doctor!=null & dateAndTime!=null){
-
-      BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
-      Log.d("DialogFlow***", "Done");
-    }*/
 
   }
 }

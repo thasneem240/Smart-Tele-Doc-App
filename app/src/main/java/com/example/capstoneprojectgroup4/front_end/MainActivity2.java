@@ -8,9 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.capstoneprojectgroup4.Frag_LabReports;
+import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.PatientObject;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
+import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
+import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
@@ -29,11 +34,13 @@ public class MainActivity2 extends AppCompatActivity {
     Button userProfile;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        Intent recive = getIntent();
 
         homePage = findViewById(R.id.homePageButton);
         chatBot = findViewById(R.id.chatBotButton);
@@ -47,6 +54,45 @@ public class MainActivity2 extends AppCompatActivity {
         {
             mainMenu = new MainMenu();
             fm.beginTransaction().add(R.id.fragmentContainerView, mainMenu).commit();
+        }
+        if (recive.getStringExtra("Page") != null){
+            if (recive.getStringExtra("Page").equals("searchDoctor")){
+                fm = getSupportFragmentManager();
+                SearchDocF searchDoctors = new SearchDocF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+            if (recive.getStringExtra("Page").equals("searchPharm")){
+                fm = getSupportFragmentManager();
+                PharmaciesF pharmacies = new PharmaciesF();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, pharmacies).commit();
+            }
+            if (recive.getStringExtra("Page").equals("patientRecords")){
+                fm = getSupportFragmentManager();
+                MedicalRecords medicalRecords = new MedicalRecords();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, medicalRecords).commit();
+            }
+            if (recive.getStringExtra("Page").equals("patientDetails")){
+                fm = getSupportFragmentManager();
+                AccountSettings accountSettings = new AccountSettings();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, accountSettings).commit();
+            }
+
+            if (recive.getStringExtra("Page").equals("medicalHistory")){
+                fm = getSupportFragmentManager();
+                Frag_MedicalHistory fragMedicalHistory = new Frag_MedicalHistory();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragMedicalHistory).commit();
+            }
+            if (recive.getStringExtra("Page").equals("prescriptionsPage")){
+                fm = getSupportFragmentManager();
+                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+            }
+            if (recive.getStringExtra("Page").equals("labReport")){
+                fm = getSupportFragmentManager();
+                Frag_LabReports fragLabReports = new Frag_LabReports();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragLabReports).commit();
+            }
+
         }
 
         homePage.setOnClickListener(new View.OnClickListener() {
