@@ -1,4 +1,5 @@
 package com.example.capstoneprojectgroup4.search_doctors;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,9 +42,13 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull AvailViewHolder holder, int position) {
         Availability availability = availabilities.get(position);
+        Log.d("AvailAdapter", "startTime: " + availability.getStartTime());
+        Log.d("AvailAdapter", "endTime: " + availability.getEndTime());
 
         holder.bind(availability);
-        //String Day = String.valueOf(holder.textDay);
+        String dateV = availability.getDate();
+        String start = availability.getStartTime();
+        String End = availability.getEndTime();
 
         holder.textDay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,14 +56,16 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
 
-                //BookAppointmentF fragment = new BookAppointmentF();
-                BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName,date, String.valueOf(noApp));
-                fm.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
-            }
+                // Pass the selected date to the BookAppointmentF fragment
+                BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName, dateV, start, End, String.valueOf(noApp));
+                fm.beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .addToBackStack("DocAvailF")
+                        .commit();
+                }
         });
-
-
     }
+
 
     @Override
     public int getItemCount() {

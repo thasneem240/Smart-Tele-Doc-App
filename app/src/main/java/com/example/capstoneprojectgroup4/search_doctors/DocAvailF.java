@@ -147,9 +147,10 @@ public class DocAvailF extends Fragment {
 
                                                     eachDay = (Map) sevenDays.getValue();
 
-                                                    endTime = eachDay.get("EndTime") + "";
                                                     startTime = eachDay.get("StartTime") + "";
-                                                    noApp = Math.toIntExact((Long) eachDay.get("NoApp"));                                                    date = eachDay.get("Date") + "";
+                                                    endTime = eachDay.get("EndTime") + "";
+                                                    date = eachDay.get("Date") + "";
+                                                    noApp = Math.toIntExact((Long) eachDay.get("NoApp"));
 
                                                     Availability sessionObject = new Availability(doctorName, location, day, noApp, endTime, startTime, date);
                                                     sessionDetails.add(sessionObject);

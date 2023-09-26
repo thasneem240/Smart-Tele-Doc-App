@@ -1,5 +1,7 @@
 package com.example.capstoneprojectgroup4.search_doctors;
 
+import static android.icu.text.MessagePattern.Part.Type.ARG_START;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -30,11 +32,18 @@ public class BookAppointmentF extends Fragment {
 
     private static final String ARG_DOCTOR_NAME = "doctorName";
     private static final String ARG_DAY = "day";
+    private static final String ARG_START = "start";
+    private static final String ARG_END = "End";
+
 
     private static final String ARG_NOAPP = "noApp";
     private String doctorName;
     private String noApp;
     private String day;
+    private String start;
+    private String End;
+
+
     private TextView patientName ;
     private Button UploadAppointment ;
     private FirebaseDatabase firebaseDatabase ;
@@ -44,10 +53,14 @@ public class BookAppointmentF extends Fragment {
         // Required empty public constructor
     }
 
-    public static BookAppointmentF newInstance(String doctorName, String day, String noApp) {
+    public static BookAppointmentF newInstance(String doctorName, String day,String start, String End, String noApp) {
         BookAppointmentF fragment = new BookAppointmentF();
         Bundle args = new Bundle();
         args.putString(ARG_DOCTOR_NAME, doctorName);
+        args.putString(ARG_DAY, day);
+        args.putString(ARG_START, start);
+        args.putString(ARG_END, End);
+        args.putString(ARG_DAY, day);
         args.putString(ARG_DAY, day);
         args.putString(ARG_NOAPP,noApp);
         fragment.setArguments(args);
@@ -60,6 +73,8 @@ public class BookAppointmentF extends Fragment {
         if (getArguments() != null) {
             doctorName = getArguments().getString(ARG_DOCTOR_NAME);
             day = getArguments().getString(ARG_DAY);
+            start = getArguments().getString(ARG_START); // Correct key
+            End = getArguments().getString(ARG_END);     // Correct key
             noApp = getArguments().getString(ARG_NOAPP);
         }
 
@@ -67,6 +82,7 @@ public class BookAppointmentF extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(); // You can adjust the reference path as needed
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,7 +97,7 @@ public class BookAppointmentF extends Fragment {
 
         // Set the doctor's name and day to the TextViews
         doctorNameTextView.setText(doctorName);
-        dayTextView.setText(day);
+        dayTextView.setText(day + " "+ start+"-"+ End);
         noAppTextView.setText(noApp);
 
         // Get patient's name and set it to the patientName TextView
@@ -97,8 +113,7 @@ public class BookAppointmentF extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DocAvailF searchDoctors = new DocAvailF();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+                fm.popBackStack("DocAvailF", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
 
