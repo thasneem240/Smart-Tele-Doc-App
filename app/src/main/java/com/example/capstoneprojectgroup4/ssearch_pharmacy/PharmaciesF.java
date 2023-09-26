@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
+import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
+import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -57,8 +60,8 @@ public class PharmaciesF extends Fragment {
 
     Button searchButton;
     Toolbar toolbar;
-
     Button orderButton;
+    Button bestPrice;
 
     RadioGroup radioGroup;
     TextView etPharmName ;
@@ -120,17 +123,35 @@ public class PharmaciesF extends Fragment {
         recyclerView = view.findViewById(R.id.pharmrv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ImageView backButton = view.findViewById(R.id.backButtonPharma);
+        bestPrice = view.findViewById(R.id.Button_ViewPrescriptions);
+
+        bestPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 MainMenu searchDoctors = new MainMenu();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MainMenu searchDoctors = new MainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
         search = view.findViewById(R.id.pharmsearchButton);
 
@@ -182,21 +203,12 @@ public class PharmaciesF extends Fragment {
                 PharmacyAdapter pharmacyAdapter = new PharmacyAdapter(getContext(),pharmacies);
                 recyclerView.setAdapter(pharmacyAdapter);
                 pharmacyAdapter.notifyDataSetChanged();
-
-
-
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
         });
-
-
-
-
     }
 }
