@@ -44,6 +44,17 @@
             android:textSize="12sp"
             android:layout_below="@+id/textD"
             />
+
+
+        <TextView
+            android:id="@+id/textMaps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Maps"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_below="@+id/textPhone"
+            />
     </RelativeLayout>
 
 
