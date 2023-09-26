@@ -18,6 +18,7 @@ import android.content.Intent;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;

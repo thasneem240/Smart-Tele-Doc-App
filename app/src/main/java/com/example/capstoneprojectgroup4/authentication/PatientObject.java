@@ -1,6 +1,7 @@
 package com.example.capstoneprojectgroup4.authentication;
 
 public class PatientObject {
+    private String uid;
     private String email;
     private String firstName;
     private String lastName;
@@ -14,6 +15,14 @@ public class PatientObject {
     private String city;
     private String address;
     private boolean completed;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getEmail() {
         return email;
