@@ -10,7 +10,7 @@ import com.example.capstoneprojectgroup4.R;
 
 
     public class PharmacyViewHolder extends RecyclerView.ViewHolder{
-        TextView Name,Address, PhoneNumber;
+        TextView Name,Address, PhoneNumber, Maps;
 
         public PharmacyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -18,6 +18,8 @@ import com.example.capstoneprojectgroup4.R;
             Name = (TextView)itemView.findViewById(R.id.textName);
             Address = (TextView)itemView.findViewById(R.id.textD);
             PhoneNumber = (TextView)itemView.findViewById(R.id.textPhone);
+            Maps = (TextView)itemView.findViewById(R.id.textMaps);
+
         }
     }
 
