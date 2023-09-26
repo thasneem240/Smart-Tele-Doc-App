@@ -2,10 +2,12 @@ package com.example.capstoneprojectgroup4.front_end;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.Signup_EmailVerificationF;
+import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -91,6 +94,9 @@ public class PatientSignUp extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
+        enterPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        reEnterPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +133,11 @@ public class PatientSignUp extends Fragment {
                     return;
                 }
 
+                if(password.length() < 6){
+                    Toast.makeText(getActivity(), "Length of the password should be more than 6 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -154,7 +165,15 @@ public class PatientSignUp extends Fragment {
                 fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientLogin).commit();
             }
         });
-
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PatientLogin patientLogin = new PatientLogin();
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientLogin).commit();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
 
         return v;
