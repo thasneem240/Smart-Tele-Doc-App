@@ -30,45 +30,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButtonLabReports" />
 
+
     <Button
         android:id="@+id/selectFileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rectangle_4"
         android:text="Select File"
+        app:layout_constraintBottom_toTopOf="@+id/uploadButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <EditText
-        android:id="@+id/selectedFileNameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/selectFileButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp"
-        android:clickable="false"
-        android:focusable="false"
-        android:hint="Selected File"
-        android:inputType="none"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectFileButton" />
+        app:layout_constraintTop_toBottomOf="@+id/firebaseImage" />
 
     <Button
         android:id="@+id/uploadButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/selectedFileNameEditText"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="99dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/rectangle_4"
         android:text="Upload"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedFileNameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/selectFileButton" />
+
+    <ImageView
+        android:id="@+id/firebaseImage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="67dp"
+        app:layout_constraintBottom_toTopOf="@+id/selectFileButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:src="@tools:sample/avatars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
