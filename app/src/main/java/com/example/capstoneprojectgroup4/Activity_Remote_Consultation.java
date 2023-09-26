@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.capstoneprojectgroup4.home.MainActivity;
+
 
 public class Activity_Remote_Consultation extends AppCompatActivity
 {
@@ -22,6 +24,7 @@ public class Activity_Remote_Consultation extends AppCompatActivity
         Button videoConferenceButton = findViewById(R.id.videoConferenceButton);
         patientNameEditText = findViewById(R.id.patientNameEditText);
 
+        //String patientName = MainActivity.getPatientObject().getFirstName();
         patientNameEditText.setText("A.S.M. Thasneem");
 
         Intent intent = new Intent(this, Activity_VideoConference.class);
