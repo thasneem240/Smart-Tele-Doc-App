@@ -11,25 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
-import android.content.Context;
-import android.content.ContentResolver;
-import android.database.Cursor;
-import android.provider.OpenableColumns;
+
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
-import com.example.capstoneprojectgroup4.home.MainActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
+
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -54,21 +49,16 @@ public class Frag_LabReports extends Fragment
 
 
     // Variable Declarations
-    private static final int FILE_PICKER_REQUEST_CODE = 1;
     private Button selectFileButton;
     private ImageView firebaseImage;
     private Button uploadButton;
+    private Button listReports;
     private Uri imageUri;
     private String fileName = null;
 
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
 
-
-    // Firebase
-
-   // StorageReference storageReference;
-   // DatabaseReference databaseReference;
 
 
     // TODO: Rename and change types of parameters
@@ -122,8 +112,10 @@ public class Frag_LabReports extends Fragment
         firebaseImage = view.findViewById(R.id.firebaseImage);
 
         uploadButton = view.findViewById(R.id.uploadButton);
+        listReports = view.findViewById(R.id.listReport);
 
         ImageView backButton = view.findViewById(R.id.backButtonLabReports);
+        final boolean[] isSelected = {false};
 
         /* Grab the  UI Variables from Layout file */
 
@@ -141,8 +133,8 @@ public class Frag_LabReports extends Fragment
             @Override
             public void onClick(View v)
             {
-                //openFilePicker();
                 selectImage();
+                isSelected[0] = true;
             }
         });
 
@@ -152,93 +144,31 @@ public class Frag_LabReports extends Fragment
             @Override
             public void onClick(View v)
             {
-//                // Implement file upload logic here
-//                // You can use the selected file (URI) for uploading to a server or saving locally.
-//                String selectedFilePath = selectedFileNameEditText.getText().toString();
-//                // Handle the upload logic accordingly.
+                if(isSelected[0])
+                {
+                    uploadFile();
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Select the File Before Upload!!!! ", Toast.LENGTH_SHORT).show();
+                }
 
-                uploadFile();
 
             }
         });
 
+        listReports.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getActivity(),Activity_ListLabReports.class);
+                startActivity(intent);
+            }
+        });
 
         return  view;
     }
-
-
-    private void openFilePicker()
-    {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*,application/pdf"); // Allow JPG and PDF files
-        startActivityForResult(intent, FILE_PICKER_REQUEST_CODE);
-    }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-//    {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == FILE_PICKER_REQUEST_CODE && resultCode == Activity.RESULT_OK)
-//        {
-//            if (data != null && data.getData() != null)
-//            {
-//                Uri selectedFileUri = data.getData();
-//                selectedFileNameEditText.setText(selectedFileUri.toString());
-//            }
-//        }
-//    }
-
-    // Query the database for lab reports
-  //  DatabaseReference labReportsRef = databaseReference.child("lab_reports").child(patientID);
-
-
-    // Function to retrieve and display patient's records and lab reports
- /*   private void displayPatientRecords(String patientID) {
-        // Query the database for patient information
-        DatabaseReference patientRef = databaseReference.child("patients").child(patientID);
-        patientRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    PatientRecord patient = dataSnapshot.getValue(PatientRecord.class);
-                    // Update UI with patient's information
-                    // For example, set TextViews with patient's name, ID, etc.
-                    TextView patientNameTextView = view.findViewById(R.id.patientNameTextView);
-                    patientNameTextView.setText(patient.getPatientName());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle errors
-            }
-        });
-
-        // Query the database for lab reports
-        DatabaseReference labReportsRef = databaseReference.child("lab_reports").child(patientID);
-        labReportsRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    // Iterate through lab reports
-                    for (DataSnapshot reportSnapshot : dataSnapshot.getChildren()) {
-                        LabReport labReport = reportSnapshot.getValue(LabReport.class);
-                        // Display each lab report in your UI (e.g., add to a ListView)
-                        // You can also create a new fragment to display lab reports individually.
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle errors
-            }
-        });
-    }
-
-    // Call this method when you want to display patient records (e.g., in onCreateView)
-    displayPatientRecords(patientID); // Pass the patient's unique ID as a parameter*/
 
     private void selectImage()
     {
@@ -262,33 +192,6 @@ public class Frag_LabReports extends Fragment
     }
 
 
-//    public static String getFileName(Context context, Uri uri)
-//    {
-//        String fName = null;
-//        ContentResolver contentResolver = context.getContentResolver();
-//
-//        // Use a Cursor to query information about the file
-//        Cursor cursor = contentResolver.query(uri, null, null, null, null);
-//
-//        try
-//        {
-//            if (cursor != null && cursor.moveToFirst())
-//            {
-//                // Get the column index for the file name
-//                int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-//                fName = cursor.getString(nameIndex);
-//            }
-//        } finally
-//        {
-//            if (cursor != null)
-//            {
-//                cursor.close();
-//            }
-//        }
-//
-//        return fName;
-//    }
-
     private void uploadFile()
     {
         progressDialog = new ProgressDialog(getContext());
@@ -298,9 +201,11 @@ public class Frag_LabReports extends Fragment
 
         //String Uid = MainActivity.getPatientObject().getUid();
 
-        SimpleDateFormat formattter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.ENGLISH);
         Date now = new Date();
-        String fileTitle = formattter.format(now);
+
+        String fileTitle = formatter.format(now);
+        //String fileTitle = formatter.format(Uid + "_" + now);
 
         storageReference = FirebaseStorage.getInstance().getReference("Lab_Reports/" + fileTitle);
         storageReference.putFile(imageUri)
@@ -330,11 +235,7 @@ public class Frag_LabReports extends Fragment
 
                     }
                 });
+
     }
-
-
-
-
-
 
 }
