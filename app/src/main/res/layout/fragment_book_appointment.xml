@@ -51,7 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDoctorNameValue" />
 
-    <EditText
+    <TextView
         android:id="@+id/textPatientNameValue"
         android:layout_width="wrap_content"
         android:layout_height="26dp"

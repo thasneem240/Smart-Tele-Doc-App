@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.PatientObject;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
@@ -70,7 +71,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getSupportFragmentManager();
-                MainMenu searchDoctors = new MainMenu();
+                ViewAppointments searchDoctors = new ViewAppointments();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });

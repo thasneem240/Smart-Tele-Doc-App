@@ -18,6 +18,7 @@ import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.PatientObject;
 import com.example.capstoneprojectgroup4.authentication.Signup_EmailVerificationF;
 import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -120,6 +121,7 @@ public class StartUpFragment extends Fragment {
 
 
                 if(patientObject.isCompleted()){
+                    MainActivity.setPatientObject(patientObject);
                     startActivity(new Intent(getActivity(), MainActivity2.class));
 
                 }
