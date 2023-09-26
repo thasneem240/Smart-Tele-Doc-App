@@ -16,6 +16,8 @@ tools:context=".Activity_Remote_Consultation">
     android:textSize="24sp"
     android:textAlignment="center"
     android:padding="16dp"
+    android:textColor="@color/black"
+    android:textStyle="bold"
     android:layout_centerHorizontal="true"/>
 
 <!-- Patient Information -->
@@ -44,6 +46,7 @@ tools:context=".Activity_Remote_Consultation">
     android:layout_below="@id/issueEditText"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="24dp"
+    android:background="@drawable/rectangle_4"
     android:padding="12dp"/>
 
 </RelativeLayout>

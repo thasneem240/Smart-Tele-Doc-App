@@ -53,7 +53,8 @@ public class Activity_NoteTaking extends AppCompatActivity
         clearNoteButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 // Clear the EditText
                 noteEditText.setText("");
             }
