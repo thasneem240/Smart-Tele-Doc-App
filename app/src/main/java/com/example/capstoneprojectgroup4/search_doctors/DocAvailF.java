@@ -194,6 +194,8 @@ public class DocAvailF extends Fragment {
             } else {
                 Toast.makeText(getContext(), "Doctor name and location not provided.", Toast.LENGTH_SHORT).show();
             }
+
+
         }
 
         return view;
