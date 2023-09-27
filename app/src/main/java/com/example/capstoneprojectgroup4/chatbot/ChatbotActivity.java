@@ -70,7 +70,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
 
     // Welcome message
     messageList.add(new Message("Hi, I'm the Teledoc AI chatbot.\n" +
-            "I am able to  help you to make an appointment, purchase medicine and view the pages in the application.\n" , true));
+            "I am able to  help you to make an appointment, purchase medicine, diagnose symptoms and view the pages in the application.\n" , true));
     messageList.add(new Message("Please choose what you want me to do.", true));
     chatAdapter.notifyDataSetChanged();
     Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
@@ -228,6 +228,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
       senderIntent.putExtra("Page","labReport");
       startActivity(senderIntent);
     }
+
 
 
     if (returnResponse.getQueryResult().getAction().equals("BuyMedicine")){
