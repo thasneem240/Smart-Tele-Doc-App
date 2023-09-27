@@ -5,11 +5,9 @@ import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -18,8 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
-import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.drug_containers.DrugsContainers;
+import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.transaction.TransactionHistory;
 import com.example.capstoneprojectgroup4.search_doctors.BookAppointmentF;
 import com.example.capstoneprojectgroup4.chatbot.adapters.ChatAdapter;
@@ -40,10 +37,6 @@ import com.google.common.collect.Lists;
 
 
 import java.io.InputStream;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -53,226 +46,218 @@ import java.util.UUID;
 
 public class ChatbotActivity extends AppCompatActivity implements BotReply {
 
-    RecyclerView chatView;
-    ChatAdapter chatAdapter;
-    List<Message> messageList = new ArrayList<>();
-    EditText editMessage;
-    ImageButton btnSend;
-    ImageView backButton;
+  RecyclerView chatView;
+  ChatAdapter chatAdapter;
+  List<Message> messageList = new ArrayList<>();
+  EditText editMessage;
+  ImageButton btnSend;
 
-    //dialogFlow
-    private SessionsClient sessionsClient;
-    private SessionName sessionName;
-    private String uuid = UUID.randomUUID().toString();
+  //dialogFlow
+  private SessionsClient sessionsClient;
+  private SessionName sessionName;
+  private String uuid = UUID.randomUUID().toString();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chatbot);
-        chatView = findViewById(R.id.chatView);
-        editMessage = findViewById(R.id.editMessage);
-        btnSend = findViewById(R.id.btnSend);
-        backButton = findViewById(R.id.ImageView_Chatbot_backbutton);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_chatbot);
+    chatView = findViewById(R.id.chatView);
+    editMessage = findViewById(R.id.editMessage);
+    btnSend = findViewById(R.id.btnSend);
 
-        chatAdapter = new ChatAdapter(messageList, this);
-        chatView.setAdapter(chatAdapter);
+    chatAdapter = new ChatAdapter(messageList, this);
+    chatView.setAdapter(chatAdapter);
 
-        // Welcome message
-        messageList.add(new Message("Hi, I'm the Teledoc AI chatbot.\n" +
-                "I am able to  help you to make an appointment, purchase medicine and view the transaction history page.\n" , true));
-        messageList.add(new Message("Please choose what you want me to do.", true));
-        chatAdapter.notifyDataSetChanged();
-        Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
+    // Welcome message
+    messageList.add(new Message("Hi, I'm the Teledoc AI chatbot.\n" +
+            "I am able to  help you to make an appointment, purchase medicine, diagnose symptoms and view the pages in the application.\n" , true));
+    messageList.add(new Message("Please choose what you want me to do.", true));
+    chatAdapter.notifyDataSetChanged();
+    Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                String message = editMessage.getText().toString();
+    btnSend.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+        String message = editMessage.getText().toString();
 
-                if (!message.isEmpty()) {
-                    messageList.add(new Message(message, false));
-                    editMessage.setText("");
-                    sendMessageToBot(message);
-                    Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
-                    Objects.requireNonNull(chatView.getLayoutManager())
-                            .scrollToPosition(messageList.size() - 1);
-                } else {
-                    Toast.makeText(ChatbotActivity.this, "Please enter text!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        editMessage.setOnKeyListener(new View.OnKeyListener() { // Enter key listner
-            @Override
-            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    String message = editMessage.getText().toString();
-
-                    if (!message.isEmpty()) {
-                        messageList.add(new Message(message, false));
-                        editMessage.setText("");
-                        sendMessageToBot(message);
-                        Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
-                        Objects.requireNonNull(chatView.getLayoutManager())
-                                .scrollToPosition(messageList.size() - 1);
-                    } else {
-                        Toast.makeText(ChatbotActivity.this, "Please enter text!", Toast.LENGTH_SHORT).show();
-                    }
-
-                    return true;
-                }
-                return false;
-            }
-        });
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ChatbotActivity.this, MainActivity2.class));
-            }
-        });
-
-        setUpBot();
-    }
-
-    private void setUpBot() {
-        try {
-            InputStream stream = this.getResources().openRawResource(R.raw.credential);
-            GoogleCredentials credentials = GoogleCredentials.fromStream(stream)
-                    .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
-            String projectId = ((ServiceAccountCredentials) credentials).getProjectId();
-            SessionsSettings.Builder settingsBuilder = SessionsSettings.newBuilder();
-            SessionsSettings sessionsSettings = settingsBuilder.setCredentialsProvider(
-                    FixedCredentialsProvider.create(credentials)).build();
-            sessionsClient = SessionsClient.create(sessionsSettings);
-            sessionName = SessionName.of(projectId, uuid);
-
-
-            Log.d(TAG, "projectId : " + projectId);
-        } catch (Exception e) {
-            Log.d(TAG, "setUpBot: " + e.getMessage());
-        }
-    }
-
-    private void sendMessageToBot(String message) {
-        QueryInput input = QueryInput.newBuilder()
-                .setText(TextInput.newBuilder().setText(message).setLanguageCode("en-US")).build();
-        new SendMessageInBg(this, sessionName, sessionsClient, input).execute();
-    }
-
-    @Override
-    public void callback(DetectIntentResponse returnResponse) {
-        if(returnResponse!=null) {
-            String doctor = null;
-
-            String botReply = returnResponse.getQueryResult().getFulfillmentText();
-            DialogFlowParameters(returnResponse);
-
-            if(!botReply.isEmpty()){
-                messageList.add(new Message(botReply, true));
-                chatAdapter.notifyDataSetChanged();
-                Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
-            }else {
-                Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
-            }
+        if (!message.isEmpty()) {
+          messageList.add(new Message(message, false));
+          editMessage.setText("");
+          sendMessageToBot(message);
+          Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
+          Objects.requireNonNull(chatView.getLayoutManager())
+              .scrollToPosition(messageList.size() - 1);
         } else {
-            Toast.makeText(this, "failed to connect!", Toast.LENGTH_SHORT).show();
+          Toast.makeText(ChatbotActivity.this, "Please enter text!", Toast.LENGTH_SHORT).show();
         }
+      }
+    });
+
+    setUpBot();
+  }
+
+  private void setUpBot() {
+    try {
+      InputStream stream = this.getResources().openRawResource(R.raw.credential);
+      GoogleCredentials credentials = GoogleCredentials.fromStream(stream)
+          .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
+      String projectId = ((ServiceAccountCredentials) credentials).getProjectId();
+      SessionsSettings.Builder settingsBuilder = SessionsSettings.newBuilder();
+      SessionsSettings sessionsSettings = settingsBuilder.setCredentialsProvider(
+          FixedCredentialsProvider.create(credentials)).build();
+      sessionsClient = SessionsClient.create(sessionsSettings);
+      sessionName = SessionName.of(projectId, uuid);
+
+
+      Log.d(TAG, "projectId : " + projectId);
+    } catch (Exception e) {
+      Log.d(TAG, "setUpBot: " + e.getMessage());
+    }
+  }
+
+  private void sendMessageToBot(String message) {
+    QueryInput input = QueryInput.newBuilder()
+        .setText(TextInput.newBuilder().setText(message).setLanguageCode("en-US")).build();
+    new SendMessageInBg(this, sessionName, sessionsClient, input).execute();
+  }
+
+  @Override
+  public void callback(DetectIntentResponse returnResponse) {
+     if(returnResponse!=null) {
+       String doctor = null;
+
+       String botReply = returnResponse.getQueryResult().getFulfillmentText();
+       DialogFlowParameters(returnResponse);
+
+       if(!botReply.isEmpty()){
+         messageList.add(new Message(botReply, true));
+         chatAdapter.notifyDataSetChanged();
+         Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
+       }else {
+         Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
+       }
+     } else {
+       Toast.makeText(this, "failed to connect!", Toast.LENGTH_SHORT).show();
+     }
+  }
+
+  public void DialogFlowParameters(DetectIntentResponse returnResponse){
+    String doctor = null;
+    String patient = null;
+    String dateAndTime = null;
+    String drug = null;
+    String quantity = null;
+    String price = null;
+
+
+//    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient"))
+//      patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStringValue()+"";
+
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient")){
+      if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStructValue().getFieldsMap().containsKey("name")){
+        patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStructValue().getFieldsMap().get("name").getStringValue();
+      }
     }
 
-    public void DialogFlowParameters(DetectIntentResponse returnResponse){
-        String doctor = null;
-        String patient = null;
-        String dateAndTime = null;
-        String date = null;
-        String time = null;
-        String drug = null;
-        String quantity = null;
-        String price = null;
-        LocalDate localDate = null;
-        LocalTime localTime = null;
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date-time"))
+      dateAndTime = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date-time").getStringValue()+"";
 
-        if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient")){
-            if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStructValue().getFieldsMap().containsKey("name")){
-                patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStructValue().getFieldsMap().get("name").getStringValue();
-            }
-        }
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("doctor")){
+      if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().containsKey("name")){
+        doctor = returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().get("name").getStringValue();
+      }
+    }
 
-        if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date")){
-            date = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date").getStringValue()+"";
+   // Log.d("DialogFlow***", ""+returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getListValue().getValues(0).getStructValue().getFieldsMap().get("name").getStringValue());
+   // Log.d("DialogFlow***", ""+returnResponse.getQueryResult());
+        Log.d("DialogFlow***", String.format("Patient = %s\nDate and time = %s\nDoctor = %s", patient, dateAndTime, doctor));
 
-            if(!date.equals("")){
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
-                    DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-                    ZonedDateTime zonedDateTime = ZonedDateTime.parse(date, formatter);
-                    localDate = zonedDateTime.toLocalDate();
-                }
-            }
-        }
+    if(patient!="" & doctor!="" & dateAndTime!="" &
+            patient!=null & doctor!=null & dateAndTime!=null){
 
-        if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("time")){
-            time = returnResponse.getQueryResult().getParameters().getFieldsMap().get("time").getStringValue()+"";
+      BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
+      Log.d("DialogFlow***", "Done");
+    }
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+    if (returnResponse.getQueryResult().getAction().equals("OpenTransactionHistorypage")){
+      Intent intent = new Intent(this, TransactionHistory.class);
+      startActivity(intent);
+    }
 
-                DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-                ZonedDateTime zonedDateTime = ZonedDateTime.parse(time, formatter);
-                localTime = zonedDateTime.toLocalTime();
-            }
-        }
+    if (returnResponse.getQueryResult().getAction().equals("OpenDoctorSearchpage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","searchDoctor");
+      startActivity(senderIntent);
 
-        if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("doctor")){
-            if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().containsKey("name")){
-                doctor = returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().get("name").getStringValue();
-            }
-        }
+    }
 
-        Log.d("DialogFlow***", String.format("Patient = %s\nDate = %s\nTime = %s\nDoctor = %s", patient, localDate, localTime, doctor));
+    if (returnResponse.getQueryResult().getAction().equals("OpenPharmacySearchpage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","searchPharm");
+      startActivity(senderIntent);
 
-        if(patient!="" & doctor!="" & dateAndTime!="" &
-                patient!=null & doctor!=null & dateAndTime!=null){
+    }
 
-            BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
-            Log.d("DialogFlow***", "Done");
-        }
+    if (returnResponse.getQueryResult().getAction().equals("OpenPatientRecordsPage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","patientRecords");
+      startActivity(senderIntent);
 
-//        if(patient!="" & doctor!="" & dateAndTime!="" &
-//                patient!=null & doctor!=null & dateAndTime!=null){
-//
-//            BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
-//            Log.d("DialogFlow***", "Done");
-//        }
+    }
 
-        if (returnResponse.getQueryResult().getAction().equals("OpenTransactionHistorypage")){
-            Intent intent = new Intent(this, TransactionHistory.class);
-            startActivity(intent);
-        }
+    if (returnResponse.getQueryResult().getAction().equals("OpenPatientDetialspage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","patientDetails");
+      startActivity(senderIntent);
+    }
 
-        if (returnResponse.getQueryResult().getAction().equals("BuyMedicine")){
-            drug = returnResponse.getQueryResult().getParameters().getFieldsMap().get("drug").getStringValue()+"";
-            quantity = returnResponse.getQueryResult().getParameters().getFieldsMap().get("quantity").getStringValue()+"";
-            Log.d("DialogFlow***", drug);
-            Log.d("DialogFlow***", quantity);
-            if (drug!="" & quantity!="" & drug!=null & quantity!=null ){
-                Random ran = new Random();
-                double next = ran.nextInt(46);
-                double result = 500 + (next * 100);
-                if (result > 5000) {
-                    result = 5000;
-                }
-                price = Double.toString(result);
-                String item = drug + " " + quantity;
+    if (returnResponse.getQueryResult().getAction().equals("OpenMedicalHistorypage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","medicalHistory");
+      startActivity(senderIntent);
+    }
 
-                Intent senderIntent = new Intent( this, PrescriptionTransaction.class);
-                senderIntent.putExtra("ITEM", item);
-                senderIntent.putExtra("PRICE",price);
-                startActivity(senderIntent);
+    if (returnResponse.getQueryResult().getAction().equals("OpenPrescriptionspage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","prescriptionsPage");
+      startActivity(senderIntent);
+    }
 
-            }
-
-        }
+    if (returnResponse.getQueryResult().getAction().equals("OpenLabReportspage")){
+      Intent senderIntent = new Intent(this, MainActivity2.class);
+      senderIntent.putExtra("Page","labReport");
+      startActivity(senderIntent);
     }
 
 
+
+    if (returnResponse.getQueryResult().getAction().equals("BuyMedicine")){
+      drug = returnResponse.getQueryResult().getParameters().getFieldsMap().get("drug").getStringValue()+"";
+      quantity = returnResponse.getQueryResult().getParameters().getFieldsMap().get("quantity").getStringValue()+"";
+      Log.d("DialogFlow***", drug);
+      Log.d("DialogFlow***", quantity);
+      if (drug!="" & quantity!="" & drug!=null & quantity!=null ){
+        Random ran = new Random();
+        double next = ran.nextInt(46);
+        double result = 500 + (next * 100);
+        if (result > 5000) {
+          result = 5000;
+        }
+        price = Double.toString(result);
+        String item = drug + " " + quantity;
+
+        Intent senderIntent = new Intent( this, PrescriptionTransaction.class);
+        senderIntent.putExtra("ITEM", item);
+        senderIntent.putExtra("PRICE",price);
+        startActivity(senderIntent);
+
+      }
+
+    }
+
+
+
+  }
 }
 
 
