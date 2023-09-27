@@ -2,23 +2,16 @@ package com.example.capstoneprojectgroup4.interface_of_doctors;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -76,7 +69,7 @@ public class DoctorLoginPage extends Fragment {
         Button login = v.findViewById(R.id.login_button);
         TextView signup = v.findViewById(R.id.sign_up_link);
         EditText email_ = v.findViewById(R.id.loginenter_email);
-        EditText password_ = v.findViewById(R.id.enter_password);
+        EditText password_ = v.findViewById(R.id.EditText_EnterPassword);
 
         auth = FirebaseAuth.getInstance();
 /*        login.setOnClickListener(new View.OnClickListener() {

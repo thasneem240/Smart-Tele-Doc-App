@@ -18,9 +18,11 @@ import android.content.Intent;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
+import com.example.capstoneprojectgroup4.transaction.TransactionHistory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,15 +84,15 @@ public class MainMenu extends Fragment {
         ImageView chatBot = v.findViewById(R.id.Ai_square);
         Button emergency = v.findViewById(R.id.emergencyButton);
         Button chatbotButton = v.findViewById(R.id.aiButton);
+        Button transactionButton = v.findViewById(R.id.transactionButton);
+        ImageView transactionImageView = v.findViewById(R.id.transaction_square);
 
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                callIntent.setData(Uri.parse("tel:119"));
-
-                // Start the dialer activity
-                startActivity(callIntent);
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                EmergencyFragment searchDoctors = new EmergencyFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
 
@@ -160,6 +162,22 @@ public class MainMenu extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 MedicalRecords searchDoctors = new MedicalRecords();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
+
+        transactionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), TransactionHistory.class);
+                startActivity(intent);
+            }
+        });
+
+        transactionImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), TransactionHistory.class);
+                startActivity(intent);
             }
         });
 

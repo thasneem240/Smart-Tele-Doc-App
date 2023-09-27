@@ -6,16 +6,21 @@ public class Pharmacy {
     String Address;
     String PhoneNumber;
 
+    String Maps;
+
+
     Pharmacy()
     {
 
     }
 
-    public Pharmacy(String Name, String Address, String PhoneNumber)
+    public Pharmacy(String Name, String Address, String PhoneNumber, String Maps)
     {
         this.Name = Name;
         this.Address = Address;
         this.PhoneNumber = PhoneNumber;
+        this.Maps = Maps;
+
     }
 
 
@@ -30,4 +35,9 @@ public class Pharmacy {
     public String getAddress() {
         return Address;
     }
+
+    public String getMaps() {
+        return Maps;
+    }
+
 }

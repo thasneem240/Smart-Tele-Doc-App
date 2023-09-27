@@ -12,31 +12,51 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/backButtonPatProf"
+            android:id="@+id/ImageView_AccountSettings_backbutton"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="26dp"
-            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_FirstName"
+            android:layout_height="0dp"
+            android:layout_marginTop="11dp"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.046"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/TextInputLayout_FirstName"
+            android:id="@+id/TextInputLayout_Email"
             android:layout_width="377dp"
             android:layout_height="0dp"
-            android:layout_marginTop="66dp"
-            android:layout_marginBottom="770dp"
             android:background="@drawable/user_profile_rectangle"
-            android:hint="First name"
+            android:hint="Email"
             android:textColorHint="#013073"
-            app:layout_constraintBottom_toTopOf="@+id/Button_Logout"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_FirstName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/ImageView_AccountSettings_backbutton">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/EditText_Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#3174D4"
+                android:textSize="15sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextInputLayout_FirstName"
+            android:layout_width="377dp"
+            android:layout_height="0dp"
+            android:background="@drawable/user_profile_rectangle"
+            android:hint="First name"
+            android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_LastName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EditText_FirstName"
@@ -50,11 +70,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextInputLayout_LastName"
             android:layout_width="377dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="18dp"
+            android:layout_height="0dp"
             android:background="@drawable/user_profile_rectangle"
             android:hint="Last name"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Nic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,15 +93,17 @@
 
             android:id="@+id/TextInputLayout_Nic"
             android:layout_width="379dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="19dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="203dp"
+            android:layout_marginBottom="384dp"
             android:background="@drawable/user_profile_rectangle"
             android:hint="NIC"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/Button_Logout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_LastName">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EditText_Nic"
@@ -96,11 +118,11 @@
 
             android:id="@+id/TextInputLayout_Dob"
             android:layout_width="379dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="19dp"
+            android:layout_height="0dp"
             android:background="@drawable/user_profile_rectangle"
             android:hint="Date of birth"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Gender"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,11 +141,11 @@
 
             android:id="@+id/TextInputLayout_Gender"
             android:layout_width="379dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="18dp"
+            android:layout_height="0dp"
             android:background="@drawable/user_profile_rectangle"
             android:hint="Gender"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Mobile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -142,11 +164,11 @@
 
             android:id="@+id/TextInputLayout_Mobile"
             android:layout_width="379dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="19dp"
+            android:layout_height="0dp"
             android:background="@drawable/user_profile_rectangle"
             android:hint="Mobile number"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Height"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -165,11 +187,11 @@
 
             android:id="@+id/TextInputLayout_Height"
             android:layout_width="379dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="19dp"
+            android:layout_height="0dp"
             android:background="@drawable/user_profile_rectangle"
             android:hint="Height"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Weight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -188,11 +210,11 @@
 
             android:id="@+id/TextInputLayout_Weight"
             android:layout_width="379dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="18dp"
+            android:layout_height="0dp"
             android:background="@drawable/user_profile_rectangle"
             android:hint="Weight"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Country"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -210,11 +232,11 @@
 
             android:id="@+id/TextInputLayout_Country"
             android:layout_width="379dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="19dp"
+            android:layout_height="0dp"
             android:background="@drawable/user_profile_rectangle"
             android:hint="Country"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_City"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -232,11 +254,11 @@
 
             android:id="@+id/TextInputLayout_City"
             android:layout_width="379dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="19dp"
+            android:layout_height="0dp"
             android:background="@drawable/user_profile_rectangle"
             android:hint="City"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Address"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -254,11 +276,11 @@
 
             android:id="@+id/TextInputLayout_Address"
             android:layout_width="379dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="19dp"
+            android:layout_height="0dp"
             android:background="@drawable/user_profile_rectangle"
             android:hint="Address"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toTopOf="@+id/Button_Update"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -277,26 +299,30 @@
             android:id="@+id/Button_Logout"
             android:layout_width="113dp"
             android:layout_height="0dp"
+            android:layout_marginBottom="383dp"
             android:background="@drawable/rectangle_4"
             android:text="Logout"
             android:textColorHint="#013073"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/Button_Update"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_FirstName" />
+            app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Nic" />
 
         <Button
             android:id="@+id/Button_Update"
             android:layout_width="113dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="87dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="383dp"
             android:background="@drawable/rectangle_4"
             android:text="Update"
             android:textColorHint="#013073"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/Button_Logout"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Address" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -311,7 +337,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="40dp" />
+            app:layout_constraintGuide_begin="1066dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

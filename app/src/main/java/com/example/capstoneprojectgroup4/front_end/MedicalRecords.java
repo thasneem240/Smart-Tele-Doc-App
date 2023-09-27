@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.front_end;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,10 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.capstoneprojectgroup4.Activity_Remote_Consultation;
 import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
+
+import java.time.Instant;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,38 +72,28 @@ public class MedicalRecords extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_medical_records, container, false);
-        Button doctorButton = v.findViewById(R.id.Button_UploadPrescription);
 
         ImageView backButton = v.findViewById(R.id.backButtonMedicalRecords);
 
         Button patientDetailButton = v.findViewById(R.id.button1);
+        ImageView patientDetailsImageView = v.findViewById(R.id.ImageView_PatientDetails);
         ImageView medicalHistoryImageView = v.findViewById(R.id.medicalHistoryImageView);
         Button medicalHistoryButton = v.findViewById(R.id.button2);
         ImageView labReportsImageView = v.findViewById(R.id.labReportsImageView);
         Button labReportsButton = v.findViewById(R.id.button3);
-        ImageView prescriptionsImageView = v.findViewById(R.id.square5);
-        Button prescriptionsButton = v.findViewById(R.id.Button_UploadPrescription);
+        ImageView prescriptionsImageView = v.findViewById(R.id.ImageView_ViewPrescriptions);
+        Button prescriptionsButton = v.findViewById(R.id.Button_ViewPrescriptions);
+        ImageView imageView_RemoteConsultation = v.findViewById(R.id.imageView_RemoteConsultation);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 MainMenu searchDoctors = new MainMenu();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
-
-        doctorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                PrescriptionWriting searchDoctors = new PrescriptionWriting();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();            }
-        });
-
-
 
         patientDetailButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +102,17 @@ public class MedicalRecords extends Fragment {
                 AccountSettings accountSettings = new AccountSettings();
 
                 fm.beginTransaction().replace(R.id.fragmentContainerView, accountSettings).commit();
+            }
+        });
+
+        patientDetailsImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                AccountSettings accountSettings = new AccountSettings();
+
+                fm.beginTransaction().replace(R.id.fragmentContainerView, accountSettings).commit();
+
             }
         });
 
@@ -168,6 +173,16 @@ public class MedicalRecords extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+            }
+        });
+
+
+        imageView_RemoteConsultation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getActivity(), Activity_Remote_Consultation.class);
+                startActivity(intent);
             }
         });
 

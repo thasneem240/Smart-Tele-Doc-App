@@ -1,32 +1,34 @@
 package com.example.capstoneprojectgroup4;
+import android.net.Uri;
 
 class LabReport
 {
-    private String reportID;
-    private String patientID;
-    private String reportText;
+    private String title;
+    private Uri imageUri;
 
-    public String getReportID() {
-        return reportID;
+    public LabReport(String title, Uri imageUri)
+    {
+        this.title = title;
+        this.imageUri = imageUri;
     }
 
-    public void setReportID(String reportID) {
-        this.reportID = reportID;
+    public String getTitle()
+    {
+        return title;
     }
 
-    public String getPatientID() {
-        return patientID;
+    public void setTitle(String title)
+    {
+        this.title = title;
     }
 
-    public void setPatientID(String patientID) {
-        this.patientID = patientID;
+    public Uri getImageUri()
+    {
+        return imageUri;
     }
 
-    public String getReportText() {
-        return reportText;
-    }
-
-    public void setReportText(String reportText) {
-        this.reportText = reportText;
+    public void setImageUri(Uri imageUri)
+    {
+        this.imageUri = imageUri;
     }
 }
