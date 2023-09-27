@@ -71,7 +71,7 @@
 
 
     <ImageView
-        android:id="@+id/ImageView_HidePassword"
+        android:id="@+id/ImageView_LoginEye"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/EditText_EnterPassword"

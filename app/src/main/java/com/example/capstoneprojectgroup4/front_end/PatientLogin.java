@@ -3,6 +3,7 @@ package com.example.capstoneprojectgroup4.front_end;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -87,12 +88,12 @@ public class PatientLogin extends Fragment {
         EditText email_ = v.findViewById(R.id.loginenter_email);
         EditText password_ = v.findViewById(R.id.EditText_EnterPassword);
         ImageView backButton = v.findViewById(R.id.backButton);
-        ImageView hidePassword = v.findViewById(R.id.ImageView_HidePassword);
+        ImageView hidePassword = v.findViewById(R.id.ImageView_LoginEye);
 
         fm = getActivity().getSupportFragmentManager();
         mAuth = FirebaseAuth.getInstance();
 
-//        password_.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        password_.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 //        password_.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
 
@@ -157,6 +158,16 @@ public class PatientLogin extends Fragment {
                 fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, aPatientOrADoctor).commit();
             }
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                A_Patient_Or_A_Doctor aPatientOrADoctor = new A_Patient_Or_A_Doctor();
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, aPatientOrADoctor).commit();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
         return v;
     }

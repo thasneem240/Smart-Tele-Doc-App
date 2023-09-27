@@ -1,25 +1,37 @@
 package com.example.capstoneprojectgroup4;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import android.widget.Toast;
+
 import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
-import com.google.firebase.database.DatabaseReference;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -37,16 +49,16 @@ public class Frag_LabReports extends Fragment
 
 
     // Variable Declarations
-    private static final int FILE_PICKER_REQUEST_CODE = 1;
     private Button selectFileButton;
-    private EditText selectedFileNameEditText;
+    private ImageView firebaseImage;
     private Button uploadButton;
+    private Button listReports;
+    private Uri imageUri;
+    private String fileName = null;
 
+    private StorageReference storageReference;
+    private ProgressDialog progressDialog;
 
-    // Firebase
-
-   // StorageReference storageReference;
-   // DatabaseReference databaseReference;
 
 
     // TODO: Rename and change types of parameters
@@ -97,10 +109,13 @@ public class Frag_LabReports extends Fragment
 
 
         selectFileButton = view.findViewById(R.id.selectFileButton);
-        selectedFileNameEditText = view.findViewById(R.id.selectedFileNameEditText);
+        firebaseImage = view.findViewById(R.id.firebaseImage);
+
         uploadButton = view.findViewById(R.id.uploadButton);
+        listReports = view.findViewById(R.id.listReport);
 
         ImageView backButton = view.findViewById(R.id.backButtonLabReports);
+        final boolean[] isSelected = {false};
 
         /* Grab the  UI Variables from Layout file */
 
@@ -118,7 +133,8 @@ public class Frag_LabReports extends Fragment
             @Override
             public void onClick(View v)
             {
-                openFilePicker();
+                selectImage();
+                isSelected[0] = true;
             }
         });
 
@@ -128,93 +144,98 @@ public class Frag_LabReports extends Fragment
             @Override
             public void onClick(View v)
             {
-                // Implement file upload logic here
-                // You can use the selected file (URI) for uploading to a server or saving locally.
-                String selectedFilePath = selectedFileNameEditText.getText().toString();
-                // Handle the upload logic accordingly.
+                if(isSelected[0])
+                {
+                    uploadFile();
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Select the File Before Upload!!!! ", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
+        listReports.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getActivity(),Activity_ListLabReports.class);
+                startActivity(intent);
+            }
+        });
 
         return  view;
     }
 
-
-
-    private void openFilePicker()
+    private void selectImage()
     {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*,application/pdf"); // Allow JPG and PDF files
-        startActivityForResult(intent, FILE_PICKER_REQUEST_CODE);
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,100);
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == FILE_PICKER_REQUEST_CODE && resultCode == Activity.RESULT_OK)
+        if(requestCode == 100 && data != null && data.getData() != null)
         {
-            if (data != null && data.getData() != null)
-            {
-                Uri selectedFileUri = data.getData();
-                selectedFileNameEditText.setText(selectedFileUri.toString());
-            }
+            imageUri = data.getData();
+            firebaseImage.setImageURI(imageUri);
         }
     }
 
-    // Query the database for lab reports
-  //  DatabaseReference labReportsRef = databaseReference.child("lab_reports").child(patientID);
+
+    private void uploadFile()
+    {
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Uploading File.....");
+        progressDialog.show();
 
 
-    // Function to retrieve and display patient's records and lab reports
- /*   private void displayPatientRecords(String patientID) {
-        // Query the database for patient information
-        DatabaseReference patientRef = databaseReference.child("patients").child(patientID);
-        patientRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    PatientRecord patient = dataSnapshot.getValue(PatientRecord.class);
-                    // Update UI with patient's information
-                    // For example, set TextViews with patient's name, ID, etc.
-                    TextView patientNameTextView = view.findViewById(R.id.patientNameTextView);
-                    patientNameTextView.setText(patient.getPatientName());
-                }
-            }
+        //String Uid = MainActivity.getPatientObject().getUid();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle errors
-            }
-        });
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.ENGLISH);
+        Date now = new Date();
 
-        // Query the database for lab reports
-        DatabaseReference labReportsRef = databaseReference.child("lab_reports").child(patientID);
-        labReportsRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    // Iterate through lab reports
-                    for (DataSnapshot reportSnapshot : dataSnapshot.getChildren()) {
-                        LabReport labReport = reportSnapshot.getValue(LabReport.class);
-                        // Display each lab report in your UI (e.g., add to a ListView)
-                        // You can also create a new fragment to display lab reports individually.
+        String fileTitle = formatter.format(now);
+        //String fileTitle = formatter.format(Uid + "_" + now);
+
+        storageReference = FirebaseStorage.getInstance().getReference("Lab_Reports/" + fileTitle);
+        storageReference.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
+                {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                    {
+                        firebaseImage.setImageURI(null);
+                        Toast.makeText(getActivity(),"Successfully uploaded", Toast.LENGTH_SHORT).show();
+
+                        if(progressDialog.isShowing())
+                        {
+                            progressDialog.dismiss();
+                        }
                     }
-                }
-            }
+                }).addOnFailureListener(new OnFailureListener()
+                {
+                    @Override
+                    public void onFailure(@NonNull Exception e)
+                    {
+                        if(progressDialog.isShowing())
+                        {
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(getActivity(),"Failed to upload", Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle errors
-            }
-        });
+                    }
+                });
+
     }
-
-    // Call this method when you want to display patient records (e.g., in onCreateView)
-    displayPatientRecords(patientID); // Pass the patient's unique ID as a parameter*/
-
-
-
 
 }

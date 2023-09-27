@@ -1,6 +1,7 @@
 package com.example.capstoneprojectgroup4;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.SurfaceView;
@@ -10,6 +11,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -19,6 +22,9 @@ public class Activity_VideoConference extends AppCompatActivity
 
     private SurfaceView localVideoView;
     private SurfaceView remoteVideoView;
+    private Button addNoteButton;
+    private TextView patientNameTextView;
+    private TextView patientMedicalHistoryTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,6 +34,9 @@ public class Activity_VideoConference extends AppCompatActivity
 
         localVideoView = findViewById(R.id.localVideoView);
         remoteVideoView = findViewById(R.id.remoteVideoView);
+        addNoteButton = findViewById(R.id.addNoteButton);
+        patientNameTextView = findViewById(R.id.patientNameTextView);
+        patientMedicalHistoryTextView = findViewById(R.id.patientMedicalHistoryTextView);
 
         // Check and request camera permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -43,23 +52,20 @@ public class Activity_VideoConference extends AppCompatActivity
         }
 
 
-        Patient patient = getPatientData("A.S.M. Thasneem"); // Fetch patient data by name
-        TextView patientNameTextView = findViewById(R.id.patientNameTextView);
-        TextView patientMedicalHistoryTextView = findViewById(R.id.patientMedicalHistoryTextView);
-
-        if (patient != null) {
-            patientNameTextView.setText("Patient Name: " + patient.getPatientName());
-            //patientMedicalHistoryTextView.setText("Medical History: " + patient.getMedicalHistory());
-        }
-
-
-
+        addNoteButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(Activity_VideoConference.this,Activity_NoteTaking.class);
+                startActivity(intent);
+            }
+        });
 
 
 
 
     }
-
 
 
     // Initialize your video conferencing components here
@@ -69,13 +75,7 @@ public class Activity_VideoConference extends AppCompatActivity
     }
 
 
-    private Patient getPatientData(String patientName)
-    {
-        // Query the database or API to retrieve patient data by name
-        // Return a Patient object with the fetched data
-        Patient pat = new Patient();
-        return  pat;
-    }
+
 
 
     // Handle permission request results
@@ -87,9 +87,13 @@ public class Activity_VideoConference extends AppCompatActivity
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
             {
                 initializeVideoConference();
-            } else {
+            } else
+            {
                 // Handle permission denial
             }
         }
     }
+
+
+
 }

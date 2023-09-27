@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
@@ -139,17 +140,18 @@ public class Pharmacy extends Fragment {
                     String name = (String) doctorSnapshot.child("Name").getValue();
                     String location = (String) doctorSnapshot.child("Address").getValue();
                     String phoneNum = (String) doctorSnapshot.child("PhoneNumber").getValue();
+                    String maps = (String) doctorSnapshot.child("Maps").getValue();
 
                     if (searchType == 0 && name != null && name.toLowerCase().contains(nameEd.toLowerCase())) {
-                        com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum);
+                        com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum, maps);
                         pharmacies.add(doctor);
                     } else if (searchType == 1 && location != null && location.toLowerCase().contains(locationEd.toLowerCase())) {
-                        com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum);
+                        com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum, maps);
                         pharmacies.add(doctor);
 
                     }
                 }
-                PharmacyAdapter pharmacyAdapter = new PharmacyAdapter(pharmacies);
+                PharmacyAdapter pharmacyAdapter = new PharmacyAdapter(getContext(),pharmacies);
                 recyclerView.setAdapter(pharmacyAdapter);
 
 

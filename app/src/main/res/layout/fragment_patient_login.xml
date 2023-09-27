@@ -71,31 +71,6 @@
         android:src="@drawable/password_icon" />
 
 
-    <ImageView
-        android:id="@+id/ImageView_HidePassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/EditText_EnterPassword"
-        android:layout_alignTop="@+id/EditText_EnterPassword"
-        android:layout_marginStart="325dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/eye_slash" />
-
-    <TextView
-        android:id="@+id/forgot_password"
-        android:layout_width="128dp"
-        android:layout_height="23dp"
-        android:layout_below="@id/EditText_EnterPassword"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="251dp"
-        android:gravity="center_horizontal|top"
-        android:lineSpacingExtra="4sp"
-        android:text="Forgot Password?"
-        android:textColor="#013073"
-        android:textSize="15sp" />
     <Button
         android:id="@+id/login_button"
         android:layout_width="210dp"

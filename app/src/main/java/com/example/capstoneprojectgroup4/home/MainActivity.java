@@ -6,11 +6,13 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.authentication.PatientObject;
 import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
 
 
 public class MainActivity extends AppCompatActivity
 {
+    private static PatientObject patientObject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,12 @@ public class MainActivity extends AppCompatActivity
             startupPage = new StartUpFragment();
             fm.beginTransaction().add(R.id.FragmentContainer_MainActivity, startupPage).commit();
         }
+    }
 
+    public static void setPatientObject(PatientObject patientObjectP){
+        patientObject = patientObjectP;
+    }
+    public static PatientObject getPatientObject(){
+        return patientObject;
     }
 }
