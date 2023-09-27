@@ -44,6 +44,7 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
         Availability availability = availabilities.get(position);
         Log.d("AvailAdapter", "startTime: " + availability.getStartTime());
         Log.d("AvailAdapter", "endTime: " + availability.getEndTime());
+        Log.d("AvailAdapter", "noapp: " + availability.getNoApp());
 
         holder.bind(availability);
         String dateV = availability.getDate();
@@ -57,7 +58,7 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
                 FragmentManager fm = activity.getSupportFragmentManager();
 
                 // Pass the selected date to the BookAppointmentF fragment
-                BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName, dateV, start, End, String.valueOf(noApp));
+                BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName, dateV, start, End, String.valueOf(availability.getNoApp()));
                 fm.beginTransaction()
                         .replace(R.id.fragmentContainerView, fragment)
                         .addToBackStack("DocAvailF")

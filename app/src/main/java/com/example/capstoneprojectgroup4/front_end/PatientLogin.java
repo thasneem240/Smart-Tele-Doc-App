@@ -88,7 +88,7 @@ public class PatientLogin extends Fragment {
         EditText email_ = v.findViewById(R.id.loginenter_email);
         EditText password_ = v.findViewById(R.id.EditText_EnterPassword);
         ImageView backButton = v.findViewById(R.id.backButton);
-        ImageView hidePassword = v.findViewById(R.id.ImageView_LoginEye);
+     //   ImageView hidePassword = v.findViewById(R.id.ImageView_LoginEye);
 
         fm = getActivity().getSupportFragmentManager();
         mAuth = FirebaseAuth.getInstance();
