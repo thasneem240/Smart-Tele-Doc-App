@@ -1,6 +1,8 @@
 package com.example.capstoneprojectgroup4.front_end;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -45,6 +47,11 @@ public class AccountSettings extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private static final String PREFS_NAME = "ProfilePrefs";
+    private static final String PROFILE_IMAGE_KEY = "profileImageResource";
+
+    private int currentProfileImageResource = R.drawable.female_avatar; // Initialize with the default image
+
     TextInputEditText emailEditText, firstNameEditText, lastNameEditText,
     nicEditText, dobEditText, genderEditText, mobileEditText,
     heightEditText, weightEditText, countryEditText, cityEditText, addressEditText;
@@ -92,7 +99,7 @@ public class AccountSettings extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_account_settings, container, false);
-
+        ImageView profileImage =  v.findViewById(R.id.ProfileImage);
         emailEditText = v.findViewById(R.id.EditText_Email);
         firstNameEditText = v.findViewById(R.id.EditText_FirstName);
         lastNameEditText = v.findViewById(R.id.EditText_LastName);
@@ -108,7 +115,10 @@ public class AccountSettings extends Fragment {
         updateButton = v.findViewById(R.id.Button_Update);
         logoutButton = v.findViewById(R.id.Button_Logout);
         backButton = v.findViewById(R.id.ImageView_AccountSettings_backbutton);
+        int savedProfileImageResource = getSavedProfileImageResource();
 
+        // Set the profile image based on the saved resource
+        profileImage.setImageResource(savedProfileImageResource);
         emailEditText.setEnabled(false);
 
         database = FirebaseDatabase.getInstance();
@@ -172,6 +182,27 @@ public class AccountSettings extends Fragment {
                 else{
                     patientObject.setCompleted(false);
 
+                }
+
+                String patientGender = genderEditText.getText().toString();
+
+                int newProfileImageResource;
+                if ("Male".equalsIgnoreCase(patientGender)) {
+                    newProfileImageResource = R.drawable.male_avatar;
+                } else if ("Female".equalsIgnoreCase(patientGender)) {
+                    newProfileImageResource = R.drawable.female_avatar;
+                } else {
+                    // Handle other genders or cases here if needed
+                    newProfileImageResource = R.drawable.female_avatar; // Set a default image
+                }
+
+                // Check if the gender has changed before updating the profile image
+                if (newProfileImageResource != savedProfileImageResource) {
+                    // Update the profile image
+                    profileImage.setImageResource(newProfileImageResource);
+
+                    // Save the new profile image resource using SharedPreferences
+                    saveProfileImageResource(newProfileImageResource);
                 }
 
 
@@ -259,5 +290,17 @@ public class AccountSettings extends Fragment {
 
         return v;
     }
+
+    private void saveProfileImageResource(int resource) {
+        SharedPreferences.Editor editor = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit();
+        editor.putInt(PROFILE_IMAGE_KEY, resource);
+        editor.apply();
+    }
+
+    private int getSavedProfileImageResource() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getInt(PROFILE_IMAGE_KEY, R.drawable.female_avatar); // Default to female_avatar if not found
+    }
+
 
 }

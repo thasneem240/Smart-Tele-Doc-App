@@ -18,57 +18,74 @@
         android:textColor="#407C87"
         android:gravity="center_horizontal|top" />
 
-    <EditText
-        android:id="@+id/loginenter_email"
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loginenter_email_layout"
         android:layout_width="371dp"
         android:layout_height="52.57dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
-        android:background="@drawable/rounded_rec"
+        android:background="@drawable/rectangle_12"
         android:strokeWidth="2"
         android:strokeColor="#E5E7EB"
-        android:gravity="center"
         android:hint="Enter your email"
         android:textColorHint="#A1A8B0"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:gravity="center_horizontal|center_vertical">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginenter_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="40dp"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/login_email_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/loginenter_email"
-        android:layout_alignTop="@+id/loginenter_email"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="14dp"
-        android:src="@drawable/message_icon" />
-
-    <EditText
-        android:id="@+id/EditText_EnterPassword"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/EditText_EnterPassword_layout"
         android:layout_width="371dp"
         android:layout_height="52.57dp"
-        android:layout_below="@+id/loginenter_email"
+        android:layout_below="@id/loginenter_email_layout"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="23dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_rec"
-        android:gravity="center"
+        android:background="@drawable/rectangle_12"
         android:hint="Enter your Password"
-        android:strokeWidth="2"
-        android:strokeColor="#E5E7EB"
         android:textColorHint="#A1A8B0"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
 
+        android:gravity="center_horizontal|center_vertical">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText_EnterPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="40dp"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/password_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/EditText_EnterPassword"
-        android:layout_alignTop="@+id/EditText_EnterPassword"
-        android:layout_marginStart="33dp"
+        android:layout_alignStart="@+id/EditText_EnterPassword_layout"
+        android:layout_alignTop="@+id/EditText_EnterPassword_layout"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="19dp"
         android:src="@drawable/password_icon" />
+
+    <ImageView
+        android:id="@+id/login_email_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/loginenter_email_layout"
+        android:layout_alignTop="@+id/loginenter_email_layout"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/message_icon" />
 
 
     <Button

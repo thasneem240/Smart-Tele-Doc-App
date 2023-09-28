@@ -34,6 +34,16 @@
         android:textSize="22sp" />
 
 
+    <Button
+        android:id="@+id/pharma_Button"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="264dp"
+        android:layout_marginTop="233dp"
+        android:background="@drawable/layered_pharmacy_button" />
+
     <ImageView
         android:id="@+id/records_square"
         android:layout_width="139.29dp"
@@ -41,9 +51,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="229dp"
+        android:layout_marginLeft="227dp"
         android:layout_marginTop="507dp"
-        android:layout_marginEnd="43dp"
+        android:layout_marginEnd="45dp"
         android:background="@drawable/blue_square" />
 
     <ImageView
@@ -53,9 +63,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="229dp"
+        android:layout_marginLeft="227dp"
         android:layout_marginTop="216dp"
-        android:layout_marginEnd="43dp"
+        android:layout_marginEnd="45dp"
         android:background="@drawable/yellow_square"
         android:contentDescription="Pharmacy Button" />
 
@@ -65,29 +75,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="72dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="236dp"
         android:background="@drawable/layered_doc_button" />
-
-    <Button
-        android:id="@+id/pharma_Button"
-        android:layout_width="63dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="266dp"
-        android:layout_marginTop="233dp"
-        android:background="@drawable/layered_pharmacy_button" />
-
-    <Button
-        android:id="@+id/emergencyButton"
-        android:layout_width="60dp"
-        android:layout_height="57dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="375dp"
-        android:background="@drawable/layered_emergency_button" />
 
     <Button
         android:id="@+id/aiButton"
@@ -95,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="266dp"
+        android:layout_marginLeft="264dp"
         android:layout_marginTop="376dp"
         android:background="@drawable/layered_ai_button" />
 
@@ -105,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="264dp"
+        android:layout_marginLeft="262dp"
         android:layout_marginTop="523dp"
         android:background="@drawable/layered_records_button"
         android:contentDescription="@string/app_name" />
@@ -116,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="70dp"
+        android:layout_marginLeft="68dp"
         android:layout_marginTop="525dp"
         android:background="@drawable/layered_transaction_icon"
         android:contentDescription="@string/app_name" />
@@ -127,7 +117,7 @@
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="37dp"
+        android:layout_marginLeft="35dp"
         android:layout_marginTop="361dp"
         android:background="@drawable/blue_square" />
 
@@ -137,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="444dp"
         android:gravity="center_horizontal|top"
         android:text="Emergency"
@@ -151,9 +141,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="229dp"
+        android:layout_marginLeft="227dp"
         android:layout_marginTop="361dp"
-        android:layout_marginEnd="43dp"
+        android:layout_marginEnd="45dp"
         android:background="@drawable/green_square" />
 
     <TextView
@@ -162,7 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="226dp"
+        android:layout_marginLeft="224dp"
         android:layout_marginTop="449dp"
         android:gravity="center_horizontal|top"
         android:text="AI Helper"
@@ -175,7 +165,7 @@
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="37dp"
+        android:layout_marginLeft="35dp"
         android:layout_marginTop="508dp"
         android:background="@drawable/yellow_square" />
 
@@ -185,7 +175,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="597dp"
         android:gravity="center_horizontal|top"
         android:text="Transactions"
@@ -198,7 +188,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="228dp"
+        android:layout_marginLeft="226dp"
         android:layout_marginTop="303dp"
         android:gravity="center_horizontal|top"
         android:text="Pharmacy"
@@ -212,8 +202,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginLeft="37dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
         android:layout_marginTop="218dp"
         android:src="@drawable/green_square" />
 
@@ -223,7 +213,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="28dp"
+        android:layout_marginLeft="26dp"
         android:layout_marginTop="306dp"
         android:gravity="center_horizontal|top"
         android:text="Doctor"
@@ -236,12 +226,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="225dp"
+        android:layout_marginLeft="223dp"
         android:layout_marginTop="597dp"
         android:gravity="center_horizontal|top"
         android:text="Records"
         android:textColor="#000000"
         android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/emergencyButton"
+        android:layout_width="60dp"
+        android:layout_height="57dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="375dp"
+        android:background="@drawable/layered_emergency_button" />
 
     <TextView
         android:id="@+id/your_virtua"
