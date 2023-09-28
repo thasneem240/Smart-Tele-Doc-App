@@ -1186,15 +1186,15 @@ public class SearchDocF extends Fragment  {
     }
 
 
-    private void showDatePickerDialogNL(String name , String loc) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+    private void showDatePickerDialogNL(String name, String loc) {
+        Log.d(TAG, "showDatePickerDialogNL() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1204,26 +1204,28 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchNameLocationAndDate(name, loc, formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
 
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         datePickerDialog.show();
     }
 
-    private void showDatePickerDialogEverything(String name , String spec, String loc) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+
+    private void showDatePickerDialogEverything(String name, String spec, String loc) {
+        Log.d(TAG, "showDatePickerDialogEverything() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1233,30 +1235,27 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
-                        performSearchNameSpecializationLocationAndDate(name, spec,loc, formattedDate);
-
+                        performSearchNameSpecializationLocationAndDate(name, spec, loc, formattedDate);
                     }
                 });
             }
         }, year, month, day);
 
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         datePickerDialog.show();
     }
 
-
-
-
-
-    private void showDatePickerDialogNS(String name , String spec) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+    private void showDatePickerDialogNS(String name, String spec) {
+        Log.d(TAG, "showDatePickerDialogNS() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1266,28 +1265,27 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchNameSpecializationAndDate(name, spec, formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
 
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         datePickerDialog.show();
     }
 
-
-
-    private void showDatePickerDialogLS(String spec , String loc) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+    private void showDatePickerDialogLS(String spec, String loc) {
+        Log.d(TAG, "showDatePickerDialogLS() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1297,26 +1295,27 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchSpecializationLocationAndDate(spec, loc, formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
+
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
         datePickerDialog.show();
     }
 
     private void showDatePickerDialogN(String name) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+        Log.d(TAG, "showDatePickerDialogN() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1326,25 +1325,27 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchNameAndDate(name, formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
+
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
         datePickerDialog.show();
     }
+
     private void showDatePickerDialogL(String location) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+        Log.d(TAG, "showDatePickerDialogL() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1354,13 +1355,14 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchLocationAndDate(location, formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
+
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
         datePickerDialog.show();
     }
@@ -1373,7 +1375,7 @@ public class SearchDocF extends Fragment  {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1383,44 +1385,48 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchDate(formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
 
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         datePickerDialog.show();
     }
+
     private void showDatePickerDialogS(String specializationV) {
-        Log.d(TAG, "showDatePickerDialog() called");
+        Log.d(TAG, "showDatePickerDialogS() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
                 String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
                 etDate.setText(formattedDate); // Set the text of the datePickerButton to the selected date
                 searchButton.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        Log.d(TAG, "1");
-
-                                                        performSearchSpecializationAndDate(specializationV, formattedDate);
-
-                                                    }
-                                                });
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG, "1");
+                        performSearchSpecializationAndDate(specializationV, formattedDate);
+                    }
+                });
             }
         }, year, month, day);
 
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         datePickerDialog.show();
     }
+
 
     private void performSearchDate(String formattedDate) {
         DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference("Availability");
