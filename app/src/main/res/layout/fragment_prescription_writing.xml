@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".prescriptions.writing_prescriptions.CreatePrescriptionFragment">
+    tools:context=".writing_prescriptions.CreatePrescriptionFragment">
 
     <ImageView
         android:id="@+id/ImageView_PrescriptionWritingBackButton"
