@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
 
@@ -75,6 +76,7 @@ public class MainMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main_menu, container, false);
+        TextView tt = v.findViewById(R.id.good_mornin);
         Button doctorButton = v.findViewById(R.id.doctor_Button);
         ImageView doctorImageView = v.findViewById(R.id.docSquare);
         Button recordsButton = v.findViewById(R.id.records_Button);
@@ -86,6 +88,8 @@ public class MainMenu extends Fragment {
         Button chatbotButton = v.findViewById(R.id.aiButton);
         Button transactionButton = v.findViewById(R.id.transactionButton);
         ImageView transactionImageView = v.findViewById(R.id.transaction_square);
+
+        tt.setText("Good Morning, " + MainActivity.getPatientObject().getFirstName());
 
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override

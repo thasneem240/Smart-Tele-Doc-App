@@ -51,7 +51,7 @@ public class SearchDocF extends Fragment  {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    int searchType = -1; // Default to no specific search
+    public int searchType = -1; // Default to no specific search
     Map <String, Object> doctors = new HashMap<>();
     Map<String, Object> detailsOfEachDoctor = new HashMap<>();
     String nameResult = "";
@@ -59,16 +59,16 @@ public class SearchDocF extends Fragment  {
     ArrayList<String> locations;
     private String mParam1;
     private String mParam2;
-    TextView etName ;
-    TextView etSpecialization ;
-    TextView etLocation;
-    TextView etDate ;
+    public TextView etName ;
+    public TextView etSpecialization ;
+    public TextView etLocation;
+    public TextView etDate ;
     private Toolbar toolbar;
     String specializationV;
     private Button searchButton;
     private RadioGroup radioGroup;
     private EditText searchEditText;
-    private RecyclerView recyclerView;
+    public RecyclerView recyclerView;
     private DoctorAdapter doctorAdapter;
 
     private DocSearchResultAdapter docSearchResultAdapter;
@@ -162,7 +162,7 @@ public class SearchDocF extends Fragment  {
         return view;
     }
 
-    private void openDateSearch()
+    public void openDateSearch()
     {
         String specializationV = etSpecialization.getText().toString().trim();
         String nameV = etName.getText().toString().trim();
@@ -205,7 +205,7 @@ public class SearchDocF extends Fragment  {
 
     }
 
-    private void performSearch() {
+    public void performSearch() {
         String selectedDate = etDate.getText().toString();
         String nameEd = etName.getText().toString().trim();
         String specializationEd = etSpecialization.getText().toString().trim();
@@ -1397,7 +1397,7 @@ public class SearchDocF extends Fragment  {
         datePickerDialog.show();
     }
 
-    private void showDatePickerDialogS(String specializationV) {
+    public void showDatePickerDialogS(String specializationV) {
         Log.d(TAG, "showDatePickerDialogS() called");
 
         Calendar calendar = Calendar.getInstance();
