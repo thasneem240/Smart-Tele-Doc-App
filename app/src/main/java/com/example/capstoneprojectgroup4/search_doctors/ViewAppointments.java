@@ -25,8 +25,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class ViewAppointments extends Fragment {
 
@@ -62,6 +67,14 @@ public class ViewAppointments extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Get the current date and time in the device's local time zone
+        Calendar calendar = Calendar.getInstance();
+        Date currentDateTime = calendar.getTime();
+
+        // Create a SimpleDateFormat for date and time comparison using the device's local time zone
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
+        dateTimeFormat.setTimeZone(TimeZone.getDefault()); // Set to local time zone
+
         // Create a database reference to the "Appointment Data" section for the specific user
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Appointment Data")
                 .child(userId); // This will reference the appointments for the specific user.
@@ -75,10 +88,21 @@ public class ViewAppointments extends Fragment {
                 for (DataSnapshot appointmentSnapshot : dataSnapshot.getChildren()) {
                     // Deserialize the data into an AppointmentItem object
                     AppointmentItem appointment = appointmentSnapshot.getValue(AppointmentItem.class);
-                    Log.d("MyApp", "Appointment List Size: " + appointment.getDoctorName());
 
                     if (appointment != null) {
-                        appointments.add(appointment);
+                        // Parse the end time string to a Date object
+                        Date endTime;
+                        try {
+                            endTime = dateTimeFormat.parse(appointment.getDate() + " " + appointment.getEndTime());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            continue; // Skip invalid date-time formats
+                        }
+
+                        // Compare end time with the current date-time
+                        if (endTime != null && endTime.after(currentDateTime) || endTime.equals(currentDateTime)) {
+                            appointments.add(appointment);
+                        }
                     }
                 }
 
@@ -94,4 +118,5 @@ public class ViewAppointments extends Fragment {
             }
         });
     }
+
 }

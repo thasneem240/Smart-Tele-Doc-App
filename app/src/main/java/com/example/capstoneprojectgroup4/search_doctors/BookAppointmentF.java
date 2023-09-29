@@ -128,14 +128,15 @@ public class BookAppointmentF extends Fragment {
                 String getPatientName = MainActivity.getPatientObject().getFirstName();
                 String email = MainActivity.getPatientObject().getEmail();
                 String getAppointmentType = appointmentType.getText().toString();
-                uploadAppointment(email, getPatientName, doctorName, day, getAppointmentType);
+
+                uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType);
             }
         });
 
         return view;
     }
 
-    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String VoiceVideoCallType) {
+    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end , String VoiceVideoCallType) {
         // Sanitize the email to remove invalid characters
         String sanitizedEmail = email.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
@@ -147,6 +148,8 @@ public class BookAppointmentF extends Fragment {
         appointmentData.put("PatientEmail", sanitizedEmail);
         appointmentData.put("DoctorName", sanitizedDoctorName);
         appointmentData.put("AppointmentType", VoiceVideoCallType);
+        appointmentData.put("StartTime", start);
+        appointmentData.put("EndTime", end);
         appointmentData.put("Date", pDay);
 
         // Use the sanitized email as the unique key for the patient
@@ -154,6 +157,7 @@ public class BookAppointmentF extends Fragment {
 
         // Generate a unique key for the appointment
         String appointmentKey = databaseReference.child("Appointment Data").child(patientKey).push().getKey();
+        Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
 
         // Use the generated key to store the appointment data under the patient's appointments
         databaseReference.child("Appointment Data").child(patientKey).child(appointmentKey).setValue(appointmentData)
