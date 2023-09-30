@@ -13,7 +13,7 @@ import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.PatientLogin;
-import com.example.capstoneprojectgroup4.prescriptions.writing_prescriptions.WritingPrescriptionActivity;
+import com.example.capstoneprojectgroup4.writing_prescriptions.WritingPrescriptionActivity;
 
 /**
  * A simple {@link Fragment} subclass.

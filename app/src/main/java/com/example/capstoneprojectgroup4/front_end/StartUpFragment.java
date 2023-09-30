@@ -80,36 +80,29 @@ public class StartUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_start_up, container, false);
-        Button startButton = v.findViewById(R.id.Startbutton);
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(currentUser == null){
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    A_Patient_Or_A_Doctor a_patient_or_a_doctor = new A_Patient_Or_A_Doctor();
-                    fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, a_patient_or_a_doctor).commit();
-                }
-                else{
-                    if(currentUser.isEmailVerified()){
-                        userDetailsOrMainMenu();
-                    }
-                    else {
-                        Toast.makeText(getActivity(), "You have already signed-in using "+currentUser.getEmail()+"\nPlease verify your email.", Toast.LENGTH_SHORT).show();
-
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        Signup_EmailVerificationF signupEmailVerificationF = new Signup_EmailVerificationF();
-                        fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signupEmailVerificationF).commit();
-                    }
-
-                }
+        if(currentUser == null){
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            A_Patient_Or_A_Doctor a_patient_or_a_doctor = new A_Patient_Or_A_Doctor();
+            fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, a_patient_or_a_doctor).commit();
+        }
+        else{
+            if(currentUser.isEmailVerified()){
+                userDetailsOrMainMenu();
             }
-        });
+            else {
+                Toast.makeText(getActivity(), "You have already signed-in using "+currentUser.getEmail()+"\nPlease verify your email.", Toast.LENGTH_SHORT).show();
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Signup_EmailVerificationF signupEmailVerificationF = new Signup_EmailVerificationF();
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signupEmailVerificationF).commit();
+            }
+
+        }
 
         return v;
     }
