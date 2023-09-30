@@ -6,20 +6,32 @@ public class AppointmentItem {
     private String DoctorName;
     private String AppointmentType;
     private String Date;
+    private String EndTime;
+    private String StartTime;
+
 
     public AppointmentItem() {
         // Default constructor required for Firebase
     }
 
-    public AppointmentItem(String patientName, String patientEmail, String doctorName, String appointmentType, String date) {
+    public AppointmentItem(String patientName, String patientEmail, String doctorName, String appointmentType, String date,String StartTime, String EndTime) {
         this.PatientName = patientName;
         this.PatientEmail = patientEmail;
         this.DoctorName = doctorName;
         this.AppointmentType = appointmentType;
         this.Date = date;
+        this.EndTime = EndTime;
+        this.StartTime = StartTime;
+
     }
 
+    public String getStartTime() {
+        return StartTime;
+    }
 
+    public String getEndTime() {
+        return EndTime;
+    }
 
     public String getPatientName() {
         return PatientName;
