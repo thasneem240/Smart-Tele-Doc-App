@@ -37,6 +37,10 @@ import com.google.common.collect.Lists;
 
 
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -144,13 +148,13 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     String doctor = null;
     String patient = null;
     String dateAndTime = null;
+    String date = null;
+    String time = null;
     String drug = null;
     String quantity = null;
     String price = null;
-
-
-//    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient"))
-//      patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStringValue()+"";
+    LocalDate localDate = null;
+    LocalTime localTime = null;
 
     if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient")){
       if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStructValue().getFieldsMap().containsKey("name")){
@@ -158,8 +162,29 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
       }
     }
 
-    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date-time"))
-      dateAndTime = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date-time").getStringValue()+"";
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date")){
+      date = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date").getStringValue()+"";
+
+      if(!date.equals("")){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+          DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+          ZonedDateTime zonedDateTime = ZonedDateTime.parse(date, formatter);
+          localDate = zonedDateTime.toLocalDate();
+        }
+      }
+    }
+
+    if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("time")){
+      time = returnResponse.getQueryResult().getParameters().getFieldsMap().get("time").getStringValue()+"";
+
+      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(time, formatter);
+        localTime = zonedDateTime.toLocalTime();
+      }
+    }
 
     if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("doctor")){
       if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().containsKey("name")){
@@ -167,10 +192,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
       }
     }
 
-   // Log.d("DialogFlow***", ""+returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getListValue().getValues(0).getStructValue().getFieldsMap().get("name").getStringValue());
-   // Log.d("DialogFlow***", ""+returnResponse.getQueryResult());
-        Log.d("DialogFlow***", String.format("Patient = %s\nDate and time = %s\nDoctor = %s", patient, dateAndTime, doctor));
-
+    Log.d("DialogFlow***", String.format("Patient = %s\nDate = %s\nTime = %s\nDoctor = %s", patient, localDate, localTime, doctor));
 
     if(patient!="" & doctor!="" & dateAndTime!="" &
             patient!=null & doctor!=null & dateAndTime!=null){
