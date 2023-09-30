@@ -7,11 +7,11 @@
     tools:context=".search_doctors.ViewAppointments">
 
     <ImageView
-        android:id="@+id/backButtonSearchDoc2"
+        android:id="@+id/backButtonViewApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="368dp"
+        android:layout_marginEnd="360dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
@@ -20,8 +20,9 @@
         android:id="@+id/recyclerAppView"
         android:layout_width="374dp"
         android:layout_height="511dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="33dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,5 +58,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButtonSearchDoc2" />
+        app:layout_constraintTop_toBottomOf="@+id/backButtonViewApp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

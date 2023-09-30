@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
@@ -116,6 +117,9 @@ public class AccountSettings extends Fragment {
         logoutButton = v.findViewById(R.id.Button_Logout);
         backButton = v.findViewById(R.id.ImageView_AccountSettings_backbutton);
         int savedProfileImageResource = getSavedProfileImageResource();
+        TextView tt = v.findViewById(R.id.textView4);
+
+        tt.setText("Hi, " + MainActivity.getPatientObject().getFirstName());
 
         // Set the profile image based on the saved resource
         profileImage.setImageResource(savedProfileImageResource);
