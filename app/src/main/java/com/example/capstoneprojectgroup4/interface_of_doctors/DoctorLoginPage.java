@@ -1,17 +1,22 @@
 package com.example.capstoneprojectgroup4.interface_of_doctors;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.front_end.PatientLogin;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -65,11 +70,32 @@ public class DoctorLoginPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_patient_login, container, false);
-        Button login = v.findViewById(R.id.login_button);
-        TextView signup = v.findViewById(R.id.sign_up_link);
-        EditText email_ = v.findViewById(R.id.loginenter_email);
-        EditText password_ = v.findViewById(R.id.EditText_EnterPassword);
+        View v = inflater.inflate(R.layout.fragment_doctor_login_page, container, false);
+        Button login = v.findViewById(R.id.login_button3);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent prescriptionActivity = new Intent(getActivity(), MainActivity4.class);
+                startActivity(prescriptionActivity);
+            }
+        });
+
+        ImageView back = v.findViewById(R.id.backButtonDocLog);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent prescriptionActivity = new Intent(getActivity(), MainActivity.class);
+                startActivity(prescriptionActivity);
+            }
+        });
+
+
+
+
+      /*  TextView signup = v.findViewById(R.id.sign_up_link);
+        EditText email_ = v.findViewById(R.id.EditText_Doctor_Enter_Reg_Layout);
+        EditText password_ = v.findViewById(R.id.EditText_Doctor_Enter_Password);*/
 
         auth = FirebaseAuth.getInstance();
 /*        login.setOnClickListener(new View.OnClickListener() {

@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_EnterEmail">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditText_EnterPassword"
+            android:id="@+id/EditText_Doctor_Enter_Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"

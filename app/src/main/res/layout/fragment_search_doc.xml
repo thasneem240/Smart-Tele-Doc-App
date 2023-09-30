@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInputLayout_searchName"
+        android:id="@+id/TextInputLayout_searchPatName"
         android:layout_width="327dp"
         android:layout_height="52.57dp"
         android:layout_alignParentLeft="true"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchName"
+            android:id="@+id/PatsearchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="10sp" />
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchName">
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchPatName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/searchSpec"
@@ -197,8 +197,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="19dp"
         android:src="@drawable/search_icon"
-        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchName"
-        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchName" />
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchPatName"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchPatName" />
 
     <ImageView
         android:id="@+id/specIcon"
@@ -225,7 +225,7 @@
         android:text="Search Doctors"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/searchName"
+        app:layout_constraintBottom_toTopOf="@+id/PatsearchName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="parent"

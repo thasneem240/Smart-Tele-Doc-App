@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.PatientLogin;
+import com.example.capstoneprojectgroup4.interface_of_doctors.MainActivity;
 import com.example.capstoneprojectgroup4.writing_prescriptions.WritingPrescriptionActivity;
 
 /**
@@ -82,8 +83,12 @@ public class A_Patient_Or_A_Doctor extends Fragment {
         doctorInterfaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent prescriptionActivity = new Intent(getActivity(), WritingPrescriptionActivity.class);
-                startActivity(prescriptionActivity);
+               // Intent prescriptionActivity = new Intent(getActivity(), WritingPrescriptionActivity.class);
+               // startActivity(prescriptionActivity);
+
+                Intent prescriptionActivity = new Intent(getActivity(), MainActivity.class);
+                 startActivity(prescriptionActivity);
+
             }
         });
 

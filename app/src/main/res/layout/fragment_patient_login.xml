@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginenter_email_layout"
+        android:id="@+id/Doctor_Enter_Reg_Layout"
         android:layout_width="371dp"
         android:layout_height="52.57dp"
         android:layout_centerHorizontal="true"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/login_title">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginenter_email"
+            android:id="@+id/EditText_Doctor_Enter_Reg_Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -51,10 +51,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/EditText_EnterPassword_layout"
+        android:id="@+id/Doctor_Enter_Password"
         android:layout_width="371dp"
         android:layout_height="52.57dp"
-        android:layout_below="@id/loginenter_email_layout"
+        android:layout_below="@id/Doctor_Enter_Reg_Layout"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="37dp"
@@ -67,10 +67,10 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginenter_email_layout">
+        app:layout_constraintTop_toBottomOf="@+id/Doctor_Enter_Reg_Layout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditText_EnterPassword"
+            android:id="@+id/EditText_Doctor_Enter_Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -82,26 +82,26 @@
         android:id="@+id/password_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/EditText_EnterPassword_layout"
-        android:layout_alignTop="@+id/EditText_EnterPassword_layout"
+        android:layout_alignStart="@+id/Doctor_Enter_Password"
+        android:layout_alignTop="@+id/Doctor_Enter_Password"
         android:layout_marginStart="10dp"
         android:layout_marginTop="19dp"
         android:src="@drawable/password_icon"
-        app:layout_constraintStart_toStartOf="@+id/EditText_EnterPassword_layout"
-        app:layout_constraintTop_toTopOf="@+id/EditText_EnterPassword_layout" />
+        app:layout_constraintStart_toStartOf="@+id/Doctor_Enter_Password"
+        app:layout_constraintTop_toTopOf="@+id/Doctor_Enter_Password" />
 
 
     <ImageView
         android:id="@+id/login_email_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/loginenter_email_layout"
-        android:layout_alignTop="@+id/loginenter_email_layout"
+        android:layout_alignStart="@+id/Doctor_Enter_Reg_Layout"
+        android:layout_alignTop="@+id/Doctor_Enter_Reg_Layout"
         android:layout_marginStart="10dp"
         android:layout_marginTop="19dp"
         android:src="@drawable/message_icon"
-        app:layout_constraintStart_toStartOf="@+id/loginenter_email_layout"
-        app:layout_constraintTop_toTopOf="@+id/loginenter_email_layout" />
+        app:layout_constraintStart_toStartOf="@+id/Doctor_Enter_Reg_Layout"
+        app:layout_constraintTop_toTopOf="@+id/Doctor_Enter_Reg_Layout" />
 
     <Button
         android:id="@+id/login_button"
@@ -117,7 +117,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditText_EnterPassword_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/Doctor_Enter_Password" />
 
     <TextView
         android:id="@+id/dont_have_account_text"
