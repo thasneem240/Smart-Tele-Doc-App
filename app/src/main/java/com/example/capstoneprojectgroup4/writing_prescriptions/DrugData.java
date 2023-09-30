@@ -2,14 +2,18 @@ package com.example.capstoneprojectgroup4.writing_prescriptions;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
@@ -32,12 +36,9 @@ public class DrugData extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    ArrayList<DatabaseDrugObject> listOfDrugData;
     PrescriptionDrugObject selectedDrug;
     int position;
-    public DrugData(ArrayList<DatabaseDrugObject> listOfDrugData){
-        this.listOfDrugData = listOfDrugData;
-    }
+
     public DrugData(PrescriptionDrugObject selectedDrug, int position){
         this.selectedDrug = selectedDrug;
     }
@@ -79,17 +80,38 @@ public class DrugData extends Fragment {
         View v = inflater.inflate(R.layout.fragment_drug_data, container, false);
 
         Button nameOfTheDrug = v.findViewById(R.id.Button_NameOfTheDrug);
-        Button brandName = v.findViewById(R.id.Button_BrandName);
         Button add = v.findViewById(R.id.Button_Add);
+        Spinner brands = v.findViewById(R.id.Spinner_AvailableBrands);
+        Spinner strengths = v.findViewById(R.id.Spinner_AvailbleStrenghts);
 
         FragmentManager fm = getActivity().getSupportFragmentManager();
 
-        if(selectedDrug == null){
+        ArrayList<DatabaseDrugObject> listOfDrugData;
+        WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getContext();
+        listOfDrugData = writingPrescriptionActivity.getListOfDrugData();
 
+        if(selectedDrug != null){
+            nameOfTheDrug.setText(selectedDrug.getNameOfTheDrug());
+
+            ArrayList<String> listOfBrandNames = listOfDrugData.get(position).getBrandNames();
+            ArrayAdapter<String> arrayAdapterBrands = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, listOfBrandNames);
+            arrayAdapterBrands.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            brands.setAdapter(arrayAdapterBrands);
+
+            ArrayList<String> listOfStrengths = listOfDrugData.get(position).getAvailableStrengths();
+            ArrayAdapter<String> arrayAdapterStrengths = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, listOfStrengths);
+            arrayAdapterStrengths.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            strengths.setAdapter(arrayAdapterStrengths);
         }
         else{
-            nameOfTheDrug.setText(selectedDrug.getNameOfTheDrug());
+            ArrayList<String> emptyArrayList = new ArrayList<>();
+            emptyArrayList.add("Please select a drug first");
+            ArrayAdapter<String> emptyArrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, emptyArrayList);
+            emptyArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            brands.setAdapter(emptyArrayAdapter);
+            strengths.setAdapter(emptyArrayAdapter);
         }
+
 
         nameOfTheDrug.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,25 +127,60 @@ public class DrugData extends Fragment {
             }
         });
 
-        brandName.setOnClickListener(new View.OnClickListener() {
+        brands.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                ArrayList<String> listOfBrandNames = listOfDrugData.get(position).getBrandNames();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(selectedDrug != null){
+                    selectedDrug.setBrandName(adapterView.getItemAtPosition(i).toString());
+                }
+            }
 
-                SearchWordByWord searchWordByWord = new SearchWordByWord(listOfBrandNames);
-                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, searchWordByWord).commit();
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
+
+        strengths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(selectedDrug != null){
+                    selectedDrug.setStrength(adapterView.getItemAtPosition(i).toString());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(selectedDrug == null){
+                    Toast.makeText(writingPrescriptionActivity, "Please select a drug, the name and the strength", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(selectedDrug.getNameOfTheDrug().equals("")){
+                    Toast.makeText(writingPrescriptionActivity, "Please select a drug, the name and the strength", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(selectedDrug.getBrandName().equals("")){
+                    Toast.makeText(writingPrescriptionActivity, "Please select the name of the brand.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(selectedDrug.getStrength().equals("")){
+                    Toast.makeText(writingPrescriptionActivity, "Please select the strength", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) view.getContext();
                 writingPrescriptionActivity.setSelectedDrug(selectedDrug);
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DrugsContainers drugsContainers = new DrugsContainers();
-//                fm.beginTransaction().remove(fm.findFragmentById(R.id.FragmentContainerView_SelectTheDrug)).commit();
                 fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();
             }
         });

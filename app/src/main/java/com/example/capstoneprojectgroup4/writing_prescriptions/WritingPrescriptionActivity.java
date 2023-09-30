@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class WritingPrescriptionActivity extends AppCompatActivity {
     private PrescriptionObject prescriptionObject = new PrescriptionObject();
     private ArrayList<PrescriptionDrugObject> selectedDrug = new ArrayList<>();
+    private ArrayList<DatabaseDrugObject> listOfDrugData = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,5 +52,17 @@ public class WritingPrescriptionActivity extends AppCompatActivity {
 
     public void setPrescriptionObject(PrescriptionObject prescriptionObject) {
         this.prescriptionObject = prescriptionObject;
+    }
+
+    public void setSelectedDrug(ArrayList<PrescriptionDrugObject> selectedDrug) {
+        this.selectedDrug = selectedDrug;
+    }
+
+    public ArrayList<DatabaseDrugObject> getListOfDrugData() {
+        return listOfDrugData;
+    }
+
+    public void setListOfDrugData(ArrayList<DatabaseDrugObject> listOfDrugData) {
+        this.listOfDrugData = listOfDrugData;
     }
 }

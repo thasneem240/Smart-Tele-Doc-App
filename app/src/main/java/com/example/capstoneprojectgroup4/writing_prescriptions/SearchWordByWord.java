@@ -117,7 +117,8 @@ public class SearchWordByWord extends Fragment {
                 }
 
                 SelectTheDrug selectTheDrug = new SelectTheDrug(output);
-                fm.beginTransaction().replace(R.id.FragmentContainerView_SelectTheDrug, selectTheDrug).commit();
+//                fm.beginTransaction().replace(R.id.FragmentContainerView_SelectTheDrug, selectTheDrug).commit();
+                fm.beginTransaction().replace(R.id.FrameLayout_FragmentContainer, selectTheDrug).commit();
             }
 
             @Override

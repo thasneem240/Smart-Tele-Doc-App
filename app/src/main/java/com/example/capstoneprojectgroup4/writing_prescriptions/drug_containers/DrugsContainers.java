@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.writing_prescriptions.AddDrugsManually;
@@ -41,6 +43,7 @@ public class DrugsContainers extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ProgressBar loadingDrugs;
 
     public DrugsContainers() {
         // Required empty public constructor
@@ -77,17 +80,22 @@ public class DrugsContainers extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_select_drugs, container, false);
+        View v = inflater.inflate(R.layout.fragment_drug_containers, container, false);
 
         Button backToPrescription = v.findViewById(R.id.button_to_prescription);
         Button addDrugsFromTheList = v.findViewById(R.id.button_add_drugs);
         Button addDrugsManuallyButton = v.findViewById(R.id.Button_AddDrugsManually);
+        loadingDrugs = v.findViewById(R.id.ProgressBar_LoadingDrugs);
 
         RecyclerView rv = v.findViewById(R.id.drugs_container_recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getActivity();
         DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter(writingPrescriptionActivity.getSelectedDrug());
         rv.setAdapter(drugsContainersAdapter);
+
+        loadingDrugs.setVisibility(View.VISIBLE);
+
+        downloadDataOfDrugsFromTheDatabase();
 
         backToPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,44 +105,61 @@ public class DrugsContainers extends Fragment {
                 fm.beginTransaction().replace(R.id.fragmentContainerPrescription, createPrescription).commit();
             }
         });
+        addDrugsFromTheList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(loadingDrugs.getVisibility() == View.INVISIBLE){
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    DrugData drugData = new DrugData();
+                    fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugData).commit();
+                }
+                else{
+                    Toast.makeText(writingPrescriptionActivity, "Loading database ............", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         addDrugsManuallyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                AddDrugsManually addDrugsManually = new AddDrugsManually();
-                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, addDrugsManually).commit();
-            }
-        });
-
-        addDrugsFromTheList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("database_of_drugs");
-                ArrayList<DatabaseDrugObject> listOfDrugData = new ArrayList<>();
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot ds: dataSnapshot.getChildren()){
-                            DatabaseDrugObject s = ds.getValue(DatabaseDrugObject.class);
-                            listOfDrugData.add(s);
-                        }
-
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        DrugData drugData = new DrugData(listOfDrugData);
-//                fm.beginTransaction().remove(fm.findFragmentById(R.id.fragmentContainerPrescription));
-                        fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugData).commit();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                    }
-                });
+                if(loadingDrugs.getVisibility() == View.INVISIBLE){
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    AddDrugsManually addDrugsManually = new AddDrugsManually();
+                    fm.beginTransaction().replace(R.id.fragmentContainerPrescription, addDrugsManually).commit();
+                }
+                else{
+                    Toast.makeText(writingPrescriptionActivity, "Loading database ............", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         return v;
+    }
+
+    public void downloadDataOfDrugsFromTheDatabase(){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("database_of_drugs");
+        ArrayList<DatabaseDrugObject> listOfDrugData = new ArrayList<>();
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    DatabaseDrugObject s = ds.getValue(DatabaseDrugObject.class);
+                    listOfDrugData.add(s);
+                }
+
+                WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getContext();
+                writingPrescriptionActivity.setListOfDrugData(listOfDrugData);
+
+                loadingDrugs.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
     }
 }
