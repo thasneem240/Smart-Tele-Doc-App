@@ -15,7 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.writing_prescriptions.select_the_drug.SelectTheDrug;
+import com.example.capstoneprojectgroup4.writing_prescriptions.select_from_the_list.SelectTheDrug;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -35,10 +35,10 @@ public class SearchWordByWord extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    ArrayList<String> listOfDrugs;
+    ArrayList<String> list;
 
-    public SearchWordByWord(ArrayList<String> listOfDrugs) {
-        this.listOfDrugs = listOfDrugs;
+    public SearchWordByWord(ArrayList<String> list) {
+        this.list = list;
     }
 
     public SearchWordByWord() {
@@ -109,13 +109,13 @@ public class SearchWordByWord extends Fragment {
                 }
 
                 ArrayList<String> output = new ArrayList<>();
-//
-                for(String drug : listOfDrugs){
+
+                for(String drug : list){
                         if(Pattern.compile(Pattern.quote(ss), Pattern.CASE_INSENSITIVE).matcher(drug).find()){ // The version of case sensitivity removed -> number.contains(ss)
                             output.add(drug);
                         }
                 }
-//                Log.d("**((", ""+ss);
+
                 SelectTheDrug selectTheDrug = new SelectTheDrug(output);
                 fm.beginTransaction().replace(R.id.FragmentContainerView_SelectTheDrug, selectTheDrug).commit();
             }

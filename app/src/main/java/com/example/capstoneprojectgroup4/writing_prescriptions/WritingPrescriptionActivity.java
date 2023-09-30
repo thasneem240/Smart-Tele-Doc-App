@@ -12,28 +12,37 @@ import java.util.ArrayList;
 
 public class WritingPrescriptionActivity extends AppCompatActivity {
     private PrescriptionObject prescriptionObject = new PrescriptionObject();
-    private ArrayList<String> selectedDrug2s = new ArrayList<>();
+    private ArrayList<PrescriptionDrugObject> selectedDrug = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prescription);
 
         FragmentManager fm = getSupportFragmentManager();
-        CreatePrescriptionFragment createPrescriptionFragment = (CreatePrescriptionFragment) fm.findFragmentById(R.id.fragmentContainerPrescription);
+        CreatePrescription createPrescription = (CreatePrescription) fm.findFragmentById(R.id.fragmentContainerPrescription);
 
-        if (createPrescriptionFragment == null) {
-            createPrescriptionFragment = new CreatePrescriptionFragment();
-            fm.beginTransaction().replace(R.id.fragmentContainerPrescription, createPrescriptionFragment).commit();
+        if (createPrescription == null) {
+            createPrescription = new CreatePrescription();
+            fm.beginTransaction().replace(R.id.fragmentContainerPrescription, createPrescription).commit();
         }
     }
 
-    public ArrayList<String> getSelectedDrug2s() {
-        return selectedDrug2s;
+    public ArrayList<PrescriptionDrugObject> getSelectedDrug() {
+        return selectedDrug;
     }
 
-    public void setSelectedDrug2s(String drugName) {
+//    public void setSelectedDrug(String drugName, String brandName, String strength, String notes) {
+//        PrescriptionDrugObject prescriptionDrugObject = new PrescriptionDrugObject();
+//        prescriptionDrugObject.setNameOfTheDrug(drugName);
+//        prescriptionDrugObject.setBrandName(brandName);
+//        prescriptionDrugObject.setStrength(strength);
+//        prescriptionDrugObject.setDrugSpecificNotes(notes);
+//
+//        this.selectedDrug.add(prescriptionDrugObject);
+//    }
 
-        this.selectedDrug2s.add(drugName);
+    public void setSelectedDrug(PrescriptionDrugObject prescriptionDrugObject){
+        this.selectedDrug.add(prescriptionDrugObject);
     }
 
     public PrescriptionObject getPrescriptionObject() {

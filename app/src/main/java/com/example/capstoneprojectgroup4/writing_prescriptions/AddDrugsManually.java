@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
 import com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers.DrugsContainers;
 
 /**
@@ -82,8 +83,11 @@ public class AddDrugsManually extends Fragment {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
                 if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    PrescriptionDrugObject prescriptionDrugObject = new PrescriptionDrugObject();
+                    prescriptionDrugObject.setNameOfTheDrug(nameOfTheDrug.getText().toString());
+
                     WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getContext();
-                    writingPrescriptionActivity.setSelectedDrug2s(nameOfTheDrug.getText().toString());
+                    writingPrescriptionActivity.setSelectedDrug(prescriptionDrugObject);
 
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     DrugsContainers drugsContainers = new DrugsContainers();
@@ -98,8 +102,11 @@ public class AddDrugsManually extends Fragment {
         addDrugsManually.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PrescriptionDrugObject prescriptionDrugObject = new PrescriptionDrugObject();
+                prescriptionDrugObject.setNameOfTheDrug(nameOfTheDrug.getText().toString());
+
                 WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getContext();
-                writingPrescriptionActivity.setSelectedDrug2s(nameOfTheDrug.getText().toString());
+                writingPrescriptionActivity.setSelectedDrug(prescriptionDrugObject);
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DrugsContainers drugsContainers = new DrugsContainers();

@@ -14,8 +14,9 @@ import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.writing_prescriptions.AddDrugsManually;
-import com.example.capstoneprojectgroup4.writing_prescriptions.SearchWordByWord;
-import com.example.capstoneprojectgroup4.writing_prescriptions.CreatePrescriptionFragment;
+import com.example.capstoneprojectgroup4.writing_prescriptions.DatabaseDrugObject;
+import com.example.capstoneprojectgroup4.writing_prescriptions.DrugData;
+import com.example.capstoneprojectgroup4.writing_prescriptions.CreatePrescription;
 import com.example.capstoneprojectgroup4.writing_prescriptions.WritingPrescriptionActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -85,15 +86,15 @@ public class DrugsContainers extends Fragment {
         RecyclerView rv = v.findViewById(R.id.drugs_container_recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getActivity();
-        DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter(writingPrescriptionActivity.getSelectedDrug2s());
+        DrugsContainersAdapter drugsContainersAdapter = new DrugsContainersAdapter(writingPrescriptionActivity.getSelectedDrug());
         rv.setAdapter(drugsContainersAdapter);
 
         backToPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                CreatePrescriptionFragment createPrescriptionFragment = new CreatePrescriptionFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, createPrescriptionFragment).commit();
+                CreatePrescription createPrescription = new CreatePrescription();
+                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, createPrescription).commit();
             }
         });
 
@@ -109,25 +110,21 @@ public class DrugsContainers extends Fragment {
         addDrugsFromTheList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                FragmentManager fm = getActivity().getSupportFragmentManager();
-//                SelectTheDrug selectTheDrug = new SelectTheDrug(listOfDrugs);
-//                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, selectTheDrug).commit();
-
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Drugs");
-                ArrayList<String> listOfDrugs = new ArrayList<>();
+                DatabaseReference myRef = database.getReference("database_of_drugs");
+                ArrayList<DatabaseDrugObject> listOfDrugData = new ArrayList<>();
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for(DataSnapshot ds: dataSnapshot.getChildren()){
-                            String s = ds.getKey();
-                            listOfDrugs.add(s);
+                            DatabaseDrugObject s = ds.getValue(DatabaseDrugObject.class);
+                            listOfDrugData.add(s);
                         }
 
                         FragmentManager fm = getActivity().getSupportFragmentManager();
-                        SearchWordByWord searchWordByWord = new SearchWordByWord(listOfDrugs);
+                        DrugData drugData = new DrugData(listOfDrugData);
 //                fm.beginTransaction().remove(fm.findFragmentById(R.id.fragmentContainerPrescription));
-                        fm.beginTransaction().replace(R.id.fragmentContainerPrescription, searchWordByWord).commit();
+                        fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugData).commit();
                     }
 
                     @Override

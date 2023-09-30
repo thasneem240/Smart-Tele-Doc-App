@@ -8,14 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
 import com.example.capstoneprojectgroup4.writing_prescriptions.WritingPrescriptionActivity;
 
 import java.util.ArrayList;
 
 public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainersViewHolder>{
     WritingPrescriptionActivity writingPrescriptionActivity;
-    ArrayList<String> selectedDrugsList;
-    public DrugsContainersAdapter(ArrayList<String> selectedDrugsList){
+    ArrayList<PrescriptionDrugObject> selectedDrugsList;
+    public DrugsContainersAdapter(ArrayList<PrescriptionDrugObject> selectedDrugsList){
         this.selectedDrugsList = selectedDrugsList;
     }
 
@@ -32,7 +33,7 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
 
     @Override
     public void onBindViewHolder(@NonNull DrugsContainersViewHolder holder, int position) {
-            holder.medicineName.setText(selectedDrugsList.get(position));
+            holder.medicineName.setText(selectedDrugsList.get(position).getNameOfTheDrug());
     }
 
     @Override
