@@ -156,6 +156,14 @@ public class PharmaciesF extends Fragment {
         return view;
     }
 
+
+    private String removeWhitespaceAndToLower(String input) {
+        if (input == null) {
+            return "";
+        }
+        return input.replaceAll("\\s", "").toLowerCase();
+    }
+
     private void performSearch() {
         String nameEd = etPharmName.getText().toString().trim();
         String drugsEd = etPharmDrugs.getText().toString().trim();
@@ -182,10 +190,10 @@ public class PharmaciesF extends Fragment {
                     String phoneNum = (String) doctorSnapshot.child("PhoneNumber").getValue();
                     String maps = (String) doctorSnapshot.child("Maps").getValue();
 
-                    if (searchType == 0 && name != null && name.toLowerCase().contains(nameEd.toLowerCase())) {
+                    if (searchType == 0 && name != null && removeWhitespaceAndToLower(name).startsWith(removeWhitespaceAndToLower(nameEd))) {
                         com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum, maps);
                         pharmacies.add(doctor);
-                    } else if (searchType == 1 && location != null && location.toLowerCase().contains(locationEd.toLowerCase())) {
+                    } else if (searchType == 1 && location != null && removeWhitespaceAndToLower(location).startsWith(removeWhitespaceAndToLower(locationEd))) {
                         com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum, maps);
                         pharmacies.add(doctor);
 
