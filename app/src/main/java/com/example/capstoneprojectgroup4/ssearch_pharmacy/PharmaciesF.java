@@ -1,7 +1,5 @@
 package com.example.capstoneprojectgroup4.ssearch_pharmacy;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,25 +46,29 @@ public class PharmaciesF extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public FirebaseDatabase firebaseDatabase;
+
 
     Button searchButton;
     Toolbar toolbar;
     Button orderButton;
     Button bestPrice;
+    public static final String TAG = "PharmaciesF"; // Add this TAG field
+
 
     RadioGroup radioGroup;
-    TextView etPharmName ;
-    int searchType=-1;
+    public TextView etPharmName ;
+    public int searchType=-1;
 
-    TextView etPharmLocation;
+    public TextView etPharmLocation;
     TextView etPharmDrugs ;
     RecyclerView recyclerView;
 
 
     Button search;
-    PharmacyAdapter pharmacyAdapter;
+    public PharmacyAdapter pharmacyAdapter;
     private SearchView searchView;
-    FragmentManager fm;
+    public FragmentManager fm;
 
 
     public PharmaciesF() {
@@ -100,7 +102,10 @@ public class PharmaciesF extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -110,7 +115,7 @@ public class PharmaciesF extends Fragment {
 
         etPharmName= view.findViewById(R.id.searchPharmName);
         etPharmLocation = view.findViewById(R.id.searchPharmLoc);
-        etPharmDrugs = view.findViewById(R.id.searchDrugs);
+       // etPharmDrugs = view.findViewById(R.id.searchDrugs);
         recyclerView = view.findViewById(R.id.pharmrv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ImageView backButton = view.findViewById(R.id.backButtonPharma);
@@ -164,9 +169,8 @@ public class PharmaciesF extends Fragment {
         return input.replaceAll("\\s", "").toLowerCase();
     }
 
-    private void performSearch() {
+    public void performSearch() {
         String nameEd = etPharmName.getText().toString().trim();
-        String drugsEd = etPharmDrugs.getText().toString().trim();
         String locationEd = etPharmLocation.getText().toString().trim();
 
         Query query = FirebaseDatabase.getInstance().getReference().child("Pharmacies");
@@ -209,5 +213,12 @@ public class PharmaciesF extends Fragment {
 
             }
         });
+    }
+    public void setEtPharmName(TextView textView) {
+        this.etPharmName = textView;
+    }
+
+    public void setEtPharmLocation(TextView textView) {
+        this.etPharmLocation = textView;
     }
 }

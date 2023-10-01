@@ -110,7 +110,7 @@ public class SearchDocF extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_search_doc, container, false);
 
         //toolbar = view.findViewById(R.id.toolbar);
-        searchButton = view.findViewById(R.id.searchButton);
+        searchButton = view.findViewById(R.id.searchDoctorsNSLDButton);
         recyclerView = view.findViewById(R.id.searchrv);
         ImageView backButton = view.findViewById(R.id.backButtonSearchDoc);
 
