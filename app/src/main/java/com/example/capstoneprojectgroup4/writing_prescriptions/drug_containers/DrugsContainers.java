@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.writing_prescriptions.drug_containers;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,14 +8,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
 import com.example.capstoneprojectgroup4.writing_prescriptions.AddDrugsManually;
 import com.example.capstoneprojectgroup4.writing_prescriptions.DatabaseDrugObject;
 import com.example.capstoneprojectgroup4.writing_prescriptions.DrugData;
@@ -84,7 +90,23 @@ public class DrugsContainers extends Fragment {
 
         Button backToPrescription = v.findViewById(R.id.button_to_prescription);
         Button addDrugsFromTheList = v.findViewById(R.id.button_add_drugs);
-        Button addDrugsManuallyButton = v.findViewById(R.id.Button_AddDrugsManually);
+       // Button addDrugsManuallyButton = v.findViewById(R.id.Button_AddDrugsManually);
+        EditText nameOfTheDrug = v.findViewById(R.id.EditText_ManualAddDrugs);
+        ImageView back = v.findViewById(R.id.backButtonSelectDrugs);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                CreatePrescription createPrescription = (CreatePrescription) fm.findFragmentById(R.id.fragmentContainerPrescription);
+
+                if (createPrescription == null) {
+                    createPrescription = new CreatePrescription();
+                    fm.beginTransaction().replace(R.id.fragmentContainerPrescription, createPrescription).commit();
+                }
+            }
+        });
+
         loadingDrugs = v.findViewById(R.id.ProgressBar_LoadingDrugs);
 
         RecyclerView rv = v.findViewById(R.id.drugs_container_recycler_view);
@@ -96,6 +118,29 @@ public class DrugsContainers extends Fragment {
         loadingDrugs.setVisibility(View.VISIBLE);
 
         downloadDataOfDrugsFromTheDatabase();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        nameOfTheDrug.requestFocus();
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+        nameOfTheDrug.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    PrescriptionDrugObject prescriptionDrugObject = new PrescriptionDrugObject();
+                    prescriptionDrugObject.setNameOfTheDrug(nameOfTheDrug.getText().toString());
+
+                    WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getContext();
+                    writingPrescriptionActivity.setSelectedDrug(prescriptionDrugObject);
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    DrugsContainers drugsContainers = new DrugsContainers();
+                    fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();
+
+                    return true;
+                }
+                return false;
+            }
+        });
 
         backToPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +165,7 @@ public class DrugsContainers extends Fragment {
             }
         });
 
-        addDrugsManuallyButton.setOnClickListener(new View.OnClickListener() {
+       /* addDrugsManuallyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(loadingDrugs.getVisibility() == View.INVISIBLE){
@@ -132,7 +177,7 @@ public class DrugsContainers extends Fragment {
                     Toast.makeText(writingPrescriptionActivity, "Loading database ............", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
 
         return v;
     }
