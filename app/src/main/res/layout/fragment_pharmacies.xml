@@ -38,11 +38,11 @@
 
     <View
         android:id="@+id/rectangle_8"
-        android:layout_width="301dp"
-        android:layout_height="101dp"
+        android:layout_width="309dp"
+        android:layout_height="130dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:background="#E6ECF7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,10 +52,9 @@
     <Button
         android:id="@+id/Button_ViewPrescriptions"
         android:layout_width="172dp"
-        android:layout_height="19dp"
+        android:layout_height="40dp"
         android:layout_alignBottom="@+id/rectangle_8"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="72dp"
         android:background="@drawable/rectangle_3"
         android:text="Upload Prescription"
         android:textAlignment="center"
@@ -64,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="@+id/rectangle_8"
         app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="@+id/rectangle_8"
-        app:layout_constraintTop_toTopOf="@+id/order_quick" />
+        app:layout_constraintTop_toBottomOf="@+id/order_quick" />
 
     <TextView
         android:id="@+id/order_quick"
@@ -72,7 +71,7 @@
         android:layout_height="63dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:gravity="top"
         android:lineSpacingExtra="8sp"
         android:text="Order Quick with Prescription"
@@ -103,9 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="98dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="138dp"
         android:background="@drawable/rectangle_6"
         android:text="Search"
         android:textColor="#FFFFFF"

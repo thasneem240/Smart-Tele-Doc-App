@@ -31,11 +31,11 @@
 
     <Button
         android:id="@+id/chatBotButton2"
-        android:layout_width="28dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/menu_message_icon"
+        android:layout_width="36dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ai_essentials_icon_set__2_"
         app:layout_constraintStart_toEndOf="@+id/homePageButton2"
         app:layout_constraintTop_toBottomOf="@+id/docmenufragmentContainer"
         app:srcCompat="@drawable/menu_message_icon" />

@@ -34,17 +34,17 @@
 
     <Button
         android:id="@+id/chatBotButton"
-        android:layout_width="28dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="19dp"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="21dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/menu_message_icon"
+        android:background="@drawable/ai_essentials_icon_set__2_"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/appointmentButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/homePageButton"
         app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"
-        app:srcCompat="@drawable/menu_message_icon" />
+        app:srcCompat="@drawable/ai_essentials_icon_set" />
 
     <Button
         android:id="@+id/appointmentButton"

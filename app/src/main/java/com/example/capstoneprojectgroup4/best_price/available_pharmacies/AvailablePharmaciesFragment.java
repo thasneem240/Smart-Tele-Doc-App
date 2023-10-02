@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.best_price.ObjectPharmacyAndPrice;
+import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 
 
@@ -92,11 +93,11 @@ public class AvailablePharmaciesFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                PharmaciesF pharmaciesF = new PharmaciesF();
+                ListOfPrescriptionsFragment pharmaciesF = new ListOfPrescriptionsFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, pharmaciesF).commit();
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         RecyclerView rv = v.findViewById(R.id.availablePharmaciesRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
