@@ -131,7 +131,7 @@ public class PatientLogin extends Fragment {
                                         fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
                                     }
                                 } else {
-                                    Toast.makeText(getActivity(), "Login failed. "+task.getException(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(requireContext(), "Login failed. " + task.getException(), Toast.LENGTH_LONG).show();
 
                                 }
                             }
