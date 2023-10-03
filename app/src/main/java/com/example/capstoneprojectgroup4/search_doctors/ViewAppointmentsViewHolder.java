@@ -1,6 +1,7 @@
 package com.example.capstoneprojectgroup4.search_doctors;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,7 +15,7 @@ public class ViewAppointmentsViewHolder extends RecyclerView.ViewHolder {
     public TextView doctorNameTextView;
     public TextView dayTextView;
     public TextView typeTextView;
-    public TextView cancelTextView;
+    public Button CancelButton;
 
     public RecyclerView recyclerAppView;
 
@@ -25,7 +26,7 @@ public class ViewAppointmentsViewHolder extends RecyclerView.ViewHolder {
         doctorNameTextView = itemView.findViewById(R.id.DoctorName);
         dayTextView = itemView.findViewById(R.id.Day);
         typeTextView = itemView.findViewById(R.id.Type);
-        cancelTextView = itemView.findViewById(R.id.Cancel);
+        CancelButton = itemView.findViewById(R.id.Cancel);
         recyclerAppView = itemView.findViewById(R.id.recyclerAppView);
 
     }

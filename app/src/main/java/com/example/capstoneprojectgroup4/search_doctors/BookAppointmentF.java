@@ -4,11 +4,14 @@ import static android.icu.text.MessagePattern.Part.Type.ARG_START;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +34,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,32 +47,28 @@ public class BookAppointmentF extends Fragment {
 
     private static final String ARG_DOCTOR_NAME = "doctorName";
     private static final String ARG_DAY = "day";
-
     private static final String ARG_DATE = "date";
-
     private static final String ARG_START = "start";
     private static final String ARG_END = "End";
-
     private static final String ARG_LOCATION = "location";
     private static final String ARG_NOAPP = "noApp";
+    private static final String TAG = "BookAppointmentF";
     private String doctorName;
     private String noApp;
     private String location;
-
     private String day;
-
     private String date;
-
     private String start;
     private String End;
-
     private  int New_NoAppValue;
-
-
+    private String patientKey;
+    private String appointmentKey;
     private TextView patientName ;
     private Button UploadAppointment ;
     private FirebaseDatabase firebaseDatabase ;
     private DatabaseReference databaseReference;
+
+
 
     public BookAppointmentF() {
         // Required empty public constructor
@@ -102,10 +103,10 @@ public class BookAppointmentF extends Fragment {
 
 
         }
-
         // Initialize the Firebase Database reference here
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(); // You can adjust the reference path as needed
+
     }
 
 
@@ -113,6 +114,7 @@ public class BookAppointmentF extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_book_appointment, container, false);
+
 
         // Initialize TextViews and other views
         TextView doctorNameTextView = view.findViewById(R.id.textDoctorNameValue);
@@ -123,7 +125,7 @@ public class BookAppointmentF extends Fragment {
         // Set the doctor's name and day to the TextViews
         doctorNameTextView.setText(doctorName);
         dayTextView.setText(day + " "+ start+"-"+ End);
-         New_NoAppValue = Integer.valueOf(noApp) + 1;
+        New_NoAppValue = Integer.valueOf(noApp) + 1;
         noAppTextView.setText(String.valueOf(New_NoAppValue));
         // Get patient's name and set it to the patientName TextView
         String patientName = MainActivity.getPatientObject().getFirstName();
@@ -142,9 +144,6 @@ public class BookAppointmentF extends Fragment {
             }
         });
 
-
-
-
         // Set an OnClickListener for the UploadAppointment Button
         UploadAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,10 +152,20 @@ public class BookAppointmentF extends Fragment {
                 String email = MainActivity.getPatientObject().getEmail();
                 String getAppointmentType = appointmentType.getText().toString();
 
+                // Generate a unique key for the appointment
+                patientKey = MainActivity.getPatientObject().getUid();
+                appointmentKey = databaseReference.child("Appointment Data").child(patientKey).push().getKey();
+                AppointmentKeyGenerator.setAppointmentKey(appointmentKey);
+
+                //String sanitizedDoctorName = doctorName.replace(".", "_");
+                //String sanitizedHospitalName = location.replace(".", "_");
+                //String sanitizedDate = date.replace(".", "_");
+
+                //appointmentKey = AppointmentKeyGenerator.generateAppointmentKey(patientKey,sanitizedDoctorName,sanitizedHospitalName,sanitizedDate);
+                Log.d(TAG, "Generated appointmentKey: " + appointmentKey);
+
 
                 uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType);
-
-
                 updateAvailability(doctorName, location, date, New_NoAppValue);
             }
         });
@@ -231,22 +240,13 @@ public class BookAppointmentF extends Fragment {
             }
         });
     }
-
-
-
-
-
-
-
-
-
-    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end , String VoiceVideoCallType) {
+    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end, String VoiceVideoCallType) {
         // Sanitize the email to remove invalid characters
         String sanitizedEmail = email.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedDoctorName = pDoctorName.replaceAll("[.#$\\[\\]]", "_");
 
-        // Create a HashMap to store appointment data
+
         HashMap<String, Object> appointmentData = new HashMap<>();
         appointmentData.put("PatientName", sanitizedPatientName);
         appointmentData.put("PatientEmail", sanitizedEmail);
@@ -256,24 +256,16 @@ public class BookAppointmentF extends Fragment {
         appointmentData.put("EndTime", end);
         appointmentData.put("Date", pDay);
 
-        // Use the sanitized email as the unique key for the patient
-        String patientKey = MainActivity.getPatientObject().getUid();
-
-        // Generate a unique key for the appointment
-        String appointmentKey = databaseReference.child("Appointment Data").child(patientKey).push().getKey();
-        Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
-
         // Use the generated key to store the appointment data under the patient's appointments
         databaseReference.child("Appointment Data").child(patientKey).child(appointmentKey).setValue(appointmentData)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
-                    // Clear the appointment type EditText
+
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(requireContext(), "Error booking appointment", Toast.LENGTH_SHORT).show();
                 });
     }
-
 
     public static void uploadAppointmentSecond(String pPatientName, String pDoctorName, String pDay){
 

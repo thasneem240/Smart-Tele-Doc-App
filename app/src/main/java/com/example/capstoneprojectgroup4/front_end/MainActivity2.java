@@ -23,6 +23,7 @@ import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.dialogflow.v2.SessionsClient;
 import com.google.cloud.dialogflow.v2.SessionsSettings;
 import com.google.common.collect.Lists;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.InputStream;
 
@@ -33,8 +34,6 @@ public class MainActivity2 extends AppCompatActivity {
     Button chatBot;
     Button appointments;
     Button userProfile;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,9 +129,6 @@ public class MainActivity2 extends AppCompatActivity {
                 AccountSettings searchDoctors = new AccountSettings();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
 
-//                FragmentManager fm = getSupportFragmentManager();
-//                PatientProfileF patientProfileF = new PatientProfileF();
-//                fm.beginTransaction().replace(R.id.fragmentContainerView, patientProfileF).commit();
             }
         });
     }

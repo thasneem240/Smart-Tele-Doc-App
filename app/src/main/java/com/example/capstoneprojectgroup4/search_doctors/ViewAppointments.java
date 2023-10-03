@@ -1,11 +1,14 @@
 package com.example.capstoneprojectgroup4.search_doctors;
 
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +40,8 @@ public class ViewAppointments extends Fragment {
 
     private RecyclerView recyclerView;
     private ViewAppointmentsAdapter viewAppointmentsAdapter;
+    private BookAppointmentF bookAppointmentFragment;
+
     private String userId; // User ID obtained from MainActivity
 
     public ViewAppointments() {
@@ -60,12 +65,23 @@ public class ViewAppointments extends Fragment {
         patient.setText(name);
         recyclerView = view.findViewById(R.id.recyclerAppView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Set the adapter here
+        viewAppointmentsAdapter = new ViewAppointmentsAdapter(new ArrayList<>());
+        recyclerView.setAdapter(viewAppointmentsAdapter);
+
+
         return view;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if (getContext() == null)  {
+            return;
+        }
 
         // Get the current date and time in the device's local time zone
         Calendar calendar = Calendar.getInstance();
@@ -73,7 +89,7 @@ public class ViewAppointments extends Fragment {
 
         // Create a SimpleDateFormat for date and time comparison using the device's local time zone
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
-        dateTimeFormat.setTimeZone(TimeZone.getDefault()); // Set to local time zone
+        dateTimeFormat.setTimeZone(TimeZone.getDefault()); // Set to the local time zone
 
         // Create a database reference to the "Appointment Data" section for the specific user
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Appointment Data")
@@ -118,5 +134,5 @@ public class ViewAppointments extends Fragment {
             }
         });
     }
-
 }
+
