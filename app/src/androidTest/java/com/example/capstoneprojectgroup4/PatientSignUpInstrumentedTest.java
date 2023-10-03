@@ -6,7 +6,10 @@ import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
-
+import org.junit.FixMethodOrder;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.example.capstoneprojectgroup4.front_end.PatientSignUp;
 import com.example.capstoneprojectgroup4.home.MainActivity;
@@ -25,6 +28,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 public class PatientSignUpInstrumentedTest {
 
     @Rule
@@ -39,7 +44,7 @@ public class PatientSignUpInstrumentedTest {
                 .commit();    }
 
     @Test
-    public void testSignUpWithValidInput() {
+    public void B_testSignUpWithValidInput() {
         // Enter valid email and password
 
         onView(ViewMatchers.withId(R.id.EditText_EnterEmail))
@@ -69,7 +74,7 @@ public class PatientSignUpInstrumentedTest {
     }
 
     @Test
-    public void testSignUpWithInvalidInput() {
+    public void A_testSignUpWithInvalidInput() {
 
         // Click the sign-up button without entering any data
         onView(withId(R.id.sign_up_button)).perform(click());
