@@ -83,7 +83,7 @@ public class Create_or_View_Prescription extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DoctorMainMenu doctorAvailability = new DoctorMainMenu();
+                DoctorPatientProfiles doctorAvailability = new DoctorPatientProfiles();
                 fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
             }
         });

@@ -2,16 +2,31 @@ package com.example.capstoneprojectgroup4.interface_of_doctors;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,20 +78,55 @@ public class DoctorPatientProfiles extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_doctor_patient_profiles, container, false);
+        View v = inflater.inflate(R.layout.fragment_doctor_patient_profiles, container, false);
 
-        Button test = v.findViewById(R.id.button6);
         ImageView back = v.findViewById(R.id.backButtonDocPatProf);
+        RecyclerView rv = v.findViewById(R.id.listPatientsrv);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        EditText searchEditText = v.findViewById(R.id.ListPatsearchName);
+        Button search = v.findViewById(R.id.searchPatientList);
 
-        test.setOnClickListener(new View.OnClickListener() {
+        DatabaseReference doctorAppointmentsRef = FirebaseDatabase.getInstance().getReference("Doctor Appointments");
+        DatabaseReference drAjithRef = doctorAppointmentsRef.child("Dr_ Ajith Amarasinghe");
+
+        drAjithRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                Create_or_View_Prescription doctorAvailability = new Create_or_View_Prescription();
-                fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    List<String> patientNames = new ArrayList<>();
+                    for (DataSnapshot appointmentSnapshot : dataSnapshot.getChildren()) {
+                        String patientName = appointmentSnapshot.child("PatientName").getValue(String.class);
+                        if (patientName != null) {
+                            patientNames.add(patientName);
+                        }
+                    }
+
+                    // Create and set the initial adapter with all patient names
+                    PatientListAdapter adapter = new PatientListAdapter(patientNames);
+                    rv.setAdapter(adapter);
+
+                    search.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String searchText = searchEditText.getText().toString().toLowerCase();
+                            List<String> filteredNames = filterPatientNames(patientNames, searchText);
+                            adapter.setPatientNames(filteredNames);
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+                } else {
+                    Log.d("DoctorPatientProfiles", "No data found for Dr. Ajith Amarasinghe.");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("DoctorPatientProfiles", "Database error: " + databaseError.getMessage());
             }
         });
+
+
+
 
 
 
@@ -91,4 +141,16 @@ public class DoctorPatientProfiles extends Fragment {
 
         return v;
     }
+
+    private List<String> filterPatientNames(List<String> patientNames, String searchText) {
+        List<String> filteredNames = new ArrayList<>();
+        for (String name : patientNames) {
+            if (name.toLowerCase().contains(searchText.toLowerCase())) {
+                filteredNames.add(name);
+            }
+        }
+        return filteredNames;
+    }
+
+
 }
