@@ -156,6 +156,8 @@ public class BookAppointmentF extends Fragment {
                 patientKey = MainActivity.getPatientObject().getUid();
                 appointmentKey = databaseReference.child("Appointment Data").child(patientKey).push().getKey();
                 AppointmentKeyGenerator.setAppointmentKey(appointmentKey);
+                String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
+                AppointmentKeyGenerator.setDoctorName(sanitizedDoctorName);
 
                 //String sanitizedDoctorName = doctorName.replace(".", "_");
                 //String sanitizedHospitalName = location.replace(".", "_");

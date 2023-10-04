@@ -4,6 +4,7 @@ import java.util.UUID;
 
 public class AppointmentKeyGenerator {
     private static String appointmentKey;
+    private static String DoctorName;
 
     public static String generateAppointmentKey(String patientKey, String DocName, String location,String date) {
 
@@ -19,4 +20,15 @@ public class AppointmentKeyGenerator {
     public static void setAppointmentKey(String appointmentKey) {
         AppointmentKeyGenerator.appointmentKey = appointmentKey;
     }
+
+    public static String getDoctorName() {
+        return DoctorName;
+    }
+
+    public static void setDoctorName(String DoctorName) {
+        AppointmentKeyGenerator.DoctorName = DoctorName;
+    }
+
+
+
 }

@@ -62,10 +62,11 @@ public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmen
                 public void onClick(View v) {
                     String patientKey = MainActivity.getPatientObject().getUid();
                     String appointmentKey = AppointmentKeyGenerator.getAppointmentKey();
+                    String doctorName = AppointmentKeyGenerator.getDoctorName();
                     Log.d(TAG, "Cancel Appointment - appointmentKey: " + appointmentKey);
                     int itemPosition = holder.getBindingAdapterPosition(); // Use getBindingAdapterPosition()
                     cancelAppointment(appointmentKey, patientKey, itemPosition);
-
+                    cancelDoctorAppointment(appointmentKey,doctorName);
                 }
             });
     }
@@ -87,7 +88,7 @@ public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmen
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.e("CancelAppointment", "Successfully Deleted Appointment");
+                        Log.e("CancelAppointment", "Successfully Deleted Patient Appointment");
                         removeAppointment(position); // Remove from the adapter's data list
                         //notifyDataSetChanged();
                     }
@@ -98,6 +99,36 @@ public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmen
                         // Handle any errors that occurred during deletion.
                         // You can show a toast or log the error.
                         Log.e("CancelAppointment", "Error deleting appointment", e);
+                    }
+                });
+    }
+
+    public void cancelDoctorAppointment(String appointmentKey, String DoctorName) {
+
+        if (appointmentKey == null || DoctorName == null) {
+            Log.e(TAG, "Cancel Appointment - appointmentKey or DoctorName is null");
+            return;
+        }
+        // Construct the reference path to the appointment
+        DatabaseReference appointmentRef = FirebaseDatabase.getInstance()
+                .getReference("Doctor Appointments")
+                .child(DoctorName)
+                .child(appointmentKey);
+
+        // Delete the appointment data
+        appointmentRef.removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.e("CancelAppointment", "Successfully Deleted Doctor Appointment");
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("CancelAppointment", "Error deleting appointment for Doctor", e);
                     }
                 });
     }
