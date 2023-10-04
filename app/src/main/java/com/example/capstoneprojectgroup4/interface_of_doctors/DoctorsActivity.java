@@ -37,7 +37,6 @@ public class DoctorsActivity extends AppCompatActivity {
         homePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getSupportFragmentManager();
                 DoctorMainMenu searchDoctors = new DoctorMainMenu();
                 fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, searchDoctors).commit();
             }
@@ -61,6 +60,8 @@ public class DoctorsActivity extends AppCompatActivity {
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DoctorUserProfile doctorUserProfile = new DoctorUserProfile();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorUserProfile).commit();
             }
         });
     }

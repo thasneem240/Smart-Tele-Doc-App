@@ -48,7 +48,7 @@
             android:layout_height="24dp" />
 
         <EditText
-            android:id="@+id/EditText_MobileNumber"
+            android:id="@+id/EditText_Specialization"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/rounded_rec"
@@ -65,7 +65,7 @@
             android:layout_height="24dp" />
 
         <EditText
-            android:id="@+id/EditText_Email"
+            android:id="@+id/EditText_RegNumber"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/rounded_rec"

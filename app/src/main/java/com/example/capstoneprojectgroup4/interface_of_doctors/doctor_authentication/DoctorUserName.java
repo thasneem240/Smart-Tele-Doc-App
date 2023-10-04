@@ -92,7 +92,7 @@ public class DoctorUserName extends Fragment {
         databaseReference = firebaseDatabase.getReference("doctors");
 
         EditText regNumber_edittext = v.findViewById(R.id.EditText_RegistrationNumber);
-        EditText mobileNumber_edittext = v.findViewById(R.id.EditText_MobileNumber);
+        EditText mobileNumber_edittext = v.findViewById(R.id.EditText_Specialization);
         EditText password_edittext = v.findViewById(R.id.EditText_EnterPassword);
         EditText reEnterPassword_edittext = v.findViewById(R.id.EditText_ReEnterPassword);
         CheckBox termsCheckBox = v.findViewById(R.id.CheckBox_Terms);

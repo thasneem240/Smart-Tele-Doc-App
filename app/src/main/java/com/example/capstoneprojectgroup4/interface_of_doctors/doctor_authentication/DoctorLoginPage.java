@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -88,6 +89,9 @@ public class DoctorLoginPage extends Fragment {
         Button login_button = v.findViewById(R.id.login_button3);
         ImageView back_button = v.findViewById(R.id.backButtonDocLog);
         TextView signup_textview = v.findViewById(R.id.TextView_sign_up_link);
+
+        password_edittext.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
 
         FirebaseDatabase firebaseDatabase;
         DatabaseReference databaseReference;
