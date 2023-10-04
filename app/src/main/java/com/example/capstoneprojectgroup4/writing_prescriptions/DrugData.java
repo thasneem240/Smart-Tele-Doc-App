@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -83,6 +84,17 @@ public class DrugData extends Fragment {
         Button add = v.findViewById(R.id.Button_Add);
         Spinner brands = v.findViewById(R.id.Spinner_AvailableBrands);
         Spinner strengths = v.findViewById(R.id.Spinner_AvailbleStrenghts);
+
+        ImageView back = v.findViewById(R.id.backButtonSelectDrugs2);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                DrugData drugData = new DrugData();
+                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugData).commit();
+            }
+        });
 
         FragmentManager fm = getActivity().getSupportFragmentManager();
 

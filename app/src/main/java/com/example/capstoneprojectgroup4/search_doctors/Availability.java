@@ -3,7 +3,6 @@ package com.example.capstoneprojectgroup4.search_doctors;
 public class Availability {
     private String doctorName;
     private String location;
-
     private String date;
     private String day;
     private int noApp;
@@ -24,6 +23,22 @@ public class Availability {
         return doctorName;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public int getNoApp() {
+        return noApp;
+    }
+
     public String getEndTime() {
         return endTime;
     }
@@ -32,32 +47,16 @@ public class Availability {
         return startTime;
     }
 
-    public String getLocation() {
-        return location;
-    }
-    public int getNoApp() {
-        return noApp;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
     @Override
     public String toString() {
-        return "SessionObject{" +
+        return "Availability{" +
                 "doctorName='" + doctorName + '\'' +
                 ", location='" + location + '\'' +
+                ", date='" + date + '\'' +
                 ", day='" + day + '\'' +
-                ", noApp='" + noApp + '\'' +
+                ", noApp=" + noApp +
                 ", endTime='" + endTime + '\'' +
                 ", startTime='" + startTime + '\'' +
                 '}';
     }
-
-
 }

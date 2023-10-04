@@ -19,6 +19,12 @@
             android:name=".interface_of_doctors.DoctorsActivity"
             android:exported="false" />
         <activity
+            android:name=".interface_of_doctors.MainActivity4"
+            android:exported="false" />
+        <activity
+            android:name=".interface_of_doctors.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity_ListLabReports"
             android:exported="false" />
         <activity

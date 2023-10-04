@@ -10,6 +10,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,12 +37,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,8 +80,6 @@ public class DocAvailF extends Fragment {
         return fragment;
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,14 +99,11 @@ public class DocAvailF extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 SearchDocF searchDoctors = new SearchDocF();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
-
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -111,7 +111,8 @@ public class DocAvailF extends Fragment {
         if (getArguments() != null) {
             String doctorNameV = getArguments().getString("doctorName");
             String locationV = getArguments().getString("location");
-
+            Log.d("DocAvailF", "Doctor Name: " + doctorNameV);
+            Log.d("DocAvailF", "Location: " + locationV);
             if (doctorNameV != null && locationV != null) {
                 DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference("Availability");
 
@@ -119,73 +120,82 @@ public class DocAvailF extends Fragment {
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Map <String, Object> doctors;
-                        Map <String, Object> detailsOfEachDoctor;
-                        Map <String, Object> eachSession;
-                        Map <String, Object> eachDay;
-                        String doctorName, endTime = null, location = null, startTime = null,  day = null, date=null;
-                        int noApp = 0;
                         ArrayList<Availability> sessionDetails = new ArrayList<>();
 
-                        doctors = (Map) snapshot.getValue();
+                        if (snapshot.exists()) {
+                            DataSnapshot doctorData = snapshot.child("d1"); // Change this to match the specific doctor's data
 
-                        for (Map.Entry<String, Object> eachDoctor : doctors.entrySet()) {
-                            detailsOfEachDoctor = (Map) eachDoctor.getValue();
-                            doctorName = detailsOfEachDoctor.get("Name")+"";
-                            if (doctorNameV.equals(doctorName)) {
+                            if (doctorData != null) {
+                                String doctorName = doctorData.child("Name").getValue(String.class);
 
-                                for (Map.Entry<String, Object> allSessionsEntry : detailsOfEachDoctor.entrySet()) {
-                                    if (!allSessionsEntry.getKey().equals("Name")) {
-                                        eachSession = (Map) allSessionsEntry.getValue();
+                                if (doctorName != null) {
+                                    textDoctorName.setText(doctorName);
+                                }
 
-                                        location = eachSession.get("LName") + "";
-                                        if (locationV.equals(location)) {
+                                DataSnapshot locationData = doctorData.child("l1"); // Change this to match the specific location's data
 
-                                            for (Map.Entry<String, Object> sevenDays : eachSession.entrySet()) {
-                                                if (!sevenDays.getKey().equals("LName")) {
-                                                    day = sevenDays.getKey();
+                                if (locationData != null) {
+                                    String locationName = locationData.child("LName").getValue(String.class);
 
-                                                    eachDay = (Map) sevenDays.getValue();
-
-                                                    startTime = eachDay.get("StartTime") + "";
-                                                    endTime = eachDay.get("EndTime") + "";
-                                                    date = eachDay.get("Date") + "";
-                                                    noApp = Math.toIntExact((Long) eachDay.get("NoApp"));
-
-                                                    Availability sessionObject = new Availability(doctorName, location, day, noApp, endTime, startTime, date);
-                                                    sessionDetails.add(sessionObject);
-                                                }
-                                            }
-                                            textDoctorName.setText(doctorName);
-                                            textDoctorLocation.setText(location);
-                                        }
-
+                                    if (locationName != null) {
+                                        textDoctorLocation.setText(locationName);
                                     }
 
+                                    // Get the current date and time in the device's local time zone
+                                    Calendar calendar = Calendar.getInstance();
+                                    Date currentDateTime = calendar.getTime();
 
+                                    SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
+                                    dateTimeFormat.setTimeZone(TimeZone.getDefault()); // Set to local time zone
+
+                                    for (DataSnapshot dayData : locationData.getChildren()) {
+                                        if (dayData.getKey() != null && !dayData.getKey().equals("LName")) {
+                                            String day = dayData.getKey();
+                                            String date = dayData.child("Date").getValue(String.class);
+                                            String startTime = dayData.child("StartTime").getValue(String.class);
+                                            String endTime = dayData.child("EndTime").getValue(String.class);
+                                            int noApp = dayData.child("NoApp").getValue(Integer.class);
+
+                                            if (day != null && date != null && startTime != null && endTime != null) {
+                                                try {
+                                                    Date sessionDateTime = dateTimeFormat.parse(date + " " + startTime);
+
+                                                    // Compare session date-time with the current date-time
+                                                    if (sessionDateTime != null && sessionDateTime.after(currentDateTime)) {
+                                                        Availability sessionObject = new Availability(doctorName, locationName, day, noApp, endTime, startTime, date);
+                                                        sessionDetails.add(sessionObject);
+                                                    }
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    // Sort the sessionDetails list based on the day of the week
+                                    Collections.sort(sessionDetails, new Comparator<Availability>() {
+                                        @Override
+                                        public int compare(Availability o1, Availability o2) {
+                                            // Define the order of days of the week
+                                            String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+
+                                            // Get the index of the day for each availability object
+                                            int index1 = Arrays.asList(daysOfWeek).indexOf(o1.getDay());
+                                            int index2 = Arrays.asList(daysOfWeek).indexOf(o2.getDay());
+
+                                            // Compare based on the index to sort in the desired order
+                                            return Integer.compare(index1, index2);
+                                        }
+                                    });
+
+                                    // Create the adapter and set it to the RecyclerView
+                                    AvailAdapter availAdapter = new AvailAdapter(sessionDetails, doctorName, "", 0, "", locationName);
+                                    recyclerView.setAdapter(availAdapter);
                                 }
                             }
-                            Collections.sort(sessionDetails, (availability1, availability2) -> {
-                                String day1 = availability1.getDay();
-                                String day2 = availability2.getDay();
-                                // Assuming day values are Monday, Tuesday, ..., Sunday
-                                List<String> daysOrder = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-                                return Integer.compare(daysOrder.indexOf(day1), daysOrder.indexOf(day2));
-                            });
-                            // added param docName
-                            AvailAdapter availAdapter1 = new AvailAdapter(sessionDetails, doctorName, day, noApp, date );
-                            recyclerView.setAdapter(availAdapter1);
-
-
-
                         }
-
-                        Log.d(TAG, String.format("%s ", sessionDetails+"")); // ArrayList<SessionObject>
-
-/*                FragmentManager fm = getSupportFragmentManager();
-                _Fragment _fragment = new _Fragment(sessionDetails);
-                fm.beginTransaction().replace(R.id.fragment_container, _fragment).commit();*/
                     }
+
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -195,11 +205,8 @@ public class DocAvailF extends Fragment {
             } else {
                 Toast.makeText(getContext(), "Doctor name and location not provided.", Toast.LENGTH_SHORT).show();
             }
-
-
         }
 
         return view;
     }
-
 }

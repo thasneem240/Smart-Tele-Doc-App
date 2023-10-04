@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/white"
+    tools:context=".front_end.Pharmacy">
 
+
+    <ImageView
+        android:id="@+id/backButtonPharma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="360dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
 
     <TextView
         android:id="@+id/pharmacy"
@@ -15,7 +25,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="156dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="157dp"
         android:gravity="center_horizontal|top"
         android:lineSpacingExtra="3sp"
@@ -24,137 +33,109 @@
         android:textSize="20sp"
         android:translationY="-1.4sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButtonPharma" />
 
-    <EditText
-        android:id="@+id/searchDrugs"
-        android:layout_width="327dp"
-        android:layout_height="40dp"
+    <View
+        android:id="@+id/rectangle_8"
+        android:layout_width="309dp"
+        android:layout_height="130dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="19dp"
-        android:background="@drawable/rounded_rec"
-        android:hint="Search Drugs"
-        android:paddingStart="50sp"
-        android:textColor="#000000"
-        android:textSize="10dp"
+        android:layout_marginTop="30dp"
+        android:background="#E6ECF7"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pharmacy" />
 
 
     <Button
         android:id="@+id/Button_ViewPrescriptions"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_width="172dp"
+        android:layout_height="40dp"
         android:layout_alignBottom="@+id/rectangle_8"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="48dp"
-        android:background="@drawable/rectangle_5"
-        android:text="Best price for your Prescription"
+        android:background="@drawable/rectangle_3"
+        android:text="Upload Prescription"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_8"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_8"
         app:layout_constraintTop_toBottomOf="@+id/order_quick" />
 
-    <ImageView
-        android:id="@+id/specIcon3"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/search_icon"
-        app:layout_constraintStart_toStartOf="@+id/searchDrugs"
-        app:layout_constraintTop_toTopOf="@+id/searchDrugs" />
-
-    <EditText
-        android:id="@+id/searchPharmName"
-        android:layout_width="327dp"
-        android:layout_height="40dp"
+    <TextView
+        android:id="@+id/order_quick"
+        android:layout_width="135dp"
+        android:layout_height="63dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="45dp"
-        android:background="@drawable/rounded_rec"
-        android:hint="Search by Name"
-        android:paddingStart="50sp"
-        android:textColor="#000000"
-        android:textSize="10dp"
+        android:layout_marginTop="40dp"
+        android:gravity="top"
+        android:lineSpacingExtra="8sp"
+        android:text="Order Quick with Prescription"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:translationY="-4.03sp"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_8"
+        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_8"
+        app:layout_constraintTop_toBottomOf="@+id/pharmacy" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rectangle_8"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/medicine"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle_8" />
+        app:layout_constraintStart_toEndOf="@+id/order_quick"
+        app:layout_constraintTop_toBottomOf="@+id/pharmacy" />
 
     <Button
         android:id="@+id/pharmsearchButton"
-        android:layout_width="175dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="138dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/rectangle_6"
         android:text="Search"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/popular_dru"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchPharmLoc" />
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchPharmLoc" />
 
-    <TextView
-        android:id="@+id/popular_dru"
-        android:layout_width="113.51dp"
-        android:layout_height="16.2dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:gravity="top"
-        android:text="Search Results"
-        android:textColor="#101623"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pharmsearchButton" />
-
-    <ImageView
-        android:id="@+id/specIcon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/search_icon"
-        app:layout_constraintStart_toStartOf="@+id/searchPharmName"
-        app:layout_constraintTop_toTopOf="@+id/searchPharmName" />
-
-    <EditText
-        android:id="@+id/searchPharmLoc"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_searchPharmName"
         android:layout_width="327dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="39dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="45dp"
-        android:background="@drawable/rounded_rec"
-        android:hint="Search by Location"
+        android:background="@drawable/rectangle_12"
+        android:hint="Search by Name"
         android:paddingStart="50sp"
-        android:textColor="#000000"
-        android:textSize="10dp"
+        android:textColorHint="#A1A8B0"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchPharmName" />
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_8">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchPharmName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/specIcon2"
@@ -163,75 +144,81 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="19dp"
         android:src="@drawable/search_icon"
-        app:layout_constraintStart_toStartOf="@+id/searchPharmLoc"
-        app:layout_constraintTop_toTopOf="@+id/searchPharmLoc" />
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchPharmName"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchPharmName" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_searchPharmLoc"
+        android:layout_width="327dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="45dp"
+        android:background="@drawable/rectangle_12"
+        android:hint="Search by Location"
+        android:paddingStart="50sp"
+        android:textColorHint="#A1A8B0"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchPharmName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchPharmLoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/specIcon3"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/search_icon"
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchPharmLoc"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchPharmLoc" />
+
+    <TextView
+        android:id="@+id/popular_dru"
+        android:layout_width="113.51dp"
+        android:layout_height="16.2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="277dp"
+        android:gravity="top"
+        android:text="Search Results"
+        android:textColor="#101623"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pharmsearchButton" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pharmrv"
-        android:layout_width="351dp"
-        android:layout_height="119dp"
+        android:layout_width="377dp"
+        android:layout_height="120dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="15dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popular_dru" />
-
-    <View
-        android:id="@+id/rectangle_8"
-        android:layout_width="370dp"
-        android:layout_height="110dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:background="#E6ECF7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchDrugs" />
-
-    <TextView
-        android:id="@+id/order_quick"
-        android:layout_width="135dp"
-        android:layout_height="63dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="34dp"
-        android:gravity="top"
-        android:lineSpacingExtra="8sp"
-        android:text="Order Quick with Prescription"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:translationY="-4.03sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchDrugs" />
-
-
-    <ImageView
-        android:id="@+id/backButtonPharma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toStartOf="@+id/pharmacy"
-        app:layout_constraintHorizontal_bias="0.33"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="175dp"
-        android:layout_height="161dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchDrugs"
-        app:srcCompat="@drawable/medicine" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
