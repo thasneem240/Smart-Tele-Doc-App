@@ -15,7 +15,7 @@
 
 
         <TextView
-            android:id="@+id/text_medicine"
+            android:id="@+id/TextView_PatientName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="39dp"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/text_select"
+            android:id="@+id/Button_select"
             android:layout_width="21dp"
             android:layout_height="20dp"
             android:layout_marginTop="57dp"
@@ -48,7 +48,7 @@
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_medicine"
+            app:layout_constraintTop_toTopOf="@+id/TextView_PatientName"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView

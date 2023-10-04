@@ -3,7 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".interface_of_doctors.DoctorLoginPage">
+    tools:context=".interface_of_doctors.doctor_authentication.DoctorLoginPage">
+
+    <ImageView
+        android:id="@+id/ImageView_backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="353dp"
+        android:layout_marginBottom="636dp"
+        android:src="@drawable/baseline_keyboard_arrow_left_24" />
 
     <TextView
         android:id="@+id/login_title"
@@ -18,85 +28,39 @@
         android:textSize="28sp" />
 
     <EditText
-        android:id="@+id/loginenter_email"
+        android:id="@+id/EditText_RegNumber"
         android:layout_width="371dp"
         android:layout_height="52.57dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
         android:background="@drawable/rounded_rec"
+        android:gravity="center"
+        android:hint="Registration number/ User name"
         android:strokeWidth="2"
         android:strokeColor="#E5E7EB"
-        android:gravity="center"
-        android:hint="Enter your email"
         android:textColorHint="#A1A8B0"
         android:textSize="16sp" />
 
-
-    <ImageView
-        android:id="@+id/login_email_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/loginenter_email"
-        android:layout_alignTop="@+id/loginenter_email"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="14dp"
-        android:src="@drawable/message_icon" />
 
     <EditText
         android:id="@+id/EditText_EnterPassword"
         android:layout_width="371dp"
         android:layout_height="52.57dp"
-        android:layout_below="@+id/loginenter_email"
+        android:layout_below="@+id/EditText_RegNumber"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="24dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/rounded_rec"
         android:gravity="center"
-        android:hint="Enter your Password"
+        android:hint="Password"
         android:strokeWidth="2"
         android:strokeColor="#E5E7EB"
         android:textColorHint="#A1A8B0"
         android:textSize="16sp" />
 
-
-    <ImageView
-        android:id="@+id/password_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/EditText_EnterPassword"
-        android:layout_alignTop="@+id/EditText_EnterPassword"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="19dp"
-        android:src="@drawable/password_icon" />
-
-
-    <ImageView
-        android:id="@+id/ImageView_LoginEye"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/EditText_EnterPassword"
-        android:layout_alignTop="@+id/EditText_EnterPassword"
-        android:layout_marginStart="325dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/eye_slash" />
-
-    <TextView
-        android:id="@+id/forgot_password"
-        android:layout_width="128dp"
-        android:layout_height="23dp"
-        android:layout_below="@id/EditText_EnterPassword"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="251dp"
-        android:gravity="center_horizontal|top"
-        android:lineSpacingExtra="4sp"
-        android:text="Forgot Password?"
-        android:textColor="#013073"
-        android:textSize="15sp" />
     <Button
-        android:id="@+id/login_button"
+        android:id="@+id/Button_Login"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
@@ -124,9 +88,9 @@
         android:id="@+id/sign_up_link"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/login_button"
+        android:layout_alignBottom="@+id/Button_Login"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="67dp"
+        android:layout_marginEnd="66dp"
         android:layout_marginBottom="-24dp"
         android:gravity="center_horizontal|top"
         android:letterSpacing="0.03"

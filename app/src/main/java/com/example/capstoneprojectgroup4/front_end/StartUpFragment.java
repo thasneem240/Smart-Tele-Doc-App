@@ -7,16 +7,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.PatientObject;
-import com.example.capstoneprojectgroup4.authentication.Signup_EmailVerificationF;
+import com.example.capstoneprojectgroup4.patient_authentication.AccountSettings;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
+import com.example.capstoneprojectgroup4.patient_authentication.Signup_EmailVerificationF;
 import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
 import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;

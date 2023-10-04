@@ -1,14 +1,20 @@
 package com.example.capstoneprojectgroup4.interface_of_doctors;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_DoctorsView.ListOfPatientsFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +67,21 @@ public class DoctorHomePage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doctor_home_page, container, false);
+        View v = inflater.inflate(R.layout.fragment_doctor_home_page, container, false);
+
+        Button listOfPatients = v.findViewById(R.id.Button_listOfPrescriptions);
+
+        listOfPatients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ListOfPatientsFragment listOfPatientsFragment = new ListOfPatientsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatientsFragment).commit();
+
+            }
+        });
+
+
+        return v;
     }
 }

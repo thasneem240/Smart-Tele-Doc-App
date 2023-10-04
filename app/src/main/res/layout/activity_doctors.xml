@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".front_end.MainActivity2">
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerDoctorsActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/homePageButtonDoctors"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/menu_home_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chatBotButtonDoctors"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerDoctorsActivity"
+        app:srcCompat="@drawable/menu_home_icon" />
+
+    <Button
+        android:id="@+id/chatBotButtonDoctors"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/menu_message_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/appointmentButtonDoctors"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/homePageButtonDoctors"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerDoctorsActivity"
+        app:srcCompat="@drawable/menu_message_icon" />
+
+    <Button
+        android:id="@+id/appointmentButtonDoctors"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/menu_appointment_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/userProfileButtonDoctors"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/chatBotButtonDoctors"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerDoctorsActivity"
+        app:srcCompat="@drawable/menu_appointment_icon" />
+
+    <Button
+        android:id="@+id/userProfileButtonDoctors"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/menu_profile_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/appointmentButtonDoctors"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerDoctorsActivity"
+        app:srcCompat="@drawable/menu_profile_icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

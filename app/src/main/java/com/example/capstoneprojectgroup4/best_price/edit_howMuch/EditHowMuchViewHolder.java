@@ -18,10 +18,10 @@ public class EditHowMuchViewHolder extends RecyclerView.ViewHolder {
     public EditHowMuchViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        medicineName = itemView.findViewById(R.id.text_medicine);
+        medicineName = itemView.findViewById(R.id.TextView_PatientName);
         editDosage = itemView.findViewById(R.id.edit_dosage);
         editButton = itemView.findViewById(R.id.button_edit);
         doneButton = itemView.findViewById(R.id.button_done);
-        removeButton = itemView.findViewById(R.id.text_select);
+        removeButton = itemView.findViewById(R.id.Button_select);
     }
 }

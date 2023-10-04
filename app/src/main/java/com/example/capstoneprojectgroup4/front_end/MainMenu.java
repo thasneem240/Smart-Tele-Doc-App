@@ -11,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.example.capstoneprojectgroup4.transaction.TransactionHistory;
@@ -81,6 +83,9 @@ public class MainMenu extends Fragment {
         Button chatbotButton = v.findViewById(R.id.aiButton);
         Button transactionButton = v.findViewById(R.id.transactionButton);
         ImageView transactionImageView = v.findViewById(R.id.transaction_square);
+        TextView greeting_TextView = v.findViewById(R.id.TextView_goodMorning);
+
+        greeting_TextView.setText("Good morning, " + MainActivity.getPatientObject().getFirstName());
 
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override

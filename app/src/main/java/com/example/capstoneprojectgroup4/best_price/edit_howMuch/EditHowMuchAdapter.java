@@ -17,7 +17,6 @@ public class EditHowMuchAdapter extends RecyclerView.Adapter<EditHowMuchViewHold
     ArrayList<PrescriptionDrugObject> selectedDrugs;
     public EditHowMuchAdapter(ArrayList<PrescriptionDrugObject> selectedDrugs){
         this.selectedDrugs = selectedDrugs;
-        Log.d("key key", selectedDrugs.toString());
     }
 
     @NonNull
