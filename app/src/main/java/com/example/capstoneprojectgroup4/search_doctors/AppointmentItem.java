@@ -4,6 +4,11 @@ public class AppointmentItem {
     private String PatientName;
     private String PatientEmail;
     private String DoctorName;
+
+    private String Location;
+    private int AppointmentNumber;
+
+
     private String AppointmentType;
     private String Date;
     private String EndTime;
@@ -16,7 +21,7 @@ public class AppointmentItem {
         // Default constructor required for Firebase
     }
 
-    public AppointmentItem(String patientName, String patientEmail, String doctorName, String appointmentType, String date, String StartTime, String EndTime, String appointmentKey, String patientKey) {
+    public AppointmentItem(String patientName, String patientEmail, String doctorName, String appointmentType, String date, String StartTime, String EndTime, String appointmentKey, String patientKey, String Location, int AppointmentNumber) {
         this.PatientName = patientName;
         this.PatientEmail = patientEmail;
         this.DoctorName = doctorName;
@@ -26,6 +31,9 @@ public class AppointmentItem {
         this.StartTime = StartTime;
         this.appointmentKey = appointmentKey;
         this.patientKey = patientKey;
+        this.Location = Location;
+        this.AppointmentNumber = AppointmentNumber;
+
     }
 
     public String getStartTime() {
@@ -69,6 +77,14 @@ public class AppointmentItem {
 
     public String getAppointmentType() {
         return AppointmentType;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public int getAppointmentNumber() {
+        return AppointmentNumber;
     }
 
     public void setAppointmentType(String appointmentType) {

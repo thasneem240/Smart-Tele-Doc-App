@@ -14,6 +14,12 @@ public class ViewAppointmentsViewHolder extends RecyclerView.ViewHolder {
     public CardView cardView;
     public TextView doctorNameTextView;
     public TextView dayTextView;
+
+    public TextView locTextView;
+
+    public TextView appNoTextView;
+
+
     public TextView typeTextView;
     public Button CancelButton;
 
@@ -26,6 +32,8 @@ public class ViewAppointmentsViewHolder extends RecyclerView.ViewHolder {
         doctorNameTextView = itemView.findViewById(R.id.DoctorName);
         dayTextView = itemView.findViewById(R.id.Day);
         typeTextView = itemView.findViewById(R.id.Type);
+        locTextView = itemView.findViewById(R.id.Location);
+        appNoTextView = itemView.findViewById(R.id.AppNumber);
         CancelButton = itemView.findViewById(R.id.Cancel);
         recyclerAppView = itemView.findViewById(R.id.recyclerAppView);
 

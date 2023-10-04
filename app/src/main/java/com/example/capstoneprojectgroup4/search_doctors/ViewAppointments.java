@@ -9,14 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.front_end.MainMenu;
 import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.search_doctors.AppointmentItem;
 import com.example.capstoneprojectgroup4.search_doctors.ViewAppointmentsAdapter;
@@ -61,6 +64,7 @@ public class ViewAppointments extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_appointments, container, false);
         TextView patient = view.findViewById(R.id.patientNameViewApp);
+        ImageView back = view.findViewById(R.id.backButtonViewApp);
         String name = MainActivity.getPatientObject().getFirstName();
         patient.setText(name);
         recyclerView = view.findViewById(R.id.recyclerAppView);
@@ -69,6 +73,17 @@ public class ViewAppointments extends Fragment {
         // Set the adapter here
         viewAppointmentsAdapter = new ViewAppointmentsAdapter(new ArrayList<>());
         recyclerView.setAdapter(viewAppointmentsAdapter);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MainMenu searchDoctors = new MainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            }
+        });
+
 
 
         return view;
@@ -82,6 +97,9 @@ public class ViewAppointments extends Fragment {
         if (getContext() == null)  {
             return;
         }
+
+
+
 
         // Get the current date and time in the device's local time zone
         Calendar calendar = Calendar.getInstance();

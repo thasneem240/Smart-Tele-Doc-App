@@ -165,8 +165,8 @@ public class BookAppointmentF extends Fragment {
                 Log.d(TAG, "Generated appointmentKey: " + appointmentKey);
 
 
-                uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType);
-                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType);
+                uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType, location, New_NoAppValue);
+                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue);
 
                 updateAvailability(doctorName, location, date, New_NoAppValue);
             }
@@ -242,7 +242,7 @@ public class BookAppointmentF extends Fragment {
             }
         });
     }
-    private void uploadDoctorAppointment(String doctorName, String pPatientName, String pPatientEmail, String pDay, String appointmentKey, String VoiceVideoCallType) {
+    private void uploadDoctorAppointment(String doctorName, String pPatientName, String pPatientEmail, String pDay, String appointmentKey, String VoiceVideoCallType, String location, int noApp) {
         // Sanitize input values to remove invalid characters
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
@@ -252,8 +252,9 @@ public class BookAppointmentF extends Fragment {
 
         // Create a HashMap to represent the appointment data
         HashMap<String, Object> appointmentData = new HashMap<>();
-        appointmentData.put("AppointmentKey", appointmentKey);
+        appointmentData.put("Location", location);
         appointmentData.put("AppointmentType", VoiceVideoCallType);
+        appointmentData.put("AppointmentNumber", noApp);
         appointmentData.put("PatientName", sanitizedPatientName);
         appointmentData.put("PatientEmail", pPatientEmail);
         appointmentData.put("Date", pDay);
@@ -273,7 +274,7 @@ public class BookAppointmentF extends Fragment {
 
 
 
-    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end, String VoiceVideoCallType) {
+    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end, String VoiceVideoCallType, String location, int noApp) {
         // Sanitize the email to remove invalid characters
         String sanitizedEmail = email.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
@@ -284,7 +285,9 @@ public class BookAppointmentF extends Fragment {
         appointmentData.put("PatientName", sanitizedPatientName);
         appointmentData.put("PatientEmail", sanitizedEmail);
         appointmentData.put("DoctorName", sanitizedDoctorName);
+        appointmentData.put("Location", location);
         appointmentData.put("AppointmentType", VoiceVideoCallType);
+        appointmentData.put("AppointmentNumber", noApp);
         appointmentData.put("StartTime", start);
         appointmentData.put("EndTime", end);
         appointmentData.put("Date", pDay);
