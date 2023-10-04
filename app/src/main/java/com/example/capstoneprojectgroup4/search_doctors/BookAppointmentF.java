@@ -166,6 +166,8 @@ public class BookAppointmentF extends Fragment {
 
 
                 uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType);
+                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType);
+
                 updateAvailability(doctorName, location, date, New_NoAppValue);
             }
         });
@@ -240,6 +242,37 @@ public class BookAppointmentF extends Fragment {
             }
         });
     }
+    private void uploadDoctorAppointment(String doctorName, String pPatientName, String pPatientEmail, String pDay, String appointmentKey, String VoiceVideoCallType) {
+        // Sanitize input values to remove invalid characters
+        String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
+        String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
+
+        // Create a reference to the "Doctor Appointments" node under the doctor's name
+        DatabaseReference doctorAppointmentsRef = databaseReference.child("Doctor Appointments").child(sanitizedDoctorName);
+
+        // Create a HashMap to represent the appointment data
+        HashMap<String, Object> appointmentData = new HashMap<>();
+        appointmentData.put("AppointmentKey", appointmentKey);
+        appointmentData.put("AppointmentType", VoiceVideoCallType);
+        appointmentData.put("PatientName", sanitizedPatientName);
+        appointmentData.put("PatientEmail", pPatientEmail);
+        appointmentData.put("Date", pDay);
+
+        // Use the generated key to store the appointment data under the doctor's appointments
+        doctorAppointmentsRef.child(appointmentKey).setValue(appointmentData)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(requireContext(), "Error booking appointment", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+
+
+
+
+
     private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end, String VoiceVideoCallType) {
         // Sanitize the email to remove invalid characters
         String sanitizedEmail = email.replaceAll("[.#$\\[\\]]", "_");
