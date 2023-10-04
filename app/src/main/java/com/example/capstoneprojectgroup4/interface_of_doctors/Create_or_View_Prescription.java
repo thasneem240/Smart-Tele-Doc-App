@@ -69,9 +69,9 @@ public class Create_or_View_Prescription extends Fragment {
         View v= inflater.inflate(R.layout.fragment_create_or__view__prescription, container, false);
 
 
-        Button test = v.findViewById(R.id.CreatePresc);
+        //Button test = v.findViewById(R.id.CreatePresc);
 
-        test.setOnClickListener(new View.OnClickListener() {
+        /*test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent prescriptionActivity = new Intent(getActivity(), WritingPrescriptionActivity.class);
@@ -86,7 +86,7 @@ public class Create_or_View_Prescription extends Fragment {
                 DoctorPatientProfiles doctorAvailability = new DoctorPatientProfiles();
                 fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
             }
-        });
+        });*/
 
 
 

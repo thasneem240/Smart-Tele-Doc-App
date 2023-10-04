@@ -135,7 +135,7 @@ public class DoctorPatientProfiles extends Fragment {
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DoctorMainMenu doctorAvailability = new DoctorMainMenu();
-                fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorAvailability).commit();
             }
         });
 

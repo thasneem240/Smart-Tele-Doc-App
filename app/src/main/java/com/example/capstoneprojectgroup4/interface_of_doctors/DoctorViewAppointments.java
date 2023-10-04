@@ -92,7 +92,7 @@ public class DoctorViewAppointments extends Fragment {
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DoctorMainMenu doctorAvailability = new DoctorMainMenu();
-                fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorAvailability).commit();
             }
         });
 
@@ -114,9 +114,12 @@ public class DoctorViewAppointments extends Fragment {
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
         dateTimeFormat.setTimeZone(TimeZone.getDefault()); // Set to the local time zone
 
+        String name = DoctorsActivity.getDoctorObject().getName();
+        String sanitizedDoctorName = name.replaceAll("[.#$\\[\\]]", "_");
+
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
-                .child("Doctor Appointments").child("Dr_ Ajith Amarasinghe");
+                .child("Doctor Appointments").child(sanitizedDoctorName);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

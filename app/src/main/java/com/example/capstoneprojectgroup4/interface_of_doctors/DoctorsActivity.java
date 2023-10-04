@@ -55,7 +55,7 @@ public class DoctorsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FragmentManager fm = getSupportFragmentManager();
                 DoctorViewAppointments searchDoctors = new DoctorViewAppointments();
-                fm.beginTransaction().replace(R.id.docmenufragmentContainer, searchDoctors).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, searchDoctors).commit();
             }
         });
 

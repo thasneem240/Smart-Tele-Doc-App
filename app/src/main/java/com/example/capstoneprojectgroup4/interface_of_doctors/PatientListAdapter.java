@@ -41,7 +41,7 @@ public void onBindViewHolder(@NonNull PatientListViewHolder holder, int position
                         AppCompatActivity activity = (AppCompatActivity) view.getContext();
                         FragmentManager fm = activity.getSupportFragmentManager();
                         Create_or_View_Prescription doctorAvailability = new Create_or_View_Prescription();
-                        fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
+                        fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorAvailability).commit();
                 }
         });
         }
