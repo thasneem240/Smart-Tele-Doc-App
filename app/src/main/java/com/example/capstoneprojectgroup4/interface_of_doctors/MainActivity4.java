@@ -56,7 +56,9 @@ public class MainActivity4 extends AppCompatActivity {
         appointments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FragmentManager fm = getSupportFragmentManager();
+                DoctorViewAppointments searchDoctors = new DoctorViewAppointments();
+                fm.beginTransaction().replace(R.id.docmenufragmentContainer, searchDoctors).commit();
             }
         });
 

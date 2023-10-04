@@ -166,7 +166,7 @@ public class BookAppointmentF extends Fragment {
 
 
                 uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType, location, New_NoAppValue);
-                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue);
+                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue,start, End);
 
                 updateAvailability(doctorName, location, date, New_NoAppValue);
             }
@@ -242,7 +242,7 @@ public class BookAppointmentF extends Fragment {
             }
         });
     }
-    private void uploadDoctorAppointment(String doctorName, String pPatientName, String pPatientEmail, String pDay, String appointmentKey, String VoiceVideoCallType, String location, int noApp) {
+    private void uploadDoctorAppointment(String doctorName, String pPatientName, String pPatientEmail, String pDay, String appointmentKey, String VoiceVideoCallType, String location, int noApp, String start, String end) {
         // Sanitize input values to remove invalid characters
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
@@ -257,6 +257,8 @@ public class BookAppointmentF extends Fragment {
         appointmentData.put("AppointmentNumber", noApp);
         appointmentData.put("PatientName", sanitizedPatientName);
         appointmentData.put("PatientEmail", pPatientEmail);
+        appointmentData.put("StartTime", start);
+        appointmentData.put("EndTime", end);
         appointmentData.put("Date", pDay);
 
         // Use the generated key to store the appointment data under the doctor's appointments
