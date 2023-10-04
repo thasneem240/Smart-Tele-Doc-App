@@ -90,19 +90,19 @@
         app:layout_constraintTop_toTopOf="@+id/AIHelpSquare" />
 
     <Button
-        android:id="@+id/patientProfButton"
+        android:id="@+id/Button_writePrescription"
         android:layout_width="63dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/layered_patient_profiles"
-        app:layout_constraintEnd_toEndOf="@+id/patientProfSquare"
-        app:layout_constraintStart_toStartOf="@+id/patientProfSquare"
-        app:layout_constraintTop_toTopOf="@+id/patientProfSquare" />
+        app:layout_constraintEnd_toEndOf="@+id/ImageView_writePrescription"
+        app:layout_constraintStart_toStartOf="@+id/ImageView_writePrescription"
+        app:layout_constraintTop_toTopOf="@+id/ImageView_writePrescription" />
 
     <ImageView
-        android:id="@+id/patientProfSquare"
+        android:id="@+id/ImageView_writePrescription"
         android:layout_width="139.29dp"
         android:layout_height="120dp"
         android:layout_alignParentStart="true"
@@ -116,18 +116,18 @@
 
     <TextView
         android:id="@+id/doctor2"
-        android:layout_width="151dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="12dp"
         android:gravity="center_horizontal|top"
-        android:text="Patient Profile"
+        android:text="Write prescription"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patientProfButton" />
+        app:layout_constraintTop_toBottomOf="@+id/Button_writePrescription" />
 
     <TextView
         android:id="@+id/good_mornin2"

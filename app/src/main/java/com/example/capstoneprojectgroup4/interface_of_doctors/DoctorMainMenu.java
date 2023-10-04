@@ -9,9 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.front_end.DoctorAvailability;
+import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_DoctorsView.ListOfPatientsFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,20 +64,29 @@ public class DoctorMainMenu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_doctor_main_menu, container, false);
-        Button patProf = view.findViewById(R.id.patientProfButton);
+        View v = inflater.inflate(R.layout.fragment_doctor_main_menu, container, false);
 
-        patProf.setOnClickListener(new View.OnClickListener() {
+        ImageView writePrescription = v.findViewById(R.id.ImageView_writePrescription);
+        Button writePrescriptionButton = v.findViewById(R.id.Button_writePrescription);
+
+        writePrescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DoctorPatientProfiles doctorAvailability = new DoctorPatientProfiles();
-                fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
+                ListOfPatientsFragment listOfPatientsFragment = new ListOfPatientsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatientsFragment).commit();
+            }
+        });
+        writePrescriptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ListOfPatientsFragment listOfPatientsFragment = new ListOfPatientsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatientsFragment).commit();
             }
         });
 
-        return view;
+        return v;
 
     }
 }

@@ -83,11 +83,11 @@ public class DoctorLoginPage extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_doctor_login_page, container, false);
 
-        EditText regNumber_edittext = v.findViewById(R.id.EditText_RegNumber);
-        EditText password_edittext = v.findViewById(R.id.EditText_EnterPassword);
-        Button login_button = v.findViewById(R.id.Button_Login);
-        ImageView back_button = v.findViewById(R.id.ImageView_backButton);
-        TextView signup_textview = v.findViewById(R.id.sign_up_link);
+        EditText regNumber_edittext = v.findViewById(R.id.EditText_Doctor_Enter_Reg_Layout);
+        EditText password_edittext = v.findViewById(R.id.EditText_Doctor_Enter_Password);
+        Button login_button = v.findViewById(R.id.login_button3);
+        ImageView back_button = v.findViewById(R.id.backButtonDocLog);
+        TextView signup_textview = v.findViewById(R.id.TextView_sign_up_link);
 
         FirebaseDatabase firebaseDatabase;
         DatabaseReference databaseReference;

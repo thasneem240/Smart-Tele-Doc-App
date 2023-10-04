@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".interface_of_doctors.DoctorLoginPage">
+    tools:context=".interface_of_doctors.doctor_authentication.DoctorLoginPage">
 
 
     <ImageView
@@ -133,4 +133,25 @@
         android:src="@drawable/message_icon"
         app:layout_constraintStart_toStartOf="@+id/Doctor_Enter_Reg_Layout"
         app:layout_constraintTop_toTopOf="@+id/Doctor_Enter_Reg_Layout" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="17dp"
+        android:text="Don't have an account?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button3" />
+
+    <TextView
+        android:id="@+id/TextView_sign_up_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="29dp"
+        android:text="Sign up"
+        android:textColor="#013073"
+        app:layout_constraintEnd_toEndOf="@+id/login_button3"
+        app:layout_constraintTop_toBottomOf="@+id/login_button3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

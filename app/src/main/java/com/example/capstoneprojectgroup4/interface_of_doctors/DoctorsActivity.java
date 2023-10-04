@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
@@ -18,14 +20,49 @@ public class DoctorsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctors);
 
-        FragmentManager fm = getSupportFragmentManager();
-        DoctorHomePage doctorHomePage = (DoctorHomePage) fm.findFragmentById(R.id.fragmentContainerDoctorsActivity);
+        Button homePage = findViewById(R.id.homePageButton2);
+        Button chatBot = findViewById(R.id.chatBotButton2);
+        Button appointments = findViewById(R.id.appointmentButton2);
+        Button userProfile = findViewById(R.id.userProfileButton2);
 
-        if (doctorHomePage == null)
+        FragmentManager fm = getSupportFragmentManager();
+        DoctorMainMenu doctorMainMenu = (DoctorMainMenu) fm.findFragmentById(R.id.fragmentContainerDoctorsActivity);
+
+        if (doctorMainMenu == null)
         {
-            doctorHomePage = new DoctorHomePage();
-            fm.beginTransaction().add(R.id.fragmentContainerDoctorsActivity, doctorHomePage).commit();
+            doctorMainMenu = new DoctorMainMenu();
+            fm.beginTransaction().add(R.id.fragmentContainerDoctorsActivity, doctorMainMenu).commit();
         }
+
+        homePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getSupportFragmentManager();
+                DoctorMainMenu searchDoctors = new DoctorMainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, searchDoctors).commit();
+            }
+        });
+
+        chatBot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        appointments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
+        userProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
     }
 
     public static DoctorObject getDoctorObject() {

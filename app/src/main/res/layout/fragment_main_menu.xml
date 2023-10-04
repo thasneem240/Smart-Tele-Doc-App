@@ -12,7 +12,7 @@
         android:id="@+id/your_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/good_mornin"
+        android:layout_below="@+id/TextView_goodMorning"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="6dp"
         android:layout_marginTop="74dp"
@@ -25,7 +25,7 @@
 
 
     <TextView
-        android:id="@+id/good_mornin"
+        android:id="@+id/TextView_goodMorning"
         android:layout_width="251dp"
         android:layout_height="45dp"
         android:layout_alignParentLeft="true"
@@ -299,7 +299,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.291"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/good_mornin" />
+        app:layout_constraintTop_toBottomOf="@+id/TextView_goodMorning" />
 
     <TextView
         android:id="@+id/how_are_you"
