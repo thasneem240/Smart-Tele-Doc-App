@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".prescriptions.writing_prescriptions.CreatePrescriptionFragment">
+    tools:context=".writing_prescriptions.CreatePrescription">
 
     <ImageView
-        android:id="@+id/ImageView_PrescriptionWritingBackButton"
+        android:id="@+id/ImageView_BackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -21,7 +21,7 @@
         app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
 
     <TextView
-        android:id="@+id/create_pres"
+        android:id="@+id/TextView"
         android:layout_width="188dp"
         android:layout_height="27dp"
         android:layout_alignParentTop="true"
@@ -43,28 +43,29 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="109dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="108dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="118dp"
+        android:layout_marginBottom="119dp"
         android:src="@drawable/rectangle_8" />
 
     <EditText
-        android:id="@+id/pres_notes"
-        android:layout_width="286dp"
-        android:layout_height="162dp"
+        android:id="@+id/EditText_PrescriptionNotes"
+        android:layout_width="288dp"
+        android:layout_height="113dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="61dp"
-        android:layout_marginTop="364dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginTop="413dp"
+        android:layout_marginEnd="62dp"
         android:background="#F6F8E2"
-        android:text="Prescription Notes : "
+        android:hint="Prescription Notes"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/patientName"
+        android:id="@+id/EditText_patientName"
         android:layout_width="285dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -75,12 +76,11 @@
         android:layout_marginEnd="65dp"
         android:background="@drawable/rectangle_4"
         android:hint=" Patient Name"
-        android:text="Patient Name :"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/doctor_s_na"
+        android:id="@+id/EditText_doctorName"
         android:layout_width="285dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -91,12 +91,11 @@
         android:layout_marginEnd="65dp"
         android:background="@drawable/rectangle_4"
         android:hint="Doctor's Name"
-        android:text="Doctor's Name :"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/presc_date"
+        android:id="@+id/EditText_dob"
         android:layout_width="285dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -106,13 +105,12 @@
         android:layout_marginTop="248dp"
         android:layout_marginEnd="65dp"
         android:background="@drawable/rectangle_4"
-        android:hint="Date"
-        android:text="Date : "
+        android:hint="Date of birth"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/treatment_duration"
+        android:id="@+id/EditText_WrittenOn"
         android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -122,15 +120,29 @@
         android:layout_marginTop="301dp"
         android:layout_marginEnd="64dp"
         android:background="@drawable/rectangle_9"
-        android:hint="Treatment duration"
-        android:text="Treatment duration :"
+        android:hint="Written on"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/EditText_ExpirationDate"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="58dp"
+        android:layout_marginTop="358dp"
+        android:layout_marginEnd="67dp"
+        android:background="@drawable/rectangle_9"
+        android:hint="Prescription expiration date"
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/drugs_count_textView"
+        android:id="@+id/TextView_DrugsCount"
         android:layout_width="84dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pres_notes"
+        android:layout_below="@+id/EditText_PrescriptionNotes"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="229dp"
@@ -141,7 +153,7 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/SubmitButton"
+        android:id="@+id/Button_Submit"
         android:layout_width="187dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -154,10 +166,10 @@
         android:text="Submit " />
 
     <Button
-        android:id="@+id/select_drugs_button"
+        android:id="@+id/Button_SelectedDrugs"
         android:layout_width="133dp"
         android:layout_height="38dp"
-        android:layout_below="@+id/pres_notes"
+        android:layout_below="@+id/EditText_PrescriptionNotes"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="219dp"

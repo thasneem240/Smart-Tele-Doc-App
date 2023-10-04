@@ -85,8 +85,8 @@ public class PatientLogin extends Fragment {
         View v = inflater.inflate(R.layout.fragment_patient_login, container, false);
         Button login = v.findViewById(R.id.login_button);
         TextView signup = v.findViewById(R.id.sign_up_link);
-        EditText email_ = v.findViewById(R.id.loginenter_email);
-        EditText password_ = v.findViewById(R.id.EditText_EnterPassword);
+        EditText email_ = v.findViewById(R.id.EditText_Doctor_Enter_Reg_Layout);
+        EditText password_ = v.findViewById(R.id.EditText_Doctor_Enter_Password);
         ImageView backButton = v.findViewById(R.id.backButton);
      //   ImageView hidePassword = v.findViewById(R.id.ImageView_LoginEye);
 
@@ -131,7 +131,7 @@ public class PatientLogin extends Fragment {
                                         fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
                                     }
                                 } else {
-                                    Toast.makeText(getActivity(), "Login failed. "+task.getException(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(requireContext(), "Login failed. " + task.getException(), Toast.LENGTH_LONG).show();
 
                                 }
                             }

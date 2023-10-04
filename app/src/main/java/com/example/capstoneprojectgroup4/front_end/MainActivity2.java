@@ -14,7 +14,7 @@ import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.authentication.PatientObject;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
-import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
+import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.google.api.gax.core.FixedCredentialsProvider;
@@ -55,6 +55,8 @@ public class MainActivity2 extends AppCompatActivity {
             mainMenu = new MainMenu();
             fm.beginTransaction().add(R.id.fragmentContainerView, mainMenu).commit();
         }
+
+
         if (recive.getStringExtra("Page") != null){
             if (recive.getStringExtra("Page").equals("searchDoctor")){
                 fm = getSupportFragmentManager();
@@ -84,8 +86,8 @@ public class MainActivity2 extends AppCompatActivity {
             }
             if (recive.getStringExtra("Page").equals("prescriptionsPage")){
                 fm = getSupportFragmentManager();
-                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+                ListOfPrescriptionsFragment listOfPrescriptionsFragment = new ListOfPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, listOfPrescriptionsFragment).commit();
             }
             if (recive.getStringExtra("Page").equals("labReport")){
                 fm = getSupportFragmentManager();

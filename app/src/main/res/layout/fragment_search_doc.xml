@@ -4,30 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="33dp"
-        android:src="@drawable/spec_row_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButtonSearchDoc" />
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInputLayout_searchName"
+        android:id="@+id/TextInputLayout_searchPatName"
         android:layout_width="327dp"
         android:layout_height="52.57dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="42dp"
         android:background="@drawable/rectangle_12"
         android:hint="Name"
@@ -40,10 +28,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchName"
-            android:textSize="10sp"
+            android:id="@+id/PatsearchName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="10sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchName">
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchPatName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/searchSpec"
@@ -157,9 +145,9 @@
         app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchDate" />
 
     <Button
-        android:id="@+id/searchButton"
-        android:layout_width="119dp"
-        android:layout_height="28dp"
+        android:id="@+id/searchDoctorsNSLDButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="40dp"
@@ -182,17 +170,17 @@
         android:text="Search Results"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+        app:layout_constraintTop_toBottomOf="@+id/searchDoctorsNSLDButton" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchrv"
-        android:layout_width="371dp"
-        android:layout_height="136dp"
+        android:layout_width="361dp"
+        android:layout_height="180dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -209,8 +197,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="19dp"
         android:src="@drawable/search_icon"
-        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchName"
-        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchName" />
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchPatName"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchPatName" />
 
     <ImageView
         android:id="@+id/specIcon"
@@ -237,7 +225,6 @@
         android:text="Search Doctors"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/searchName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="parent"
@@ -248,7 +235,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="368dp"
+        android:layout_marginEnd="360dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />

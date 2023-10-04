@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -111,11 +110,11 @@ public class SearchDocF extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_search_doc, container, false);
 
         //toolbar = view.findViewById(R.id.toolbar);
-        searchButton = view.findViewById(R.id.searchButton);
+        searchButton = view.findViewById(R.id.searchDoctorsNSLDButton);
         recyclerView = view.findViewById(R.id.searchrv);
         ImageView backButton = view.findViewById(R.id.backButtonSearchDoc);
 
-         etName = view.findViewById(R.id.searchName);
+         etName = view.findViewById(R.id.PatsearchName);
          etSpecialization = view.findViewById(R.id.searchSpec);
          etLocation = view.findViewById(R.id.searchLoc);
          etDate = view.findViewById(R.id.searchDate);
