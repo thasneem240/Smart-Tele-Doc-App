@@ -3,38 +3,35 @@ package com.example.capstoneprojectgroup4.interface_of_doctors;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
-import com.example.capstoneprojectgroup4.front_end.AccountSettings;
-import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 
-public class MainActivity4 extends AppCompatActivity {
+public class DoctorsActivity extends AppCompatActivity {
+    private static String doctorRegNumber;
+    private static DoctorObject doctorObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main4);
-        FragmentManager fm = getSupportFragmentManager();
+        setContentView(R.layout.activity_doctors);
 
-
-        Button  homePage = findViewById(R.id.homePageButton2);
+        Button homePage = findViewById(R.id.homePageButton2);
         Button chatBot = findViewById(R.id.chatBotButton2);
         Button appointments = findViewById(R.id.appointmentButton2);
         Button userProfile = findViewById(R.id.userProfileButton2);
 
-        DoctorMainMenu mainMenu = (DoctorMainMenu) fm.findFragmentById(R.id.docmenufragmentContainer);
+        FragmentManager fm = getSupportFragmentManager();
+        DoctorMainMenu doctorMainMenu = (DoctorMainMenu) fm.findFragmentById(R.id.fragmentContainerDoctorsActivity);
 
-        if (mainMenu == null)
+        if (doctorMainMenu == null)
         {
-            mainMenu = new DoctorMainMenu();
-            fm.beginTransaction().add(R.id.docmenufragmentContainer, mainMenu).commit();
+            doctorMainMenu = new DoctorMainMenu();
+            fm.beginTransaction().add(R.id.fragmentContainerDoctorsActivity, doctorMainMenu).commit();
         }
 
         homePage.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +39,7 @@ public class MainActivity4 extends AppCompatActivity {
             public void onClick(View view) {
                 FragmentManager fm = getSupportFragmentManager();
                 DoctorMainMenu searchDoctors = new DoctorMainMenu();
-                fm.beginTransaction().replace(R.id.docmenufragmentContainer, searchDoctors).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, searchDoctors).commit();
             }
         });
 
@@ -66,14 +63,22 @@ public class MainActivity4 extends AppCompatActivity {
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getSupportFragmentManager();
-                Doctor_User_Profile searchDoctors = new Doctor_User_Profile();
-                fm.beginTransaction().replace(R.id.docmenufragmentContainer, searchDoctors).commit();
-
-//                FragmentManager fm = getSupportFragmentManager();
-//                PatientProfileF patientProfileF = new PatientProfileF();
-//                fm.beginTransaction().replace(R.id.fragmentContainerView, patientProfileF).commit();
             }
         });
+    }
+
+    public static DoctorObject getDoctorObject() {
+        return doctorObject;
+    }
+
+    public static void setDoctorObject(DoctorObject doctorObject) {
+        DoctorsActivity.doctorObject = doctorObject;
+    }
+    public static String getDoctorRegNumber() {
+        return doctorRegNumber;
+    }
+
+    public static void setDoctorRegNumber(String doctorRegNumber) {
+        DoctorsActivity.doctorRegNumber = doctorRegNumber;
     }
 }

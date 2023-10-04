@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.REcyclerAdapter;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
-import com.example.capstoneprojectgroup4.front_end.AccountSettings;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
 import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;

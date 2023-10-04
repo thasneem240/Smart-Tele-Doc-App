@@ -16,6 +16,7 @@ import com.example.capstoneprojectgroup4.Activity_Remote_Consultation;
 import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.patient_authentication.AccountSettings;
 import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
 
 /**

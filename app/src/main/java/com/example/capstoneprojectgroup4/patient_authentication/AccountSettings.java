@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.front_end;
+package com.example.capstoneprojectgroup4.patient_authentication;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,12 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.PatientObject;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
+import com.example.capstoneprojectgroup4.front_end.MainMenu;
 import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -155,7 +155,6 @@ public class AccountSettings extends Fragment {
                 }
             });
         }
-
 
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override

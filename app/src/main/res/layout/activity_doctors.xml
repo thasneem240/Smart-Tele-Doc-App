@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".interface_of_doctors.MainActivity4">
+    tools:context=".interface_of_doctors.DoctorsActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/docmenufragmentContainer"
+        android:id="@+id/fragmentContainerDoctorsActivity"
         android:layout_width="407dp"
         android:layout_height="668dp"
         android:layout_marginBottom="64dp"
@@ -26,7 +26,7 @@
         android:background="@drawable/menu_home_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/docmenufragmentContainer"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerDoctorsActivity"
         app:srcCompat="@drawable/menu_home_icon" />
 
     <Button
@@ -34,12 +34,12 @@
         android:layout_width="36dp"
         android:layout_height="32dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/ai_essentials_icon_set__2_"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/homePageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/docmenufragmentContainer"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerDoctorsActivity"
         app:srcCompat="@drawable/menu_message_icon" />
 
     <Button
@@ -52,19 +52,19 @@
         android:background="@drawable/menu_appointment_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/userProfileButton2"
-        app:layout_constraintTop_toBottomOf="@+id/docmenufragmentContainer"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerDoctorsActivity"
         app:srcCompat="@drawable/menu_appointment_icon" />
 
     <Button
         android:id="@+id/userProfileButton2"
         android:layout_width="28dp"
         android:layout_height="25dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="19dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/menu_profile_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/docmenufragmentContainer"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerDoctorsActivity"
         app:srcCompat="@drawable/menu_profile_icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>

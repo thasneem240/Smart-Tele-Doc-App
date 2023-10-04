@@ -95,7 +95,7 @@ public class ListOfPrescriptionsFragment extends Fragment {
                     listOfPrescriptions.add(prescriptionObject);
                 }
 
-                RecyclerView rv = v.findViewById(R.id.recycler_view_prescriptions);
+                RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
                 rv.setLayoutManager(new LinearLayoutManager(getContext()));
                 ListOfPrescriptionsAdapter listOfPrescriptionsAdapter = new ListOfPrescriptionsAdapter(listOfPrescriptions);
                 rv.setAdapter(listOfPrescriptionsAdapter);

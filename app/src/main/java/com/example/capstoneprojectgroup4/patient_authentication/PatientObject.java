@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.authentication;
+package com.example.capstoneprojectgroup4.patient_authentication;
 
 public class PatientObject {
     private String uid;
@@ -15,7 +15,7 @@ public class PatientObject {
     private String city;
     private String address;
     private boolean completed;
-
+    
     public String getUid() {
         return uid;
     }

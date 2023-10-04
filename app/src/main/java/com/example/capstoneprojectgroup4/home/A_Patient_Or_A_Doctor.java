@@ -1,6 +1,5 @@
 package com.example.capstoneprojectgroup4.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,9 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.front_end.PatientLogin;
-import com.example.capstoneprojectgroup4.interface_of_doctors.MainActivity;
-import com.example.capstoneprojectgroup4.writing_prescriptions.WritingPrescriptionActivity;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientLogin;
+import com.example.capstoneprojectgroup4.interface_of_doctors.doctor_authentication.DoctorLoginPage;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,10 +69,12 @@ public class A_Patient_Or_A_Doctor extends Fragment {
         Button patientInterfaceButton = v.findViewById(R.id.Patient_login_button);
         Button doctorInterfaceButton = v.findViewById(R.id.Doctor_login_button);
 
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+
+
         patientInterfaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
                 PatientLogin patientLogin = new PatientLogin();
                 fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientLogin).commit();
 
@@ -83,12 +83,8 @@ public class A_Patient_Or_A_Doctor extends Fragment {
         doctorInterfaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Intent prescriptionActivity = new Intent(getActivity(), WritingPrescriptionActivity.class);
-               // startActivity(prescriptionActivity);
-
-                Intent prescriptionActivity = new Intent(getActivity(), MainActivity.class);
-                 startActivity(prescriptionActivity);
-
+                DoctorLoginPage doctorLoginPage = new DoctorLoginPage();
+                fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, doctorLoginPage).commit();
             }
         });
 

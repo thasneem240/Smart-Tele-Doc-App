@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.front_end;
+package com.example.capstoneprojectgroup4.patient_authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,13 +20,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.Signup_EmailVerificationF;
+import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -122,7 +127,7 @@ public class PatientLogin extends Fragment {
                                     currentUser = mAuth.getCurrentUser();
 
                                     if(currentUser.isEmailVerified()){
-                                        startActivity(new Intent(getActivity(), MainActivity2.class));
+                                        isPatientProfileCompleted();
                                     }
                                     else{
                                         Toast.makeText(getActivity(), "Please verify your email", Toast.LENGTH_SHORT).show();
@@ -170,5 +175,31 @@ public class PatientLogin extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
         return v;
+    }
+
+    public void isPatientProfileCompleted(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("Users").child(currentUser.getUid());
+
+        databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue(PatientObject.class).isCompleted()){
+                    startActivity(new Intent(getActivity(), MainActivity2.class));
+                }
+                else{
+                    Toast.makeText(getActivity(), "Please fill in all the required details.", Toast.LENGTH_SHORT).show();
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    AccountSettings accountSettings = new AccountSettings();
+                    fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, accountSettings).commit();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "Error while loading the database. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

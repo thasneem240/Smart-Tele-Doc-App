@@ -4,47 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".interface_of_doctors.DoctorPatientProfiles">
+    tools:context=".interface_of_doctors.ListOfPatients_DoctorsView.DoctorPatientProfiles">
 
-    <Button
-        android:id="@+id/searchPatientList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+
+    <ImageView
+        android:id="@+id/nameIcon2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+
         android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/rectangle_1"
-        android:text="Search"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchPatName" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/search_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/TextInputLayout_searchPatName"
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchPatName"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchPatName" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayout_searchPatName"
-        android:layout_width="327dp"
-        android:layout_height="52.57dp"
+        android:layout_width="331dp"
+        android:layout_height="63dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="42dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/rectangle_12"
         android:hint="Name"
         android:paddingStart="50sp"
         android:textColorHint="#A1A8B0"
         android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/RecyclerView_ListOfPatients"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ListPatsearchName"
+            android:id="@+id/PatsearchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#A1A8B0"
             android:textSize="10sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -56,13 +54,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="62dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="263dp"
+        android:layout_marginBottom="50dp"
         android:text="List of Patients"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_searchPatName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButtonDocPatProf" />
 
@@ -70,37 +66,22 @@
         android:id="@+id/backButtonDocPatProf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="360dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="43dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView13"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listPatientsrv"
-        android:layout_width="334dp"
-        android:layout_height="368dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/RecyclerView_ListOfPatients"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchPatientList" />
-
-
-    <ImageView
-        android:id="@+id/nameIcon2"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="19dp"
-        android:src="@drawable/search_icon"
-        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchPatName"
-        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchPatName" />
-
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchPatName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

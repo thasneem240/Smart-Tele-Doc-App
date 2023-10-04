@@ -75,9 +75,7 @@ public class DoctorMedicalRecords extends Fragment {
         presc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                Create_or_View_Prescription doctorAvailability = new Create_or_View_Prescription();
-                fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
+
             }
         });
 
@@ -87,7 +85,7 @@ public class DoctorMedicalRecords extends Fragment {
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DoctorMedicalRecords doctorAvailability = new DoctorMedicalRecords();
-                fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorAvailability).commit();
             }
         });
 
@@ -95,8 +93,8 @@ public class DoctorMedicalRecords extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DoctorPatientProfiles doctorAvailability = new DoctorPatientProfiles();
-                fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
+                DoctorMainMenu doctorMainMenu = new DoctorMainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorMainMenu).commit();
             }
         });
 

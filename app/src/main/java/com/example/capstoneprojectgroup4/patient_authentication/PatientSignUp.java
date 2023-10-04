@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.front_end;
+package com.example.capstoneprojectgroup4.patient_authentication;
 
 import android.os.Bundle;
 
@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.Signup_EmailVerificationF;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -86,7 +85,7 @@ public class PatientSignUp extends Fragment {
         TextView login = v.findViewById(R.id.login_link);
         ImageView backButton = v.findViewById(R.id.ImageView_SignupBack);
         EditText enterEmail = v.findViewById(R.id.EditText_EnterEmail);
-        EditText enterPassword = v.findViewById(R.id.EditText_Doctor_Enter_Password);
+        EditText enterPassword = v.findViewById(R.id.EditText_EnterPassword);
         EditText reEnterPassword = v.findViewById(R.id.EditText_ReEnterPassword);
         CheckBox termsConditions = v.findViewById(R.id.CheckBox_Terms);
 
@@ -122,6 +121,10 @@ public class PatientSignUp extends Fragment {
                     Toast.makeText(getActivity(), "Please enter the password", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(password.length() < 6){
+                    Toast.makeText(getActivity(), "Length of the password should be more than 6 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(!password.equals(passwordRepeat)){
                     Toast.makeText(getActivity(), "Passwords don't match", Toast.LENGTH_SHORT).show();
                     return;
@@ -129,11 +132,6 @@ public class PatientSignUp extends Fragment {
 
                 if(!termsConditions.isChecked()){
                     Toast.makeText(getActivity(), "Please indicate that you accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if(password.length() < 6){
-                    Toast.makeText(getActivity(), "Length of the password should be more than 6 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

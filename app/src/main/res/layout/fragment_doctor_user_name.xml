@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".patient_authentication.PatientSignUp">
+
+    <!-- Sign up As Patient -->
+
+
+    <ImageView
+        android:id="@+id/ImageView_SignupBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/baseline_keyboard_arrow_left_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="195dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/EditText_RegistrationNumber"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/rounded_rec"
+            android:gravity="center"
+            android:hint="Registration Number"
+            android:textColorHint="#A1A8B0"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="144dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/EditText_MobileNumber"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/rounded_rec"
+            android:gravity="center"
+            android:hint="Mobile Number"
+            android:textColorHint="#A1A8B0"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="24dp"
+            tools:layout_editor_absoluteY="199dp" />
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/EditText_Email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/rounded_rec"
+            android:gravity="center"
+            android:hint="Email"
+            android:textColorHint="#A1A8B0"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="24dp"
+            tools:layout_editor_absoluteY="200dp" />
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/EditText_EnterPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/rounded_rec"
+            android:gravity="center"
+            android:hint="Password"
+            android:textColorHint="#A1A8B0"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="24dp"
+            tools:layout_editor_absoluteY="200dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/EditText_ReEnterPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/EditText_EnterPassword"
+            android:background="@drawable/rounded_rec"
+            android:gravity="center"
+            android:hint="Re enter Password"
+            android:textColorHint="#A1A8B0"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="272dp" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sign_up_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="81dp"
+        android:gravity="center_horizontal"
+        android:text="Doctor Registration"
+        android:textColor="#407C87"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/CheckBox_Terms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:minHeight="48dp"
+        android:text="I agree to the medidoc Terms of Service and Privacy Policy"
+        android:textColor="#3B4453"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/Button_SignUp"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/CheckBox_Terms"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rectangle_1"
+        android:text="Sign Up"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CheckBox_Terms" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

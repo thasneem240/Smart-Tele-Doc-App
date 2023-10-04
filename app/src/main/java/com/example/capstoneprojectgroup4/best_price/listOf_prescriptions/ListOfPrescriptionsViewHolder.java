@@ -15,8 +15,8 @@ public class ListOfPrescriptionsViewHolder extends RecyclerView.ViewHolder {
     public ListOfPrescriptionsViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        date = itemView.findViewById(R.id.text_medicine);
-        doctor = itemView.findViewById(R.id.text_dosage);
-        select = itemView.findViewById(R.id.text_select);
+        date = itemView.findViewById(R.id.TextView_PatientName);
+        doctor = itemView.findViewById(R.id.TextView_Dob);
+        select = itemView.findViewById(R.id.Button_select);
     }
 }
