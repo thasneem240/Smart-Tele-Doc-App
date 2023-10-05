@@ -85,8 +85,6 @@ public class Frag_Remote_Consultation extends Fragment
         // patientNameEditText.setText("A.S.M. Thasneem");
         patientNameEditText.setText(patientName);
 
-        Intent intent = new Intent(getActivity(), Activity_VideoConference.class);
-
 
         videoConferenceButton.setOnClickListener(new View.OnClickListener()
         {
@@ -95,7 +93,10 @@ public class Frag_Remote_Consultation extends Fragment
             {
                 // Handle the video conference button click event here
                 // You can start the video conference activity or initiate the call.
-                startActivity(intent);
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Frag_VideoConference fragVideoConference = new Frag_VideoConference();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragVideoConference).commit();
 
 
             }
