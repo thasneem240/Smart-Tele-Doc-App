@@ -9,20 +9,25 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Frag_VideoConference#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag_VideoConference extends Fragment {
+public class Frag_VideoConference extends Fragment
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,6 +46,8 @@ public class Frag_VideoConference extends Fragment {
     private Button addNoteButton;
     private TextView patientNameTextView;
     private TextView patientMedicalHistoryTextView;
+
+    private ImageView backButtonVideoConference;
 
 
 
@@ -89,6 +96,7 @@ public class Frag_VideoConference extends Fragment {
         addNoteButton = view.findViewById(R.id.addNoteButton);
         patientNameTextView = view.findViewById(R.id.patientNameTextView);
         patientMedicalHistoryTextView = view.findViewById(R.id.patientMedicalHistoryTextView);
+        backButtonVideoConference = view.findViewById(R.id.backButtonVideoConference);
 
         // Check and request camera permission
         if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA)
@@ -111,6 +119,17 @@ public class Frag_VideoConference extends Fragment {
             {
                 Intent intent = new Intent(getActivity(),Activity_NoteTaking.class);
                 startActivity(intent);
+            }
+        });
+
+        backButtonVideoConference.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Frag_Remote_Consultation fragRemoteConsultation = new Frag_Remote_Consultation();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragRemoteConsultation).commit();
             }
         });
 
