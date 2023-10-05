@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -101,6 +102,22 @@ public class Frag_ListLabReports extends Fragment
         retrieveLabReports.setVisibility(View.VISIBLE);
         listLabReports.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
+
+
+        backButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Frag_LabReports fragLabReports = new Frag_LabReports();
+
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragLabReports).commit();
+            }
+        });
+
+
+
 
         retrieveLabReports.setOnClickListener(new View.OnClickListener()
         {
