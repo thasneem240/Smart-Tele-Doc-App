@@ -279,15 +279,25 @@ public class BookAppointmentF extends Fragment {
 
 
     private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end, String VoiceVideoCallType, String location, int noApp) {
+
         // Sanitize the email to remove invalid characters
+
         String sanitizedEmail = email.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedDoctorName = pDoctorName.replaceAll("[.#$\\[\\]]", "_");
 
+        // Encrypt patientName and email before uploading
+        String encryptedPatientName = EncryptionUtil.encrypt(sanitizedPatientName);
+        String encryptedEmail = EncryptionUtil.encrypt(sanitizedEmail);
+
+
 
         HashMap<String, Object> appointmentData = new HashMap<>();
-        appointmentData.put("PatientName", sanitizedPatientName);
-        appointmentData.put("PatientEmail", sanitizedEmail);
+        //appointmentData.put("PatientName", sanitizedPatientName);
+        //appointmentData.put("PatientEmail", sanitizedEmail);
+        appointmentData.put("PatientName", encryptedPatientName);
+        appointmentData.put("PatientEmail", encryptedEmail);
+
         appointmentData.put("DoctorName", sanitizedDoctorName);
         appointmentData.put("Location", location);
         appointmentData.put("AppointmentType", VoiceVideoCallType);

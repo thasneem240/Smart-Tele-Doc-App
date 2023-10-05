@@ -98,9 +98,6 @@ public class DoctorViewAppointments extends Fragment {
 
 
 
-
-
-
         recyclerView = view.findViewById(R.id.recyclerDocAppView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
