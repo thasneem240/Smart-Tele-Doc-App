@@ -30,7 +30,7 @@ public class Activity_NoteTaking extends AppCompatActivity
         Button clearNoteButton = findViewById(R.id.clearNoteButton);
 
         // Load and display saved notes when the activity is created
-        //displaySavedNotes();
+        displaySavedNotes();
 
         saveNoteButton.setOnClickListener(new View.OnClickListener()
         {
