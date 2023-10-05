@@ -3,6 +3,7 @@ package com.example.capstoneprojectgroup4.front_end;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
 import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
@@ -85,7 +87,7 @@ public class MainMenu extends Fragment {
         ImageView transactionImageView = v.findViewById(R.id.transaction_square);
         TextView greeting_TextView = v.findViewById(R.id.TextView_goodMorning);
 
-        greeting_TextView.setText("Good morning, " + MainActivity.getPatientObject().getFirstName());
+        greeting_TextView.setText("Good Morning, " + MainActivity.getPatientObject().getFirstName());
 
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +182,14 @@ public class MainMenu extends Fragment {
                 startActivity(intent);
             }
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this.getActivity(), callback);
 
         return v;
     }

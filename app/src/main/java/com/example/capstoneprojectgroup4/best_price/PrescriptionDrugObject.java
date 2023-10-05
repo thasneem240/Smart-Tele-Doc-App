@@ -6,6 +6,7 @@ public class PrescriptionDrugObject {
     private String strength;
     private int amount;
     private String drugSpecificNotes;
+    private String medicineNotes;
 
     public String getNameOfTheDrug() {
         return nameOfTheDrug;
@@ -46,5 +47,13 @@ public class PrescriptionDrugObject {
 
     public void setDrugSpecificNotes(String drugSpecificNotes) {
         this.drugSpecificNotes = drugSpecificNotes;
+    }
+
+    public String getMedicineNotes() {
+        return medicineNotes;
+    }
+
+    public void setMedicineNotes(String medicineNotes) {
+        this.medicineNotes = medicineNotes;
     }
 }

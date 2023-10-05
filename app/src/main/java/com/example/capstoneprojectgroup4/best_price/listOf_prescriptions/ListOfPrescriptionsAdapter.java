@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
 import com.example.capstoneprojectgroup4.best_price.edit_howMuch.EditHowMuchFragment;
-import com.example.capstoneprojectgroup4.writing_prescriptions.PrescriptionObject;
+import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.other.PrescriptionObject;
 
 import java.util.ArrayList;
 

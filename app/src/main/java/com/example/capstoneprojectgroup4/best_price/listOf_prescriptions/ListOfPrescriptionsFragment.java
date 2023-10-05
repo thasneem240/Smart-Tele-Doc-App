@@ -19,7 +19,7 @@ import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
-import com.example.capstoneprojectgroup4.writing_prescriptions.PrescriptionObject;
+import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.other.PrescriptionObject;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
