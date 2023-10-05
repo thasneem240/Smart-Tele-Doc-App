@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import com.example.capstoneprojectgroup4.Activity_Remote_Consultation;
 import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
+import com.example.capstoneprojectgroup4.Frag_Remote_Consultation;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
 
@@ -181,8 +182,15 @@ public class MedicalRecords extends Fragment {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(getActivity(), Activity_Remote_Consultation.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), Activity_Remote_Consultation.class);
+//                startActivity(intent);
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Frag_Remote_Consultation fragRemoteConsultation = new Frag_Remote_Consultation();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragRemoteConsultation).commit();
+
+
+
             }
         });
 
