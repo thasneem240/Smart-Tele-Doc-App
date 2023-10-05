@@ -101,13 +101,13 @@ public class AccountSettings extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_account_settings, container, false);
         ImageView profileImage =  v.findViewById(R.id.ProfileImage);
-        emailEditText = v.findViewById(R.id.EditText_Email);
-        firstNameEditText = v.findViewById(R.id.EditText_FirstName);
+        emailEditText = v.findViewById(R.id.EditText_RegNumber);
+        firstNameEditText = v.findViewById(R.id.EditText_DoctorName);
         lastNameEditText = v.findViewById(R.id.EditText_LastName);
         nicEditText = v.findViewById(R.id.EditText_Nic);
         dobEditText = v.findViewById(R.id.EditText_Dob);
         genderEditText = v.findViewById(R.id.EditText_Gender);
-        mobileEditText = v.findViewById(R.id.EditText_MobileNumber);
+        mobileEditText = v.findViewById(R.id.EditText_Specialization);
         heightEditText = v.findViewById(R.id.EditText_Height);
         weightEditText = v.findViewById(R.id.EditText_Weight);
         countryEditText = v.findViewById(R.id.EditText_Country);

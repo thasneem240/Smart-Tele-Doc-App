@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".writing_prescriptions.CreatePrescription">
+    tools:context=".interface_of_doctors.writing_prescriptions.other.CreatePrescription">
 
     <ImageView
         android:id="@+id/ImageView_BackButton"
@@ -52,12 +52,13 @@
     <EditText
         android:id="@+id/EditText_PrescriptionNotes"
         android:layout_width="288dp"
-        android:layout_height="113dp"
+        android:layout_height="150dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="61dp"
-        android:layout_marginTop="413dp"
+        android:layout_marginTop="366dp"
         android:layout_marginEnd="62dp"
         android:background="#F6F8E2"
         android:hint="Prescription Notes"
@@ -121,21 +122,6 @@
         android:layout_marginEnd="64dp"
         android:background="@drawable/rectangle_9"
         android:hint="Written on"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/EditText_ExpirationDate"
-        android:layout_width="286dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="58dp"
-        android:layout_marginTop="358dp"
-        android:layout_marginEnd="67dp"
-        android:background="@drawable/rectangle_9"
-        android:hint="Prescription expiration date"
         android:textSize="14sp" />
 
     <TextView

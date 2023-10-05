@@ -19,9 +19,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorObject;
-import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorSignupObject;
-import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorsActivity;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorObject;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorSignupObject;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -92,7 +92,7 @@ public class DoctorUserName extends Fragment {
         databaseReference = firebaseDatabase.getReference("doctors");
 
         EditText regNumber_edittext = v.findViewById(R.id.EditText_RegistrationNumber);
-        EditText mobileNumber_edittext = v.findViewById(R.id.EditText_MobileNumber);
+        EditText mobileNumber_edittext = v.findViewById(R.id.EditText_Specialization);
         EditText password_edittext = v.findViewById(R.id.EditText_EnterPassword);
         EditText reEnterPassword_edittext = v.findViewById(R.id.EditText_ReEnterPassword);
         CheckBox termsCheckBox = v.findViewById(R.id.CheckBox_Terms);

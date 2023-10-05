@@ -1,6 +1,8 @@
 package com.example.capstoneprojectgroup4.patient_authentication;
 
-public class PatientObject {
+import java.io.Serializable;
+
+public class PatientObject implements Serializable {
     private String uid;
     private String email;
     private String firstName;

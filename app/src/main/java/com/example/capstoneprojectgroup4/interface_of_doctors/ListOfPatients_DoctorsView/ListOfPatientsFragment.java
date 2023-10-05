@@ -4,17 +4,19 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
-import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorsActivity;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMainMenu;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,10 +78,14 @@ public class ListOfPatientsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_list_of_patients, container, false);
 
+        ImageView backButton = v.findViewById(R.id.ImageView_backButton);
+
         FirebaseDatabase firebaseDatabase;
         DatabaseReference databaseReference;
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        ArrayList<AppoinmentObject> appoinmentObjectArrayList = new ArrayList<>();
+
+/*        firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Users");
 
         databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
@@ -121,6 +126,39 @@ public class ListOfPatientsFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getActivity(), "Error in the database. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("doctor_appointments").child(DoctorsActivity.getDoctorRegNumber());
+
+        databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshotChild : dataSnapshot.getChildren()){
+                    AppoinmentObject appoinmentObject = dataSnapshotChild.getValue(AppoinmentObject.class);
+                    appoinmentObjectArrayList.add(appoinmentObject);
+                }
+
+                RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
+                rv.setLayoutManager(new LinearLayoutManager(getContext()));
+                ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appoinmentObjectArrayList);
+                rv.setAdapter(listOfPatientsAdapter);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "Error in the database. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                DoctorMainMenu doctorMainMenu = new DoctorMainMenu();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorMainMenu).commit();
             }
         });
 

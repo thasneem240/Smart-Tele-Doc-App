@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -172,7 +173,7 @@ public class PatientLogin extends Fragment {
                 fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, aPatientOrADoctor).commit();
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+        requireActivity().getOnBackPressedDispatcher().addCallback(this.getActivity(), callback);
 
         return v;
     }
@@ -184,7 +185,9 @@ public class PatientLogin extends Fragment {
         databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue(PatientObject.class).isCompleted()){
+                PatientObject patientObject = dataSnapshot.getValue(PatientObject.class);
+                if(patientObject.isCompleted()){
+                    MainActivity.setPatientObject(patientObject);
                     startActivity(new Intent(getActivity(), MainActivity2.class));
                 }
                 else{

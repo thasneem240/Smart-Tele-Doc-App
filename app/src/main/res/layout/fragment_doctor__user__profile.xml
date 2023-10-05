@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".interface_of_doctors.Doctor_User_Profile">
+    tools:context=".interface_of_doctors.other.DoctorUserProfile">
 
 
     <Button
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_FirstName">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditText_MobileNumber"
+            android:id="@+id/EditText_Specialization"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#3174D4"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditText_FirstName"
+            android:id="@+id/EditText_DoctorName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#3174D4"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView20">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditText_Email"
+            android:id="@+id/EditText_RegNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#3174D4"
@@ -85,7 +85,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/TextView_Greetings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
@@ -97,7 +97,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/dockAccBack"
+        android:id="@+id/ImageView_BackButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -114,6 +114,6 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/steth"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dockAccBack" />
+        app:layout_constraintTop_toBottomOf="@+id/ImageView_BackButton2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

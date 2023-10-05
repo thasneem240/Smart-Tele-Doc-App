@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +22,9 @@ import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
-import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorObject;
-import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorSignupObject;
-import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorsActivity;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorObject;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorSignupObject;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -88,6 +88,9 @@ public class DoctorLoginPage extends Fragment {
         Button login_button = v.findViewById(R.id.login_button3);
         ImageView back_button = v.findViewById(R.id.backButtonDocLog);
         TextView signup_textview = v.findViewById(R.id.TextView_sign_up_link);
+
+        password_edittext.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
 
         FirebaseDatabase firebaseDatabase;
         DatabaseReference databaseReference;

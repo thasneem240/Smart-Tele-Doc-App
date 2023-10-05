@@ -11,7 +11,7 @@ import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
 
 
 public class MainActivity extends AppCompatActivity
-{
+{// 123
     private static PatientObject patientObject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

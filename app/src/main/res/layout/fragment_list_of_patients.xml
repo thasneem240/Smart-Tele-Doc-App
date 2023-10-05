@@ -60,10 +60,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_searchPatName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButtonDocPatProf" />
+        app:layout_constraintTop_toBottomOf="@+id/ImageView_backButton" />
 
     <ImageView
-        android:id="@+id/backButtonDocPatProf"
+        android:id="@+id/ImageView_backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
