@@ -2,6 +2,7 @@ package com.example.capstoneprojectgroup4;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -59,6 +60,7 @@ public class Frag_LabReports extends Fragment
 
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
+    private Drawable drawable = null;
 
 
 
@@ -118,6 +120,8 @@ public class Frag_LabReports extends Fragment
 
         ImageView backButton = view.findViewById(R.id.backButtonLabReports);
 
+        drawable = firebaseImage.getDrawable();
+
         /* Grab the  UI Variables from Layout file */
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +139,6 @@ public class Frag_LabReports extends Fragment
             public void onClick(View v)
             {
                 selectImage();
-                isSelected[0] = true;
             }
         });
 
@@ -189,6 +192,7 @@ public class Frag_LabReports extends Fragment
         {
             imageUri = data.getData();
             firebaseImage.setImageURI(imageUri);
+            isSelected[0] = true;
         }
     }
 
@@ -215,7 +219,9 @@ public class Frag_LabReports extends Fragment
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
                     {
-                        firebaseImage.setImageURI(null);
+                        firebaseImage.setImageDrawable(drawable);
+                        isSelected[0] = false;
+
                         Toast.makeText(getActivity(),"Successfully uploaded", Toast.LENGTH_SHORT).show();
 
                         if(progressDialog.isShowing())
@@ -223,19 +229,20 @@ public class Frag_LabReports extends Fragment
                             progressDialog.dismiss();
                         }
 
-                        isSelected[0] = false;
                     }
                 }).addOnFailureListener(new OnFailureListener()
                 {
                     @Override
                     public void onFailure(@NonNull Exception e)
                     {
+                        firebaseImage.setImageDrawable(drawable);
+                        isSelected[0] = false;
+
                         if(progressDialog.isShowing())
                         {
                             progressDialog.dismiss();
                         }
                         Toast.makeText(getActivity(),"Failed to upload", Toast.LENGTH_SHORT).show();
-                        isSelected[0] = false;
 
                     }
                 });
