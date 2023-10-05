@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
 
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -64,6 +65,7 @@ public class Frag_LabReports extends Fragment
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private   final boolean[] isSelected = {false};
 
     public Frag_LabReports()
     {
@@ -115,7 +117,6 @@ public class Frag_LabReports extends Fragment
         listReports = view.findViewById(R.id.listReport);
 
         ImageView backButton = view.findViewById(R.id.backButtonLabReports);
-        final boolean[] isSelected = {false};
 
         /* Grab the  UI Variables from Layout file */
 
@@ -199,15 +200,15 @@ public class Frag_LabReports extends Fragment
         progressDialog.show();
 
 
-        //String Uid = MainActivity.getPatientObject().getUid();
+        String uId = MainActivity.getPatientObject().getUid();
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.ENGLISH);
         Date now = new Date();
 
         String fileTitle = formatter.format(now);
-        //String fileTitle = formatter.format(Uid + "_" + now);
+        String fileTitleWithUID = uId + "_" + fileTitle;
 
-        storageReference = FirebaseStorage.getInstance().getReference("Lab_Reports/" + fileTitle);
+        storageReference = FirebaseStorage.getInstance().getReference("Lab_Reports/" + fileTitleWithUID);
         storageReference.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
                 {
@@ -221,6 +222,8 @@ public class Frag_LabReports extends Fragment
                         {
                             progressDialog.dismiss();
                         }
+
+                        isSelected[0] = false;
                     }
                 }).addOnFailureListener(new OnFailureListener()
                 {
@@ -232,6 +235,7 @@ public class Frag_LabReports extends Fragment
                             progressDialog.dismiss();
                         }
                         Toast.makeText(getActivity(),"Failed to upload", Toast.LENGTH_SHORT).show();
+                        isSelected[0] = false;
 
                     }
                 });
