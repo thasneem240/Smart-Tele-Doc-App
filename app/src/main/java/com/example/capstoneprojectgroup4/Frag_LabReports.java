@@ -166,8 +166,14 @@ public class Frag_LabReports extends Fragment
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(getActivity(),Activity_ListLabReports.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(),Activity_ListLabReports.class);
+//                startActivity(intent);
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Frag_ListLabReports fragListLabReports = new Frag_ListLabReports();
+
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragListLabReports).commit();
+
             }
         });
 
