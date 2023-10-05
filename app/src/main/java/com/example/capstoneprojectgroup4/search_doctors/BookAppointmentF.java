@@ -165,10 +165,10 @@ public class BookAppointmentF extends Fragment {
 
                 //appointmentKey = AppointmentKeyGenerator.generateAppointmentKey(patientKey,sanitizedDoctorName,sanitizedHospitalName,sanitizedDate);
                 Log.d(TAG, "Generated appointmentKey: " + appointmentKey);
+                String PatientID = MainActivity.getPatientObject().getUid();
 
-
-                uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType, location, New_NoAppValue);
-                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue,start, End);
+                uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType, location, New_NoAppValue, PatientID);
+                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue,start, End, PatientID);
 
                 updateAvailability(doctorName, location, date, New_NoAppValue);
             }
@@ -244,7 +244,7 @@ public class BookAppointmentF extends Fragment {
             }
         });
     }
-    private void uploadDoctorAppointment(String doctorName, String pPatientName, String pPatientEmail, String pDay, String appointmentKey, String VoiceVideoCallType, String location, int noApp, String start, String end) {
+    private void uploadDoctorAppointment(String doctorName, String pPatientName, String pPatientEmail, String pDay, String appointmentKey, String VoiceVideoCallType, String location, int noApp, String start, String end, String PatientID) {
         // Sanitize input values to remove invalid characters
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
@@ -262,6 +262,7 @@ public class BookAppointmentF extends Fragment {
         appointmentData.put("StartTime", start);
         appointmentData.put("EndTime", end);
         appointmentData.put("Date", pDay);
+        appointmentData.put("PaitentUserId",PatientID);
 
         // Use the generated key to store the appointment data under the doctor's appointments
         doctorAppointmentsRef.child(appointmentKey).setValue(appointmentData)
@@ -278,7 +279,7 @@ public class BookAppointmentF extends Fragment {
 
 
 
-    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end, String VoiceVideoCallType, String location, int noApp) {
+    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end, String VoiceVideoCallType, String location, int noApp, String PatientID) {
 
         // Sanitize the email to remove invalid characters
 
@@ -305,6 +306,7 @@ public class BookAppointmentF extends Fragment {
         appointmentData.put("StartTime", start);
         appointmentData.put("EndTime", end);
         appointmentData.put("Date", pDay);
+        appointmentData.put("PaitentUserId",PatientID);
 
         // Use the generated key to store the appointment data under the patient's appointments
         databaseReference.child("Appointment Data").child(patientKey).child(appointmentKey).setValue(appointmentData)
