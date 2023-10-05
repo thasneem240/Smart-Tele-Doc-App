@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -47,6 +48,7 @@ public class Frag_ListLabReports extends Fragment
     private String mParam2;
 
     private StorageReference storageReference;
+    private String uId;
 
     public Frag_ListLabReports()
     {
@@ -87,6 +89,8 @@ public class Frag_ListLabReports extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_lab_reports, container, false);
 
+
+        uId = MainActivity.getPatientObject().getUid();
 
         // Initialize a list to store the firebaseLabReports
         List<LabReport> fireBaseLabReports  = new ArrayList<>();
@@ -187,6 +191,7 @@ public class Frag_ListLabReports extends Fragment
         // Reference to the Firebase Storage folder where lab reports are stored
         storageReference = FirebaseStorage.getInstance().getReference("Lab_Reports");
 
+
         storageReference.listAll()
                 .addOnSuccessListener(new OnSuccessListener<ListResult>()
                 {
@@ -198,36 +203,37 @@ public class Frag_ListLabReports extends Fragment
                             // Generate an ID for each image
                             String id = item.getName();
 
-//                           boolean containsUid = id.contains(uID);
-//                            if(containsUid)
-//                            {
-//                                item.getDownloadUrl(),...........
-//                            }
+                           boolean containsUid = id.contains(uId);
 
-                            // Get the download URL for the image
-                            item.getDownloadUrl()
-                                    .addOnSuccessListener(new OnSuccessListener<Uri>()
-                                    {
-                                        @Override
-                                        public void onSuccess(Uri uri)
+                           // Retrieve Reports of the specific user
+                            if(containsUid)
+                            {
+                                // Get the download URL for the image
+                                item.getDownloadUrl()
+                                        .addOnSuccessListener(new OnSuccessListener<Uri>()
                                         {
-                                            // Create an LabReport Object and add it to the list
-                                            LabReport labReport = new LabReport(id, uri);
-                                            labReportList.add(labReport);
+                                            @Override
+                                            public void onSuccess(Uri uri)
+                                            {
+                                                // Create an LabReport Object and add it to the list
+                                                LabReport labReport = new LabReport(id, uri);
+                                                labReportList.add(labReport);
 
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener()
-                                    {
-                                        @Override
-                                        public void onFailure(@NonNull Exception exception)
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener()
                                         {
-                                            // Handle any errors that may occur during URL retrieval
+                                            @Override
+                                            public void onFailure(@NonNull Exception exception)
+                                            {
+                                                // Handle any errors that may occur during URL retrieval
 
-                                            Toast.makeText(getActivity(),
-                                                    "Failed to Retrieve the URI", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                                Toast.makeText(getActivity(),
+                                                        "Failed to Retrieve the URI", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+
                         }
                     }
                 })
