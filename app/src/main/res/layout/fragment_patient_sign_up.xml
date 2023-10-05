@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".front_end.PatientSignUp">
+    tools:context=".patient_authentication.PatientSignUp">
 
     <!-- Sign up As Patient -->
-
 
     <ImageView
         android:id="@+id/ImageView_SignupBack"
@@ -16,76 +15,85 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/baseline_keyboard_arrow_left_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_EnterEmail"
+        android:layout_width="371dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="195dp"
-        android:orientation="vertical"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rectangle_12"
+        android:hint="Enter your email"
+        android:textColorHint="#A1A8B0"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_title">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/EditText_EnterEmail"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/rounded_rec"
-            android:gravity="center"
-            android:hint="Enter your email"
-            android:textColorHint="#A1A8B0"
-            android:textSize="16sp"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="144dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:textSize="14sp"
+            />
 
-        <Space
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_EnterPassword"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rectangle_12"
+        android:hint="Enter your password"
+        android:textColorHint="#A1A8B0"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_EnterEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText_Doctor_Enter_Password"
             android:layout_width="match_parent"
-            android:layout_height="48dp" />
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginStart="40dp"
+            android:textSize="14sp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/EditText_EnterPassword"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/rounded_rec"
-            android:gravity="center"
-            android:hint="Enter your password"
-            android:textColorHint="#A1A8B0"
-            android:textSize="16sp"
-            tools:layout_editor_absoluteX="24dp"
-            tools:layout_editor_absoluteY="200dp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_ReEnterPassword"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rectangle_12"
+        android:hint="Re-enter your password"
+        android:textColorHint="#A1A8B0"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_EnterPassword">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="24dp" />
-
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/EditText_ReEnterPassword"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@+id/EditText_EnterPassword"
-            android:background="@drawable/rounded_rec"
-            android:gravity="center"
-            android:hint="Re-enter your password"
-            android:textColorHint="#A1A8B0"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="272dp" />
-
-
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:inputType="textPassword"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/sign_up_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="81dp"
+        android:layout_marginTop="80dp"
         android:gravity="center_horizontal"
         android:text="Sign up As Patient"
         android:textColor="#407C87"
@@ -99,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="61dp"
         android:minHeight="48dp"
         android:text="I agree to the medidoc Terms of Service and Privacy Policy"
         android:textColor="#3B4453"
@@ -107,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_ReEnterPassword" />
 
     <Button
         android:id="@+id/sign_up_button"
@@ -116,13 +124,14 @@
         android:layout_below="@+id/CheckBox_Terms"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="62dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="62dp"
         android:background="@drawable/rectangle_1"
         android:text="Sign Up"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CheckBox_Terms" />
 
@@ -146,15 +155,46 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sign_up_button"
-        android:layout_marginStart="92dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="14dp"
         android:layout_toStartOf="@+id/login_link"
         android:text="Have an account?"
         android:textColor="#717784"
         android:textSize="15sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/login_link"
-        app:layout_constraintEnd_toStartOf="@+id/login_link"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_button" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/TextInputLayout_EnterEmail"
+        android:layout_alignTop="@+id/TextInputLayout_EnterEmail"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/message_icon"
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_EnterEmail"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_EnterEmail" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/password_icon"
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_EnterPassword"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_EnterPassword" />
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/password_icon"
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_ReEnterPassword"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_ReEnterPassword" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

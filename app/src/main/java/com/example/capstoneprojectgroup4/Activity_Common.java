@@ -8,9 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.capstoneprojectgroup4.front_end.AccountSettings;
+import com.example.capstoneprojectgroup4.patient_authentication.AccountSettings;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.Frag_Prescriptions;
-import com.google.android.gms.common.internal.AccountType;
 
 public class Activity_Common extends AppCompatActivity
 {

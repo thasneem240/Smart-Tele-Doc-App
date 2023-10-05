@@ -1,100 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="33dp"
-        android:src="@drawable/spec_row_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButtonSearchDoc" />
-
-    <EditText
-        android:id="@+id/searchName"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_searchPatName"
         android:layout_width="327dp"
-        android:layout_height="40dp"
+        android:layout_height="52.57dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="43dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="42dp"
-        android:background="@drawable/rounded_rec"
+        android:background="@drawable/rectangle_12"
         android:hint="Name"
         android:paddingStart="50sp"
-        android:textColor="#000000"
-        android:textSize="10dp"
+        android:textColorHint="#A1A8B0"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-    <EditText
-        android:id="@+id/searchSpec"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/PatsearchName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_searchSpec"
         android:layout_width="327dp"
-        android:layout_height="40dp"
+        android:layout_height="52.57dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="42dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="42dp"
-        android:background="@drawable/rounded_rec"
+        android:background="@drawable/rectangle_12"
         android:hint="Specialization"
         android:paddingStart="50sp"
-        android:textColor="#000000"
-        android:textSize="10dp"
+        android:textColorHint="#A1A8B0"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchName" />
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchPatName">
 
-    <EditText
-        android:id="@+id/searchDate"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchSpec"
+            android:textSize="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_searchLoc"
         android:layout_width="327dp"
-        android:layout_height="40dp"
+        android:layout_height="52.57dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="42dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="42dp"
-        android:background="@drawable/rounded_rec"
-        android:hint="Date"
-        android:paddingStart="50sp"
-        android:textColor="#000000"
-        android:textSize="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchLoc" />
-
-    <EditText
-        android:id="@+id/searchLoc"
-        android:layout_width="327dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="42dp"
-        android:background="@drawable/rounded_rec"
+        android:background="@drawable/rectangle_12"
         android:hint="Location"
         android:paddingStart="50sp"
-        android:textColor="#000000"
-        android:textSize="10dp"
+        android:textColorHint="#A1A8B0"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchSpec" />
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchSpec">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchLoc"
+            android:textSize="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_searchDate"
+        android:layout_width="327dp"
+        android:layout_height="52.57dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="42dp"
+        android:background="@drawable/rectangle_12"
+        android:hint="Date"
+        android:paddingStart="50sp"
+        android:textColorHint="#A1A8B0"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchLoc">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchDate"
+            android:textSize="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/LocIcon"
@@ -103,11 +125,11 @@
 
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="284dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
         android:src="@drawable/search_icon"
-        app:layout_constraintEnd_toEndOf="@+id/searchLoc"
-        app:layout_constraintTop_toTopOf="@+id/searchLoc" />
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchLoc"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchLoc" />
 
     <ImageView
         android:id="@+id/dateIcon"
@@ -116,26 +138,26 @@
 
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="284dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
         android:src="@drawable/calendar_icon"
-        app:layout_constraintEnd_toEndOf="@+id/searchDate"
-        app:layout_constraintTop_toTopOf="@+id/searchDate" />
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchDate"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchDate" />
 
     <Button
-        android:id="@+id/searchButton"
-        android:layout_width="119dp"
-        android:layout_height="28dp"
+        android:id="@+id/searchDoctorsNSLDButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/rectangle_1"
         android:text="Search"
         android:textColor="#FFFFFF"
-        android:textSize="11sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchDate" />
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchDate" />
 
     <TextView
         android:id="@+id/textView3"
@@ -143,28 +165,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:text="Search Results"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+        app:layout_constraintTop_toBottomOf="@+id/searchDoctorsNSLDButton" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchrv"
-        android:layout_width="371dp"
-        android:layout_height="136dp"
+        android:layout_width="361dp"
+        android:layout_height="180dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.36" />
 
     <ImageView
         android:id="@+id/nameIcon"
@@ -173,11 +194,11 @@
 
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="284dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
         android:src="@drawable/search_icon"
-        app:layout_constraintEnd_toEndOf="@+id/searchName"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchPatName"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchPatName" />
 
     <ImageView
         android:id="@+id/specIcon"
@@ -185,11 +206,11 @@
         android:layout_height="24dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="284dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
         android:src="@drawable/search_icon"
-        app:layout_constraintEnd_toEndOf="@+id/searchSpec"
-        app:layout_constraintTop_toBottomOf="@+id/searchName" />
+        app:layout_constraintStart_toStartOf="@+id/TextInputLayout_searchSpec"
+        app:layout_constraintTop_toTopOf="@+id/TextInputLayout_searchSpec" />
 
     <TextView
         android:id="@+id/textView2"
@@ -204,7 +225,6 @@
         android:text="Search Doctors"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/searchName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="parent"
@@ -215,7 +235,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="368dp"
+        android:layout_marginEnd="360dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />

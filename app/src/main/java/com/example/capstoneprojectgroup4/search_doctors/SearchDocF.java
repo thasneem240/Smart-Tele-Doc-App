@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,7 +50,7 @@ public class SearchDocF extends Fragment  {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    int searchType = -1; // Default to no specific search
+    public int searchType = -1; // Default to no specific search
     Map <String, Object> doctors = new HashMap<>();
     Map<String, Object> detailsOfEachDoctor = new HashMap<>();
     String nameResult = "";
@@ -59,16 +58,16 @@ public class SearchDocF extends Fragment  {
     ArrayList<String> locations;
     private String mParam1;
     private String mParam2;
-    TextView etName ;
-    TextView etSpecialization ;
-    TextView etLocation;
-    TextView etDate ;
+    public TextView etName ;
+    public TextView etSpecialization ;
+    public TextView etLocation;
+    public TextView etDate ;
     private Toolbar toolbar;
     String specializationV;
     private Button searchButton;
     private RadioGroup radioGroup;
     private EditText searchEditText;
-    private RecyclerView recyclerView;
+    public RecyclerView recyclerView;
     private DoctorAdapter doctorAdapter;
 
     private DocSearchResultAdapter docSearchResultAdapter;
@@ -111,11 +110,11 @@ public class SearchDocF extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_search_doc, container, false);
 
         //toolbar = view.findViewById(R.id.toolbar);
-        searchButton = view.findViewById(R.id.searchButton);
+        searchButton = view.findViewById(R.id.searchDoctorsNSLDButton);
         recyclerView = view.findViewById(R.id.searchrv);
         ImageView backButton = view.findViewById(R.id.backButtonSearchDoc);
 
-         etName = view.findViewById(R.id.searchName);
+         etName = view.findViewById(R.id.PatsearchName);
          etSpecialization = view.findViewById(R.id.searchSpec);
          etLocation = view.findViewById(R.id.searchLoc);
          etDate = view.findViewById(R.id.searchDate);
@@ -162,7 +161,7 @@ public class SearchDocF extends Fragment  {
         return view;
     }
 
-    private void openDateSearch()
+    public void openDateSearch()
     {
         String specializationV = etSpecialization.getText().toString().trim();
         String nameV = etName.getText().toString().trim();
@@ -205,7 +204,15 @@ public class SearchDocF extends Fragment  {
 
     }
 
-    private void performSearch() {
+
+    private String removeWhitespaceAndToLower(String input) {
+        if (input == null) {
+            return "";
+        }
+        return input.replaceAll("\\s", "").toLowerCase();
+    }
+
+    public void performSearch() {
         String selectedDate = etDate.getText().toString();
         String nameEd = etName.getText().toString().trim();
         String specializationEd = etSpecialization.getText().toString().trim();
@@ -254,16 +261,16 @@ public class SearchDocF extends Fragment  {
                     String specialization = (String) doctorSnapshot.child("Specialization").getValue();
                     ArrayList<String> locations = (ArrayList<String>) doctorSnapshot.child("Locations").getValue();
 
-                    if (searchType == 0 && name != null && name.toLowerCase().contains(nameEd.toLowerCase())) {
-                        Doctors doctor = new Doctors(name, specialization, locations);
+                    if (searchType == 0 && name != null &&
+                            removeWhitespaceAndToLower(name).contains(removeWhitespaceAndToLower(nameEd))) {                        Doctors doctor = new Doctors(name, specialization, locations);
                         doctors.add(doctor);
-                    } else if (searchType == 1 && specialization != null && specialization.toLowerCase().contains(specializationEd.toLowerCase())) {
+                    } else if (searchType == 1 && specialization != null && removeWhitespaceAndToLower(specialization).contains(removeWhitespaceAndToLower(specializationEd))){
                         Doctors doctor = new Doctors(name, specialization, locations);
                         doctors.add(doctor);
                     }  else if (searchType == 2 && locations != null) {
                         // Check if the searched location matches any location for this doctor (case-insensitive).
                         for (String location : locations) {
-                            if (location.toLowerCase().contains(locationEd.toLowerCase())) {
+                            if (removeWhitespaceAndToLower(location).contains(removeWhitespaceAndToLower(locationEd))) {
                                 // Convert the locations list to an ArrayList with a single element.
                                 ArrayList<String> locationList = new ArrayList<>();
                                 locationList.add(location);
@@ -340,11 +347,11 @@ public class SearchDocF extends Fragment  {
                     String doctorName = doctorSnapshot.child("Name").getValue(String.class);
 
                     for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
-                        if (!sessionSnapshot.getKey().equals("Name")) {
+                        if (!sessionSnapshot.getKey().contains("Name")) {
                             String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
                             Log.d(TAG, "LName " + sessionLocation);
 
-                            if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationSLN.toLowerCase())) {
+                            if (sessionLocation != null && removeWhitespaceAndToLower(sessionLocation).contains(removeWhitespaceAndToLower(locationSLN))) {
                                 Log.d(TAG, "Location matched for doctor: " + doctorName);
                                 String doctorId = doctorSnapshot.getKey();
                                 Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
@@ -358,14 +365,14 @@ public class SearchDocF extends Fragment  {
                                         for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
                                             String doctorLocation = locationSnapshot.getValue(String.class);
 
-                                            if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                            if (doctorLocation != null && removeWhitespaceAndToLower(doctorLocation).contains(removeWhitespaceAndToLower(sessionLocation))) {
                                                 locationsList.add(doctorLocation);
                                             }
                                         }
 
                                         Log.d(TAG, "Comparing specializationSLN: " + specializationSLN + " with spec2: " + spec2);
-                                        if (name2 != null && name2.toLowerCase().contains(nameSLN.toLowerCase()) &&
-                                                spec2 != null && spec2.toLowerCase().contains(specializationSLN.toLowerCase())) {
+                                        if (name2 != null && removeWhitespaceAndToLower(name2).contains(removeWhitespaceAndToLower(nameSLN)) &&
+                                                spec2 != null && removeWhitespaceAndToLower(spec2).contains(removeWhitespaceAndToLower(specializationSLN))) {
                                             Log.d(TAG, "Doctor matched: " + name2);
                                             Doctors doctor = new Doctors(name2, spec2, locationsList);
                                             Log.d(TAG, "D: " + doctor);
@@ -418,11 +425,11 @@ public class SearchDocF extends Fragment  {
                     String doctorName = doctorSnapshot.child("Name").getValue(String.class);
 
                     for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
-                        if (!sessionSnapshot.getKey().equals("Name")) {
+                        if (!sessionSnapshot.getKey().contains("Name")) {
                             String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
                             Log.d(TAG, "LName " + sessionLocation);
 
-                            if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationLN.toLowerCase())) {
+                            if (sessionLocation != null && removeWhitespaceAndToLower(sessionLocation).contains(removeWhitespaceAndToLower(locationLN))) {
                                 Log.d(TAG, "Location matched for doctor: " + doctorName);
                                 String doctorId = doctorSnapshot.getKey();
                                 Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
@@ -436,13 +443,13 @@ public class SearchDocF extends Fragment  {
                                         for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
                                             String doctorLocation = locationSnapshot.getValue(String.class);
 
-                                            if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                            if (doctorLocation != null && removeWhitespaceAndToLower(doctorLocation).contains(removeWhitespaceAndToLower(sessionLocation))) {
                                                 locationsList.add(doctorLocation);
                                             }
                                         }
 
                                         Log.d(TAG, "Comparing nameLN: " + nameLN + " with name2: " + name2);
-                                        if (name2 != null && name2.toLowerCase().contains(nameLN.toLowerCase())) {
+                                        if (name2 != null && removeWhitespaceAndToLower(name2).contains(removeWhitespaceAndToLower(nameLN))) {
                                             Log.d(TAG, "Doctor matched: " + name2);
                                             Doctors doctor = new Doctors(name2, spec2, locationsList);
                                             Log.d(TAG, "D: " + doctor);
@@ -492,18 +499,18 @@ public class SearchDocF extends Fragment  {
                     String doctorName = doctorSnapshot.child("Name").getValue(String.class);
 
                     for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
-                        if (!sessionSnapshot.getKey().equals("Name")) {
+                        if (!sessionSnapshot.getKey().contains("Name")) {
                             String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
                             Log.d(TAG, "LName " + sessionLocation);
 
-                            if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationSLD.toLowerCase())) {
+                            if (sessionLocation != null && removeWhitespaceAndToLower(sessionLocation).contains(removeWhitespaceAndToLower(locationSLD))) {
                                 for (DataSnapshot daySnapshot : sessionSnapshot.getChildren()) {
-                                    if (!daySnapshot.getKey().equals("LName")) {
+                                    if (!daySnapshot.getKey().contains("LName")) {
                                         String sessionDate = daySnapshot.child("Date").getValue(String.class);
 
                                         Log.d(TAG, "Comparing selectedDateSLD: " + selectedDateSLD + " with sessionDate: " + sessionDate);
 
-                                        if (selectedDateSLD.equals(sessionDate)) {
+                                        if (selectedDateSLD.contains(sessionDate)) {
                                             Log.d(TAG, "Date matched for doctor: " + doctorName);
                                             String doctorId = doctorSnapshot.getKey();
                                             Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
@@ -517,14 +524,14 @@ public class SearchDocF extends Fragment  {
                                                     for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
                                                         String doctorLocation = locationSnapshot.getValue(String.class);
 
-                                                        if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                        if (doctorLocation != null && removeWhitespaceAndToLower(doctorLocation).contains(removeWhitespaceAndToLower(sessionLocation))) {
                                                             locationsList.add(doctorLocation);
                                                         }
                                                     }
 
                                                     Log.d(TAG, "Comparing specializationSLD: " + specializationSLD + " with spec: " + spec);
-                                                    if (name != null && name.toLowerCase().contains(doctorName.toLowerCase()) &&
-                                                            spec != null && spec.toLowerCase().contains(specializationSLD.toLowerCase())) {
+                                                    if (name != null && removeWhitespaceAndToLower(name).contains(removeWhitespaceAndToLower(doctorName)) &&
+                                                            spec != null && removeWhitespaceAndToLower(spec).contains(removeWhitespaceAndToLower(specializationSLD))) {
                                                         Log.d(TAG, "Doctor matched: " + name);
                                                         Doctors doctor = new Doctors(name, spec, locationsList);
                                                         Log.d(TAG, "D: " + doctor);
@@ -575,15 +582,15 @@ public class SearchDocF extends Fragment  {
                 for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
                     String doctorName = doctorSnapshot.child("Name").getValue(String.class);
 
-                    if (doctorName != null && doctorName.toLowerCase().contains(nameNLD.toLowerCase())) {
+                    if (doctorName != null && removeWhitespaceAndToLower(doctorName).contains(removeWhitespaceAndToLower(nameNLD))) {
                         for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
-                            if (!sessionSnapshot.getKey().equals("Name")) {
+                            if (!sessionSnapshot.getKey().contains("Name")) {
                                 String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
                                 Log.d(TAG, "LName " + sessionLocation);
 
                                 if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationNLD.toLowerCase())) {
                                     for (DataSnapshot daySnapshot : sessionSnapshot.getChildren()) {
-                                        if (!daySnapshot.getKey().equals("LName")) {
+                                        if (!daySnapshot.getKey().contains("LName")) {
                                             String sessionDate = daySnapshot.child("Date").getValue(String.class);
 
                                             Log.d(TAG, "Comparing selectedDateNLD: " + selectedDateNLD + " with sessionDate: " + sessionDate);
@@ -602,7 +609,7 @@ public class SearchDocF extends Fragment  {
                                                         for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
                                                             String doctorLocation = locationSnapshot.getValue(String.class);
 
-                                                            if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                            if (doctorLocation != null && removeWhitespaceAndToLower(doctorLocation).contains(removeWhitespaceAndToLower(sessionLocation)) ){
                                                                 locationsList.add(doctorLocation);
                                                             }
                                                         }
@@ -661,8 +668,8 @@ public class SearchDocF extends Fragment  {
                     String doctorName = doctorSnapshot.child("Name").getValue(String.class);
                     String doctorSpec = doctorSnapshot.child("Specialization").getValue(String.class);
 
-                    if (doctorName != null && doctorName.toLowerCase().contains(nameSN.toLowerCase()) &&
-                            doctorSpec != null && doctorSpec.toLowerCase().contains(specializationSN.toLowerCase())) {
+                    if (doctorName != null && removeWhitespaceAndToLower(doctorName).contains(removeWhitespaceAndToLower(nameSN)) &&
+                            doctorSpec != null && removeWhitespaceAndToLower(doctorSpec).contains(removeWhitespaceAndToLower(specializationSN))) {
                         Log.d(TAG, "Doctor matched: " + doctorName);
                         ArrayList<String> locationsList = new ArrayList<>();
                         for (DataSnapshot locationSnapshot : doctorSnapshot.child("Locations").getChildren()) {
@@ -706,11 +713,11 @@ public class SearchDocF extends Fragment  {
                     String doctorName = doctorSnapshot.child("Name").getValue(String.class);
 
                     for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
-                        if (!sessionSnapshot.getKey().equals("Name")) {
+                        if (!sessionSnapshot.getKey().contains("Name")) {
                             String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
                             Log.d(TAG, "LName " + sessionLocation);
 
-                            if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationSL.toLowerCase())) {
+                            if (sessionLocation != null && removeWhitespaceAndToLower(sessionLocation).contains(removeWhitespaceAndToLower(locationSL))) {
                                 Log.d(TAG, "Location matched for doctor: " + doctorName);
                                 String doctorId = doctorSnapshot.getKey();
                                 Query doctorsRef = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId);
@@ -724,14 +731,14 @@ public class SearchDocF extends Fragment  {
                                         for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
                                             String doctorLocation = locationSnapshot.getValue(String.class);
 
-                                            if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                            if (doctorLocation != null && removeWhitespaceAndToLower(doctorLocation).contains(removeWhitespaceAndToLower(sessionLocation))) {
                                                 locationsList.add(doctorLocation);
                                             }
                                         }
 
                                         Log.d(TAG, "Comparing specializationSL: " + specializationSL + " with spec2: " + spec2);
-                                        if (name2 != null && name2.toLowerCase().contains(doctorName.toLowerCase()) &&
-                                                spec2 != null && spec2.toLowerCase().contains(specializationSL.toLowerCase())) {
+                                        if (name2 != null && removeWhitespaceAndToLower(name2).contains(removeWhitespaceAndToLower(doctorName)) &&
+                                                spec2 != null && removeWhitespaceAndToLower(spec2).contains(removeWhitespaceAndToLower(specializationSL))) {
                                             Log.d(TAG, "Doctor matched: " + name2);
                                             Doctors doctor = new Doctors(name2, spec2, locationsList);
                                             Log.d(TAG, "D: " + doctor);
@@ -779,11 +786,11 @@ public class SearchDocF extends Fragment  {
                     String doctorNameDateS = doctorSnapshotS.child("Name").getValue(String.class);
 
                     for (DataSnapshot sessionSnapshotDateS : doctorSnapshotS.getChildren()) {
-                        if (!sessionSnapshotDateS.getKey().equals("Name")) {
+                        if (!sessionSnapshotDateS.getKey().contains("Name")) {
                             String locationDateS = sessionSnapshotDateS.child("LName").getValue(String.class);
 
                             for (DataSnapshot daySnapshotDateS : sessionSnapshotDateS.getChildren()) {
-                                if (!daySnapshotDateS.getKey().equals("LName")) {
+                                if (!daySnapshotDateS.getKey().contains("LName")) {
                                     String dateDateS = daySnapshotDateS.child("Date").getValue(String.class);
 
                                     Log.d(TAG, "Comparing selectedDateS: " + selectedDateS + " with dateDateS: " + dateDateS);
@@ -801,12 +808,12 @@ public class SearchDocF extends Fragment  {
                                                     for (DataSnapshot locationSnapshotDateS : doctorSnapshotDateS.child("Locations").getChildren()) {
                                                         String locationS = locationSnapshotDateS.getValue(String.class);
 
-                                                        if (locationS != null && locationS.equals(locationDateS)) {
+                                                        if (locationS != null && removeWhitespaceAndToLower(locationS).contains(removeWhitespaceAndToLower(locationDateS))) {
                                                             locationsDateListS.add(locationS);
                                                         }                                                    }
 
-                                                    if (name2DateS != null && name2DateS.toLowerCase().contains(doctorNameDateS.toLowerCase()) &&
-                                                            specDateS != null && specDateS.toLowerCase().contains(specializationS.toLowerCase())) {
+                                                    if (name2DateS != null && removeWhitespaceAndToLower(name2DateS).contains(removeWhitespaceAndToLower(doctorNameDateS)) &&
+                                                            specDateS != null && removeWhitespaceAndToLower(specDateS).contains(removeWhitespaceAndToLower(specializationS))) {
                                                         Log.d(TAG, "Doctor matched: " + name2DateS);
                                                         Doctors doctorDateS = new Doctors(name2DateS, specDateS, locationsDateListS);
                                                         Log.d(TAG, "D: " + doctorDateS);
@@ -860,17 +867,17 @@ public class SearchDocF extends Fragment  {
                     String doctorName = doctorSnapshot.child("Name").getValue(String.class);
                     Log.d(TAG, "dN " + doctorName);
 
-                    if (doctorName != null && doctorName.toLowerCase().contains(nameNSLD.toLowerCase())) {
+                    if (doctorName != null && removeWhitespaceAndToLower(doctorName).contains(removeWhitespaceAndToLower(nameNSLD))) {
 
                         for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
-                            if (!sessionSnapshot.getKey().equals("Name")) {
+                            if (!sessionSnapshot.getKey().contains("Name")) {
                                 String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
                                 Log.d(TAG, "LName " + sessionLocation);
 
-                                if (sessionLocation != null && sessionLocation.toLowerCase().contains(locationNSLD.toLowerCase())) {
+                                if (sessionLocation != null && removeWhitespaceAndToLower(sessionLocation).contains(removeWhitespaceAndToLower(locationNSLD))) {
 
                                     for (DataSnapshot daySnapshot : sessionSnapshot.getChildren()) {
-                                        if (!daySnapshot.getKey().equals("LName")) {
+                                        if (!daySnapshot.getKey().contains("LName")) {
                                             String sessionDate = daySnapshot.child("Date").getValue(String.class);
 
                                             Log.d(TAG, "Comparing selectedDateNSLD: " + selectedDateNSLD + " with sessionDate: " + sessionDate);
@@ -889,13 +896,13 @@ public class SearchDocF extends Fragment  {
                                                         for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
                                                             String doctorLocation = locationSnapshot.getValue(String.class);
 
-                                                            if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                            if (doctorLocation != null && removeWhitespaceAndToLower(doctorLocation).contains(removeWhitespaceAndToLower(sessionLocation))) {
                                                                 locationsList.add(doctorLocation);
                                                             }
                                                         }
 
                                                         Log.d(TAG, "Comparing nameNSLD: " + nameNSLD + " with name: " + name);
-                                                        if (spec != null && spec.toLowerCase().contains(specializationNSLD.toLowerCase())) {
+                                                        if (spec != null && removeWhitespaceAndToLower(spec).contains(removeWhitespaceAndToLower(specializationNSLD))) {
                                                             Log.d(TAG, "Doctor matched: " + name);
                                                             Doctors doctor = new Doctors(name, spec, locationsList);
                                                             Log.d(TAG, "D: " + doctor);
@@ -953,15 +960,15 @@ public class SearchDocF extends Fragment  {
                     //String doctorSpecialization = doctorSnapshot.child("Specialization").getValue(String.class);
                     //Log.d(TAG, "dS " + doctorSpecialization);
 
-                    if (doctorName != null && doctorName.toLowerCase().contains(nameNSD.toLowerCase())) {
+                    if (doctorName != null && removeWhitespaceAndToLower(doctorName).contains(removeWhitespaceAndToLower(nameNSD))) {
 
                         for (DataSnapshot sessionSnapshot : doctorSnapshot.getChildren()) {
-                            if (!sessionSnapshot.getKey().equals("Name")) {
+                            if (!sessionSnapshot.getKey().contains("Name")) {
                                 String sessionLocation = sessionSnapshot.child("LName").getValue(String.class);
                                 Log.d(TAG, "LName " + sessionLocation);
 
                                 for (DataSnapshot daySnapshot : sessionSnapshot.getChildren()) {
-                                    if (!daySnapshot.getKey().equals("LName")) {
+                                    if (!daySnapshot.getKey().contains("LName")) {
                                         String sessionDate = daySnapshot.child("Date").getValue(String.class);
 
                                         Log.d(TAG, "Comparing selectedDateNSD: " + selectedDateNSD + " with sessionDate: " + sessionDate);
@@ -980,13 +987,13 @@ public class SearchDocF extends Fragment  {
                                                     for (DataSnapshot locationSnapshot : snapshot.child("Locations").getChildren()) {
                                                         String doctorLocation = locationSnapshot.getValue(String.class);
 
-                                                        if (doctorLocation != null && doctorLocation.equals(sessionLocation)) {
+                                                        if (doctorLocation != null && removeWhitespaceAndToLower(doctorLocation).contains(removeWhitespaceAndToLower(sessionLocation))) {
                                                             locationsList.add(doctorLocation);
                                                         }
                                                     }
 
                                                     Log.d(TAG, "Comparing nameNSD: " + nameNSD + " with name: " + name);
-                                                    if (spec != null  && spec.toLowerCase().contains(specializationNSD.toLowerCase()) )
+                                                    if (spec != null  && removeWhitespaceAndToLower(spec).contains(removeWhitespaceAndToLower(specializationNSD)) )
                                                     {
                                                         Log.d(TAG, "Doctor matched: " + name);
                                                         Doctors doctor = new Doctors(name, spec, locationsList);
@@ -1038,13 +1045,13 @@ public class SearchDocF extends Fragment  {
                 for (DataSnapshot doctorSnapshotS : snapshot.getChildren()) {
                     String doctorNameDateS = doctorSnapshotS.child("Name").getValue(String.class);
 
-                    if (doctorNameDateS != null && doctorNameDateS.toLowerCase().contains(doctorNameS.toLowerCase())) {
+                    if (doctorNameDateS != null && removeWhitespaceAndToLower(doctorNameDateS).contains(removeWhitespaceAndToLower(doctorNameS))) {
                         for (DataSnapshot sessionSnapshotDateS : doctorSnapshotS.getChildren()) {
-                            if (!sessionSnapshotDateS.getKey().equals("Name")) {
+                            if (!sessionSnapshotDateS.getKey().contains("Name")) {
                                 String locationDateS = sessionSnapshotDateS.child("LName").getValue(String.class);
 
                                 for (DataSnapshot daySnapshotDateS : sessionSnapshotDateS.getChildren()) {
-                                    if (!daySnapshotDateS.getKey().equals("LName")) {
+                                    if (!daySnapshotDateS.getKey().contains("LName")) {
                                         String dateDateS = daySnapshotDateS.child("Date").getValue(String.class);
 
                                         Log.d(TAG, "Comparing selectedDateS: " + selectedDateS + " with dateDateS: " + dateDateS);
@@ -1062,11 +1069,11 @@ public class SearchDocF extends Fragment  {
                                                         for (DataSnapshot locationSnapshotDateS : doctorSnapshotDateS.child("Locations").getChildren()) {
                                                             String locationS = locationSnapshotDateS.getValue(String.class);
 
-                                                            if (locationS != null && locationS.equals(locationDateS)) {
+                                                            if (locationS != null && locationS.contains(locationDateS)) {
                                                                 locationsDateListS.add(locationS);
                                                             }                                                    }
 
-                                                        if (name2DateS != null && name2DateS.toLowerCase().contains(doctorNameDateS.toLowerCase())
+                                                        if (name2DateS != null && removeWhitespaceAndToLower(name2DateS).contains(removeWhitespaceAndToLower(doctorNameDateS))
                                                                ) {
                                                             Log.d(TAG, "Doctor matched: " + name2DateS);
                                                             Doctors doctorDateS = new Doctors(name2DateS, specDateS, locationsDateListS);
@@ -1119,12 +1126,12 @@ public class SearchDocF extends Fragment  {
                     String doctorNameDateS = doctorSnapshotS.child("Name").getValue(String.class);
 
                     for (DataSnapshot sessionSnapshotDateS : doctorSnapshotS.getChildren()) {
-                        if (!sessionSnapshotDateS.getKey().equals("Name")) {
+                        if (!sessionSnapshotDateS.getKey().contains("Name")) {
                             String locationDateS = sessionSnapshotDateS.child("LName").getValue(String.class);
 
-                            if (locationDateS != null && locationDateS.toLowerCase().contains(locationSV.toLowerCase())) {
+                            if (locationDateS != null && removeWhitespaceAndToLower(locationDateS).contains(removeWhitespaceAndToLower(locationSV))) {
                                 for (DataSnapshot daySnapshotDateS : sessionSnapshotDateS.getChildren()) {
-                                    if (!daySnapshotDateS.getKey().equals("LName")) {
+                                    if (!daySnapshotDateS.getKey().contains("LName")) {
                                         String dateDateS = daySnapshotDateS.child("Date").getValue(String.class);
 
                                         Log.d(TAG, "Comparing selectedDateS: " + selectedDateS + " with dateDateS: " + dateDateS);
@@ -1142,12 +1149,12 @@ public class SearchDocF extends Fragment  {
                                                         for (DataSnapshot locationSnapshotDateS : doctorSnapshotDateS.child("Locations").getChildren()) {
                                                             String locationS = locationSnapshotDateS.getValue(String.class);
 
-                                                            if (locationS != null && locationS.equals(locationDateS)) {
+                                                            if (locationS != null && locationS.contains(locationDateS)) {
                                                                 locationsDateListS.add(locationS);
                                                             }
                                                         }
 
-                                                        if (name2DateS != null && name2DateS.toLowerCase().contains(doctorNameDateS.toLowerCase()) &&
+                                                        if (name2DateS != null && removeWhitespaceAndToLower(name2DateS).contains(removeWhitespaceAndToLower(doctorNameDateS)) &&
                                                                 specDateS != null ) {
                                                             Log.d(TAG, "Doctor matched: " + name2DateS);
                                                             Doctors doctorDateS = new Doctors(name2DateS, specDateS, locationsDateListS);
@@ -1186,15 +1193,15 @@ public class SearchDocF extends Fragment  {
     }
 
 
-    private void showDatePickerDialogNL(String name , String loc) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+    private void showDatePickerDialogNL(String name, String loc) {
+        Log.d(TAG, "showDatePickerDialogNL() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1204,26 +1211,28 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchNameLocationAndDate(name, loc, formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
 
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         datePickerDialog.show();
     }
 
-    private void showDatePickerDialogEverything(String name , String spec, String loc) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+
+    private void showDatePickerDialogEverything(String name, String spec, String loc) {
+        Log.d(TAG, "showDatePickerDialogEverything() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1233,30 +1242,27 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
-                        performSearchNameSpecializationLocationAndDate(name, spec,loc, formattedDate);
-
+                        performSearchNameSpecializationLocationAndDate(name, spec, loc, formattedDate);
                     }
                 });
             }
         }, year, month, day);
 
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         datePickerDialog.show();
     }
 
-
-
-
-
-    private void showDatePickerDialogNS(String name , String spec) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+    private void showDatePickerDialogNS(String name, String spec) {
+        Log.d(TAG, "showDatePickerDialogNS() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1266,28 +1272,27 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchNameSpecializationAndDate(name, spec, formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
 
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         datePickerDialog.show();
     }
 
-
-
-    private void showDatePickerDialogLS(String spec , String loc) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+    private void showDatePickerDialogLS(String spec, String loc) {
+        Log.d(TAG, "showDatePickerDialogLS() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1297,26 +1302,27 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchSpecializationLocationAndDate(spec, loc, formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
+
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
         datePickerDialog.show();
     }
 
     private void showDatePickerDialogN(String name) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+        Log.d(TAG, "showDatePickerDialogN() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1326,25 +1332,27 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchNameAndDate(name, formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
+
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
         datePickerDialog.show();
     }
+
     private void showDatePickerDialogL(String location) {
-        Log.d(TAG, "showDatePickerDialogD() called");
+        Log.d(TAG, "showDatePickerDialogL() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1354,13 +1362,14 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchLocationAndDate(location, formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
+
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
         datePickerDialog.show();
     }
@@ -1373,7 +1382,7 @@ public class SearchDocF extends Fragment  {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
@@ -1383,44 +1392,48 @@ public class SearchDocF extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         Log.d(TAG, "1");
-
                         performSearchDate(formattedDate);
-
                     }
                 });
             }
         }, year, month, day);
 
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         datePickerDialog.show();
     }
-    private void showDatePickerDialogS(String specializationV) {
-        Log.d(TAG, "showDatePickerDialog() called");
+
+    public void showDatePickerDialogS(String specializationV) {
+        Log.d(TAG, "showDatePickerDialogS() called");
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+        CustomDatePicker datePickerDialog = new CustomDatePicker(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // Do something with the selected date
                 String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%02d", selectedDay, selectedMonth + 1, selectedYear % 100);
                 etDate.setText(formattedDate); // Set the text of the datePickerButton to the selected date
                 searchButton.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        Log.d(TAG, "1");
-
-                                                        performSearchSpecializationAndDate(specializationV, formattedDate);
-
-                                                    }
-                                                });
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG, "1");
+                        performSearchSpecializationAndDate(specializationV, formattedDate);
+                    }
+                });
             }
         }, year, month, day);
 
+        // Set the minimum date (current local date)
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
         datePickerDialog.show();
     }
+
 
     private void performSearchDate(String formattedDate) {
         DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference("Availability");

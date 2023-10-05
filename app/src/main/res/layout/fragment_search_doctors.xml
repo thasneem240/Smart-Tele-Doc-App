@@ -29,7 +29,7 @@
         android:textColor="@color/black" />
 
     <EditText
-        android:id="@+id/searchName"
+        android:id="@+id/PatsearchName"
         android:layout_width="327dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
@@ -131,7 +131,7 @@
         android:src="@drawable/calendar_icon" />
 
     <Button
-        android:id="@+id/searchButton"
+        android:id="@+id/searchDoctorsNSLDButton"
         android:layout_width="119dp"
         android:layout_height="28dp"
         android:layout_alignParentLeft="true"
