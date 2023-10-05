@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
+import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
 import com.example.capstoneprojectgroup4.home.MainActivity;
 
 /**
@@ -32,6 +36,7 @@ public class Frag_Remote_Consultation extends Fragment
 
 
     private EditText patientNameEditText;
+    private ImageView backButtonRemoteCons;
 
     public Frag_Remote_Consultation() {
         // Required empty public constructor
@@ -73,6 +78,8 @@ public class Frag_Remote_Consultation extends Fragment
 
         Button videoConferenceButton = view.findViewById(R.id.videoConferenceButton);
         patientNameEditText = view.findViewById(R.id.patientNameEditText);
+        backButtonRemoteCons = view.findViewById(R.id.backButtonRemoteCons);
+
 
         String patientName = MainActivity.getPatientObject().getFirstName();
         // patientNameEditText.setText("A.S.M. Thasneem");
@@ -93,6 +100,19 @@ public class Frag_Remote_Consultation extends Fragment
 
             }
         });
+
+        backButtonRemoteCons.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MedicalRecords medicalRecords = new MedicalRecords();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, medicalRecords).commit();
+            }
+        });
+
+
 
         return view;
     }
