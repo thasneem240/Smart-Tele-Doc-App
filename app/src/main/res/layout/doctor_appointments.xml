@@ -61,17 +61,6 @@
             android:textSize="14sp"
             android:layout_below="@id/AppNumber" />
 
-        <Button
-            android:id="@+id/Cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:textColor="#ff0000"
-            android:textSize="16sp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:onClick="onCancelButtonClick" />
-
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
