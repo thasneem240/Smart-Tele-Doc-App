@@ -4,27 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".home.A_Patient_Or_A_Doctor">
 
     <Button
         android:id="@+id/Patient_login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="238dp"
-        android:background="@drawable/rectangle_4"
+        android:layout_width="227dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="324dp"
+        android:background="@drawable/rectangle_11"
         android:text="I'm a patient"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.791"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Doctor_login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="123dp"
+        android:layout_width="227dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="104dp"
         android:background="@drawable/rectangle_4"
         android:text="I'm a doctor"
         app:layout_constraintEnd_toEndOf="@+id/Patient_login_button"
-        app:layout_constraintStart_toStartOf="@+id/Patient_login_button"
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Patient_login_button" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="345dp"
+        android:layout_height="374dp"
+        android:src="@drawable/doc_illustrator"
+        app:layout_constraintBottom_toTopOf="@+id/Patient_login_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="422dp"
+        android:layout_height="371dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/doc_illustrator_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Patient_login_button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

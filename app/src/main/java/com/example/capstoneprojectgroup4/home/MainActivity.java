@@ -6,12 +6,12 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.PatientObject;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
 import com.example.capstoneprojectgroup4.front_end.StartUpFragment;
 
 
 public class MainActivity extends AppCompatActivity
-{
+{// 123
     private static PatientObject patientObject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

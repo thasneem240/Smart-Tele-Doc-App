@@ -21,7 +21,7 @@
         android:translationY="-1.4sp" />
 
     <TextView
-        android:id="@+id/presc_date"
+        android:id="@+id/EditText_dob"
         android:layout_width="320dp"
         android:layout_height="41dp"
         android:layout_alignParentLeft="true"

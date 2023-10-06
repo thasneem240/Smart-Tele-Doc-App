@@ -11,10 +11,11 @@ import android.widget.Button;
 import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.PatientObject;
+import com.example.capstoneprojectgroup4.patient_authentication.AccountSettings;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
-import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
+import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.google.api.gax.core.FixedCredentialsProvider;
@@ -23,6 +24,7 @@ import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.dialogflow.v2.SessionsClient;
 import com.google.cloud.dialogflow.v2.SessionsSettings;
 import com.google.common.collect.Lists;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.InputStream;
 
@@ -33,8 +35,6 @@ public class MainActivity2 extends AppCompatActivity {
     Button chatBot;
     Button appointments;
     Button userProfile;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,8 @@ public class MainActivity2 extends AppCompatActivity {
             mainMenu = new MainMenu();
             fm.beginTransaction().add(R.id.fragmentContainerView, mainMenu).commit();
         }
+
+
         if (recive.getStringExtra("Page") != null){
             if (recive.getStringExtra("Page").equals("searchDoctor")){
                 fm = getSupportFragmentManager();
@@ -85,8 +87,8 @@ public class MainActivity2 extends AppCompatActivity {
             }
             if (recive.getStringExtra("Page").equals("prescriptionsPage")){
                 fm = getSupportFragmentManager();
-                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+                ListOfPrescriptionsFragment listOfPrescriptionsFragment = new ListOfPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, listOfPrescriptionsFragment).commit();
             }
             if (recive.getStringExtra("Page").equals("labReport")){
                 fm = getSupportFragmentManager();
@@ -130,9 +132,6 @@ public class MainActivity2 extends AppCompatActivity {
                 AccountSettings searchDoctors = new AccountSettings();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
 
-//                FragmentManager fm = getSupportFragmentManager();
-//                PatientProfileF patientProfileF = new PatientProfileF();
-//                fm.beginTransaction().replace(R.id.fragmentContainerView, patientProfileF).commit();
             }
         });
     }

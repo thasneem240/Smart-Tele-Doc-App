@@ -5,23 +5,11 @@
     android:id="@+id/st"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".front_end.StartUpFragment">
+    tools:context=".front_end.StartUpFragment"
+    android:background="@color/white">
 
 
     <!-- Center the button in the middle of the RelativeLayout -->
-
-    <Button
-        android:id="@+id/Startbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="165dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="83dp"
-        android:background="#ADC5F0"
-        android:text="Start" />
 
     <ImageView
         android:id="@+id/imageView11"
@@ -33,6 +21,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="0dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo"
+        android:background="@color/white"/>
 
 </RelativeLayout>
