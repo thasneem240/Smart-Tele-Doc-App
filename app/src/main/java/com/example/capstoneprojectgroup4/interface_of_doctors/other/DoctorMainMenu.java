@@ -73,7 +73,7 @@ public class DoctorMainMenu extends Fragment {
         Button writePrescriptionButton = v.findViewById(R.id.Button_writePrescription);
         TextView greetings = v.findViewById(R.id.good_morning2);
 
-        greetings.setText("Good Morning, " + DoctorsActivity.getDoctorObject().getName());
+        greetings.setText("Good Morning, \n" + DoctorsActivity.getDoctorObject().getName());
 
         writePrescription.setOnClickListener(new View.OnClickListener() {
             @Override
