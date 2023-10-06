@@ -55,6 +55,7 @@ public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmen
         holder.typeTextView.setText(appointmentItem.getAppointmentType());
         holder.appNoTextView.setText("Appointment Number: " +appointmentItem.getAppointmentNumber());
         holder.locTextView.setText(appointmentItem.getLocation());
+        holder.time.setText("Time: " +appointmentItem.getStartTime()+ "-"+ appointmentItem.getEndTime());
 
 
         holder.CancelButton.setOnClickListener(new View.OnClickListener() {

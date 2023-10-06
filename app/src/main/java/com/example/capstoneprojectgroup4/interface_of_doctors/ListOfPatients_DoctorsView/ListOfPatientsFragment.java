@@ -154,7 +154,7 @@ public class ListOfPatientsFragment extends Fragment {
         });*/
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Doctor Appointments").child("Dr_ Saliya Pathirana");
+        databaseReference = firebaseDatabase.getReference("Doctor Appointments").child("Dr_ Bawantha Gamage");
 
         databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorPatientProfiles;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,7 +94,7 @@ public class DoctorMedicalRecords extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DoctorMainMenu doctorMainMenu = new DoctorMainMenu();
+                DoctorPatientProfiles doctorMainMenu = new DoctorPatientProfiles();
                 fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorMainMenu).commit();
             }
         });

@@ -1,4 +1,3 @@
-/*
 package com.example.capstoneprojectgroup4.interface_of_doctors;
 
 import android.os.Bundle;
@@ -20,6 +19,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMainMenu;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,12 +30,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-*/
-/**
+/*
  * A simple {@link Fragment} subclass.
  * Use the {@link DoctorPatientProfiles#newInstance} factory method to
- * create an instance of this fragment.
- *//*
+ * create an instance of this fragment.*/
+
 
 public class DoctorPatientProfiles extends Fragment {
 
@@ -51,15 +51,14 @@ public class DoctorPatientProfiles extends Fragment {
         // Required empty public constructor
     }
 
-    */
-/**
+/*
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DoctorPatientProfiles.
-     *//*
+     * @return A new instance of fragment DoctorPatientProfiles.*/
+
 
     // TODO: Rename and change types and number of parameters
     public static DoctorPatientProfiles newInstance(String param1, String param2) {
@@ -91,8 +90,12 @@ public class DoctorPatientProfiles extends Fragment {
         EditText searchEditText = v.findViewById(R.id.ListPatsearchName);
         Button search = v.findViewById(R.id.searchPatientList);
 
+        String name = DoctorsActivity.getDoctorObject().getName();
+        String sanitizedDoctorName = name.replaceAll("[.#$\\[\\]]", "_");
+
+
         DatabaseReference doctorAppointmentsRef = FirebaseDatabase.getInstance().getReference("Doctor Appointments");
-        DatabaseReference drAjithRef = doctorAppointmentsRef.child("Dr_ Ajith Amarasinghe");
+        DatabaseReference drAjithRef = doctorAppointmentsRef.child(sanitizedDoctorName);
 
         drAjithRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -158,4 +161,4 @@ public class DoctorPatientProfiles extends Fragment {
     }
 
 
-}*/
+}
