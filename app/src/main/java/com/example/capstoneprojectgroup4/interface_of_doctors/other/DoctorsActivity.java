@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorViewAppointments;
 
 public class DoctorsActivity extends AppCompatActivity {
     private static String doctorRegNumber;
