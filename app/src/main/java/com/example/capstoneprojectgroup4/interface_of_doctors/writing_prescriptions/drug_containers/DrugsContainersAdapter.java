@@ -34,6 +34,8 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
     @Override
     public void onBindViewHolder(@NonNull DrugsContainersViewHolder holder, int position) {
         holder.medicineName.setText(selectedDrugsList.get(position).getNameOfTheDrug());
+        holder.howMuch.setText(selectedDrugsList.get(position).getAmount()+"");
+
     }
 
     @Override

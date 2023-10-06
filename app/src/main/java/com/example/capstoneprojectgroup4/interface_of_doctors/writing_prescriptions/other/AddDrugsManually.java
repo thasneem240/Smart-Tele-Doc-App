@@ -72,13 +72,13 @@ public class AddDrugsManually extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_add_drugs_manually, container, false);
 
-        EditText nameOfTheDrug = v.findViewById(R.id.edittext_add_drugs_manually);
+        EditText medicineNotes = v.findViewById(R.id.edittext_add_drugs_manually);
         Button addDrugsManually = v.findViewById(R.id.Button_AddTheDrug);
         ImageView backButton = v.findViewById(R.id.imageView_BackButton3);
 
 
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        nameOfTheDrug.requestFocus();
+        medicineNotes.requestFocus();
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
 
@@ -87,7 +87,7 @@ public class AddDrugsManually extends Fragment {
             @Override
             public void onClick(View view) {
                 PrescriptionDrugObject prescriptionDrugObject = new PrescriptionDrugObject();
-                prescriptionDrugObject.setMedicineNotes(nameOfTheDrug.getText().toString());
+                prescriptionDrugObject.setNameOfTheDrug(medicineNotes.getText().toString());
 
                 WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getContext();
                 writingPrescriptionActivity.setWrittenByManually();

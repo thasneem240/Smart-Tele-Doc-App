@@ -47,7 +47,7 @@ public class ListOfPatientsAdapter extends RecyclerView.Adapter<ListOfPatientsVi
             @Override
             public void onClick(View view) {
 
-                openWritingPrescription(appointmentObjects.get(position).getPatientUserId(), view);  // retrievePatientObjectAndOpenWritingPrescription();
+                openWritingPrescription(appointmentObjects.get(position).getPaitentUserId(), view);  // retrievePatientObjectAndOpenWritingPrescription();
 
             }
         });

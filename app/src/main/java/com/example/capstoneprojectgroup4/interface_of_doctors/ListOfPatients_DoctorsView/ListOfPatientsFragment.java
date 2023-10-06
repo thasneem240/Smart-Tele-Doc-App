@@ -129,8 +129,32 @@ public class ListOfPatientsFragment extends Fragment {
             }
         });*/
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        /*firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("doctor_appointments").child(DoctorsActivity.getDoctorRegNumber());
+
+        databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshotChild : dataSnapshot.getChildren()){
+                    AppoinmentObject appoinmentObject = dataSnapshotChild.getValue(AppoinmentObject.class);
+                    appoinmentObjectArrayList.add(appoinmentObject);
+                }
+
+                RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
+                rv.setLayoutManager(new LinearLayoutManager(getContext()));
+                ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appoinmentObjectArrayList);
+                rv.setAdapter(listOfPatientsAdapter);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "Error in the database. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Doctor Appointments").child("Dr_ Saliya Pathirana");
 
         databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
