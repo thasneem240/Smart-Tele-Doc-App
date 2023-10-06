@@ -24,8 +24,9 @@ public class Activity_Remote_Consultation extends AppCompatActivity
         Button videoConferenceButton = findViewById(R.id.videoConferenceButton);
         patientNameEditText = findViewById(R.id.patientNameEditText);
 
-        //String patientName = MainActivity.getPatientObject().getFirstName();
-        patientNameEditText.setText("A.S.M. Thasneem");
+        String patientName = MainActivity.getPatientObject().getFirstName();
+       // patientNameEditText.setText("A.S.M. Thasneem");
+        patientNameEditText.setText(patientName);
 
         Intent intent = new Intent(this, Activity_VideoConference.class);
 

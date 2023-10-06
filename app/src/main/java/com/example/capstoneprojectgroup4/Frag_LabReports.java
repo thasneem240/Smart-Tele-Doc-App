@@ -2,6 +2,7 @@ package com.example.capstoneprojectgroup4;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
 
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -58,12 +60,14 @@ public class Frag_LabReports extends Fragment
 
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
+    private Drawable drawable = null;
 
 
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private   final boolean[] isSelected = {false};
 
     public Frag_LabReports()
     {
@@ -115,7 +119,8 @@ public class Frag_LabReports extends Fragment
         listReports = view.findViewById(R.id.listReport);
 
         ImageView backButton = view.findViewById(R.id.backButtonLabReports);
-        final boolean[] isSelected = {false};
+
+        drawable = firebaseImage.getDrawable();
 
         /* Grab the  UI Variables from Layout file */
 
@@ -134,7 +139,6 @@ public class Frag_LabReports extends Fragment
             public void onClick(View v)
             {
                 selectImage();
-                isSelected[0] = true;
             }
         });
 
@@ -162,8 +166,14 @@ public class Frag_LabReports extends Fragment
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(getActivity(),Activity_ListLabReports.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(),Activity_ListLabReports.class);
+//                startActivity(intent);
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Frag_ListLabReports fragListLabReports = new Frag_ListLabReports();
+
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragListLabReports).commit();
+
             }
         });
 
@@ -188,6 +198,7 @@ public class Frag_LabReports extends Fragment
         {
             imageUri = data.getData();
             firebaseImage.setImageURI(imageUri);
+            isSelected[0] = true;
         }
     }
 
@@ -199,34 +210,40 @@ public class Frag_LabReports extends Fragment
         progressDialog.show();
 
 
-        //String Uid = MainActivity.getPatientObject().getUid();
+        String uId = MainActivity.getPatientObject().getUid();
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.ENGLISH);
         Date now = new Date();
 
         String fileTitle = formatter.format(now);
-        //String fileTitle = formatter.format(Uid + "_" + now);
+        String fileTitleWithUID = uId + "_" + fileTitle;
 
-        storageReference = FirebaseStorage.getInstance().getReference("Lab_Reports/" + fileTitle);
+        storageReference = FirebaseStorage.getInstance().getReference("Lab_Reports/" + fileTitleWithUID);
         storageReference.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
                 {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
                     {
-                        firebaseImage.setImageURI(null);
+                        firebaseImage.setImageDrawable(drawable);
+                        isSelected[0] = false;
+
                         Toast.makeText(getActivity(),"Successfully uploaded", Toast.LENGTH_SHORT).show();
 
                         if(progressDialog.isShowing())
                         {
                             progressDialog.dismiss();
                         }
+
                     }
                 }).addOnFailureListener(new OnFailureListener()
                 {
                     @Override
                     public void onFailure(@NonNull Exception e)
                     {
+                        firebaseImage.setImageDrawable(drawable);
+                        isSelected[0] = false;
+
                         if(progressDialog.isShowing())
                         {
                             progressDialog.dismiss();

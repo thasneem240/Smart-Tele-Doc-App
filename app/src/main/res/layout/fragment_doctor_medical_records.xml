@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".interface_of_doctors.other.DoctorMedicalRecords">
+
+
+    <ImageView
+        android:id="@+id/labReportsImageView2"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/blue_square"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalHistoryImageView4" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="60dp"
+        android:layout_height="57dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_lab_reports"
+        app:layout_constraintEnd_toEndOf="@+id/labReportsImageView2"
+        app:layout_constraintStart_toStartOf="@+id/labReportsImageView2"
+        app:layout_constraintTop_toTopOf="@+id/labReportsImageView2" />
+
+    <ImageView
+        android:id="@+id/imageView_ViewPrescriptions"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/green_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_PatientDetails3" />
+
+    <Button
+        android:id="@+id/button_ViewPrescriptionsDoc"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_prescription_notes"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_ViewPrescriptions"
+        app:layout_constraintStart_toStartOf="@+id/imageView_ViewPrescriptions"
+        app:layout_constraintTop_toTopOf="@+id/imageView_ViewPrescriptions" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal|top"
+        android:text="Prescriptions"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_ViewPrescriptionsDoc" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="34dp"
+        android:gravity="center_horizontal|top"
+        android:text="Lab Reports"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button13" />
+
+    <ImageView
+        android:id="@+id/medicalHistoryImageView4"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/green_square"
+        android:contentDescription="Pharmacy Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/your_health3" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_medical_history"
+        app:layout_constraintEnd_toEndOf="@+id/medicalHistoryImageView4"
+        app:layout_constraintStart_toStartOf="@+id/medicalHistoryImageView4"
+        app:layout_constraintTop_toTopOf="@+id/medicalHistoryImageView4" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="30dp"
+        android:gravity="center_horizontal|top"
+        android:text="Medical History"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button11" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_patient_details"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_PatientDetails3"
+        app:layout_constraintStart_toStartOf="@+id/imageView_PatientDetails3"
+        app:layout_constraintTop_toTopOf="@+id/imageView_PatientDetails3" />
+
+    <ImageView
+        android:id="@+id/imageView_PatientDetails3"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/yellow_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/your_health3" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal|top"
+        android:text="Patient Details"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button12" />
+
+    <TextView
+        android:id="@+id/medical_rec3"
+        android:layout_width="252dp"
+        android:layout_height="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="96dp"
+        android:text="Medical Records"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/your_health3"
+        android:layout_width="272dp"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:gravity="top"
+        android:lineSpacingExtra="3sp"
+        android:text="All records at a glance !"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:translationY="-1.61sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medical_rec3" />
+
+    <ImageView
+        android:id="@+id/backDoc"
+        android:layout_width="43dp"
+        android:layout_height="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="360dp"
+        android:src="@drawable/baseline_keyboard_arrow_left_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

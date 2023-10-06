@@ -1,15 +1,8 @@
 package com.example.capstoneprojectgroup4.ssearch_pharmacy;
 
-import static android.content.ContentValues.TAG;
-
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,7 +15,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,10 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
-import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
-import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -57,25 +46,29 @@ public class PharmaciesF extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public FirebaseDatabase firebaseDatabase;
+
 
     Button searchButton;
     Toolbar toolbar;
     Button orderButton;
     Button bestPrice;
+    public static final String TAG = "PharmaciesF"; // Add this TAG field
+
 
     RadioGroup radioGroup;
-    TextView etPharmName ;
-    int searchType=-1;
+    public TextView etPharmName ;
+    public int searchType=-1;
 
-    TextView etPharmLocation;
+    public TextView etPharmLocation;
     TextView etPharmDrugs ;
     RecyclerView recyclerView;
 
 
     Button search;
-    PharmacyAdapter pharmacyAdapter;
+    public PharmacyAdapter pharmacyAdapter;
     private SearchView searchView;
-    FragmentManager fm;
+    public FragmentManager fm;
 
 
     public PharmaciesF() {
@@ -109,7 +102,10 @@ public class PharmaciesF extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,7 +115,7 @@ public class PharmaciesF extends Fragment {
 
         etPharmName= view.findViewById(R.id.searchPharmName);
         etPharmLocation = view.findViewById(R.id.searchPharmLoc);
-        etPharmDrugs = view.findViewById(R.id.searchDrugs);
+       // etPharmDrugs = view.findViewById(R.id.searchDrugs);
         recyclerView = view.findViewById(R.id.pharmrv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ImageView backButton = view.findViewById(R.id.backButtonPharma);
@@ -129,8 +125,8 @@ public class PharmaciesF extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+                ListOfPrescriptionsFragment listOfPrescriptionsFragment = new ListOfPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, listOfPrescriptionsFragment).commit();
             }
         });
 
@@ -165,9 +161,16 @@ public class PharmaciesF extends Fragment {
         return view;
     }
 
-    private void performSearch() {
+
+    private String removeWhitespaceAndToLower(String input) {
+        if (input == null) {
+            return "";
+        }
+        return input.replaceAll("\\s", "").toLowerCase();
+    }
+
+    public void performSearch() {
         String nameEd = etPharmName.getText().toString().trim();
-        String drugsEd = etPharmDrugs.getText().toString().trim();
         String locationEd = etPharmLocation.getText().toString().trim();
 
         Query query = FirebaseDatabase.getInstance().getReference().child("Pharmacies");
@@ -191,10 +194,10 @@ public class PharmaciesF extends Fragment {
                     String phoneNum = (String) doctorSnapshot.child("PhoneNumber").getValue();
                     String maps = (String) doctorSnapshot.child("Maps").getValue();
 
-                    if (searchType == 0 && name != null && name.toLowerCase().contains(nameEd.toLowerCase())) {
+                    if (searchType == 0 && name != null && removeWhitespaceAndToLower(name).startsWith(removeWhitespaceAndToLower(nameEd))) {
                         com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum, maps);
                         pharmacies.add(doctor);
-                    } else if (searchType == 1 && location != null && location.toLowerCase().contains(locationEd.toLowerCase())) {
+                    } else if (searchType == 1 && location != null && removeWhitespaceAndToLower(location).startsWith(removeWhitespaceAndToLower(locationEd))) {
                         com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy doctor = new com.example.capstoneprojectgroup4.ssearch_pharmacy.Pharmacy(name, location, phoneNum, maps);
                         pharmacies.add(doctor);
 
@@ -210,5 +213,12 @@ public class PharmaciesF extends Fragment {
 
             }
         });
+    }
+    public void setEtPharmName(TextView textView) {
+        this.etPharmName = textView;
+    }
+
+    public void setEtPharmLocation(TextView textView) {
+        this.etPharmLocation = textView;
     }
 }

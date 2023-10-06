@@ -15,10 +15,10 @@ import android.widget.ImageView;
 import com.example.capstoneprojectgroup4.Activity_Remote_Consultation;
 import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
+import com.example.capstoneprojectgroup4.Frag_Remote_Consultation;
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.prescriptions.view_prescriptions.ViewPrescriptionsFragment;
-
-import java.time.Instant;
+import com.example.capstoneprojectgroup4.patient_authentication.AccountSettings;
+import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,7 +83,7 @@ public class MedicalRecords extends Fragment {
         Button labReportsButton = v.findViewById(R.id.button3);
         ImageView prescriptionsImageView = v.findViewById(R.id.ImageView_ViewPrescriptions);
         Button prescriptionsButton = v.findViewById(R.id.Button_ViewPrescriptions);
-        ImageView imageView_RemoteConsultation = v.findViewById(R.id.imageView_RemoteConsultation);
+      //  ImageView imageView_RemoteConsultation = v.findViewById(R.id.imageView_RemoteConsultation);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,29 +163,36 @@ public class MedicalRecords extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+                ListOfPrescriptionsFragment listOfPrescriptionsFragment = new ListOfPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, listOfPrescriptionsFragment).commit();
             }
         });
         prescriptionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                ViewPrescriptionsFragment viewPrescriptionsFragment = new ViewPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, viewPrescriptionsFragment).commit();
+                ListOfPrescriptionsFragment listOfPrescriptionsFragment = new ListOfPrescriptionsFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, listOfPrescriptionsFragment).commit();
             }
         });
 
 
-        imageView_RemoteConsultation.setOnClickListener(new View.OnClickListener() {
+     /*   imageView_RemoteConsultation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(getActivity(), Activity_Remote_Consultation.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), Activity_Remote_Consultation.class);
+//                startActivity(intent);
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Frag_Remote_Consultation fragRemoteConsultation = new Frag_Remote_Consultation();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragRemoteConsultation).commit();
+
+
+
             }
         });
-
+*/
 
 
 
