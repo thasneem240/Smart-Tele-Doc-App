@@ -1,8 +1,11 @@
 package com.example.capstoneprojectgroup4.search_doctors;
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,16 +22,20 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
     private String doctorName;
     private String Day;
     private String date;
+    private String location;
+
 
     private int noApp ;
 
 
-    public AvailAdapter(ArrayList<Availability> availabilities, String doctorName, String Day, int noApp, String date) {
+    public AvailAdapter(ArrayList<Availability> availabilities, String doctorName, String Day, int noApp, String date, String location) {
         this.availabilities = availabilities;
         this.doctorName = doctorName;
         this.Day = Day;
         this.noApp = noApp;
         this.date = date;
+        this.location = location;
+
     }
 
     @NonNull
@@ -45,8 +52,11 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
         Log.d("AvailAdapter", "startTime: " + availability.getStartTime());
         Log.d("AvailAdapter", "endTime: " + availability.getEndTime());
         Log.d("AvailAdapter", "noapp: " + availability.getNoApp());
+        Log.d("AvailAdapter", "Location: " + location);
 
         holder.bind(availability);
+        String day = availability.getDay();
+
         String dateV = availability.getDate();
         String start = availability.getStartTime();
         String End = availability.getEndTime();
@@ -57,12 +67,24 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
 
-                // Pass the selected date to the BookAppointmentF fragment
-                BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName, dateV, start, End, String.valueOf(availability.getNoApp()));
-                fm.beginTransaction()
-                        .replace(R.id.fragmentContainerView, fragment)
-                        .addToBackStack("DocAvailF")
-                        .commit();
+                if(availability.getNoApp() < 30)
+                {
+                    // Pass the selected date to the BookAppointmentF fragment
+                    BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName, day, dateV, start, End, String.valueOf(availability.getNoApp()), location);
+                    fm.beginTransaction()
+                            .replace(R.id.fragmentContainerView, fragment)
+                            .addToBackStack("DocAvailF")
+                            .commit();
+                }
+                else
+                {
+                    Toast.makeText(view.getContext(), "Doctor is fully booked", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+
                 }
         });
     }

@@ -63,7 +63,7 @@ public class SearchDoctors extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_doctors, container, false);
-        Button doctorButton = v.findViewById(R.id.searchButton);
+        Button doctorButton = v.findViewById(R.id.searchDoctorsNSLDButton);
         doctorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

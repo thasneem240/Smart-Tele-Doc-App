@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".interface_of_doctors.other.DoctorMainMenu">
+
+
+    <ImageView
+        android:id="@+id/ConferenceSquare"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/yellow_square"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AIHelpSquare" />
+
+    <Button
+        android:id="@+id/ConferenceButton"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_video_conference"
+        app:layout_constraintEnd_toEndOf="@+id/ConferenceSquare"
+        app:layout_constraintStart_toStartOf="@+id/ConferenceSquare"
+        app:layout_constraintTop_toTopOf="@+id/ConferenceSquare" />
+
+    <TextView
+        android:id="@+id/doctor3"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="131dp"
+        android:gravity="center_horizontal|top"
+        android:text="Conferencing"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ConferenceButton" />
+
+    <ImageView
+        android:id="@+id/AIHelpSquare"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/green_square"
+        android:contentDescription="Pharmacy Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+
+    <TextView
+        android:id="@+id/pharmacytext2"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="31dp"
+        android:gravity="center_horizontal|top"
+        android:text="AI Helper"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AIHelpButton" />
+
+    <Button
+        android:id="@+id/AIHelpButton"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_ai_button"
+        app:layout_constraintEnd_toEndOf="@+id/AIHelpSquare"
+        app:layout_constraintStart_toStartOf="@+id/AIHelpSquare"
+        app:layout_constraintTop_toTopOf="@+id/AIHelpSquare" />
+
+    <Button
+        android:id="@+id/Button_writePrescription"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_patient_profiles"
+        app:layout_constraintEnd_toEndOf="@+id/ImageView_writePrescription"
+        app:layout_constraintStart_toStartOf="@+id/ImageView_writePrescription"
+        app:layout_constraintTop_toTopOf="@+id/ImageView_writePrescription" />
+
+    <ImageView
+        android:id="@+id/ImageView_writePrescription"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="6dp"
+        android:src="@drawable/blue_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+
+    <TextView
+        android:id="@+id/doctor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal|top"
+        android:text="Write prescription"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Button_writePrescription" />
+
+    <TextView
+        android:id="@+id/good_morning2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="120dp"
+        android:gravity="top"
+        android:text="Greetings"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="332dp"
+        android:layout_height="288dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/doctors_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
