@@ -4,6 +4,10 @@ import static android.icu.text.MessagePattern.Part.Type.ARG_START;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 
@@ -13,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +38,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import android.telephony.SmsManager;
+import android.content.Context;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -101,11 +115,11 @@ public class BookAppointmentF extends Fragment {
             location = getArguments().getString(ARG_LOCATION);
             date = getArguments().getString(ARG_DATE);
 
-
         }
         // Initialize the Firebase Database reference here
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(); // You can adjust the reference path as needed
+
 
     }
 
@@ -159,11 +173,7 @@ public class BookAppointmentF extends Fragment {
                 String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
                 AppointmentKeyGenerator.setDoctorName(sanitizedDoctorName);
 
-                //String sanitizedDoctorName = doctorName.replace(".", "_");
-                //String sanitizedHospitalName = location.replace(".", "_");
-                //String sanitizedDate = date.replace(".", "_");
 
-                //appointmentKey = AppointmentKeyGenerator.generateAppointmentKey(patientKey,sanitizedDoctorName,sanitizedHospitalName,sanitizedDate);
                 Log.d(TAG, "Generated appointmentKey: " + appointmentKey);
                 String PatientID = MainActivity.getPatientObject().getUid();
 
@@ -171,6 +181,12 @@ public class BookAppointmentF extends Fragment {
                 uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue,start, End, PatientID);
 
                 updateAvailability(doctorName, location, date, New_NoAppValue);
+
+                String phoneNumber = MainActivity.getPatientObject().getMobile();
+                if (isOneDayBeforeAppointmentDate(date)) {
+                    sendSMS(phoneNumber, "Your Appointment at " + location + " with " + doctorName + "is Tomorrow, Please Don't forget !");
+                }
+
             }
         });
 
@@ -334,4 +350,37 @@ public class BookAppointmentF extends Fragment {
                 .setValue(hashMap);
 
     }
+    private boolean isOneDayBeforeAppointmentDate(String appointmentDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar currentDate = Calendar.getInstance();
+        Calendar appointmentCalendar = Calendar.getInstance();
+
+        try {
+            Date date = dateFormat.parse(appointmentDate);
+            appointmentCalendar.setTime(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        // Check if the current date is one day before the appointment date
+        currentDate.add(Calendar.DAY_OF_MONTH, 1);
+
+        return currentDate.get(Calendar.YEAR) == appointmentCalendar.get(Calendar.YEAR) &&
+                currentDate.get(Calendar.MONTH) == appointmentCalendar.get(Calendar.MONTH) &&
+                currentDate.get(Calendar.DAY_OF_MONTH) == appointmentCalendar.get(Calendar.DAY_OF_MONTH);
+    }
+
+    private void sendSMS(String phoneNumber, String message) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+            Toast.makeText(requireContext(), "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(requireContext(), "Failed to send SMS", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
 }
+
