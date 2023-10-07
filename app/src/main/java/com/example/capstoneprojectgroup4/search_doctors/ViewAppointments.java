@@ -64,6 +64,8 @@ public class ViewAppointments extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_appointments, container, false);
         TextView patient = view.findViewById(R.id.patientNameViewApp);
+        TextView viewh = view.findViewById(R.id.viewhistory);
+
         ImageView back = view.findViewById(R.id.backButtonViewApp);
         String name = MainActivity.getPatientObject().getFirstName();
         patient.setText(name);
@@ -73,6 +75,20 @@ public class ViewAppointments extends Fragment {
         // Set the adapter here
         viewAppointmentsAdapter = new ViewAppointmentsAdapter(new ArrayList<>());
         recyclerView.setAdapter(viewAppointmentsAdapter);
+
+
+
+        viewh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                AppointmentHistory searchDoctors = new AppointmentHistory();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+
+            }
+        });
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

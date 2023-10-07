@@ -18,8 +18,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
@@ -29,13 +27,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 /**
@@ -92,7 +87,7 @@ public class DocAvailF extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doc_avail, container, false);
-        TextView textDoctorName = view.findViewById(R.id.textDoctorName);
+        TextView textDoctorName = view.findViewById(R.id.textDoctorName22);
         TextView textDoctorLocation = view.findViewById(R.id.textDoctorLocation);
         ImageView backButton = view.findViewById(R.id.backButtonDocAvail);
 
