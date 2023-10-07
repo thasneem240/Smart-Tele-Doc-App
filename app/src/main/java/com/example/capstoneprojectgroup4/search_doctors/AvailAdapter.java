@@ -23,19 +23,20 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
     private String Day;
     private String date;
     private String location;
+    private double docPrice;
 
 
     private int noApp ;
 
 
-    public AvailAdapter(ArrayList<Availability> availabilities, String doctorName, String Day, int noApp, String date, String location) {
+    public AvailAdapter(ArrayList<Availability> availabilities, String doctorName, String Day, int noApp, String date, String location, double docPrice) {
         this.availabilities = availabilities;
         this.doctorName = doctorName;
         this.Day = Day;
         this.noApp = noApp;
         this.date = date;
         this.location = location;
-
+        this.docPrice = docPrice;
     }
 
     @NonNull
@@ -60,6 +61,7 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
         String dateV = availability.getDate();
         String start = availability.getStartTime();
         String End = availability.getEndTime();
+        double doctorprice = availability.getPrice();
 
         holder.textDay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +72,7 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
                 if(availability.getNoApp() < 30)
                 {
                     // Pass the selected date to the BookAppointmentF fragment
-                    BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName, day, dateV, start, End, String.valueOf(availability.getNoApp()), location);
+                    BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName, day, dateV, start, End, String.valueOf(availability.getNoApp()), location, doctorprice);
                     fm.beginTransaction()
                             .replace(R.id.fragmentContainerView, fragment)
                             .addToBackStack("DocAvailF")

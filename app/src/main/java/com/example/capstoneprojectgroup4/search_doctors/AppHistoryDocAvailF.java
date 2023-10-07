@@ -120,6 +120,8 @@ public class AppHistoryDocAvailF extends Fragment {
                                 // Found the matching doctor
                                 Log.d("DocAvailF", "Found doctor: " + doctorNameV);
 
+                                double price = doctorSnapshot.child("Price").getValue(Double.class);
+
                                 DataSnapshot locationData = doctorSnapshot.child("l1"); // Adjust for location "l2" if needed
 
                                 if (locationData.exists()) {
@@ -152,7 +154,8 @@ public class AppHistoryDocAvailF extends Fragment {
 
                                                     // Compare session date-time with the current date-time
                                                     if (sessionDateTime != null && sessionDateTime.after(currentDateTime)) {
-                                                        Availability sessionObject = new Availability(doctorNameV, locationName, day, noApp, endTime, startTime, date);
+
+                                                        Availability sessionObject = new Availability(doctorNameV, locationName, day, noApp, endTime, startTime, date, price);
                                                         sessionDetails.add(sessionObject);
                                                     }
                                                 } catch (ParseException e) {

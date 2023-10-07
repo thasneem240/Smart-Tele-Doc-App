@@ -166,6 +166,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textAppointmentType2" />
 
+
     <Button
         android:id="@+id/buttonConfirmAppointment2"
         android:layout_width="213dp"
@@ -174,14 +175,14 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="69dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="69dp"
         android:background="@drawable/rectangle_1"
         android:text="Book Appointment"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDateTimeValue" />
+        app:layout_constraintTop_toBottomOf="@+id/textTotal2" />
 
     <ImageView
         android:id="@+id/backButtonAppoint2"
@@ -195,5 +196,89 @@
         android:src="@drawable/baseline_keyboard_arrow_left_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textPaymentDetails2"
+        android:layout_width="195dp"
+        android:layout_height="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:text="Payment Details"
+        android:textColor="#0B0808"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDateTimeValue" />
+
+    <TextView
+        android:id="@+id/textAdministrationFees2"
+        android:layout_width="163dp"
+        android:layout_height="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:text="Administration fees : "
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPaymentDetails2"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/textConsultationFees2"
+        android:layout_width="154dp"
+        android:layout_height="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:text="Consultation fees : "
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAdministrationFees2"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/textTotal2"
+        android:layout_width="83dp"
+        android:layout_height="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:text="Total : "
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textConsultationFees2"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/ConsultFeesTv"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="48dp"
+        android:text="Rs 100.00"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AdminfeesTv" />
+
+    <TextView
+        android:id="@+id/AdminfeesTv"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="40dp"
+        android:text="Rs 3000.00"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPaymentDetails2" />
+
+    <TextView
+        android:id="@+id/TotalTv"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="40dp"
+        android:text="Rs 3100.00"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ConsultFeesTv" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
