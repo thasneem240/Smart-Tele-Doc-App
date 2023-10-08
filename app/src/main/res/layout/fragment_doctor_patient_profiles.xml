@@ -78,8 +78,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listPatientsrv"
-        android:layout_width="334dp"
-        android:layout_height="368dp"
+        android:layout_width="363dp"
+        android:layout_height="421dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.519"

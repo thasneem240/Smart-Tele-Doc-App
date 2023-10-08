@@ -13,7 +13,7 @@
         android:id="@+id/scrollView"
         android:layout_width="380dp"
         android:layout_height="509dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout_Email"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:background="@drawable/rectangle_12"
                 android:hint="Email"
@@ -52,7 +52,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout_FirstName"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -75,7 +75,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout_LastName"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -98,7 +98,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout_Nic"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -122,7 +122,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Dob"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -146,7 +146,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Gender"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -170,7 +170,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Mobile"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
 
@@ -195,7 +195,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Height"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
 
@@ -220,7 +220,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Weight"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
 
@@ -244,7 +244,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Country"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
 
@@ -268,7 +268,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_City"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -292,7 +292,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Address"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -314,7 +314,7 @@
 
             <Button
                 android:id="@+id/Button_Update"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="47dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_4"
@@ -325,7 +325,7 @@
 
             <Button
                 android:id="@+id/Button_Logout"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_4"
@@ -356,16 +356,18 @@
         android:id="@+id/ImageView_AccountSettings_backbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="360dp"
         android:src="@drawable/baseline_keyboard_arrow_left_24"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="36dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ProfileImage"
         android:layout_width="96dp"
         android:layout_height="81dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="61dp"
         android:src="@drawable/female_avatar"
         app:layout_constraintEnd_toStartOf="@+id/textView4"

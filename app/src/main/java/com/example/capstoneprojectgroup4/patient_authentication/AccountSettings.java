@@ -119,7 +119,7 @@ public class AccountSettings extends Fragment {
         int savedProfileImageResource = getSavedProfileImageResource();
         TextView tt = v.findViewById(R.id.textView4);
 
-      //  tt.setText("Hi, " + MainActivity.getPatientObject().getFirstName());
+        tt.setText("Hi, " + MainActivity.getPatientObject().getFirstName());
 
         // Set the profile image based on the saved resource
         profileImage.setImageResource(savedProfileImageResource);

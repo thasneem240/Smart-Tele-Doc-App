@@ -24,15 +24,13 @@
         android:layout_height="27dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="156dp"
-        android:layout_marginEnd="157dp"
+        android:layout_marginStart="60dp"
         android:gravity="center_horizontal|top"
         android:lineSpacingExtra="3sp"
         android:text="Pharmacy"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:translationY="-1.4sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButtonPharma" />
 
@@ -42,7 +40,7 @@
         android:layout_height="130dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:background="#E6ECF7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +115,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="39dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="45dp"
         android:background="@drawable/rectangle_12"
         android:hint="Search by Name"
@@ -133,6 +131,7 @@
             android:id="@+id/searchPharmName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#3174D4"
             android:textSize="10sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -172,6 +171,7 @@
             android:id="@+id/searchPharmLoc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#3174D4"
             android:textSize="10sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -207,8 +207,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pharmrv"
-        android:layout_width="377dp"
-        android:layout_height="120dp"
+        android:layout_width="379dp"
+        android:layout_height="170dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="15dp"
@@ -219,6 +219,18 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popular_dru" />
+
+    <TextView
+        android:id="@+id/FindNearby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:text="Find Nearby Pharmacies"
+        android:textColor="#407C87"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_8" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

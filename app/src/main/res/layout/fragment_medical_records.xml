@@ -178,14 +178,14 @@
         android:layout_height="27dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
         android:text="Medical Records"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButtonMedicalRecords" />
 
 
     <TextView
@@ -194,21 +194,21 @@
         android:layout_height="25dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="68dp"
         android:gravity="top"
         android:lineSpacingExtra="3sp"
         android:text="Your Health History at a Glance !"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:translationY="-1.61sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medical_rec" />
 
     <ImageView
         android:id="@+id/backButtonMedicalRecords"
-        android:layout_width="43dp"
-        android:layout_height="21dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"

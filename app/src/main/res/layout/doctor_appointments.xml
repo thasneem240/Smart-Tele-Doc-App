@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="6dp"
     app:cardElevation="6dp"
+    android:background="@drawable/rectangle_12"
+    app:cardBackgroundColor="@color/white"
+    android:backgroundTint="@color/white"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
