@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_FirstName">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditText_Specialization"
+            android:id="@+id/EditText_MobileNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#3174D4"
@@ -77,7 +77,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView20">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditText_RegNumber"
+            android:id="@+id/EditText_Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#3174D4"

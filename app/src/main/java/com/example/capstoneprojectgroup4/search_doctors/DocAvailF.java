@@ -128,6 +128,9 @@ public class DocAvailF extends Fragment {
                                 // Found the matching doctor
                                 Log.d("DocAvailF", "Found doctor: " + doctorNameV);
 
+                                double price = doctorSnapshot.child("Price").getValue(Double.class); // Extract the Price
+                                Log.d("DocAvailF", "Found Price: " + price);
+
                                 DataSnapshot locationData = doctorSnapshot.child("l1"); // Adjust for location "l2" if needed
 
                                 if (locationData.exists()) {
@@ -160,7 +163,7 @@ public class DocAvailF extends Fragment {
 
                                                     // Compare session date-time with the current date-time
                                                     if (sessionDateTime != null && sessionDateTime.after(currentDateTime)) {
-                                                        Availability sessionObject = new Availability(doctorNameV, locationName, day, noApp, endTime, startTime, date);
+                                                        Availability sessionObject = new Availability(doctorNameV, locationName, day, noApp, endTime, startTime, date, price);
                                                         sessionDetails.add(sessionObject);
                                                     }
                                                 } catch (ParseException e) {
@@ -187,7 +190,7 @@ public class DocAvailF extends Fragment {
                                     });
 
                                     // Create the adapter and set it to the RecyclerView
-                                    AvailAdapter availAdapter = new AvailAdapter(sessionDetails, doctorNameV, "", 0, "", locationName);
+                                    AvailAdapter availAdapter = new AvailAdapter(sessionDetails, doctorNameV, "", 0, "", locationName,price);
                                     recyclerView.setAdapter(availAdapter);
 
                                     // Set the doctor's name in the TextView

@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,32 +130,10 @@ public class ListOfPatientsFragment extends Fragment {
             }
         });*/
 
-        /*firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("doctor_appointments").child(DoctorsActivity.getDoctorRegNumber());
-
-        databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshotChild : dataSnapshot.getChildren()){
-                    AppoinmentObject appoinmentObject = dataSnapshotChild.getValue(AppoinmentObject.class);
-                    appoinmentObjectArrayList.add(appoinmentObject);
-                }
-
-                RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
-                rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appoinmentObjectArrayList);
-                rv.setAdapter(listOfPatientsAdapter);
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Error in the database. Please try again.", Toast.LENGTH_SHORT).show();
-            }
-        });*/
+        String sanitizedDoctorName = DoctorsActivity.getDoctorObject().getName().replaceAll("[.#$\\[\\]]", "_");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Doctor Appointments").child("Dr_ Bawantha Gamage");
+        databaseReference = firebaseDatabase.getReference("Doctor Appointments").child(sanitizedDoctorName);
 
         databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
@@ -164,10 +143,19 @@ public class ListOfPatientsFragment extends Fragment {
                     appoinmentObjectArrayList.add(appoinmentObject);
                 }
 
-                RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
-                rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appoinmentObjectArrayList);
-                rv.setAdapter(listOfPatientsAdapter);
+                if(appoinmentObjectArrayList.isEmpty()){
+                    Toast.makeText(getActivity(), "There are no appointments under this registration number yet.", Toast.LENGTH_SHORT).show();
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    DoctorMainMenu searchDoctors = new DoctorMainMenu();
+                    fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, searchDoctors).commit();
+                }
+                else{
+                    RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
+                    rv.setLayoutManager(new LinearLayoutManager(getContext()));
+                    ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appoinmentObjectArrayList);
+                    rv.setAdapter(listOfPatientsAdapter);
+                }
 
             }
         }).addOnFailureListener(new OnFailureListener() {

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.drug_containers.DrugsContainers;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -96,6 +97,12 @@ public class AddDrugsManually extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DrugsContainers drugsContainers = new DrugsContainers();
                 fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();
+
+
+//                MaterialAlertDialogBuilder builder =
+//                        new MaterialAlertDialogBuilder(getContext())
+//                                .setTitle("Confirmation Dialog")
+//                                .setSingleChoiceItems()
             }
         });
 

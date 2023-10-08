@@ -21,6 +21,7 @@
         android:hint="Frequency, the route  and other notes"
         android:textColor="@color/black"
         android:textSize="15sp"
+        android:gravity="top"
         app:layout_constraintBottom_toTopOf="@+id/edittext_how_much"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView14"

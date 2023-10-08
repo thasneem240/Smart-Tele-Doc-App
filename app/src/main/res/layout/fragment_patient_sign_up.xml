@@ -40,7 +40,7 @@
             android:textColor="#3174D4"
             android:layout_marginStart="40dp"
             android:textSize="14sp"
-            />
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_EnterEmail">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditText_Doctor_Enter_Password"
+            android:id="@+id/EditText_EnterPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"

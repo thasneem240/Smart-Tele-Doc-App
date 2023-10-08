@@ -87,7 +87,7 @@ public class MainMenu extends Fragment {
         ImageView transactionImageView = v.findViewById(R.id.transaction_square);
         TextView greeting_TextView = v.findViewById(R.id.TextView_goodMorning);
 
-        greeting_TextView.setText("Good Morning, " + MainActivity.getPatientObject().getFirstName());
+        greeting_TextView.setText("Hi, " + MainActivity.getPatientObject().getFirstName());
 
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override

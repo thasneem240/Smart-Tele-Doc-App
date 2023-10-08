@@ -6,7 +6,7 @@ public class AppoinmentObject {
     private String Date;
     private String EndTime;
     private String Location;
-    private String PaitentUserId;
+    private String PatientUserId;
     private String PatientEmail;
     private String PatientName;
     private String StartTime;
@@ -67,12 +67,12 @@ public class AppoinmentObject {
         PatientName = patientName;
     }
 
-    public String getPaitentUserId() {
-        return PaitentUserId;
+    public String getPatientUserId() {
+        return PatientUserId;
     }
 
-    public void setPaitentUserId(String paitentUserId) {
-        PaitentUserId = paitentUserId;
+    public void setPatientUserId(String patientUserId) {
+        PatientUserId = patientUserId;
     }
 
     public String getStartTime() {

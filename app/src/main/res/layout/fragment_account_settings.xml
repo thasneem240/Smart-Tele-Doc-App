@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".front_end.AccountSettings">
+    tools:context=".patient_authentication.AccountSettings">
 
 
     <ScrollView
@@ -42,7 +42,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ImageView_AccountSettings_backbutton">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/EditText_RegNumber"
+                    android:id="@+id/EditText_Email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#3174D4"
@@ -144,7 +144,6 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-
                 android:id="@+id/TextInputLayout_Gender"
                 android:layout_width="360dp"
                 android:layout_height="56dp"
@@ -152,18 +151,18 @@
                 android:background="@drawable/rectangle_12"
                 android:hint="Gender"
                 android:textColorHint="#013073"
+                android:gravity="center"
                 app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Mobile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Dob">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/EditText_Gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <Spinner
+                    android:id="@+id/Spinner_Gender"
                     android:textColor="#3174D4"
-                    android:textSize="15sp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -184,7 +183,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Gender">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/EditText_Specialization"
+                    android:id="@+id/EditText_MobileNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#3174D4"
@@ -380,7 +379,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="80dp"
-        android:text="Hi, "
+        android:text="Greetings"
         android:textColor="#000000"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/ProfileImage"

@@ -10,9 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +52,7 @@ public class BookAppointmentF extends Fragment {
     private static final String ARG_END = "End";
     private static final String ARG_LOCATION = "location";
     private static final String ARG_NOAPP = "noApp";
+    private static final String ARG_PRICE = "docPrice";
     private static final String TAG = "BookAppointmentF";
     private String doctorName;
     private String noApp;
@@ -57,6 +61,7 @@ public class BookAppointmentF extends Fragment {
     private String date;
     private String start;
     private String End;
+    private double docPrice;
     private  int New_NoAppValue;
     private String patientKey;
     private String appointmentKey;
@@ -64,6 +69,7 @@ public class BookAppointmentF extends Fragment {
     private Button UploadAppointment ;
     private FirebaseDatabase firebaseDatabase ;
     private DatabaseReference databaseReference;
+    private String selectedAppointmentType;
 
 
 
@@ -71,7 +77,7 @@ public class BookAppointmentF extends Fragment {
         // Required empty public constructor
     }
 
-    public static BookAppointmentF newInstance(String doctorName, String date, String day,String start, String End, String noApp, String location) {
+    public static BookAppointmentF newInstance(String doctorName, String date, String day,String start, String End, String noApp, String location, double docPrice) {
         BookAppointmentF fragment = new BookAppointmentF();
         Bundle args = new Bundle();
         args.putString(ARG_DOCTOR_NAME, doctorName);
@@ -82,6 +88,7 @@ public class BookAppointmentF extends Fragment {
         args.putString(ARG_DATE, date);
         args.putString(ARG_NOAPP,noApp);
         args.putString(ARG_LOCATION,location);
+        args.putDouble(ARG_PRICE,docPrice);
         fragment.setArguments(args);
         return fragment;
     }
@@ -97,7 +104,7 @@ public class BookAppointmentF extends Fragment {
             noApp = getArguments().getString(ARG_NOAPP);
             location = getArguments().getString(ARG_LOCATION);
             date = getArguments().getString(ARG_DATE);
-
+            docPrice = getArguments().getDouble(ARG_PRICE);
         }
         // Initialize the Firebase Database reference here
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -118,6 +125,8 @@ public class BookAppointmentF extends Fragment {
         TextView dayTextView = view.findViewById(R.id.textDateTimeValue);
         TextView noAppTextView = view.findViewById(R.id.textAppointmentNumberValue2);
         ImageView previousButton = view.findViewById(R.id.backButtonAppoint2);
+        TextView TotalPrice = view.findViewById(R.id.TotalTv);
+        TextView AppointmentFees = view.findViewById(R.id.AdminfeesTv);
 
         // Set the doctor's name and day to the TextViews
         doctorNameTextView.setText(doctorName);
@@ -129,9 +138,32 @@ public class BookAppointmentF extends Fragment {
         TextView patientNameTextView = view.findViewById(R.id.textPatientNameValue2);
         patientNameTextView.setText(patientName);
 
+        // Format and set the appointment fees and total price as text
+        AppointmentFees.setText("Rs " + String.valueOf((int) docPrice) + ".00"); // Convert double to String
+        double TotalFees = docPrice + 100;
+        TotalPrice.setText("Rs " + String.valueOf((int) TotalFees) + ".00"); // Convert double to String
+
         // Initialize appointmentType EditText and UploadAppointment Button
-        EditText appointmentType = view.findViewById(R.id.textAppointmentType2);
         UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment2);
+        Spinner appointmentTypeSpinner = view.findViewById(R.id.textAppointmentType2);
+
+        String[] appointmentTypes = {"Appointment type", "Voice", "Video"};
+
+        ArrayAdapter<String> arrayAdapterBrands = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, appointmentTypes);
+        arrayAdapterBrands.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        appointmentTypeSpinner.setAdapter(arrayAdapterBrands);
+
+        appointmentTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedAppointmentType = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,7 +179,12 @@ public class BookAppointmentF extends Fragment {
             public void onClick(View v) {
                 String getPatientName = MainActivity.getPatientObject().getFirstName();
                 String email = MainActivity.getPatientObject().getEmail();
-                String getAppointmentType = appointmentType.getText().toString();
+
+                if(selectedAppointmentType.equals("Appointment type")){
+                    Toast.makeText(getActivity(), "Please choose the type of appointment.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 // Generate a unique key for the appointment
                 patientKey = MainActivity.getPatientObject().getUid();
@@ -160,8 +197,8 @@ public class BookAppointmentF extends Fragment {
                 Log.d(TAG, "Generated appointmentKey: " + appointmentKey);
                 String PatientID = MainActivity.getPatientObject().getUid();
 
-                uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType, location, New_NoAppValue, PatientID);
-                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue,start, End, PatientID);
+                uploadAppointment(email, getPatientName, doctorName, day, start, End, selectedAppointmentType, location, New_NoAppValue, PatientID);
+                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, selectedAppointmentType, location, New_NoAppValue,start, End, PatientID);
 
                 updateAvailability(doctorName, location, date, New_NoAppValue);
 
@@ -261,7 +298,7 @@ public class BookAppointmentF extends Fragment {
         appointmentData.put("StartTime", start);
         appointmentData.put("EndTime", end);
         appointmentData.put("Date", pDay);
-        appointmentData.put("PaitentUserId",PatientID);
+        appointmentData.put("PatientUserId",PatientID);
 
         // Use the generated key to store the appointment data under the doctor's appointments
         doctorAppointmentsRef.child(appointmentKey).setValue(appointmentData)
@@ -305,7 +342,7 @@ public class BookAppointmentF extends Fragment {
         appointmentData.put("StartTime", start);
         appointmentData.put("EndTime", end);
         appointmentData.put("Date", pDay);
-        appointmentData.put("PaitentUserId",PatientID);
+        appointmentData.put("PatientUserId",PatientID);
 
         // Use the generated key to store the appointment data under the patient's appointments
         databaseReference.child("Appointment Data").child(patientKey).child(appointmentKey).setValue(appointmentData)

@@ -13,8 +13,11 @@ import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,8 +57,11 @@ public class AccountSettings extends Fragment {
     private int currentProfileImageResource = R.drawable.female_avatar; // Initialize with the default image
 
     TextInputEditText emailEditText, firstNameEditText, lastNameEditText,
-    nicEditText, dobEditText, genderEditText, mobileEditText,
+    nicEditText, dobEditText, mobileEditText,
     heightEditText, weightEditText, countryEditText, cityEditText, addressEditText;
+    Spinner genderSpinner;
+    String selectedGender;
+    ImageView profileImage;
     ImageView backButton;
     Button logoutButton;
     Button updateButton;
@@ -100,14 +106,14 @@ public class AccountSettings extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_account_settings, container, false);
-        ImageView profileImage =  v.findViewById(R.id.ProfileImage);
-        emailEditText = v.findViewById(R.id.EditText_RegNumber);
+        profileImage =  v.findViewById(R.id.ProfileImage);
+        emailEditText = v.findViewById(R.id.EditText_Email);
         firstNameEditText = v.findViewById(R.id.EditText_DoctorName);
         lastNameEditText = v.findViewById(R.id.EditText_LastName);
         nicEditText = v.findViewById(R.id.EditText_Nic);
         dobEditText = v.findViewById(R.id.EditText_Dob);
-        genderEditText = v.findViewById(R.id.EditText_Gender);
-        mobileEditText = v.findViewById(R.id.EditText_Specialization);
+        genderSpinner = v.findViewById(R.id.Spinner_Gender);
+        mobileEditText = v.findViewById(R.id.EditText_MobileNumber);
         heightEditText = v.findViewById(R.id.EditText_Height);
         weightEditText = v.findViewById(R.id.EditText_Weight);
         countryEditText = v.findViewById(R.id.EditText_Country);
@@ -116,13 +122,10 @@ public class AccountSettings extends Fragment {
         updateButton = v.findViewById(R.id.Button_Update);
         logoutButton = v.findViewById(R.id.Button_Logout);
         backButton = v.findViewById(R.id.ImageView_AccountSettings_backbutton);
-        int savedProfileImageResource = getSavedProfileImageResource();
-        TextView tt = v.findViewById(R.id.textView4);
+        TextView greetings_textView = v.findViewById(R.id.textView4);
 
-        tt.setText("Hi, " + MainActivity.getPatientObject().getFirstName());
+        greetings_textView.setText("Hi, " + MainActivity.getPatientObject().getFirstName());
 
-        // Set the profile image based on the saved resource
-        profileImage.setImageResource(savedProfileImageResource);
         emailEditText.setEnabled(false);
 
         database = FirebaseDatabase.getInstance();
@@ -140,13 +143,34 @@ public class AccountSettings extends Fragment {
                     lastNameEditText.setText(patientObjectOnline.getLastName());
                     nicEditText.setText(patientObjectOnline.getNic());
                     dobEditText.setText(patientObjectOnline.getDob());
-                    genderEditText.setText(patientObjectOnline.getGender());
                     mobileEditText.setText(patientObjectOnline.getMobile());
                     heightEditText.setText(patientObjectOnline.getHeight());
                     weightEditText.setText(patientObjectOnline.getWeight());
                     countryEditText.setText(patientObjectOnline.getCountry());
                     cityEditText.setText(patientObjectOnline.getCity());
                     countryEditText.setText(patientObjectOnline.getCountry());
+
+                    if (patientObjectOnline.getGender().equals("Male")){
+                        setProfilePicture("Male");
+                    }
+                    else {
+                        setProfilePicture("Female");
+                    }
+
+                    if(patientObjectOnline.getGender().equals("Male")){
+                        String[] male = {"Male", "Female"};
+                        setTheSpinner(male);
+
+                    } else if (patientObjectOnline.getGender().equals("Female")) {
+                        String[] female = {"Female", "Male"};
+                        setTheSpinner(female);
+
+                    }
+                    else{
+                        String[] gender = {"Select", "Male", "Female"};
+                        setTheSpinner(gender);
+
+                    }
                 }
 
                 @Override
@@ -155,6 +179,29 @@ public class AccountSettings extends Fragment {
                 }
             });
         }
+        else{
+            String[] gender = {"Select", "Male", "Female"};
+            setTheSpinner(gender);
+        }
+
+        genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedGender = adapterView.getItemAtPosition(i).toString();
+
+                if (selectedGender.equals("Male")){
+                    setProfilePicture("Male");
+                }
+                else {
+                    setProfilePicture("Female");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,7 +216,7 @@ public class AccountSettings extends Fragment {
                 patientObject.setLastName(lastNameEditText.getText().toString());
                 patientObject.setNic(nicEditText.getText().toString());
                 patientObject.setDob(dobEditText.getText().toString());
-                patientObject.setGender(genderEditText.getText().toString());
+                patientObject.setGender(selectedGender);
                 patientObject.setMobile(mobileEditText.getText().toString());
                 patientObject.setHeight(heightEditText.getText().toString());
                 patientObject.setWeight(weightEditText.getText().toString());
@@ -186,28 +233,6 @@ public class AccountSettings extends Fragment {
                     patientObject.setCompleted(false);
 
                 }
-
-                String patientGender = genderEditText.getText().toString();
-
-                int newProfileImageResource;
-                if ("Male".equalsIgnoreCase(patientGender)) {
-                    newProfileImageResource = R.drawable.male_avatar;
-                } else if ("Female".equalsIgnoreCase(patientGender)) {
-                    newProfileImageResource = R.drawable.female_avatar;
-                } else {
-                    // Handle other genders or cases here if needed
-                    newProfileImageResource = R.drawable.female_avatar; // Set a default image
-                }
-
-                // Check if the gender has changed before updating the profile image
-                if (newProfileImageResource != savedProfileImageResource) {
-                    // Update the profile image
-                    profileImage.setImageResource(newProfileImageResource);
-
-                    // Save the new profile image resource using SharedPreferences
-                    saveProfileImageResource(newProfileImageResource);
-                }
-
 
                 if(patientObject.isCompleted()){
                     DatabaseReference myRef = database.getReference("Users").child(currentUser.getUid());
@@ -238,7 +263,6 @@ public class AccountSettings extends Fragment {
                 lastNameEditText.setEnabled(enable);
                 nicEditText.setEnabled(enable);
                 dobEditText.setEnabled(enable);
-                genderEditText.setEnabled(enable);
                 mobileEditText.setEnabled(enable);
                 heightEditText.setEnabled(enable);
                 weightEditText.setEnabled(enable);
@@ -289,7 +313,7 @@ public class AccountSettings extends Fragment {
                 }
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+        requireActivity().getOnBackPressedDispatcher().addCallback(this.getActivity(), callback);
 
         return v;
     }
@@ -305,5 +329,36 @@ public class AccountSettings extends Fragment {
         return prefs.getInt(PROFILE_IMAGE_KEY, R.drawable.female_avatar); // Default to female_avatar if not found
     }
 
+    private void setProfilePicture(String patientGender){
 
+        int savedProfileImageResource = getSavedProfileImageResource();
+
+        // Set the profile image based on the saved resource
+        profileImage.setImageResource(savedProfileImageResource);
+
+
+        int newProfileImageResource;
+        if ("Male".equalsIgnoreCase(patientGender)) {
+            newProfileImageResource = R.drawable.male_avatar;
+        } else if ("Female".equalsIgnoreCase(patientGender)) {
+            newProfileImageResource = R.drawable.female_avatar;
+        } else {
+            newProfileImageResource = R.drawable.female_avatar; // Set a default image
+        }
+
+        // Check if the gender has changed before updating the profile image
+        if (newProfileImageResource != savedProfileImageResource) {
+            // Update the profile image
+            profileImage.setImageResource(newProfileImageResource);
+
+            // Save the new profile image resource using SharedPreferences
+            saveProfileImageResource(newProfileImageResource);
+        }
+    }
+
+    private void setTheSpinner(String[] array){
+        ArrayAdapter<String> arrayAdapterBrands = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, array);
+        arrayAdapterBrands.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(arrayAdapterBrands);
+    }
 }

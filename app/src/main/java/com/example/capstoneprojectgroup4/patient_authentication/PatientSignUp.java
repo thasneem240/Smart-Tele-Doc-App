@@ -1,5 +1,7 @@
 package com.example.capstoneprojectgroup4.patient_authentication;
 
+import static com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF.TAG;
+
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -9,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,8 @@ import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,7 +95,6 @@ public class PatientSignUp extends Fragment {
         CheckBox termsConditions = v.findViewById(R.id.CheckBox_Terms);
 
         mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
 
         enterPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         reEnterPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -135,22 +139,21 @@ public class PatientSignUp extends Fragment {
                     return;
                 }
 
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getActivity(), "Please verify your email.", Toast.LENGTH_SHORT).show();
+                mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(getActivity(), "Please verify your email.", Toast.LENGTH_SHORT).show();
 
-                                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                                    Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
-                                    fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
-
-                                } else {
-                                    Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
+                        fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 
@@ -170,7 +173,7 @@ public class PatientSignUp extends Fragment {
                 fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, patientLogin).commit();
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+        requireActivity().getOnBackPressedDispatcher().addCallback(this.getActivity(), callback);
 
 
         return v;

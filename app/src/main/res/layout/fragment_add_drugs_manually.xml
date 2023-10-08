@@ -44,6 +44,7 @@
         android:hint="Name of the drug\nFrequency, the route  and other notes"
         android:textColor="@color/black"
         android:textSize="15sp"
+        android:gravity="top"
         app:layout_constraintBottom_toTopOf="@+id/Button_AddTheDrug"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
