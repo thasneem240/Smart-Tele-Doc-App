@@ -1,17 +1,10 @@
 package com.example.capstoneprojectgroup4.search_doctors;
 
-import static android.icu.text.MessagePattern.Part.Type.ARG_START;
-
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
-import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,10 +26,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import android.telephony.SmsManager;
 
-import java.util.ArrayList;
+
+import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +49,7 @@ public class BookAppointmentF extends Fragment {
     private static final String ARG_END = "End";
     private static final String ARG_LOCATION = "location";
     private static final String ARG_NOAPP = "noApp";
+    private static final String ARG_PRICE = "docPrice";
     private static final String TAG = "BookAppointmentF";
     private String doctorName;
     private String noApp;
@@ -60,6 +58,7 @@ public class BookAppointmentF extends Fragment {
     private String date;
     private String start;
     private String End;
+    private double docPrice;
     private  int New_NoAppValue;
     private String patientKey;
     private String appointmentKey;
@@ -74,7 +73,7 @@ public class BookAppointmentF extends Fragment {
         // Required empty public constructor
     }
 
-    public static BookAppointmentF newInstance(String doctorName, String date, String day,String start, String End, String noApp, String location) {
+    public static BookAppointmentF newInstance(String doctorName, String date, String day,String start, String End, String noApp, String location, double docPrice) {
         BookAppointmentF fragment = new BookAppointmentF();
         Bundle args = new Bundle();
         args.putString(ARG_DOCTOR_NAME, doctorName);
@@ -85,6 +84,7 @@ public class BookAppointmentF extends Fragment {
         args.putString(ARG_DATE, date);
         args.putString(ARG_NOAPP,noApp);
         args.putString(ARG_LOCATION,location);
+        args.putDouble(ARG_PRICE,docPrice);
         fragment.setArguments(args);
         return fragment;
     }
@@ -100,12 +100,12 @@ public class BookAppointmentF extends Fragment {
             noApp = getArguments().getString(ARG_NOAPP);
             location = getArguments().getString(ARG_LOCATION);
             date = getArguments().getString(ARG_DATE);
-
-
+            docPrice = getArguments().getDouble(ARG_PRICE);
         }
         // Initialize the Firebase Database reference here
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(); // You can adjust the reference path as needed
+
 
     }
 
@@ -117,10 +117,12 @@ public class BookAppointmentF extends Fragment {
 
 
         // Initialize TextViews and other views
-        TextView doctorNameTextView = view.findViewById(R.id.textDoctorNameValue);
+        TextView doctorNameTextView = view.findViewById(R.id.textDoctorNameValue2);
         TextView dayTextView = view.findViewById(R.id.textDateTimeValue);
-        TextView noAppTextView = view.findViewById(R.id.textAppointmentNumberValue);
-        ImageView previousButton = view.findViewById(R.id.backButtonAppoint);
+        TextView noAppTextView = view.findViewById(R.id.textAppointmentNumberValue2);
+        ImageView previousButton = view.findViewById(R.id.backButtonAppoint2);
+        TextView TotalPrice = view.findViewById(R.id.TotalTv);
+        TextView AppointmentFees = view.findViewById(R.id.AdminfeesTv);
 
         // Set the doctor's name and day to the TextViews
         doctorNameTextView.setText(doctorName);
@@ -129,12 +131,17 @@ public class BookAppointmentF extends Fragment {
         noAppTextView.setText(String.valueOf(New_NoAppValue));
         // Get patient's name and set it to the patientName TextView
         String patientName = MainActivity.getPatientObject().getFirstName();
-        TextView patientNameTextView = view.findViewById(R.id.textPatientNameValue);
+        TextView patientNameTextView = view.findViewById(R.id.textPatientNameValue2);
         patientNameTextView.setText(patientName);
 
+        // Format and set the appointment fees and total price as text
+        AppointmentFees.setText("Rs " + String.valueOf((int) docPrice) + ".00"); // Convert double to String
+        double TotalFees = docPrice + 100;
+        TotalPrice.setText("Rs " + String.valueOf((int) TotalFees) + ".00"); // Convert double to String
+
         // Initialize appointmentType EditText and UploadAppointment Button
-        EditText appointmentType = view.findViewById(R.id.textAppointmentType);
-        UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment);
+        EditText appointmentType = view.findViewById(R.id.textAppointmentType2);
+        UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment2);
 
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,11 +166,7 @@ public class BookAppointmentF extends Fragment {
                 String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
                 AppointmentKeyGenerator.setDoctorName(sanitizedDoctorName);
 
-                //String sanitizedDoctorName = doctorName.replace(".", "_");
-                //String sanitizedHospitalName = location.replace(".", "_");
-                //String sanitizedDate = date.replace(".", "_");
 
-                //appointmentKey = AppointmentKeyGenerator.generateAppointmentKey(patientKey,sanitizedDoctorName,sanitizedHospitalName,sanitizedDate);
                 Log.d(TAG, "Generated appointmentKey: " + appointmentKey);
                 String PatientID = MainActivity.getPatientObject().getUid();
 
@@ -171,6 +174,12 @@ public class BookAppointmentF extends Fragment {
                 uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue,start, End, PatientID);
 
                 updateAvailability(doctorName, location, date, New_NoAppValue);
+
+                String phoneNumber = MainActivity.getPatientObject().getMobile();
+                if (isOneDayBeforeAppointmentDate(date)) {
+                    sendSMS(phoneNumber, "Your Appointment at " + location + " with " + doctorName + "is Tomorrow, Please Don't forget !");
+                }
+
             }
         });
 
@@ -334,4 +343,37 @@ public class BookAppointmentF extends Fragment {
                 .setValue(hashMap);
 
     }
+    private boolean isOneDayBeforeAppointmentDate(String appointmentDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar currentDate = Calendar.getInstance();
+        Calendar appointmentCalendar = Calendar.getInstance();
+
+        try {
+            Date date = dateFormat.parse(appointmentDate);
+            appointmentCalendar.setTime(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        // Check if the current date is one day before the appointment date
+        currentDate.add(Calendar.DAY_OF_MONTH, 1);
+
+        return currentDate.get(Calendar.YEAR) == appointmentCalendar.get(Calendar.YEAR) &&
+                currentDate.get(Calendar.MONTH) == appointmentCalendar.get(Calendar.MONTH) &&
+                currentDate.get(Calendar.DAY_OF_MONTH) == appointmentCalendar.get(Calendar.DAY_OF_MONTH);
+    }
+
+    private void sendSMS(String phoneNumber, String message) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+            Toast.makeText(requireContext(), "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(requireContext(), "Failed to send SMS", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
 }
+

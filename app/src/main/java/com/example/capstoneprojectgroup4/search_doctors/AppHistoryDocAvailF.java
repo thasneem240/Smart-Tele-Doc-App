@@ -3,6 +3,13 @@ package com.example.capstoneprojectgroup4.search_doctors;
 import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +17,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.capstoneprojectgroup4.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,25 +35,12 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.TimeZone;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.capstoneprojectgroup4.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DocAvailF#newInstance} factory method to
+ * Use the {@link AppHistoryDocAvailF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DocAvailF extends Fragment {
+public class AppHistoryDocAvailF extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,33 +50,21 @@ public class DocAvailF extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     RecyclerView recyclerView;
-
-    AvailAdapter availAdapter;
-
-    public DocAvailF() {
+    public AppHistoryDocAvailF() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param doctorName Parameter 1.
-     * @param location Parameter 2.
-     * @return A new instance of fragment DocAvailF.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DocAvailF newInstance(String doctorName, String location) {
-        DocAvailF fragment = new DocAvailF();
+
+
+    public static AppHistoryDocAvailF newInstance(String doctorName, String location) {
+        AppHistoryDocAvailF fragment = new AppHistoryDocAvailF();
         Bundle args = new Bundle();
         args.putString("doctorName", doctorName);
         args.putString("location", location);
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,22 +75,24 @@ public class DocAvailF extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_doc_avail, container, false);
-        TextView textDoctorName = view.findViewById(R.id.textDoctorName22);
-        TextView textDoctorLocation = view.findViewById(R.id.textDoctorLocation);
-        ImageView backButton = view.findViewById(R.id.backButtonDocAvail);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_app_history_doc_avail, container, false);
+        TextView textDoctorName = view.findViewById(R.id.textDoctorName2);
+        TextView textDoctorLocation = view.findViewById(R.id.textDoctorLocation2);
+        ImageView backButton = view.findViewById(R.id.backButtonDocAvail2);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                SearchDocF searchDoctors = new SearchDocF();
+                AppointmentHistory searchDoctors = new AppointmentHistory();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
             }
         });
 
-        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.history_doc_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         if (getArguments() != null) {
@@ -124,12 +116,11 @@ public class DocAvailF extends Fragment {
                             String doctorKey = doctorSnapshot.getKey();
                             DataSnapshot doctorData = doctorSnapshot.child("Name");
 
-                            if (doctorData.exists() && doctorData.getValue(String.class).equals(doctorNameV)) {
+                            if (doctorData.exists() && doctorData.getValue(String.class).contains(doctorNameV)) {
                                 // Found the matching doctor
                                 Log.d("DocAvailF", "Found doctor: " + doctorNameV);
 
-                                double price = doctorSnapshot.child("Price").getValue(Double.class); // Extract the Price
-                                Log.d("DocAvailF", "Found Price: " + price);
+                                double price = doctorSnapshot.child("Price").getValue(Double.class);
 
                                 DataSnapshot locationData = doctorSnapshot.child("l1"); // Adjust for location "l2" if needed
 
@@ -150,7 +141,7 @@ public class DocAvailF extends Fragment {
                                     dateTimeFormat.setTimeZone(TimeZone.getDefault()); // Set to local time zone
 
                                     for (DataSnapshot dayData : locationData.getChildren()) {
-                                        if (!dayData.getKey().equals("LName")) {
+                                        if (!dayData.getKey().contains("LName")) {
                                             String day = dayData.getKey();
                                             String date = dayData.child("Date").getValue(String.class);
                                             String startTime = dayData.child("StartTime").getValue(String.class);
@@ -163,6 +154,7 @@ public class DocAvailF extends Fragment {
 
                                                     // Compare session date-time with the current date-time
                                                     if (sessionDateTime != null && sessionDateTime.after(currentDateTime)) {
+
                                                         Availability sessionObject = new Availability(doctorNameV, locationName, day, noApp, endTime, startTime, date, price);
                                                         sessionDetails.add(sessionObject);
                                                     }
@@ -190,7 +182,7 @@ public class DocAvailF extends Fragment {
                                     });
 
                                     // Create the adapter and set it to the RecyclerView
-                                    AvailAdapter availAdapter = new AvailAdapter(sessionDetails, doctorNameV, "", 0, "", locationName,price);
+                                    AppHistoryAvailAdapter availAdapter = new AppHistoryAvailAdapter(sessionDetails, doctorNameV, "", 0, "", locationName);
                                     recyclerView.setAdapter(availAdapter);
 
                                     // Set the doctor's name in the TextView
@@ -214,5 +206,4 @@ public class DocAvailF extends Fragment {
 
         return view;
     }
-
 }

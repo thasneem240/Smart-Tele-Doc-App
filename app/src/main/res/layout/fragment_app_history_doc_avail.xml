@@ -6,12 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-
     android:orientation="vertical">
 
 
     <TextView
-        android:id="@+id/textDoctorName22"
+        android:id="@+id/textDoctorName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textDoctorLocation"
@@ -22,10 +21,10 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButtonDocAvail" />
+        app:layout_constraintTop_toBottomOf="@+id/backButtonDocAvail2" />
 
     <TextView
-        android:id="@+id/textDoctorLocation"
+        android:id="@+id/textDoctorLocation2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/recyclerView"
@@ -36,10 +35,10 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDoctorName22" />
+        app:layout_constraintTop_toBottomOf="@+id/textDoctorName2" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/history_doc_rv"
         android:layout_width="375dp"
         android:layout_height="503dp"
         android:layout_alignParentBottom="true"
@@ -48,13 +47,13 @@
         android:layout_marginEnd="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDoctorLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/textDoctorLocation2" />
 
     <ImageView
-        android:id="@+id/backButtonDocAvail"
+        android:id="@+id/backButtonDocAvail2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textDoctorName22"
+        android:layout_above="@+id/textDoctorName2"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="360dp"

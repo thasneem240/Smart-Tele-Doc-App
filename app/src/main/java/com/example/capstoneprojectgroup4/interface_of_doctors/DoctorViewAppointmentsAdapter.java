@@ -29,6 +29,10 @@ public class DoctorViewAppointmentsAdapter extends RecyclerView.Adapter<DoctorVi
     @Override
     public void onBindViewHolder(@NonNull DoctorViewAppointmentsViewHolder holder, int position) {
         DoctorAppointmentItemList appointmentItem = appointmentItemList.get(position);
+
+
+
+
         // Set the data to the views in the ViewHolder
         holder.doctorNameTextView.setText(appointmentItem.getPatientName());
         holder.dayTextView.setText(appointmentItem.getDate());

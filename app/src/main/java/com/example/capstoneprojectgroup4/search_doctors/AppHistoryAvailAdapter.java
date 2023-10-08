@@ -1,5 +1,4 @@
 package com.example.capstoneprojectgroup4.search_doctors;
-import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,39 +15,38 @@ import com.example.capstoneprojectgroup4.R;
 
 import java.util.ArrayList;
 
-public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
+public class AppHistoryAvailAdapter extends RecyclerView.Adapter<AppHistoryAvailViewHolder> {
 
     private ArrayList<Availability> availabilities;
     private String doctorName;
     private String Day;
     private String date;
     private String location;
-    private double docPrice;
 
 
     private int noApp ;
 
 
-    public AvailAdapter(ArrayList<Availability> availabilities, String doctorName, String Day, int noApp, String date, String location, double docPrice) {
+    public AppHistoryAvailAdapter(ArrayList<Availability> availabilities, String doctorName, String Day, int noApp, String date, String location) {
         this.availabilities = availabilities;
         this.doctorName = doctorName;
         this.Day = Day;
         this.noApp = noApp;
         this.date = date;
         this.location = location;
-        this.docPrice = docPrice;
+
     }
 
     @NonNull
     @Override
-    public AvailViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AppHistoryAvailViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the item_availability.xml layout and return a new AvailViewHolder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.avail, parent, false);
-        return new AvailViewHolder(view);
+        return new AppHistoryAvailViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AvailViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AppHistoryAvailViewHolder holder, int position) {
         Availability availability = availabilities.get(position);
         Log.d("AvailAdapter", "startTime: " + availability.getStartTime());
         Log.d("AvailAdapter", "endTime: " + availability.getEndTime());
@@ -61,7 +59,6 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
         String dateV = availability.getDate();
         String start = availability.getStartTime();
         String End = availability.getEndTime();
-        double doctorprice = availability.getPrice();
 
         holder.textDay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +69,7 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
                 if(availability.getNoApp() < 30)
                 {
                     // Pass the selected date to the BookAppointmentF fragment
-                    BookAppointmentF fragment = BookAppointmentF.newInstance(doctorName, day, dateV, start, End, String.valueOf(availability.getNoApp()), location, doctorprice);
+                    AppHistoryBookAppointmentF fragment = AppHistoryBookAppointmentF.newInstance(doctorName, day, dateV, start, End, String.valueOf(availability.getNoApp()), location);
                     fm.beginTransaction()
                             .replace(R.id.fragmentContainerView, fragment)
                             .addToBackStack("DocAvailF")
@@ -87,7 +84,7 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
 
 
 
-                }
+            }
         });
     }
 
@@ -95,7 +92,7 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
     @Override
     public int getItemCount() {
         return availabilities.size();
-}
+    }
 
 
 

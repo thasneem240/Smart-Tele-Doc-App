@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".search_doctors.ViewAppointments">
+    tools:context=".search_doctors.AppointmentHistory">
+
 
     <ImageView
-        android:id="@+id/backButtonViewApp"
+        android:id="@+id/backButtonViewApp2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -16,58 +17,43 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerAppView"
-        android:layout_width="374dp"
-        android:layout_height="511dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patientNameViewApp" />
 
     <TextView
-        android:id="@+id/patientNameViewApp"
+        android:id="@+id/patientNameViewApp2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="308dp"
         android:text="Patient Name"
         android:textColor="#15195A"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/textView112" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/textView112"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="45dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="289dp"
-        android:text="Current Appointments"
+        android:text="Appointment History"
         android:textColor="#101623"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButtonViewApp" />
+        app:layout_constraintTop_toBottomOf="@+id/backButtonViewApp2" />
 
-    <TextView
-        android:id="@+id/viewhistory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="15dp"
-        android:text="View Appointment History"
-        android:textColor="@color/color_red"
-        app:layout_constraintStart_toEndOf="@+id/patientNameViewApp"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/appHistoryrv"
+        android:layout_width="374dp"
+        android:layout_height="482dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patientNameViewApp2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

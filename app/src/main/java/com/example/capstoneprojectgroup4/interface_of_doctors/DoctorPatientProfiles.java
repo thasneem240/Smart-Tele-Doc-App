@@ -27,8 +27,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /*
  * A simple {@link Fragment} subclass.
@@ -101,23 +107,47 @@ public class DoctorPatientProfiles extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    List<String> patientNames = new ArrayList<>();
+                    Set<String> patientNames = new HashSet<>(); // Use a Set to store unique patient names
+                    List<String> appointmentKeys = new ArrayList<>(); // Store appointment keys for later use
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm"); // Modify date format
+
+                    // Get the current date and time
+                    Calendar currentDateTime = Calendar.getInstance();
+
                     for (DataSnapshot appointmentSnapshot : dataSnapshot.getChildren()) {
-                        String patientName = appointmentSnapshot.child("PatientName").getValue(String.class);
-                        if (patientName != null) {
-                            patientNames.add(patientName);
+                        String appointmentDate = appointmentSnapshot.child("Date").getValue(String.class);
+                        String appointmentEndTime = appointmentSnapshot.child("EndTime").getValue(String.class);
+
+                        if (appointmentDate != null && appointmentEndTime != null) {
+                            try {
+                                // Parse appointment date and time
+                                Date appointmentDateTime = dateFormat.parse(appointmentDate + " " + appointmentEndTime);
+                                Calendar appointmentCalendar = Calendar.getInstance();
+                                appointmentCalendar.setTime(appointmentDateTime);
+
+                                // Compare with the current date and time
+                                if (appointmentCalendar.after(currentDateTime)) {
+                                    String patientName = appointmentSnapshot.child("PatientName").getValue(String.class);
+                                    if (patientName != null) {
+                                        patientNames.add(patientName);
+                                        appointmentKeys.add(appointmentSnapshot.getKey());
+                                    }
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 
-                    // Create and set the initial adapter with all patient names
-                    PatientListAdapter adapter = new PatientListAdapter(patientNames);
+                    // Create and set the initial adapter with unique patient names and filtered appointments
+                    PatientListAdapter adapter = new PatientListAdapter(new ArrayList<>(patientNames));
                     rv.setAdapter(adapter);
 
                     search.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             String searchText = searchEditText.getText().toString().toLowerCase();
-                            List<String> filteredNames = filterPatientNames(patientNames, searchText);
+                            List<String> filteredNames = filterPatientNames(new ArrayList<>(patientNames), searchText);
                             adapter.setPatientNames(filteredNames);
                             adapter.notifyDataSetChanged();
                         }
