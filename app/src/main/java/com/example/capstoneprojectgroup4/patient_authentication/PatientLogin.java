@@ -120,28 +120,27 @@ public class PatientLogin extends Fragment {
                     return;
                 }
 
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    currentUser = mAuth.getCurrentUser();
+                mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        currentUser = mAuth.getCurrentUser();
 
-                                    if(currentUser.isEmailVerified()){
-                                        isPatientProfileCompleted();
-                                    }
-                                    else{
-                                        Toast.makeText(getActivity(), "Please verify your email", Toast.LENGTH_SHORT).show();
+                        if(currentUser.isEmailVerified()){
+                            isPatientProfileCompleted();
+                        }
+                        else{
+                            Toast.makeText(getActivity(), "Please verify your email", Toast.LENGTH_SHORT).show();
 
-                                        Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
-                                        fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
-                                    }
-                                } else {
-                                    Toast.makeText(requireContext(), "Login failed. " + task.getException(), Toast.LENGTH_LONG).show();
-
-                                }
-                            }
-                        });
+                            Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
+                            fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
 
             }
         });

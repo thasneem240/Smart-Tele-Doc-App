@@ -262,7 +262,7 @@ public class BookAppointmentF extends Fragment {
         appointmentData.put("StartTime", start);
         appointmentData.put("EndTime", end);
         appointmentData.put("Date", pDay);
-        appointmentData.put("PaitentUserId",PatientID);
+        appointmentData.put("PatientUserId",PatientID);
 
         // Use the generated key to store the appointment data under the doctor's appointments
         doctorAppointmentsRef.child(appointmentKey).setValue(appointmentData)
@@ -306,7 +306,7 @@ public class BookAppointmentF extends Fragment {
         appointmentData.put("StartTime", start);
         appointmentData.put("EndTime", end);
         appointmentData.put("Date", pDay);
-        appointmentData.put("PaitentUserId",PatientID);
+        appointmentData.put("PatientUserId",PatientID);
 
         // Use the generated key to store the appointment data under the patient's appointments
         databaseReference.child("Appointment Data").child(patientKey).child(appointmentKey).setValue(appointmentData)

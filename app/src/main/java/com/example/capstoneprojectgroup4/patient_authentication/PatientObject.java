@@ -9,7 +9,7 @@ public class PatientObject implements Serializable {
     private String lastName;
     private String nic;
     private String dob;
-    private String gender;
+    private String gender = "";
     private String mobile;
     private String height;
     private String weight;

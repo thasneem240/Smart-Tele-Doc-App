@@ -153,8 +153,10 @@ public class ListOfPatientsFragment extends Fragment {
             }
         });*/
 
+        String sanitizedDoctorName = DoctorsActivity.getDoctorObject().getName().replaceAll("[.#$\\[\\]]", "_");
+
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Doctor Appointments").child("Dr_ Bawantha Gamage");
+        databaseReference = firebaseDatabase.getReference("Doctor Appointments").child(sanitizedDoctorName);
 
         databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override

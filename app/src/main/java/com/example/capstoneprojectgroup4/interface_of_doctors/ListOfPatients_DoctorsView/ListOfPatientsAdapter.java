@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,8 +48,7 @@ public class ListOfPatientsAdapter extends RecyclerView.Adapter<ListOfPatientsVi
             @Override
             public void onClick(View view) {
 
-                openWritingPrescription(appointmentObjects.get(position).getPaitentUserId(), view);  // retrievePatientObjectAndOpenWritingPrescription();
-
+                openWritingPrescription(appointmentObjects.get(position).getPatientUserId(), view);  // retrievePatientObjectAndOpenWritingPrescription();
             }
         });
     }

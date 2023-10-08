@@ -76,7 +76,7 @@ public class DoctorMainMenu extends Fragment {
 
         TextView greetings = v.findViewById(R.id.good_morning2);
 
-        greetings.setText("Good Morning, " + DoctorsActivity.getDoctorObject().getName());
+        greetings.setText("Hi, " + DoctorsActivity.getDoctorObject().getName());
 
         listOfPatients.setOnClickListener(new View.OnClickListener() {
             @Override
