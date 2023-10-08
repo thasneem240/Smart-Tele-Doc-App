@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,14 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="11dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView10"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="360dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
+
 
     <TextView
         android:id="@+id/TextView"
@@ -26,15 +25,15 @@
         android:layout_height="27dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="124dp"
-        android:gravity="center_horizontal|top"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
         android:lineSpacingExtra="3sp"
         android:text="Create Prescription"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:translationY="-1.4sp" />
-
+        android:translationY="-1.4sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ImageView_BackButton" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -44,41 +43,44 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginTop="109dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="118dp"
-        android:src="@drawable/rectangle_8" />
+        android:layout_marginTop="15dp"
+        android:src="@drawable/rectangle_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView" />
 
     <EditText
         android:id="@+id/EditText_PrescriptionNotes"
-        android:layout_width="283dp"
-        android:layout_height="164dp"
+        android:layout_width="288dp"
+        android:layout_height="131dp"
         android:layout_alignBottom="@+id/imageView10"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="59dp"
-        android:layout_marginTop="368dp"
-        android:layout_marginEnd="69dp"
-        android:layout_marginBottom="81dp"
+        android:layout_marginTop="20dp"
         android:background="#F6F8E2"
         android:gravity="top"
         android:hint="Prescription Notes"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
         android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="184dp"
-        android:background="#A8FAEE"
+        android:layout_marginTop="20dp"
         android:hint="Name of the doctor"
-        android:textColorHint="#3951ED">
+        android:textColorHint="#3951ED"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <EditText
             android:id="@+id/EditText_doctorName"
@@ -93,16 +95,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
         android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="247dp"
-        android:background="#A8FAEE"
+        android:layout_marginTop="20dp"
         android:hint="Date of birth"
-        android:textColorHint="#3951ED">
+        android:textColorHint="#3951ED"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
         <EditText
             android:id="@+id/EditText_dob"
@@ -117,16 +121,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout4"
         android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="308dp"
-        android:background="#A8FAEE"
+        android:layout_marginTop="20dp"
         android:hint="Written on"
-        android:textColorHint="#3951ED">
+        android:textColorHint="#3951ED"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <EditText
             android:id="@+id/EditText_WrittenOn"
@@ -146,12 +152,14 @@
         android:layout_alignBottom="@+id/imageView10"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="225dp"
-        android:layout_marginEnd="102dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rectangle_9"
         android:text="Drugs count"
-        android:textSize="14sp" />
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/Button_SelectedDrugs"
+        app:layout_constraintTop_toBottomOf="@+id/EditText_PrescriptionNotes" />
 
     <Button
         android:id="@+id/Button_Submit"
@@ -160,34 +168,43 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="106dp"
-        android:layout_marginEnd="118dp"
-        android:layout_marginBottom="58dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="112dp"
         android:background="@drawable/rectangle_6"
-        android:text="Submit " />
+        android:text="Submit "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
     <Button
         android:id="@+id/Button_SelectedDrugs"
-        android:layout_width="133dp"
-        android:layout_height="38dp"
+        android:layout_width="134dp"
+        android:layout_height="41dp"
         android:layout_alignBottom="@+id/imageView10"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="219dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rectangle_6"
-        android:text="Select medicines" />
+        android:text="Select medicines"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@+id/EditText_PrescriptionNotes" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="121dp"
-        android:background="#A8FAEE"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rectangle_12"
         android:hint="Name of the patient"
-        android:textColorHint="#3951ED">
+        android:textColorHint="#3951ED"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/imageView10">
 
         <EditText
             android:id="@+id/EditText_patientName"
@@ -203,4 +220,4 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
