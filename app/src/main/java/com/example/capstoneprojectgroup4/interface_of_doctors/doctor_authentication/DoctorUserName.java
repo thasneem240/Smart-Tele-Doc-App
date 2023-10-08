@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.InputType;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,12 +93,20 @@ public class DoctorUserName extends Fragment {
         databaseReference = firebaseDatabase.getReference("doctors");
 
         EditText regNumber_edittext = v.findViewById(R.id.EditText_RegistrationNumber);
-        EditText mobileNumber_edittext = v.findViewById(R.id.EditText_Specialization);
+        EditText mobileNumber_edittext = v.findViewById(R.id.EditText_MobileNumber);
+        EditText email_edittext = v.findViewById(R.id.EditText_Email);
         EditText password_edittext = v.findViewById(R.id.EditText_EnterPassword);
         EditText reEnterPassword_edittext = v.findViewById(R.id.EditText_ReEnterPassword);
         CheckBox termsCheckBox = v.findViewById(R.id.CheckBox_Terms);
-        Button signupButton = v.findViewById(R.id.Button_SignUp);
+        Button signupButton = v.findViewById(R.id.Button_Verify);
         ImageView backButton = v.findViewById(R.id.ImageView_SignupBack);
+
+        mobileNumber_edittext.setVisibility(View.INVISIBLE);
+        email_edittext.setVisibility(View.INVISIBLE);
+
+        password_edittext.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        reEnterPassword_edittext.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
 
         FragmentManager fm = getActivity().getSupportFragmentManager();
 
@@ -124,12 +133,10 @@ public class DoctorUserName extends Fragment {
                     return;
                 }
 
-                DoctorSignupObject doctorSignupObject = new DoctorSignupObject();
 
                 byte[] encodedBytes = Base64.encode(password.getBytes(), Base64.DEFAULT);
 
-                String encodedPassword = new String(encodedBytes);
-
+                DoctorSignupObject doctorSignupObject = new DoctorSignupObject();
                 doctorSignupObject.setPassword(new String(encodedBytes));
 
 //                Map<String, DoctorSignupObject> doctorSignupHashmap = new HashMap<>();
@@ -176,7 +183,7 @@ public class DoctorUserName extends Fragment {
         DatabaseReference databaseReference;
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(regNumber);
+        databaseReference = firebaseDatabase.getReference("doctors").child(regNumber);
 
         databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override

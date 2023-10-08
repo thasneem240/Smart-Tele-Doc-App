@@ -1,7 +1,5 @@
 package com.example.capstoneprojectgroup4.patient_authentication;
 
-import static com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF.TAG;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,13 +107,13 @@ public class AccountSettings extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_account_settings, container, false);
         profileImage =  v.findViewById(R.id.ProfileImage);
-        emailEditText = v.findViewById(R.id.EditText_RegNumber);
+        emailEditText = v.findViewById(R.id.EditText_Email);
         firstNameEditText = v.findViewById(R.id.EditText_DoctorName);
         lastNameEditText = v.findViewById(R.id.EditText_LastName);
         nicEditText = v.findViewById(R.id.EditText_Nic);
         dobEditText = v.findViewById(R.id.EditText_Dob);
         genderSpinner = v.findViewById(R.id.Spinner_Gender);
-        mobileEditText = v.findViewById(R.id.EditText_Specialization);
+        mobileEditText = v.findViewById(R.id.EditText_MobileNumber);
         heightEditText = v.findViewById(R.id.EditText_Height);
         weightEditText = v.findViewById(R.id.EditText_Weight);
         countryEditText = v.findViewById(R.id.EditText_Country);
@@ -141,6 +138,18 @@ public class AccountSettings extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     patientObjectOnline = snapshot.getValue(PatientObject.class);
 
+                    emailEditText.setText(currentUser.getEmail());
+                    firstNameEditText.setText(patientObjectOnline.getFirstName());
+                    lastNameEditText.setText(patientObjectOnline.getLastName());
+                    nicEditText.setText(patientObjectOnline.getNic());
+                    dobEditText.setText(patientObjectOnline.getDob());
+                    mobileEditText.setText(patientObjectOnline.getMobile());
+                    heightEditText.setText(patientObjectOnline.getHeight());
+                    weightEditText.setText(patientObjectOnline.getWeight());
+                    countryEditText.setText(patientObjectOnline.getCountry());
+                    cityEditText.setText(patientObjectOnline.getCity());
+                    countryEditText.setText(patientObjectOnline.getCountry());
+
                     if (patientObjectOnline.getGender().equals("Male")){
                         setProfilePicture("Male");
                     }
@@ -148,37 +157,20 @@ public class AccountSettings extends Fragment {
                         setProfilePicture("Female");
                     }
 
-                    emailEditText.setText(currentUser.getEmail());
-                    firstNameEditText.setText(patientObjectOnline.getFirstName());
-                    lastNameEditText.setText(patientObjectOnline.getLastName());
-                    nicEditText.setText(patientObjectOnline.getNic());
-                    dobEditText.setText(patientObjectOnline.getDob());
                     if(patientObjectOnline.getGender().equals("Male")){
                         String[] male = {"Male", "Female"};
+                        setTheSpinner(male);
 
-                        ArrayAdapter<String> arrayAdapterBrands = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, male);
-                        arrayAdapterBrands.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        genderSpinner.setAdapter(arrayAdapterBrands);
                     } else if (patientObjectOnline.getGender().equals("Female")) {
                         String[] female = {"Female", "Male"};
+                        setTheSpinner(female);
 
-                        ArrayAdapter<String> arrayAdapterBrands = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, female);
-                        arrayAdapterBrands.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        genderSpinner.setAdapter(arrayAdapterBrands);
                     }
                     else{
                         String[] gender = {"Select", "Male", "Female"};
+                        setTheSpinner(gender);
 
-                        ArrayAdapter<String> arrayAdapterBrands = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, gender);
-                        arrayAdapterBrands.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        genderSpinner.setAdapter(arrayAdapterBrands);
                     }
-                    mobileEditText.setText(patientObjectOnline.getMobile());
-                    heightEditText.setText(patientObjectOnline.getHeight());
-                    weightEditText.setText(patientObjectOnline.getWeight());
-                    countryEditText.setText(patientObjectOnline.getCountry());
-                    cityEditText.setText(patientObjectOnline.getCity());
-                    countryEditText.setText(patientObjectOnline.getCountry());
                 }
 
                 @Override
@@ -189,11 +181,7 @@ public class AccountSettings extends Fragment {
         }
         else{
             String[] gender = {"Select", "Male", "Female"};
-
-            ArrayAdapter<String> arrayAdapterBrands = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, gender);
-            arrayAdapterBrands.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            genderSpinner.setAdapter(arrayAdapterBrands);
-
+            setTheSpinner(gender);
         }
 
         genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -368,4 +356,9 @@ public class AccountSettings extends Fragment {
         }
     }
 
+    private void setTheSpinner(String[] array){
+        ArrayAdapter<String> arrayAdapterBrands = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, array);
+        arrayAdapterBrands.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(arrayAdapterBrands);
+    }
 }

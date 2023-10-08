@@ -42,7 +42,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ImageView_AccountSettings_backbutton">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/EditText_RegNumber"
+                    android:id="@+id/EditText_Email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#3174D4"
@@ -183,7 +183,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Gender">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/EditText_Specialization"
+                    android:id="@+id/EditText_MobileNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#3174D4"
