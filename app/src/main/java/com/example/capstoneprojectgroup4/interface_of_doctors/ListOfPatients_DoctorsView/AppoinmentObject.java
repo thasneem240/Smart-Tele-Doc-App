@@ -6,9 +6,9 @@ public class AppoinmentObject {
     private String Date;
     private String EndTime;
     private String Location;
+    private String PatientUserId;
     private String PatientEmail;
     private String PatientName;
-    private String PatientUserId;
     private String StartTime;
 
     public int getAppointmentNumber() {

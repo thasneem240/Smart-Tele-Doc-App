@@ -16,7 +16,7 @@ public class PatientListViewHolder extends RecyclerView.ViewHolder {
 
     public PatientListViewHolder(@NonNull View itemView) {
         super(itemView);
-        textPatientName = itemView.findViewById(R.id.textPatientName);
+        textPatientName = itemView.findViewById(R.id.textPatientName22);
         select = itemView.findViewById(R.id.select_patientlist);
 
     }

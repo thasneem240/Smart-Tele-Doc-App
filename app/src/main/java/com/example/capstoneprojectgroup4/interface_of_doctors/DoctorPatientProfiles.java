@@ -1,4 +1,3 @@
-/*
 package com.example.capstoneprojectgroup4.interface_of_doctors;
 
 import android.os.Bundle;
@@ -20,21 +19,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMainMenu;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-*/
-/**
+/*
  * A simple {@link Fragment} subclass.
  * Use the {@link DoctorPatientProfiles#newInstance} factory method to
- * create an instance of this fragment.
- *//*
+ * create an instance of this fragment.*/
+
 
 public class DoctorPatientProfiles extends Fragment {
 
@@ -51,15 +57,14 @@ public class DoctorPatientProfiles extends Fragment {
         // Required empty public constructor
     }
 
-    */
-/**
+/*
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DoctorPatientProfiles.
-     *//*
+     * @return A new instance of fragment DoctorPatientProfiles.*/
+
 
     // TODO: Rename and change types and number of parameters
     public static DoctorPatientProfiles newInstance(String param1, String param2) {
@@ -91,30 +96,58 @@ public class DoctorPatientProfiles extends Fragment {
         EditText searchEditText = v.findViewById(R.id.ListPatsearchName);
         Button search = v.findViewById(R.id.searchPatientList);
 
+        String name = DoctorsActivity.getDoctorObject().getName();
+        String sanitizedDoctorName = name.replaceAll("[.#$\\[\\]]", "_");
+
+
         DatabaseReference doctorAppointmentsRef = FirebaseDatabase.getInstance().getReference("Doctor Appointments");
-        DatabaseReference drAjithRef = doctorAppointmentsRef.child("Dr_ Ajith Amarasinghe");
+        DatabaseReference drAjithRef = doctorAppointmentsRef.child(sanitizedDoctorName);
 
         drAjithRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    List<String> patientNames = new ArrayList<>();
+                    Set<String> patientNames = new HashSet<>(); // Use a Set to store unique patient names
+                    List<String> appointmentKeys = new ArrayList<>(); // Store appointment keys for later use
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm"); // Modify date format
+
+                    // Get the current date and time
+                    Calendar currentDateTime = Calendar.getInstance();
+
                     for (DataSnapshot appointmentSnapshot : dataSnapshot.getChildren()) {
-                        String patientName = appointmentSnapshot.child("PatientName").getValue(String.class);
-                        if (patientName != null) {
-                            patientNames.add(patientName);
+                        String appointmentDate = appointmentSnapshot.child("Date").getValue(String.class);
+                        String appointmentEndTime = appointmentSnapshot.child("EndTime").getValue(String.class);
+
+                        if (appointmentDate != null && appointmentEndTime != null) {
+                            try {
+                                // Parse appointment date and time
+                                Date appointmentDateTime = dateFormat.parse(appointmentDate + " " + appointmentEndTime);
+                                Calendar appointmentCalendar = Calendar.getInstance();
+                                appointmentCalendar.setTime(appointmentDateTime);
+
+                                // Compare with the current date and time
+                                if (appointmentCalendar.after(currentDateTime)) {
+                                    String patientName = appointmentSnapshot.child("PatientName").getValue(String.class);
+                                    if (patientName != null) {
+                                        patientNames.add(patientName);
+                                        appointmentKeys.add(appointmentSnapshot.getKey());
+                                    }
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 
-                    // Create and set the initial adapter with all patient names
-                    PatientListAdapter adapter = new PatientListAdapter(patientNames);
+                    // Create and set the initial adapter with unique patient names and filtered appointments
+                    PatientListAdapter adapter = new PatientListAdapter(new ArrayList<>(patientNames));
                     rv.setAdapter(adapter);
 
                     search.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             String searchText = searchEditText.getText().toString().toLowerCase();
-                            List<String> filteredNames = filterPatientNames(patientNames, searchText);
+                            List<String> filteredNames = filterPatientNames(new ArrayList<>(patientNames), searchText);
                             adapter.setPatientNames(filteredNames);
                             adapter.notifyDataSetChanged();
                         }
@@ -158,4 +191,4 @@ public class DoctorPatientProfiles extends Fragment {
     }
 
 
-}*/
+}

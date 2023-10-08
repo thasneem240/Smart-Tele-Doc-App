@@ -18,8 +18,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
@@ -29,13 +27,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 /**
@@ -92,7 +87,7 @@ public class DocAvailF extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doc_avail, container, false);
-        TextView textDoctorName = view.findViewById(R.id.textDoctorName);
+        TextView textDoctorName = view.findViewById(R.id.textDoctorName22);
         TextView textDoctorLocation = view.findViewById(R.id.textDoctorLocation);
         ImageView backButton = view.findViewById(R.id.backButtonDocAvail);
 
@@ -133,6 +128,9 @@ public class DocAvailF extends Fragment {
                                 // Found the matching doctor
                                 Log.d("DocAvailF", "Found doctor: " + doctorNameV);
 
+                                double price = doctorSnapshot.child("Price").getValue(Double.class); // Extract the Price
+                                Log.d("DocAvailF", "Found Price: " + price);
+
                                 DataSnapshot locationData = doctorSnapshot.child("l1"); // Adjust for location "l2" if needed
 
                                 if (locationData.exists()) {
@@ -165,7 +163,7 @@ public class DocAvailF extends Fragment {
 
                                                     // Compare session date-time with the current date-time
                                                     if (sessionDateTime != null && sessionDateTime.after(currentDateTime)) {
-                                                        Availability sessionObject = new Availability(doctorNameV, locationName, day, noApp, endTime, startTime, date);
+                                                        Availability sessionObject = new Availability(doctorNameV, locationName, day, noApp, endTime, startTime, date, price);
                                                         sessionDetails.add(sessionObject);
                                                     }
                                                 } catch (ParseException e) {
@@ -192,7 +190,7 @@ public class DocAvailF extends Fragment {
                                     });
 
                                     // Create the adapter and set it to the RecyclerView
-                                    AvailAdapter availAdapter = new AvailAdapter(sessionDetails, doctorNameV, "", 0, "", locationName);
+                                    AvailAdapter availAdapter = new AvailAdapter(sessionDetails, doctorNameV, "", 0, "", locationName,price);
                                     recyclerView.setAdapter(availAdapter);
 
                                     // Set the doctor's name in the TextView

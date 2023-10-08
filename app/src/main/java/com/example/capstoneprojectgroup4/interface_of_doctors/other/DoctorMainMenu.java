@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorPatientProfiles;
 import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_DoctorsView.ListOfPatientsFragment;
 
 /**
@@ -71,9 +72,23 @@ public class DoctorMainMenu extends Fragment {
 
         ImageView writePrescription = v.findViewById(R.id.ImageView_writePrescription);
         Button writePrescriptionButton = v.findViewById(R.id.Button_writePrescription);
+        Button listOfPatients = v.findViewById(R.id.ListofPatientsButton);
+
         TextView greetings = v.findViewById(R.id.good_morning2);
 
-        greetings.setText("Good Morning, \n" + DoctorsActivity.getDoctorObject().getName());
+        greetings.setText("Hi, " + DoctorsActivity.getDoctorObject().getName());
+
+        listOfPatients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                DoctorPatientProfiles listOfPatientsFragment = new DoctorPatientProfiles();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatientsFragment).commit();
+            }
+        });
+
+
+
 
         writePrescription.setOnClickListener(new View.OnClickListener() {
             @Override

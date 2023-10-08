@@ -4,7 +4,7 @@ public class PrescriptionDrugObject {
     private String nameOfTheDrug;
     private String brandName;
     private String strength;
-    private int amount;
+    private int amount = 0;
     private String drugSpecificNotes;
     private String medicineNotes;
 

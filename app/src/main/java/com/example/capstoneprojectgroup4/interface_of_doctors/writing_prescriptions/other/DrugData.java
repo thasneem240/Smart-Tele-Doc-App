@@ -174,7 +174,6 @@ public class DrugData extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                selectedDrug.setAmount(Integer.parseInt(howMuchMedicines.getText().toString()));
                 if(selectedDrug == null){
                     Toast.makeText(writingPrescriptionActivity, "Please select a drug, the name and the strength", Toast.LENGTH_SHORT).show();
                     return;
@@ -191,12 +190,13 @@ public class DrugData extends Fragment {
                     Toast.makeText(writingPrescriptionActivity, "Please select the strength", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                if(selectedDrug.getAmount() == 0){
-//                    Toast.makeText(writingPrescriptionActivity, "Please enter How much from this medicine.", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
+                if(howMuchMedicines.getText().toString().equals("")){
+                    Toast.makeText(writingPrescriptionActivity, "Please enter How much from this medicine.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                selectedDrug.setMedicineNotes(medicineNotes.toString());
+                selectedDrug.setMedicineNotes(medicineNotes.getText().toString());
+                selectedDrug.setAmount(Integer.parseInt(howMuchMedicines.getText().toString()));
 
                 WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) view.getContext();
                 writingPrescriptionActivity.setSelectedDrug(selectedDrug);
