@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -56,6 +58,8 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
   EditText editMessage;
   ImageButton btnSend;
 
+  ImageView backButton;
+
   //dialogFlow
   private SessionsClient sessionsClient;
   private SessionName sessionName;
@@ -65,6 +69,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_chatbot);
+    backButton = findViewById(R.id.ChatbotBackbutton);
     chatView = findViewById(R.id.chatView);
     editMessage = findViewById(R.id.editMessage);
     btnSend = findViewById(R.id.btnSend);
@@ -78,6 +83,14 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     messageList.add(new Message("Please choose what you want me to do.", true));
     chatAdapter.notifyDataSetChanged();
     Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
+
+    backButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent Activity = new Intent(ChatbotActivity.this, MainActivity2.class);
+        startActivity(Activity);
+      }
+    });
 
     btnSend.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
