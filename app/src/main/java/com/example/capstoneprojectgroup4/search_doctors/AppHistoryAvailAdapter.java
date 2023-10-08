@@ -72,7 +72,7 @@ public class AppHistoryAvailAdapter extends RecyclerView.Adapter<AppHistoryAvail
                     AppHistoryBookAppointmentF fragment = AppHistoryBookAppointmentF.newInstance(doctorName, day, dateV, start, End, String.valueOf(availability.getNoApp()), location);
                     fm.beginTransaction()
                             .replace(R.id.fragmentContainerView, fragment)
-                            .addToBackStack("DocAvailF")
+                            .addToBackStack("AppHistoryDocAvailF")
                             .commit();
                 }
                 else

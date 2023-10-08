@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".interface_of_doctors.DoctorPatientProfiles">
 
     <Button
@@ -44,7 +45,7 @@
             android:id="@+id/ListPatsearchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#A1A8B0"
+            android:textColor="#3174D4"
             android:textSize="10sp" />
 
     </com.google.android.material.textfield.TextInputLayout>

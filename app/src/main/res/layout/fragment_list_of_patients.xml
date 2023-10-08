@@ -28,13 +28,11 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="42dp"
         android:layout_marginEnd="42dp"
-        android:layout_marginBottom="50dp"
         android:background="@drawable/rectangle_12"
         android:hint="Name"
         android:paddingStart="50sp"
         android:textColorHint="#A1A8B0"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/RecyclerView_ListOfPatients"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13">
@@ -43,6 +41,7 @@
             android:id="@+id/PatsearchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#3174D4"
             android:textSize="10sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -76,10 +75,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerView_ListOfPatients"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="360dp"
+        android:layout_height="451dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_searchPatName" />
