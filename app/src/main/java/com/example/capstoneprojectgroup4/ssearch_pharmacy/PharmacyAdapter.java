@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -45,6 +46,29 @@ public class PharmacyAdapter extends RecyclerView.Adapter<PharmacyViewHolder> {
         holder.Name.setText(pharmacy.getName());
         holder.Address.setText(pharmacy.getAddress());
         holder.PhoneNumber.setText(pharmacy.getPhoneNumber());
+
+        holder.PhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create an Intent to open the dialer with the phone number
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + pharmacy.getPhoneNumber()));
+
+                // Explicitly specify the package name of the Android dialer app
+                // Check if there's an activity to handle this intent
+                if (intent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(intent);
+                } else {
+                    // Handle the case where there's no activity to handle the call intent
+                    Toast.makeText(context, "No app available to make a call.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
+
         holder.Maps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
