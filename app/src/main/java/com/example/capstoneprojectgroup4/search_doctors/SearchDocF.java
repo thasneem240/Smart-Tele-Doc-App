@@ -114,7 +114,7 @@ public class SearchDocF extends Fragment  {
         recyclerView = view.findViewById(R.id.searchrv);
         ImageView backButton = view.findViewById(R.id.backButtonSearchDoc);
 
-         etName = view.findViewById(R.id.PatsearchName);
+         etName = view.findViewById(R.id.textInputEditText_searchName);
          etSpecialization = view.findViewById(R.id.searchSpec);
          etLocation = view.findViewById(R.id.searchLoc);
          etDate = view.findViewById(R.id.searchDate);

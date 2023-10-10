@@ -20,11 +20,15 @@ import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMainMe
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +45,7 @@ public class ListOfPatientsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    RecyclerView rv;
 
     public ListOfPatientsFragment() {
         // Required empty public constructor
@@ -80,6 +85,8 @@ public class ListOfPatientsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_list_of_patients, container, false);
 
         ImageView backButton = v.findViewById(R.id.ImageView_backButton);
+        ImageView searchButton = v.findViewById(R.id.nameIcon2);
+        TextInputEditText searchNameEditText = v.findViewById(R.id.textInputEditText_searchName);
 
         FirebaseDatabase firebaseDatabase;
         DatabaseReference databaseReference;
@@ -135,6 +142,10 @@ public class ListOfPatientsFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Doctor Appointments").child(sanitizedDoctorName);
 
+        rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
         databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -151,8 +162,7 @@ public class ListOfPatientsFragment extends Fragment {
                     fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, searchDoctors).commit();
                 }
                 else{
-                    RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
-                    rv.setLayoutManager(new LinearLayoutManager(getContext()));
+
                     ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appoinmentObjectArrayList);
                     rv.setAdapter(listOfPatientsAdapter);
                 }
@@ -162,6 +172,16 @@ public class ListOfPatientsFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getActivity(), "Error in the database. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                String searchText = searchNameEditText.getText().toString().toLowerCase();
+//                List<String> filteredNames = filterPatientNames(patientNames, searchText);
+//                rv.setPatientNames(filteredNames);
+//                rv.notifyDataSetChanged();
             }
         });
 
@@ -175,5 +195,15 @@ public class ListOfPatientsFragment extends Fragment {
         });
 
         return v;
+    }
+
+    private List<String> filterPatientNames(List<String> patientNames, String searchText) {
+        List<String> filteredNames = new ArrayList<>();
+        for (String name : patientNames) {
+            if (name.toLowerCase().contains(searchText.toLowerCase())) {
+                filteredNames.add(name);
+            }
+        }
+        return filteredNames;
     }
 }
