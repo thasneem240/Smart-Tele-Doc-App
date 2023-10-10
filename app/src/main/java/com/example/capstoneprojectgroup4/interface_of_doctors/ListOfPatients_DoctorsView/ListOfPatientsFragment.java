@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.best_price.ObjectPharmacyAndPrice;
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMainMenu;
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -178,10 +180,10 @@ public class ListOfPatientsFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String searchText = searchNameEditText.getText().toString().toLowerCase();
-//                List<String> filteredNames = filterPatientNames(patientNames, searchText);
-//                rv.setPatientNames(filteredNames);
-//                rv.notifyDataSetChanged();
+                String searchText = searchNameEditText.getText().toString().toLowerCase();
+                ArrayList<AppoinmentObject> filteredAppointmentObjects = filterPatientNames(appoinmentObjectArrayList, searchText);
+                ListOfPatientsAdapter filteredAdapter = new ListOfPatientsAdapter(filteredAppointmentObjects);
+                rv.setAdapter(filteredAdapter);
             }
         });
 
@@ -197,13 +199,15 @@ public class ListOfPatientsFragment extends Fragment {
         return v;
     }
 
-    private List<String> filterPatientNames(List<String> patientNames, String searchText) {
-        List<String> filteredNames = new ArrayList<>();
-        for (String name : patientNames) {
-            if (name.toLowerCase().contains(searchText.toLowerCase())) {
-                filteredNames.add(name);
+    private ArrayList<AppoinmentObject> filterPatientNames(ArrayList<AppoinmentObject> appoinmentObjectArrayList, String searchText) {
+        ArrayList<AppoinmentObject> filteredAppointmentObjects = new ArrayList<>();
+
+        for(AppoinmentObject o : appoinmentObjectArrayList){
+            if(o.getPatientName().toLowerCase().contains(searchText)){
+                filteredAppointmentObjects.add(o);
             }
         }
-        return filteredNames;
+
+        return filteredAppointmentObjects;
     }
 }

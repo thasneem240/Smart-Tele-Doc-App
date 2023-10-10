@@ -168,11 +168,10 @@ public class CreatePrescription extends Fragment {
                 prescriptionObject.setSelectedDrugs(writingPrescriptionActivity.getSelectedDrug());
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Users").child(patientObject.getUid()).child("Doctors")
-                        .child(DoctorsActivity.getDoctorRegNumber()).child("Prescriptions").child( (new Date()).toString());
+                DatabaseReference myRef = database.getReference("Prescriptions").child(patientObject.getUid()).
+                        child("Prescriptions").child( (new Date()).toString());
 
-//                Log.d(TAG, LocalTime.now().toString());
-
+                // child(DoctorsActivity.getDoctorRegNumber())
                 myRef.setValue(prescriptionObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
