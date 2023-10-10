@@ -127,6 +127,9 @@ public class BookAppointmentF extends Fragment {
         ImageView previousButton = view.findViewById(R.id.backButtonAppoint2);
         TextView TotalPrice = view.findViewById(R.id.TotalTv);
         TextView AppointmentFees = view.findViewById(R.id.AdminfeesTv);
+        // Initialize appointmentType EditText and UploadAppointment Button
+        UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment2);
+        Spinner appointmentTypeSpinner = view.findViewById(R.id.textAppointmentType2);
 
         // Set the doctor's name and day to the TextViews
         doctorNameTextView.setText(doctorName);
@@ -142,10 +145,6 @@ public class BookAppointmentF extends Fragment {
         AppointmentFees.setText("Rs " + String.valueOf((int) docPrice) + ".00"); // Convert double to String
         double TotalFees = docPrice + 100;
         TotalPrice.setText("Rs " + String.valueOf((int) TotalFees) + ".00"); // Convert double to String
-
-        // Initialize appointmentType EditText and UploadAppointment Button
-        UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment2);
-        Spinner appointmentTypeSpinner = view.findViewById(R.id.textAppointmentType2);
 
         String[] appointmentTypes = {"Appointment type", "Voice", "Video"};
 

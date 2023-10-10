@@ -131,7 +131,8 @@ public class AccountSettings extends Fragment {
         backButton = v.findViewById(R.id.ImageView_AccountSettings_backbutton);
         TextView greetings_textView = v.findViewById(R.id.textView4);
 
-        greetings_textView.setText("Hi, " + MainActivity.getPatientObject().getFirstName());
+        //            greetings_textView.setText("Hi, " + MainActivity.getPatientObject().getFirstName());
+
 
         emailEditText.setEnabled(false);
 
@@ -172,7 +173,14 @@ public class AccountSettings extends Fragment {
                     weightEditText.setText(patientObjectOnline.getWeight());
                     countryEditText.setText(patientObjectOnline.getCountry());
                     cityEditText.setText(patientObjectOnline.getCity());
-                    countryEditText.setText(patientObjectOnline.getCountry());
+                    addressEditText.setText(patientObjectOnline.getAddress());
+                    if(patientObjectOnline.getCountry() == null){
+                        countryEditText.setText("Sri Lanka");
+                    }
+                    else{
+                        countryEditText.setText(patientObjectOnline.getCountry());
+
+                    }
 
                     if (patientObjectOnline.getGender().equals("Male")){
                         setProfilePicture("Male");
@@ -191,7 +199,7 @@ public class AccountSettings extends Fragment {
 
                     }
                     else{
-                        String[] gender = {"Select", "Male", "Female"};
+                        String[] gender = {"Gender", "Male", "Female"};
                         setTheSpinner(gender);
 
                     }
@@ -204,9 +212,8 @@ public class AccountSettings extends Fragment {
             });
         }
         else{
-            String[] gender = {"Select", "Male", "Female"};
-            setTheSpinner(gender);
-            countryEditText.setText("Sri Lanka");
+//            String[] gender = {"Select", "Male", "Female"};
+//            setTheSpinner(gender);
         }
 
         genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -243,13 +250,16 @@ public class AccountSettings extends Fragment {
                     lastNameEditText.setError("Required");
                     complete = false;
                 }
-
                 if(nicEditText.getText().toString().equals("")){
                     nicEditText.setError("Required");
                     complete = false;
                 }
                 if(dobEditText.getText().toString().equals("")){
                     dobEditText.setError("Required");
+                    complete = false;
+                }
+                if(selectedGender.equals("Gender")){
+                    Toast.makeText(getActivity(), "Please select the gender.", Toast.LENGTH_SHORT).show();
                     complete = false;
                 }
                 if(mobileEditText.getText().toString().length() != 9){
