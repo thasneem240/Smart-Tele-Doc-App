@@ -94,9 +94,26 @@ public class Frag_Remote_Consultation extends Fragment
                 // Handle the video conference button click event here
                 // You can start the video conference activity or initiate the call.
 
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                Frag_VideoConference fragVideoConference = new Frag_VideoConference();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, fragVideoConference).commit();
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
+//                Frag_VideoConference fragVideoConference = new Frag_VideoConference();
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, fragVideoConference).commit();
+
+
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
+//                Frag_AgoraVideoConference videoConference = new Frag_AgoraVideoConference(1);
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, videoConference).commit();
+
+
+                // Create an Intent to specify the target activity
+                Intent intent = new Intent(getActivity(), Activity_Agora_VideoConference.class);
+
+                // Optionally, add data to the Intent using key-value pairs
+//                intent.putExtra("userType", "Patient");
+
+                intent.putExtra("userType", "Doctor");
+
+                // Start the target activity using the Intent
+                startActivity(intent);
 
 
             }
