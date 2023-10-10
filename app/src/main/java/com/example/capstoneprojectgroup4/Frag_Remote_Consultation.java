@@ -104,20 +104,17 @@ public class Frag_Remote_Consultation extends Fragment
 //                fm.beginTransaction().replace(R.id.fragmentContainerView, videoConference).commit();
 
 
-                // Create an Intent to specify the target activity
-                Intent intent = new Intent(getActivity(), Activity_Agora_VideoConference.class);
-
-                // Optionally, add data to the Intent using key-value pairs
-//                intent.putExtra("userType", "Patient");
-
-                intent.putExtra("userType", "Doctor");
-
-                // Start the target activity using the Intent
-                startActivity(intent);
-
-
+//                startVideoConference();
+                startAudioConference();
             }
         });
+
+
+
+
+
+
+
 
         backButtonRemoteCons.setOnClickListener(new View.OnClickListener()
         {
@@ -134,4 +131,41 @@ public class Frag_Remote_Consultation extends Fragment
 
         return view;
     }
+
+
+    private void startVideoConference()
+    {
+        // Create an Intent to specify the target activity
+        Intent intent = new Intent(getActivity(), Activity_Agora_VideoConference.class);
+
+        // Optionally, add data to the Intent using key-value pairs
+//                intent.putExtra("userType", "Patient");
+
+        intent.putExtra("userType", "Doctor");
+
+        // Start the target activity using the Intent
+        startActivity(intent);
+    }
+
+
+
+    private void startAudioConference()
+    {
+        // Create an Intent to specify the target activity
+        Intent intent = new Intent(getActivity(), Activity_Agora_AudioConference.class);
+
+        // Optionally, add data to the Intent using key-value pairs
+//                intent.putExtra("userType", "Patient");
+
+        intent.putExtra("userType", "Doctor");
+
+        // Start the target activity using the Intent
+        startActivity(intent);
+    }
+
+
+
+
+
+
 }
