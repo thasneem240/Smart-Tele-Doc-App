@@ -8,6 +8,32 @@
 
 
     <ImageView
+        android:id="@+id/imageView_RemoteConsultation"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/green_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ImageView_ViewPrescriptions" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:gravity="center_horizontal|top"
+        android:text="Remote Consultation"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_RemoteConsultation"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
         android:id="@+id/medicalHistoryImageView"
         android:layout_width="139.29dp"
         android:layout_height="120dp"
@@ -58,9 +84,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/layered_patient_details"
-        app:layout_constraintEnd_toEndOf="@+id/ImageView_PatientDetails"
         app:layout_constraintStart_toStartOf="@+id/ImageView_PatientDetails"
         app:layout_constraintTop_toTopOf="@+id/ImageView_PatientDetails" />
 
@@ -98,9 +124,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/layered_lab_reports"
-        app:layout_constraintEnd_toEndOf="@+id/labReportsImageView"
-        app:layout_constraintStart_toStartOf="@+id/labReportsImageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/labReportsImageView" />
 
     <ImageView
@@ -134,10 +160,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/layered_prescription_notes"
         android:contentDescription="@string/app_name"
-        app:layout_constraintEnd_toEndOf="@+id/ImageView_ViewPrescriptions"
         app:layout_constraintStart_toStartOf="@+id/ImageView_ViewPrescriptions"
         app:layout_constraintTop_toTopOf="@+id/ImageView_ViewPrescriptions" />
 
@@ -163,7 +189,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="12dp"
         android:gravity="center_horizontal|top"
         android:text="Patient Details"
@@ -212,8 +238,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="360dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="340dp"
         android:src="@drawable/baseline_keyboard_arrow_left_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

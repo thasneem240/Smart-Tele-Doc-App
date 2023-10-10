@@ -83,7 +83,7 @@ public class MedicalRecords extends Fragment {
         Button labReportsButton = v.findViewById(R.id.button3);
         ImageView prescriptionsImageView = v.findViewById(R.id.ImageView_ViewPrescriptions);
         Button prescriptionsButton = v.findViewById(R.id.Button_ViewPrescriptions);
-      //  ImageView imageView_RemoteConsultation = v.findViewById(R.id.imageView_RemoteConsultation);
+        ImageView imageView_RemoteConsultation = v.findViewById(R.id.imageView_RemoteConsultation);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +177,7 @@ public class MedicalRecords extends Fragment {
         });
 
 
-     /*   imageView_RemoteConsultation.setOnClickListener(new View.OnClickListener() {
+        imageView_RemoteConsultation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -192,7 +192,6 @@ public class MedicalRecords extends Fragment {
 
             }
         });
-*/
 
 
 
