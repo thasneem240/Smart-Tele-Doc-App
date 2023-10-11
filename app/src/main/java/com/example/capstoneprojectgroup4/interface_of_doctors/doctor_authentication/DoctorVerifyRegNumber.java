@@ -79,7 +79,7 @@ public class DoctorVerifyRegNumber extends Fragment {
         DatabaseReference myRef;
 
         EditText regNum_edittext = v.findViewById(R.id.EditText_RegistrationNumber);
-        Button signUpButton = v.findViewById(R.id.Button_SignUp);
+        Button signUpButton = v.findViewById(R.id.Button_Verify);
         TextView loginLink = v.findViewById(R.id.login_link);
         ImageView backButton = v.findViewById(R.id.ImageView_SignupBack);
 
@@ -96,12 +96,16 @@ public class DoctorVerifyRegNumber extends Fragment {
                 myRef.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(regNumber)){
+                        if(regNumber.equals("")){
+                            Toast.makeText(getActivity(), "Enter the registration number", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else if(dataSnapshot.hasChild(regNumber)){
                             checkAlreadyRegistered(regNumber);
 
                         }
                         else{
-                            Toast.makeText(getActivity(), "Please check you registration number again "+regNumber, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Please check you registration number again ", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {

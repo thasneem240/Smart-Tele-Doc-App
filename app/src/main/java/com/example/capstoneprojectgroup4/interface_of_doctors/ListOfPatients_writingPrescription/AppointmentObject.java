@@ -1,6 +1,6 @@
-package com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_DoctorsView;
+package com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_writingPrescription;
 
-public class AppoinmentObject {
+public class AppointmentObject {
     private int AppointmentNumber;
     private String AppointmentType;
     private String Date;

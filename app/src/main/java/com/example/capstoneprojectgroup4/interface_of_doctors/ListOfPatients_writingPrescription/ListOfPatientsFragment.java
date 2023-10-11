@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_DoctorsView;
+package com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_writingPrescription;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMainMe
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,6 +42,7 @@ public class ListOfPatientsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    RecyclerView rv;
 
     public ListOfPatientsFragment() {
         // Required empty public constructor
@@ -79,11 +82,13 @@ public class ListOfPatientsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_list_of_patients, container, false);
 
         ImageView backButton = v.findViewById(R.id.ImageView_backButton);
+        Button searchButton = v.findViewById(R.id.button_searchPatients);
+        TextInputEditText searchNameEditText = v.findViewById(R.id.textInputEditText_searchName);
 
         FirebaseDatabase firebaseDatabase;
         DatabaseReference databaseReference;
 
-        ArrayList<AppoinmentObject> appoinmentObjectArrayList = new ArrayList<>();
+        ArrayList<AppointmentObject> appointmentObjectArrayList = new ArrayList<>();
 
 /*        firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Users");
@@ -129,53 +134,51 @@ public class ListOfPatientsFragment extends Fragment {
             }
         });*/
 
-        /*firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("doctor_appointments").child(DoctorsActivity.getDoctorRegNumber());
-
-        databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshotChild : dataSnapshot.getChildren()){
-                    AppoinmentObject appoinmentObject = dataSnapshotChild.getValue(AppoinmentObject.class);
-                    appoinmentObjectArrayList.add(appoinmentObject);
-                }
-
-                RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
-                rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appoinmentObjectArrayList);
-                rv.setAdapter(listOfPatientsAdapter);
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Error in the database. Please try again.", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
         String sanitizedDoctorName = DoctorsActivity.getDoctorObject().getName().replaceAll("[.#$\\[\\]]", "_");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Doctor Appointments").child(sanitizedDoctorName);
 
+        rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
         databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshotChild : dataSnapshot.getChildren()){
-                    AppoinmentObject appoinmentObject = dataSnapshotChild.getValue(AppoinmentObject.class);
-                    appoinmentObjectArrayList.add(appoinmentObject);
+                    AppointmentObject appointmentObject = dataSnapshotChild.getValue(AppointmentObject.class);
+                    appointmentObjectArrayList.add(appointmentObject);
                 }
 
-                RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
-                rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appoinmentObjectArrayList);
-                rv.setAdapter(listOfPatientsAdapter);
+                if(appointmentObjectArrayList.isEmpty()){
+                    Toast.makeText(getActivity(), "There are no appointments under this registration number yet.", Toast.LENGTH_SHORT).show();
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    DoctorMainMenu searchDoctors = new DoctorMainMenu();
+                    fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, searchDoctors).commit();
+                }
+                else{
+
+                    ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appointmentObjectArrayList);
+                    rv.setAdapter(listOfPatientsAdapter);
+                }
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getActivity(), "Error in the database. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String searchText = searchNameEditText.getText().toString().toLowerCase();
+                ArrayList<AppointmentObject> filteredAppointmentObjects = filterPatientNames(appointmentObjectArrayList, searchText);
+                ListOfPatientsAdapter filteredAdapter = new ListOfPatientsAdapter(filteredAppointmentObjects);
+                rv.setAdapter(filteredAdapter);
             }
         });
 
@@ -189,5 +192,17 @@ public class ListOfPatientsFragment extends Fragment {
         });
 
         return v;
+    }
+
+    private ArrayList<AppointmentObject> filterPatientNames(ArrayList<AppointmentObject> appointmentObjectArrayList, String searchText) {
+        ArrayList<AppointmentObject> filteredAppointmentObjects = new ArrayList<>();
+
+        for(AppointmentObject o : appointmentObjectArrayList){
+            if(o.getPatientName().toLowerCase().contains(searchText)){
+                filteredAppointmentObjects.add(o);
+            }
+        }
+
+        return filteredAppointmentObjects;
     }
 }

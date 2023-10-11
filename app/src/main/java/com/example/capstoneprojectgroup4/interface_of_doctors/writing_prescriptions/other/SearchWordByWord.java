@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.drug_containers.DrugsContainers;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.select_from_the_list.SelectTheDrug;
 
 import java.util.ArrayList;
@@ -79,6 +81,8 @@ public class SearchWordByWord extends Fragment {
         View v = inflater.inflate(R.layout.fragment_search_word_by_word, container, false);
 
         EditText nameOfTheDrug = v.findViewById(R.id.EditText_name_of_the_drug);
+        ImageView backButton = v.findViewById(R.id.imageView_BackButton);
+
         FragmentManager fm = getActivity().getSupportFragmentManager();
 
         InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -117,13 +121,20 @@ public class SearchWordByWord extends Fragment {
                 }
 
                 SelectTheDrug selectTheDrug = new SelectTheDrug(output);
-//                fm.beginTransaction().replace(R.id.FragmentContainerView_SelectTheDrug, selectTheDrug).commit();
                 fm.beginTransaction().replace(R.id.FrameLayout_FragmentContainer, selectTheDrug).commit();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
 
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DrugData drugData = new DrugData();
+                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugData).commit();
             }
         });
 

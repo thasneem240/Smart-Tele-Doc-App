@@ -147,7 +147,7 @@ public class Signup_EmailVerificationF extends Fragment {
                 myRef.setValue(patientObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(getActivity(), "Your email is verified.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Your email is verified.", Toast.LENGTH_SHORT).show();
                         userDetailsOrMainMenu(); // Check whether user details filled and open the Account settings
 
                     }

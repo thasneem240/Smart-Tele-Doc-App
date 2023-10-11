@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:textSize="14sp"
-            />
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

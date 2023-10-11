@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorPatientProfiles;
-import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_DoctorsView.ListOfPatientsFragment;
+import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOfPatients_patientProfile.ListOfPatientsFragment2;
+import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_writingPrescription.ListOfPatientsFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,6 +73,7 @@ public class DoctorMainMenu extends Fragment {
         ImageView writePrescription = v.findViewById(R.id.ImageView_writePrescription);
         Button writePrescriptionButton = v.findViewById(R.id.Button_writePrescription);
         Button listOfPatients = v.findViewById(R.id.ListofPatientsButton);
+        ImageView listOfPatientsImage = v.findViewById(R.id.imageView_listOfPatients);
 
         TextView greetings = v.findViewById(R.id.good_morning2);
 
@@ -81,13 +82,24 @@ public class DoctorMainMenu extends Fragment {
         listOfPatients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
+//                DoctorPatientProfiles listOfPatientsFragment = new DoctorPatientProfiles();
+//                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatientsFragment).commit();
+
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DoctorPatientProfiles listOfPatientsFragment = new DoctorPatientProfiles();
-                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatientsFragment).commit();
+                ListOfPatientsFragment2 listOfPatientsFragment2 = new ListOfPatientsFragment2();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatientsFragment2).commit();
             }
         });
 
-
+        listOfPatientsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ListOfPatientsFragment2 listOfPatientsFragment2 = new ListOfPatientsFragment2();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatientsFragment2).commit();
+            }
+        });
 
 
         writePrescription.setOnClickListener(new View.OnClickListener() {
