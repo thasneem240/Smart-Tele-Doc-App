@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_DoctorsView;
+package com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_writingPrescription;
 
 import static android.app.PendingIntent.getActivity;
 
@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,8 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class ListOfPatientsAdapter extends RecyclerView.Adapter<ListOfPatientsViewHolder> {
-    ArrayList<AppoinmentObject> appointmentObjects;
-    ListOfPatientsAdapter(ArrayList<AppoinmentObject> appointmentObjects){
+    ArrayList<AppointmentObject> appointmentObjects;
+    ListOfPatientsAdapter(ArrayList<AppointmentObject> appointmentObjects){
         this.appointmentObjects = appointmentObjects;
     }
     @NonNull

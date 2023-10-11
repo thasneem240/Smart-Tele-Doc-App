@@ -48,7 +48,7 @@
             android:layout_height="24dp" />
 
         <EditText
-            android:id="@+id/EditText_Specialization"
+            android:id="@+id/EditText_MobileNumber"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/rounded_rec"
@@ -65,7 +65,7 @@
             android:layout_height="24dp" />
 
         <EditText
-            android:id="@+id/EditText_RegNumber"
+            android:id="@+id/EditText_Email"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/rounded_rec"
@@ -143,7 +143,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
-        android:id="@+id/Button_SignUp"
+        android:id="@+id/Button_Verify"
         android:layout_width="287dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/CheckBox_Terms"

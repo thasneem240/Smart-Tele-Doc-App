@@ -13,6 +13,8 @@ import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorPatientProfiles;
+import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOfPatients_patientProfile.ListOfPatientsFragment2;
+import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOf_prescriptions.PrescriptionsListFragment2;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,15 +70,24 @@ public class DoctorMedicalRecords extends Fragment {
         View v= inflater.inflate(R.layout.fragment_doctor_medical_records, container, false);
 
         Button patientProf = v.findViewById(R.id.button12);
-        Button presc = v.findViewById(R.id.button_ViewPrescriptionsDoc);
+        Button viewPrescriptionsButton = v.findViewById(R.id.button_ViewPrescriptionsDoc);
+        ImageView viewPrescriptionsImage = v.findViewById(R.id.imageView_ViewPrescriptions);
+        ImageView backButton = v.findViewById(R.id.backDoc);
 
-
-        ImageView back = v.findViewById(R.id.backDoc);
-
-        presc.setOnClickListener(new View.OnClickListener() {
+        viewPrescriptionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PrescriptionsListFragment2 prescriptionsListFragment2 = new PrescriptionsListFragment2(DoctorsActivity.getAppointmentObject().getPatientUserId());
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, prescriptionsListFragment2).commit();
+            }
+        });
+        viewPrescriptionsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                PrescriptionsListFragment2 prescriptionsListFragment2 = new PrescriptionsListFragment2(DoctorsActivity.getDoctorRegNumber());
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, prescriptionsListFragment2).commit();
             }
         });
 
@@ -90,12 +101,12 @@ public class DoctorMedicalRecords extends Fragment {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DoctorPatientProfiles doctorMainMenu = new DoctorPatientProfiles();
-                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorMainMenu).commit();
+                ListOfPatientsFragment2 listOfPatients = new ListOfPatientsFragment2();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatients).commit();
             }
         });
 

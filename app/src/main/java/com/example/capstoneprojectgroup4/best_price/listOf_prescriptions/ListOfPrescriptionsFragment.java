@@ -16,8 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.other.PrescriptionObject;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,21 +88,32 @@ public class ListOfPrescriptionsFragment extends Fragment {
         ImageView backButton = v.findViewById(R.id.backButtonViewPrescription);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Prescriptions");
+        DatabaseReference myRef = database.getReference("Prescriptions").child(MainActivity.getPatientObject().getUid()).
+                child("Prescriptions");
         listOfPrescriptions = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 for (DataSnapshot userSnapshot: snapshot.getChildren()) {
                     PrescriptionObject prescriptionObject = userSnapshot.getValue(PrescriptionObject.class);
                     listOfPrescriptions.add(prescriptionObject);
                 }
+                
+                if(listOfPrescriptions.isEmpty()){
+                    Toast.makeText(getActivity(), "There are no available prescriptions for you.", Toast.LENGTH_SHORT).show();
 
-                RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
-                rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                ListOfPrescriptionsAdapter listOfPrescriptionsAdapter = new ListOfPrescriptionsAdapter(listOfPrescriptions);
-                rv.setAdapter(listOfPrescriptionsAdapter);
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    PharmaciesF pharmaciesF = new PharmaciesF();
+                    fm.beginTransaction().replace(R.id.fragmentContainerView, pharmaciesF).commit();
+                }
+                else{
+                    RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
+                    rv.setLayoutManager(new LinearLayoutManager(getContext()));
+                    ListOfPrescriptionsAdapter listOfPrescriptionsAdapter = new ListOfPrescriptionsAdapter(listOfPrescriptions);
+                    rv.setAdapter(listOfPrescriptionsAdapter);
+                }
             }
 
             @Override

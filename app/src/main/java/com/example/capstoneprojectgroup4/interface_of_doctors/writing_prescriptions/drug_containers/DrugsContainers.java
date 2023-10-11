@@ -1,6 +1,8 @@
 package com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.drug_containers;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -134,9 +136,30 @@ public class DrugsContainers extends Fragment {
             @Override
             public void onClick(View view) {
                 if(loadingDrugs.getVisibility() == View.INVISIBLE){
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    AddDrugsManually addDrugsManually = new AddDrugsManually();
-                    fm.beginTransaction().replace(R.id.fragmentContainerPrescription, addDrugsManually).commit();
+                    AlertDialog dialog;
+                    AlertDialog.Builder builder;
+
+                    builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Please note");
+                    builder.setMessage("Adding drugs manually prevents the user's ability to see the best price for their prescription." +
+                            "There for first, try to select medicines from the list.");
+
+                    builder.setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    }).setNegativeButton("Continue with manually add medicines", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            AddDrugsManually addDrugsManually = new AddDrugsManually();
+                            fm.beginTransaction().replace(R.id.fragmentContainerPrescription, addDrugsManually).commit();
+                        }
+                    });
+
+                    dialog = builder.create();
+                    dialog.show();
                 }
                 else{
                     Toast.makeText(writingPrescriptionActivity, "Loading database ............", Toast.LENGTH_SHORT).show();

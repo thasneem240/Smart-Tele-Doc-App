@@ -28,7 +28,7 @@
         android:layout_marginTop="29dp"
         android:layout_marginBottom="4dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/Button_SignUp"
+        app:layout_constraintBottom_toTopOf="@+id/Button_Verify"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Button_SignUp"
+        android:id="@+id/Button_Verify"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/CheckBox_Terms"
@@ -92,7 +92,7 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/have_an_account_text"
-        app:layout_constraintTop_toBottomOf="@+id/Button_SignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/Button_Verify" />
 
     <TextView
         android:id="@+id/have_an_account_text"
@@ -108,7 +108,7 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/login_link"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_SignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/Button_Verify" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

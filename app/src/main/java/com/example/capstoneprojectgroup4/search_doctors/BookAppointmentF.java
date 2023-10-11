@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,6 +82,7 @@ public class BookAppointmentF extends Fragment {
     private Button UploadAppointment ;
     private FirebaseDatabase firebaseDatabase ;
     private DatabaseReference databaseReference;
+    private String selectedAppointmentType;
 
     private static final int PAYHERE_REQUEST = 110;
     private Map<String, Object> Transaction = new HashMap<>();
@@ -150,6 +153,10 @@ public class BookAppointmentF extends Fragment {
         ImageView previousButton = view.findViewById(R.id.backButtonAppoint2);
         TextView TotalPrice = view.findViewById(R.id.TotalTv);
         TextView AppointmentFees = view.findViewById(R.id.AdminfeesTv);
+        // Initialize appointmentType EditText and UploadAppointment Button
+        UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment2);
+        Spinner appointmentTypeSpinner = view.findViewById(R.id.spinner_appointmentType);
+
         // Set the doctor's name and day to the TextViews
         doctorNameTextView.setText(doctorName);
         dayTextView.setText(day + " "+ start+"-"+ End);
@@ -165,9 +172,23 @@ public class BookAppointmentF extends Fragment {
         TotalFees = docPrice + 100;
         TotalPrice.setText("Rs " + String.valueOf((int) TotalFees) + ".00"); // Convert double to String
 
-        // Initialize appointmentType EditText and UploadAppointment Button
-        EditText appointmentType = view.findViewById(R.id.textAppointmentType2);
-        UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment2);
+        String[] appointmentTypes = {"Appointment type", "Voice", "Video"};
+
+        ArrayAdapter<String> arrayAdapterBrands = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, appointmentTypes);
+        arrayAdapterBrands.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        appointmentTypeSpinner.setAdapter(arrayAdapterBrands);
+
+        appointmentTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedAppointmentType = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +202,14 @@ public class BookAppointmentF extends Fragment {
         UploadAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String getPatientName = MainActivity.getPatientObject().getFirstName();
+                String email = MainActivity.getPatientObject().getEmail();
+
+                if(selectedAppointmentType.equals("Appointment type")){
+                    Toast.makeText(getActivity(), "Please choose the type of appointment.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 getPatientName = MainActivity.getPatientObject().getFirstName();
                 String getPatientLastName = MainActivity.getPatientObject().getLastName();
                 email = MainActivity.getPatientObject().getEmail();
@@ -221,6 +250,8 @@ public class BookAppointmentF extends Fragment {
 
                 temp(req);
 
+                uploadAppointment(email, getPatientName, doctorName, day, start, End, selectedAppointmentType, location, New_NoAppValue, PatientID);
+                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, selectedAppointmentType, location, New_NoAppValue,start, End, PatientID);
 
 
 

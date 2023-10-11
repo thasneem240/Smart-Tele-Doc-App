@@ -5,6 +5,7 @@ import static android.app.PendingIntent.getActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,18 +36,28 @@ public class ListOfPrescriptionsAdapter extends RecyclerView.Adapter<ListOfPresc
 
     @Override
     public void onBindViewHolder(@NonNull ListOfPrescriptionsViewHolder holder, int position) {
+        if(prescriptionObjectList.get(position).isManuallyWrittenDrugs()){
+            holder.writtenManually.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.writtenManually.setVisibility(View.INVISIBLE);
+        }
         holder.date.setText(prescriptionObjectList.get(position).getWrittenOn());
         holder.doctor.setText(prescriptionObjectList.get(position).getDoctorName());
-
         holder.select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<PrescriptionDrugObject> selectedDrugs = prescriptionObjectList.get(position).getSelectedDrugs();
+                if(prescriptionObjectList.get(position).isManuallyWrittenDrugs()){
+                    Toast.makeText(view.getContext(), "There are manually written medicines in this prescription.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    ArrayList<PrescriptionDrugObject> selectedDrugs = prescriptionObjectList.get(position).getSelectedDrugs();
 
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                FragmentManager fm = activity.getSupportFragmentManager();
-                EditHowMuchFragment editHowMuchFragment = new EditHowMuchFragment(selectedDrugs);
-                fm.beginTransaction().replace(R.id.fragmentContainerView, editHowMuchFragment).commit();
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    FragmentManager fm = activity.getSupportFragmentManager();
+                    EditHowMuchFragment editHowMuchFragment = new EditHowMuchFragment(selectedDrugs);
+                    fm.beginTransaction().replace(R.id.fragmentContainerView, editHowMuchFragment).commit();
+                }
             }
         });
     }
