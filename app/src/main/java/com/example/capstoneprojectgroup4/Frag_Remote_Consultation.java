@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
 import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
@@ -40,6 +41,7 @@ public class Frag_Remote_Consultation extends Fragment
     private EditText patientNameEditText;
     private ImageView backButtonRemoteCons;
     private AppointmentItem appointmentItem;
+    private EditText issueEditText;
 
     public Frag_Remote_Consultation()
     {
@@ -89,6 +91,7 @@ public class Frag_Remote_Consultation extends Fragment
         Button videoConferenceButton = view.findViewById(R.id.videoConferenceButton);
         patientNameEditText = view.findViewById(R.id.patientNameEditText);
         backButtonRemoteCons = view.findViewById(R.id.backButtonRemoteCons);
+        issueEditText = view.findViewById(R.id.issueEditText);
 
 
         String patientName = MainActivity.getPatientObject().getFirstName();
@@ -121,21 +124,28 @@ public class Frag_Remote_Consultation extends Fragment
 //                fm.beginTransaction().replace(R.id.fragmentContainerView, videoConference).commit();
 
 
-                // Audio Conference
-                if(appointmentType.equalsIgnoreCase("Voice"))
+                String issueText = issueEditText.getText().toString().trim();
+
+                if (issueText.isEmpty())
                 {
-                    startAudioConference();
+                    String message = "Please write Your Issue or Concern in the issue text field";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    startVideoConference();
+                    // Audio Conference
+                    if(appointmentType.equalsIgnoreCase("Voice"))
+                    {
+                        startAudioConference();
+                    }
+                    else
+                    {
+                        startVideoConference();
+                    }
                 }
 
             }
         });
-
-
-
 
 
 

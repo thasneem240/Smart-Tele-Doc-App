@@ -49,8 +49,6 @@ public class ViewAppointments extends Fragment
 
     private String userId; // User ID obtained from MainActivity
 
-    private CardView currentAppointmentCardView;
-
     public ViewAppointments() {
         // Required empty public constructor
     }
@@ -71,7 +69,6 @@ public class ViewAppointments extends Fragment
         TextView viewh = view.findViewById(R.id.viewhistory);
 
         ImageView back = view.findViewById(R.id.backButtonViewApp);
-        currentAppointmentCardView = view.findViewById(R.id.currentAppointmentCardView);
 
 
         String name = MainActivity.getPatientObject().getFirstName();

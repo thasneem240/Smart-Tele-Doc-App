@@ -11,17 +11,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/backButtonAgoraVideoConference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/videoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Video Conference"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/backButtonAgoraVideoConference"
+            />
+
         <FrameLayout
             android:id="@+id/localVideo"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:layout_margin="6dp"
             android:background="@android:color/darker_gray"/>
 
         <FrameLayout
             android:id="@+id/remoteVideo"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:layout_margin="6dp"
             android:background="@android:color/darker_gray"/>
 

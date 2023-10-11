@@ -77,4 +77,9 @@ public class DoctorAppointmentItemList {
     public void setPatientName(String patientName) {
         PatientName = patientName;
     }
+
+    public String getStartTime()
+    {
+        return StartTime;
+    }
 }

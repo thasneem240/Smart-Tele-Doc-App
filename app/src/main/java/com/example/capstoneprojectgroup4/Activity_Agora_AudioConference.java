@@ -7,12 +7,18 @@ import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorViewAppointments;
+import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
 
 import io.agora.rtc2.Constants;
 import io.agora.rtc2.IRtcEngineEventHandler;
@@ -70,6 +76,8 @@ public class Activity_Agora_AudioConference extends AppCompatActivity
     // UI elements
     private TextView infoText;
     private Button joinLeaveButton;
+    private ImageView backButtonAgoraAudioConference;
+    private String strData;
 
 
     /**
@@ -179,6 +187,8 @@ public class Activity_Agora_AudioConference extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agora_audio_conference);
 
+        backButtonAgoraAudioConference = findViewById(R.id.backButtonAgoraAudioConference);
+
         appId = getResources().getString(R.string.appId);
         // Fill the channel name.
         channelName = getResources().getString(R.string.channel);
@@ -189,7 +199,7 @@ public class Activity_Agora_AudioConference extends AppCompatActivity
         Intent intent = getIntent();
         if (intent != null)
         {
-            String strData = intent.getStringExtra("userType");
+            strData = intent.getStringExtra("userType");
 
             // Now, userType contains the value sent from the previous activity
             if (strData != null)
@@ -206,9 +216,6 @@ public class Activity_Agora_AudioConference extends AppCompatActivity
         }
 
 
-
-
-
         // If all the permissions are granted, initialize the RtcEngine object and join a channel.
         if (!checkSelfPermission())
         {
@@ -220,7 +227,45 @@ public class Activity_Agora_AudioConference extends AppCompatActivity
         // Set up access to the UI elements
         joinLeaveButton = findViewById(R.id.joinLeaveButton);
         infoText = findViewById(R.id.infoText);
+
+
+        backButtonAgoraAudioConference.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+//                if(strData.equals("Patient"))
+//                {
+//                    FragmentManager fm = getSupportFragmentManager();
+//                    ViewAppointments viewAppointments = new ViewAppointments();
+//                    fm.beginTransaction().replace(R.id.fragmentContainerView, viewAppointments).commit();
+//                }
+//                else // back button for Doctors
+//                {
+//                    FragmentManager fm = getSupportFragmentManager();
+//                    DoctorViewAppointments doctorViewAppointments = new DoctorViewAppointments();
+//                    fm.beginTransaction().replace(R.id.fragmentContainerView, doctorViewAppointments).commit();
+//                }
+
+                onBackPressed();
+            }
+        });
+
+
+
     }
+
+
+
+    @Override
+    public void onBackPressed()
+    {
+        // Handle the back key press event here
+        // You can perform custom actions or call super.onBackPressed() to use the default behavior
+        super.onBackPressed();
+    }
+
+
 
 
     /**
