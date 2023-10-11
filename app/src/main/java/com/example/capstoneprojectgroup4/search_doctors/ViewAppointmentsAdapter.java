@@ -9,10 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.capstoneprojectgroup4.Frag_Remote_Consultation;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,15 +24,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import android.widget.Toast;
 
 public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmentsViewHolder> {
 
     private List<AppointmentItem> appointmentItemList;
+    private Context context;
+    private FragmentManager fragmentManager;
 
-    public ViewAppointmentsAdapter(List<AppointmentItem> appointmentItemList) {
+    public ViewAppointmentsAdapter(List<AppointmentItem> appointmentItemList, Context context,
+                                   FragmentManager fragmentManager)
+    {
         this.appointmentItemList = appointmentItemList;
-
+        this.context = context;
+        this.fragmentManager = fragmentManager;
     }
 
     public void removeAppointment(int position) {
@@ -47,7 +60,8 @@ public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmen
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewAppointmentsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewAppointmentsViewHolder holder, int position)
+    {
         AppointmentItem appointmentItem = appointmentItemList.get(position);
 
         String docName = appointmentItem.getDoctorName().replaceAll("_", ".");
@@ -60,6 +74,37 @@ public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmen
         holder.appNoTextView.setText("Appointment Number: " +appointmentItem.getAppointmentNumber());
         holder.locTextView.setText(appointmentItem.getLocation());
         holder.time.setText("Time: " +appointmentItem.getStartTime()+ "-"+ appointmentItem.getEndTime());
+
+
+        CardView currentAppointmentCardView = holder.currentAppointmentCardView;
+
+
+        currentAppointmentCardView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                String appointmentType = appointmentItem.getAppointmentType();
+
+                if(checkDateAndTime(appointmentItem))
+//                if(true)
+                {
+                    if(appointmentType != null)
+                    {
+
+                        Frag_Remote_Consultation fragRemoteConsultation = new Frag_Remote_Consultation(appointmentItem);
+                        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragRemoteConsultation).commit();
+
+                    }
+
+                }
+
+
+
+            }
+        });
+
+
 
 
         holder.CancelButton.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +120,87 @@ public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmen
                 }
             });
     }
+
+
+    private boolean checkDateAndTime(AppointmentItem appointmentItem)
+    {
+        boolean isValid = false;
+
+        // Assuming appointmentDate, startTime, and endTime are strings in
+        // the format "dd/MM/yyyy", "HH:mm", and "HH:mm" respectively
+
+        // Get the current date and time
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Parse appointment date, start time, and end time strings to Date objects
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
+        try
+        {
+            Date appointmentDate = dateFormat.parse(appointmentItem.getDate());
+            Date startTime = timeFormat.parse(appointmentItem.getStartTime());
+            Date endTime = timeFormat.parse(appointmentItem.getEndTime());
+
+            // Check if the current date is equal to the appointment date
+            if (appointmentDate.equals(currentDate))
+            {
+                // Check if the current time is within the appointment start and end time
+                if (currentDate.after(startTime) && currentDate.before(endTime))
+                {
+                    // Current time is within the appointment time slot
+                    isValid = true;
+                }
+                else
+                {
+                    // Current time is outside the appointment time slot
+
+                    if(currentDate.after(startTime))
+                    {
+                        // Show error message
+                        Toast.makeText(context, "Appointment time has passed .", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        // Show error message
+                        Toast.makeText(context, "Appointment time has not started yet.", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            } else
+            {
+                // Current date is not the same as the appointment date
+
+                if(appointmentDate.after(currentDate))
+                {
+                    String toastMessage = "Your appointment is scheduled for " +
+                            new SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(appointmentDate) +
+                            " from " + appointmentItem.getStartTime() + " to " + appointmentItem.getEndTime();
+
+                    // Show error message
+                    Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    // Show error message
+                    Toast.makeText(context, "Appointment Date Already Passed.", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return  isValid;
+    }
+
+
+
+
+
 
     public void cancelAppointment(String appointmentKey, String patientKey,int position) {
         Log.d(TAG, "Cancel Appointment - patientKey: " + patientKey);
@@ -139,7 +265,11 @@ public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmen
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return appointmentItemList.size();
     }
+
+
+
 }

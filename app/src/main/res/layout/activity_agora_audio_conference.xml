@@ -4,6 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
     tools:context=".Activity_Agora_AudioConference">
 
     <RelativeLayout
@@ -19,6 +20,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_alignParentTop="true"
+            android:textStyle="bold"
             android:text="Press the button to join a channel" />
 
         <Button
@@ -28,6 +30,7 @@
             android:layout_below="@id/infoText"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:background="@drawable/rectangle_4"
             android:onClick="joinLeaveChannel"
             android:text="Join" />
 

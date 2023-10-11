@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
 import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.search_doctors.AppointmentItem;
+import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,10 +39,18 @@ public class Frag_Remote_Consultation extends Fragment
 
     private EditText patientNameEditText;
     private ImageView backButtonRemoteCons;
+    private AppointmentItem appointmentItem;
 
-    public Frag_Remote_Consultation() {
+    public Frag_Remote_Consultation()
+    {
         // Required empty public constructor
     }
+
+    public Frag_Remote_Consultation(AppointmentItem appointmentItem)
+    {
+        this.appointmentItem = appointmentItem;
+    }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -82,8 +92,15 @@ public class Frag_Remote_Consultation extends Fragment
 
 
         String patientName = MainActivity.getPatientObject().getFirstName();
+        String appointmentType = appointmentItem.getAppointmentType();
+
         // patientNameEditText.setText("A.S.M. Thasneem");
         patientNameEditText.setText(patientName);
+
+        if(appointmentType.equalsIgnoreCase("Voice"))
+        {
+            videoConferenceButton.setText("Start Audio Conference");
+        }
 
 
         videoConferenceButton.setOnClickListener(new View.OnClickListener()
@@ -104,8 +121,16 @@ public class Frag_Remote_Consultation extends Fragment
 //                fm.beginTransaction().replace(R.id.fragmentContainerView, videoConference).commit();
 
 
-//                startVideoConference();
-                startAudioConference();
+                // Audio Conference
+                if(appointmentType.equalsIgnoreCase("Voice"))
+                {
+                    startAudioConference();
+                }
+                else
+                {
+                    startVideoConference();
+                }
+
             }
         });
 
@@ -121,9 +146,14 @@ public class Frag_Remote_Consultation extends Fragment
             @Override
             public void onClick(View view)
             {
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
+//                MedicalRecords medicalRecords = new MedicalRecords();
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, medicalRecords).commit();
+
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                MedicalRecords medicalRecords = new MedicalRecords();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, medicalRecords).commit();
+                ViewAppointments viewAppointments = new ViewAppointments();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, viewAppointments).commit();
+
             }
         });
 
@@ -139,9 +169,7 @@ public class Frag_Remote_Consultation extends Fragment
         Intent intent = new Intent(getActivity(), Activity_Agora_VideoConference.class);
 
         // Optionally, add data to the Intent using key-value pairs
-//                intent.putExtra("userType", "Patient");
-
-        intent.putExtra("userType", "Doctor");
+        intent.putExtra("userType", "Patient");
 
         // Start the target activity using the Intent
         startActivity(intent);
@@ -156,8 +184,6 @@ public class Frag_Remote_Consultation extends Fragment
 
         // Optionally, add data to the Intent using key-value pairs
         intent.putExtra("userType", "Patient");
-
-//        intent.putExtra("userType", "Doctor");
 
         // Start the target activity using the Intent
         startActivity(intent);

@@ -11,7 +11,7 @@ import com.example.capstoneprojectgroup4.R;
 
 public class ViewAppointmentsViewHolder extends RecyclerView.ViewHolder {
 
-    public CardView cardView;
+    public CardView currentAppointmentCardView;
     public TextView doctorNameTextView;
     public TextView dayTextView;
 
@@ -39,6 +39,8 @@ public class ViewAppointmentsViewHolder extends RecyclerView.ViewHolder {
         appNoTextView = itemView.findViewById(R.id.AppNumber);
         CancelButton = itemView.findViewById(R.id.Cancel);
         time = itemView.findViewById(R.id.Time);
+
+        currentAppointmentCardView = itemView.findViewById(R.id.currentAppointmentCardView);
 
         recyclerAppView = itemView.findViewById(R.id.recyclerAppView);
 

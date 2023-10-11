@@ -59,8 +59,8 @@ public class Activity_Agora_AudioConference extends AppCompatActivity
     // Fill the temp token generated on Agora Console.
     private String token;
     // An integer that identifies the local user.
-    private int uid = 1;
-    private String userType = "Patient";
+    private int uid = 2;
+    private String userType = "Doctor";
 
     // Track the status of your connection
     private boolean isJoined = false;
@@ -195,10 +195,10 @@ public class Activity_Agora_AudioConference extends AppCompatActivity
             if (strData != null)
             {
 
-                if(!strData.equals("Patient"))
+                if(strData.equals("Patient"))
                 {
-                    uid = 2;
-                    userType = "Doctor";
+                    uid = 1;
+                    userType = "Patient";
                 }
 
 

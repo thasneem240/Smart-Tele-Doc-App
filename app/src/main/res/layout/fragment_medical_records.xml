@@ -7,6 +7,7 @@
     tools:context=".front_end.MedicalRecords">
 
 
+    <!--
     <ImageView
         android:id="@+id/imageView_RemoteConsultation"
         android:layout_width="139.29dp"
@@ -18,6 +19,7 @@
         android:background="@drawable/green_square"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImageView_ViewPrescriptions" />
+
 
     <TextView
         android:id="@+id/textView11"
@@ -32,6 +34,8 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView_RemoteConsultation"
         app:layout_constraintStart_toStartOf="parent" />
+
+        -->
 
     <ImageView
         android:id="@+id/medicalHistoryImageView"

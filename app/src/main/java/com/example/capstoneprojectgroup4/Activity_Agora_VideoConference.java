@@ -31,8 +31,8 @@ public class Activity_Agora_VideoConference extends AppCompatActivity
                     Manifest.permission.CAMERA
             };
 
-    private int uid = 1;
-    private String userType = "Patient";
+    private int uid = 2;
+    private String userType = "Doctor";
 
     private boolean isJoined = false;
 
@@ -173,10 +173,10 @@ public class Activity_Agora_VideoConference extends AppCompatActivity
             if (strData != null)
             {
 
-                if(!strData.equals("Patient"))
+                if(strData.equals("Patient"))
                 {
-                    uid = 2;
-                    userType = "Doctor";
+                    uid = 1;
+                    userType = "Patient";
                 }
 
 
