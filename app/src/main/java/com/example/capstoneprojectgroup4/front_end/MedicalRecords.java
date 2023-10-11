@@ -171,9 +171,21 @@ public class MedicalRecords extends Fragment {
         prescriptionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                PrescriptionsListFragment prescriptionsListFragment = new PrescriptionsListFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, prescriptionsListFragment).commit();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
         });
 

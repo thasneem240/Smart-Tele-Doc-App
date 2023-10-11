@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -129,7 +128,7 @@ public class BookAppointmentF extends Fragment {
         TextView AppointmentFees = view.findViewById(R.id.AdminfeesTv);
         // Initialize appointmentType EditText and UploadAppointment Button
         UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment2);
-        Spinner appointmentTypeSpinner = view.findViewById(R.id.textAppointmentType2);
+        Spinner appointmentTypeSpinner = view.findViewById(R.id.spinner_appointmentType);
 
         // Set the doctor's name and day to the TextViews
         doctorNameTextView.setText(doctorName);

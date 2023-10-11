@@ -76,7 +76,7 @@ public class DrugDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_drug_details, container, false);
 
-        ImageView backButton = v.findViewById(R.id.imageView_backButton);
+        ImageView backButton = v.findViewById(R.id.backButtonViewPrescription2);
         RecyclerView rv = v.findViewById(R.id.recyclerView_medDetails);
 
         rv.setLayoutManager(new LinearLayoutManager(getContext()));

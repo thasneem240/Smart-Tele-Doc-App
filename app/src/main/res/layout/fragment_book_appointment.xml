@@ -140,7 +140,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textPatientNameValue2" />
 
     <Spinner
-        android:id="@+id/textAppointmentType2"
+        android:id="@+id/spinner_appointmentType"
         android:layout_width="185dp"
         android:layout_height="22dp"
         android:layout_marginStart="40dp"
@@ -161,7 +161,7 @@
         android:textColor="#0B0808"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textAppointmentType2" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_appointmentType" />
 
 
     <Button

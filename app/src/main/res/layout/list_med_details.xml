@@ -59,8 +59,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView35"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="4dp"
                 android:text="medicne name"
                 app:layout_constraintStart_toStartOf="parent" />
 

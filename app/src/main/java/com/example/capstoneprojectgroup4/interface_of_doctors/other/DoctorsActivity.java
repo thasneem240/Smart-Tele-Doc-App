@@ -9,10 +9,12 @@ import android.widget.Button;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorViewAppointments;
+import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_writingPrescription.AppointmentObject;
 
 public class DoctorsActivity extends AppCompatActivity {
     private static String doctorRegNumber;
     private static DoctorObject doctorObject;
+    private static AppointmentObject appointmentObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,5 +85,12 @@ public class DoctorsActivity extends AppCompatActivity {
 
     public static void setDoctorRegNumber(String doctorRegNumber) {
         DoctorsActivity.doctorRegNumber = doctorRegNumber;
+    }
+    public static AppointmentObject getAppointmentObject() {
+        return appointmentObject;
+    }
+
+    public static void setAppointmentObject(AppointmentObject appointmentObject) {
+        DoctorsActivity.appointmentObject = appointmentObject;
     }
 }

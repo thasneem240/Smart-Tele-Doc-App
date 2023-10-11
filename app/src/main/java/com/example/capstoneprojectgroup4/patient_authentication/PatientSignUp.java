@@ -142,11 +142,23 @@ public class PatientSignUp extends Fragment {
                 mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(getActivity(), "Please verify your email.", Toast.LENGTH_SHORT).show();
+                        mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(getContext(), "The email has been sent successfully. Please verify your email.", Toast.LENGTH_SHORT).show();
 
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
-                        fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
+                                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                                    Signup_EmailVerificationF signup_emailVerificationF = new Signup_EmailVerificationF();
+                                    fm.beginTransaction().replace(R.id.FragmentContainer_MainActivity, signup_emailVerificationF).commit();
+                                }
+                                else{
+                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        });
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
