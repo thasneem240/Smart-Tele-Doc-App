@@ -6,34 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".interface_of_doctors.writing_prescriptions.other.SearchWordByWord">
 
+    <ImageView
+        android:id="@+id/imageView_BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
+
     <EditText
         android:id="@+id/EditText_name_of_the_drug"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="48dp"
         android:ems="10"
         android:hint="Name of the medicine"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/FrameLayout_FragmentContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FrameLayout_FragmentContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
     <FrameLayout
         android:id="@+id/FrameLayout_FragmentContainer"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/EditText_name_of_the_drug"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView25">
 
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="131dp"
+        android:text="Search Medicines"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/FrameLayout_FragmentContainer"
+        app:layout_constraintStart_toEndOf="@+id/imageView_BackButton"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_BackButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

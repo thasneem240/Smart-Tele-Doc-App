@@ -17,6 +17,7 @@ import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
 import com.example.capstoneprojectgroup4.Frag_Remote_Consultation;
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.medical_records_prescriptions.prescriptions_list.PrescriptionsListFragment;
 import com.example.capstoneprojectgroup4.patient_authentication.AccountSettings;
 import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
 
@@ -163,16 +164,16 @@ public class MedicalRecords extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                ListOfPrescriptionsFragment listOfPrescriptionsFragment = new ListOfPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, listOfPrescriptionsFragment).commit();
+                PrescriptionsListFragment prescriptionsListFragment = new PrescriptionsListFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, prescriptionsListFragment).commit();
             }
         });
         prescriptionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                ListOfPrescriptionsFragment listOfPrescriptionsFragment = new ListOfPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, listOfPrescriptionsFragment).commit();
+                PrescriptionsListFragment prescriptionsListFragment = new PrescriptionsListFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, prescriptionsListFragment).commit();
             }
         });
 

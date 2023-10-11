@@ -59,9 +59,9 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="59dp"
-        android:layout_marginTop="368dp"
+        android:layout_marginTop="367dp"
         android:layout_marginEnd="69dp"
-        android:layout_marginBottom="81dp"
+        android:layout_marginBottom="82dp"
         android:background="#F6F8E2"
         android:gravity="top"
         android:hint="Prescription Notes"
@@ -146,9 +146,9 @@
         android:layout_alignBottom="@+id/imageView10"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="225dp"
-        android:layout_marginEnd="102dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="223dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="7dp"
         android:background="@drawable/rectangle_9"
         android:text="Drugs count"
         android:textSize="14sp" />
@@ -172,8 +172,8 @@
         android:layout_height="38dp"
         android:layout_alignBottom="@+id/imageView10"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="219dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="217dp"
+        android:layout_marginBottom="9dp"
         android:background="@drawable/rectangle_6"
         android:text="Select medicines" />
 
@@ -201,6 +201,17 @@
             android:textColorHint="#217BDA"
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="169dp"
+        android:text="Manually written"
+        android:textColor="#AF0E0E" />
 
 
 </RelativeLayout>

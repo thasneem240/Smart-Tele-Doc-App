@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="How much"
+        android:text="Amount"
         android:textColor="@color/black"
         app:layout_constraintBaseline_toBaselineOf="@+id/edittext_how_much"
         app:layout_constraintStart_toStartOf="parent" />
@@ -84,6 +84,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/rectangle_10"
         android:text="Name of the drug"
+        android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="@+id/Spinner_AvailableBrands"
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
