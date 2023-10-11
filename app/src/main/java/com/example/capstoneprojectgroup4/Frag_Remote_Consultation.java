@@ -155,9 +155,9 @@ public class Frag_Remote_Consultation extends Fragment
         Intent intent = new Intent(getActivity(), Activity_Agora_AudioConference.class);
 
         // Optionally, add data to the Intent using key-value pairs
-//                intent.putExtra("userType", "Patient");
+        intent.putExtra("userType", "Patient");
 
-        intent.putExtra("userType", "Doctor");
+//        intent.putExtra("userType", "Doctor");
 
         // Start the target activity using the Intent
         startActivity(intent);
