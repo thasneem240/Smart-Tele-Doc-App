@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,21 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.best_price.ObjectPharmacyAndPrice;
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMainMenu;
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +47,7 @@ public class ListOfPatientsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    RecyclerView rv;
 
     public ListOfPatientsFragment() {
         // Required empty public constructor
@@ -79,6 +87,8 @@ public class ListOfPatientsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_list_of_patients, container, false);
 
         ImageView backButton = v.findViewById(R.id.ImageView_backButton);
+        ImageView searchButton = v.findViewById(R.id.nameIcon2);
+        TextInputEditText searchNameEditText = v.findViewById(R.id.textInputEditText_searchName);
 
         FirebaseDatabase firebaseDatabase;
         DatabaseReference databaseReference;
@@ -129,8 +139,14 @@ public class ListOfPatientsFragment extends Fragment {
             }
         });*/
 
+        String sanitizedDoctorName = DoctorsActivity.getDoctorObject().getName().replaceAll("[.#$\\[\\]]", "_");
+
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("doctor_appointments").child(DoctorsActivity.getDoctorRegNumber());
+        databaseReference = firebaseDatabase.getReference("Doctor Appointments").child(sanitizedDoctorName);
+
+        rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
         databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
@@ -140,16 +156,34 @@ public class ListOfPatientsFragment extends Fragment {
                     appoinmentObjectArrayList.add(appoinmentObject);
                 }
 
-                RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
-                rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appoinmentObjectArrayList);
-                rv.setAdapter(listOfPatientsAdapter);
+                if(appoinmentObjectArrayList.isEmpty()){
+                    Toast.makeText(getActivity(), "There are no appointments under this registration number yet.", Toast.LENGTH_SHORT).show();
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    DoctorMainMenu searchDoctors = new DoctorMainMenu();
+                    fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, searchDoctors).commit();
+                }
+                else{
+
+                    ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(appoinmentObjectArrayList);
+                    rv.setAdapter(listOfPatientsAdapter);
+                }
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getActivity(), "Error in the database. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String searchText = searchNameEditText.getText().toString().toLowerCase();
+                ArrayList<AppoinmentObject> filteredAppointmentObjects = filterPatientNames(appoinmentObjectArrayList, searchText);
+                ListOfPatientsAdapter filteredAdapter = new ListOfPatientsAdapter(filteredAppointmentObjects);
+                rv.setAdapter(filteredAdapter);
             }
         });
 
@@ -163,5 +197,17 @@ public class ListOfPatientsFragment extends Fragment {
         });
 
         return v;
+    }
+
+    private ArrayList<AppoinmentObject> filterPatientNames(ArrayList<AppoinmentObject> appoinmentObjectArrayList, String searchText) {
+        ArrayList<AppoinmentObject> filteredAppointmentObjects = new ArrayList<>();
+
+        for(AppoinmentObject o : appoinmentObjectArrayList){
+            if(o.getPatientName().toLowerCase().contains(searchText)){
+                filteredAppointmentObjects.add(o);
+            }
+        }
+
+        return filteredAppointmentObjects;
     }
 }

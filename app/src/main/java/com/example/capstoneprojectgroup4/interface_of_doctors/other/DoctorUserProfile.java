@@ -71,13 +71,13 @@ public class DoctorUserProfile extends Fragment {
         View v = inflater.inflate(R.layout.fragment_doctor_user_profile, container, false);
 
         TextView textViewGreetings = v.findViewById(R.id.TextView_Greetings);
-        TextInputEditText editTextRegNumber = v.findViewById(R.id.EditText_RegNumber);
+        TextInputEditText editTextRegNumber = v.findViewById(R.id.EditText_Email);
         TextInputEditText editTextName = v.findViewById(R.id.EditText_DoctorName);
-        TextInputEditText editTextSpecialization = v.findViewById(R.id.EditText_Specialization);
+        TextInputEditText editTextSpecialization = v.findViewById(R.id.EditText_MobileNumber);
         ImageView backButton = v.findViewById(R.id.ImageView_BackButton2);
         Button logoutButton = v.findViewById(R.id.button_Logout);
 
-        textViewGreetings.setText("Hi, "+DoctorsActivity.getDoctorObject().getName());
+        textViewGreetings.setText("Hi, \n"+DoctorsActivity.getDoctorObject().getName());
         editTextName.setText(DoctorsActivity.getDoctorObject().getName());
         editTextRegNumber.setText(DoctorsActivity.getDoctorRegNumber());
         editTextSpecialization.setText(DoctorsActivity.getDoctorObject().getSpecialization());

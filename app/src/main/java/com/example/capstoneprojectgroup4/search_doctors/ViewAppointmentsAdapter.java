@@ -49,12 +49,17 @@ public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmen
     @Override
     public void onBindViewHolder(@NonNull ViewAppointmentsViewHolder holder, int position) {
         AppointmentItem appointmentItem = appointmentItemList.get(position);
+
+        String docName = appointmentItem.getDoctorName().replaceAll("_", ".");
+
+
         // Set the data to the views in the ViewHolder
-        holder.doctorNameTextView.setText(appointmentItem.getDoctorName());
+        holder.doctorNameTextView.setText(docName);
         holder.dayTextView.setText(appointmentItem.getDate());
         holder.typeTextView.setText(appointmentItem.getAppointmentType());
         holder.appNoTextView.setText("Appointment Number: " +appointmentItem.getAppointmentNumber());
         holder.locTextView.setText(appointmentItem.getLocation());
+        holder.time.setText("Time: " +appointmentItem.getStartTime()+ "-"+ appointmentItem.getEndTime());
 
 
         holder.CancelButton.setOnClickListener(new View.OnClickListener() {

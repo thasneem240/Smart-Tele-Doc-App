@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
 import com.example.capstoneprojectgroup4.best_price.edit_howMuch.EditHowMuchFragment;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMedicalRecords;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public void onBindViewHolder(@NonNull PatientListViewHolder holder, int position
                 public void onClick(View view) {
                         AppCompatActivity activity = (AppCompatActivity) view.getContext();
                         FragmentManager fm = activity.getSupportFragmentManager();
-                        Create_or_View_Prescription doctorAvailability = new Create_or_View_Prescription();
+                        DoctorMedicalRecords doctorAvailability = new DoctorMedicalRecords();
                         fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorAvailability).commit();
                 }
         });

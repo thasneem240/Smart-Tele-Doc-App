@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.drug_containers;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,22 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
     @Override
     public void onBindViewHolder(@NonNull DrugsContainersViewHolder holder, int position) {
         holder.medicineName.setText(selectedDrugsList.get(position).getNameOfTheDrug());
+        holder.howMuch.setText(selectedDrugsList.get(position).getAmount()+"");
+        holder.removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedDrugsList.remove(position);
+
+                holder.medicineName.setVisibility(View.INVISIBLE);
+                holder.howMuch.setVisibility(View.INVISIBLE);
+                holder.removeButton.setVisibility(View.INVISIBLE);
+
+                new DrugsContainersAdapter(selectedDrugsList);
+
+                Log.d("nndp", "position "+position);
+                Log.d("nndp", "size "+selectedDrugsList.size());
+            }
+        });
     }
 
     @Override

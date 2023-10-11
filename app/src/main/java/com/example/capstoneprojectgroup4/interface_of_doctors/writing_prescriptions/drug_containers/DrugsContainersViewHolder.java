@@ -3,6 +3,7 @@ package com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescript
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,17 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.capstoneprojectgroup4.R;
 
 public class DrugsContainersViewHolder extends RecyclerView.ViewHolder{
-    TextView medicineName, editButton, doneButton;
-    EditText editDosage;
-    Button removeButton;
+    TextView medicineName, howMuch;
+    ImageView removeButton;
 
     public DrugsContainersViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        medicineName = itemView.findViewById(R.id.medicineName_textView);
-        editDosage = itemView.findViewById(R.id.dosage_editText);
-        editButton = itemView.findViewById(R.id.button_edit);
-        doneButton = itemView.findViewById(R.id.button_done);
-        removeButton = itemView.findViewById(R.id.Button_select);
+        medicineName = itemView.findViewById(R.id.textView_medicineName);
+        howMuch = itemView.findViewById(R.id.textView_howMuch);
+        removeButton = itemView.findViewById(R.id.imageView_remove);
     }
 }

@@ -9,11 +9,9 @@ import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
-import androidx.documentfile.provider.DocumentFile;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -21,17 +19,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static androidx.test.espresso.Espresso.onData;
+
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.doubleClick;
-import static androidx.test.espresso.action.ViewActions.swipeUp;
-import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.instanceOf;
 
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -39,14 +33,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import static com.google.common.base.CharMatcher.is;
-import static com.google.common.base.Predicates.instanceOf;
-
-import android.app.DatePickerDialog;
 import android.view.View;
 import android.widget.DatePicker;
-
-import java.util.Calendar;
 
 @RunWith(AndroidJUnit4.class)
 public class SearchDocFInstrumentedTest {
@@ -74,7 +62,7 @@ public class SearchDocFInstrumentedTest {
         });
 
         // Type text into the EditText field
-        onView(withId(R.id.PatsearchName))
+        onView(withId(R.id.textInputEditText_searchName))
                 .perform(typeText("Noel"), ViewActions.closeSoftKeyboard()); // Close the keyboard
 
         onView(ViewMatchers.withId(R.id.searchDoctorsNSLDButton)).check(matches(isDisplayed()));
@@ -191,7 +179,7 @@ public class SearchDocFInstrumentedTest {
             fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, new SearchDocF()).commit();
         });
 
-        onView(withId(R.id.PatsearchName))
+        onView(withId(R.id.textInputEditText_searchName))
                 .perform(typeText("Noel"), ViewActions.closeSoftKeyboard()); // Close the keyboard
 
         onView(withId(R.id.searchLoc))
@@ -237,7 +225,7 @@ public class SearchDocFInstrumentedTest {
             fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, new SearchDocF()).commit();
         });
 
-        onView(withId(R.id.PatsearchName))
+        onView(withId(R.id.textInputEditText_searchName))
                 .perform(typeText("Saliya"), ViewActions.closeSoftKeyboard()); // Close the keyboard
         // Type text into the EditText field
 

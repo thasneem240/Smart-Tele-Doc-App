@@ -1,6 +1,8 @@
 package com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.other;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,7 +19,9 @@ import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.drug_containers.DrugsContainers;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,13 +76,13 @@ public class AddDrugsManually extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_add_drugs_manually, container, false);
 
-        EditText nameOfTheDrug = v.findViewById(R.id.edittext_add_drugs_manually);
+        EditText medicineNotes = v.findViewById(R.id.edittext_add_drugs_manually);
         Button addDrugsManually = v.findViewById(R.id.Button_AddTheDrug);
         ImageView backButton = v.findViewById(R.id.imageView_BackButton3);
 
 
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        nameOfTheDrug.requestFocus();
+        medicineNotes.requestFocus();
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
 
@@ -87,7 +91,7 @@ public class AddDrugsManually extends Fragment {
             @Override
             public void onClick(View view) {
                 PrescriptionDrugObject prescriptionDrugObject = new PrescriptionDrugObject();
-                prescriptionDrugObject.setMedicineNotes(nameOfTheDrug.getText().toString());
+                prescriptionDrugObject.setNameOfTheDrug(medicineNotes.getText().toString());
 
                 WritingPrescriptionActivity writingPrescriptionActivity =  (WritingPrescriptionActivity) getContext();
                 writingPrescriptionActivity.setWrittenByManually();
@@ -96,6 +100,8 @@ public class AddDrugsManually extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DrugsContainers drugsContainers = new DrugsContainers();
                 fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();
+
+
             }
         });
 

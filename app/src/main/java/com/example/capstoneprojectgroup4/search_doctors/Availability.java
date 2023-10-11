@@ -8,8 +8,9 @@ public class Availability {
     private int noApp;
     private String endTime;
     private String startTime;
+    private double price;
 
-    public Availability(String doctorName, String location, String day, int noApp, String endTime, String startTime, String date) {
+    public Availability(String doctorName, String location, String day, int noApp, String endTime, String startTime, String date, double price) {
         this.doctorName = doctorName;
         this.location = location;
         this.day = day;
@@ -17,6 +18,7 @@ public class Availability {
         this.endTime = endTime;
         this.startTime = startTime;
         this.date = date;
+        this.price = price;
     }
 
     public String getDoctorName() {
@@ -46,6 +48,10 @@ public class Availability {
     public String getStartTime() {
         return startTime;
     }
+    public double getPrice() {
+        return price;
+    }
+
 
     @Override
     public String toString() {

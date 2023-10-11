@@ -95,6 +95,12 @@ public class MainActivity2 extends AppCompatActivity {
                 Frag_LabReports fragLabReports = new Frag_LabReports();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, fragLabReports).commit();
             }
+            if (recive.getStringExtra("Page").equals("appointmentsList")){
+                fm = getSupportFragmentManager();
+                ViewAppointments appointmentsList = new ViewAppointments();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, appointmentsList).commit();
+            }
+
 
         }
 
