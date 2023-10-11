@@ -2,6 +2,7 @@ package com.example.capstoneprojectgroup4.interface_of_doctors;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,20 +120,36 @@ public class DoctorViewAppointmentsAdapter extends RecyclerView.Adapter<DoctorVi
             Date startTime = timeFormat.parse(appointmentItem.getStartTime());
             Date endTime = timeFormat.parse(appointmentItem.getEndTime());
 
+            Date currentDateWithoutTime = dateFormat.parse(dateFormat.format(currentDate));
+
+            Log.d("currentDate: ", currentDate.toString() );
+            Log.d("appointmentDate: ", appointmentDate.toString());
+            Log.d("currentDateWithoutTime: ", currentDateWithoutTime.toString());
+
             // Check if the current date is equal to the appointment date
-            if (appointmentDate.equals(currentDate))
+            if (appointmentDate.equals(currentDateWithoutTime))
             {
+                Log.d("appointmentDate Equals currentDate ", appointmentDate.toString());
+
+
+                Date currentTime = timeFormat.parse(timeFormat.format(currentDate));
+
+
                 // Check if the current time is within the appointment start and end time
-                if (currentDate.after(startTime) && currentDate.before(endTime))
+                if (currentTime.after(startTime) && currentTime.before(endTime))
                 {
                     // Current time is within the appointment time slot
                     isValid = true;
+                    Toast.makeText(context, "Appointment Started .", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
                     // Current time is outside the appointment time slot
 
-                    if(currentDate.after(startTime))
+                    Log.d("current Time in Else Statement: ", currentTime.toString() );
+                    Log.d("End Time in Else Statement: ", endTime.toString() );
+
+                    if(currentTime.after(endTime))
                     {
                         // Show error message
                         Toast.makeText(context, "Appointment time has passed .", Toast.LENGTH_SHORT).show();
@@ -144,7 +161,8 @@ public class DoctorViewAppointmentsAdapter extends RecyclerView.Adapter<DoctorVi
                     }
 
                 }
-            } else
+            }
+            else
             {
                 // Current date is not the same as the appointment date
 
