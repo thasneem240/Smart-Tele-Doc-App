@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMedicalRecords;
+import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOf_prescriptions.PrescriptionsListFragment2;
 import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.drug_details.DrugDetailsFragment2;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.other.PrescriptionObject;
 
@@ -88,10 +89,11 @@ public class DetailedPrescription2 extends Fragment {
         writtenOn.setText(prescriptionObject.getWrittenOn());
         notes.setText(prescriptionObject.getPrescriptionNotes());
 
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+
         medsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
                 DrugDetailsFragment2 drugDetailsFragment2 = new DrugDetailsFragment2(prescriptionObject);
                 fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, drugDetailsFragment2).commit();
             }
@@ -100,9 +102,8 @@ public class DetailedPrescription2 extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                DoctorMedicalRecords doctorMedicalRecords = new DoctorMedicalRecords();
-                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorMedicalRecords).commit();
+                PrescriptionsListFragment2 prescriptionsListFragment2 = new PrescriptionsListFragment2();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, prescriptionsListFragment2).commit();
             }
         });
 

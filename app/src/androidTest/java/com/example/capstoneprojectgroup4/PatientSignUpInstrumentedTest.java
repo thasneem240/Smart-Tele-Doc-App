@@ -8,8 +8,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 
-import com.example.capstoneprojectgroup4.front_end.PatientSignUp;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientSignUp;
 
 import org.junit.Before;
 import org.junit.Rule;

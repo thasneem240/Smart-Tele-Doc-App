@@ -14,9 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorPatientProfiles;
 import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOfPatients_patientProfile.ListOfPatientsFragment2;
-import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_writingPrescription.ListOfPatientsFragment;
+import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.ListOfPatients_writingPrescription.ListOfPatientsFragment;
 
 /**
  * A simple {@link Fragment} subclass.
