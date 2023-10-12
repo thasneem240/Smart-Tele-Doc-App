@@ -5,14 +5,16 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorPatientProfiles;
+import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorViewPatientProfile;
 import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOfPatients_patientProfile.ListOfPatientsFragment2;
 import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOf_prescriptions.PrescriptionsListFragment2;
 
@@ -69,42 +71,49 @@ public class DoctorMedicalRecords extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_doctor_medical_records, container, false);
 
-        Button patientProf = v.findViewById(R.id.button12);
+        TextView patientName = v.findViewById(R.id.textView33);
         Button viewPrescriptionsButton = v.findViewById(R.id.button_ViewPrescriptionsDoc);
         ImageView viewPrescriptionsImage = v.findViewById(R.id.imageView_ViewPrescriptions);
         ImageView backButton = v.findViewById(R.id.backDoc);
+        ImageView patientDetailsImage = v.findViewById(R.id.imageView_PatientDetails3);
+        Button patientDetailsButton = v.findViewById(R.id.button12);
+
+        patientName.setText(DoctorsActivity.getAppointmentObject().getPatientName()+"'s");
+
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        patientDetailsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DoctorViewPatientProfile doctorViewPatientProfile = new DoctorViewPatientProfile();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorViewPatientProfile).commit();
+            }
+        });
+        patientDetailsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DoctorViewPatientProfile doctorViewPatientProfile = new DoctorViewPatientProfile();
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorViewPatientProfile).commit();
+            }
+        });
 
         viewPrescriptionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                PrescriptionsListFragment2 prescriptionsListFragment2 = new PrescriptionsListFragment2(DoctorsActivity.getAppointmentObject().getPatientUserId());
+                PrescriptionsListFragment2 prescriptionsListFragment2 = new PrescriptionsListFragment2();
                 fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, prescriptionsListFragment2).commit();
             }
         });
         viewPrescriptionsImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                PrescriptionsListFragment2 prescriptionsListFragment2 = new PrescriptionsListFragment2(DoctorsActivity.getDoctorRegNumber());
+                PrescriptionsListFragment2 prescriptionsListFragment2 = new PrescriptionsListFragment2();
                 fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, prescriptionsListFragment2).commit();
-            }
-        });
-
-
-        patientProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                DoctorMedicalRecords doctorAvailability = new DoctorMedicalRecords();
-                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorAvailability).commit();
             }
         });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
                 ListOfPatientsFragment2 listOfPatients = new ListOfPatientsFragment2();
                 fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatients).commit();
             }
