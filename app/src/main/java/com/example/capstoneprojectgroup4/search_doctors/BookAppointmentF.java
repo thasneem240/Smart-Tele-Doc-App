@@ -202,8 +202,7 @@ public class BookAppointmentF extends Fragment {
         UploadAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getPatientName = MainActivity.getPatientObject().getFirstName();
-                String email = MainActivity.getPatientObject().getEmail();
+                email = MainActivity.getPatientObject().getEmail();
 
                 if(selectedAppointmentType.equals("Appointment type")){
                     Toast.makeText(getActivity(), "Please choose the type of appointment.", Toast.LENGTH_SHORT).show();
@@ -217,7 +216,7 @@ public class BookAppointmentF extends Fragment {
                 String address = MainActivity.getPatientObject().getAddress();
                 String city = MainActivity.getPatientObject().getCity();
                 String country = MainActivity.getPatientObject().getCountry();
-                getAppointmentType = appointmentType.getText().toString();
+                getAppointmentType = selectedAppointmentType;
 
                 // Generate a unique key for the appointment
                 patientKey = MainActivity.getPatientObject().getUid();
@@ -249,12 +248,6 @@ public class BookAppointmentF extends Fragment {
                 req.getItems().add(new Item(null, item, 1, price));
 
                 temp(req);
-
-                uploadAppointment(email, getPatientName, doctorName, day, start, End, selectedAppointmentType, location, New_NoAppValue, PatientID);
-                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, selectedAppointmentType, location, New_NoAppValue,start, End, PatientID);
-
-
-
 
             }
         });
@@ -478,7 +471,7 @@ public class BookAppointmentF extends Fragment {
                         String itemname = item;
                         PatientID = MainActivity.getPatientObject().getUid();
                         Transaction.put("name", itemname);
-                        Transaction.put("item",getAppointmentType+" appointment, 1, "+"LKR "+TotalFees);
+                        Transaction.put("item",getAppointmentType+" appointment, Quantity 1, "+"LKR "+TotalFees);
                         Transaction.put("date", strDate);
                         Transaction.put("price", "LKR "+TotalFees);
                         Transaction.put("description",itemname+" from "+start+" to "+End+" Appointment number : "+New_NoAppValue);

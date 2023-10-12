@@ -6,77 +6,102 @@
     android:layout_height="match_parent"
     tools:context=".ssearch_pharmacy.PrescriptionTransaction">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=''
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_Item"
+        android:layout_width="377dp"
+        android:layout_height="56dp"
+        android:background="@drawable/rectangle_12"
+        android:hint="Item"
+        android:textColorHint="#013073"
+        app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Descrip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.572">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText_Item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#3174D4"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_Descrip"
+        android:layout_width="377dp"
+        android:layout_height="150dp"
+        android:background="@drawable/rectangle_12"
+        android:hint="Description"
+        android:textColorHint="#013073"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
-        app:layout_constraintVertical_bias="0.191" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.409">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText_Descrip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:textColor="#3174D4"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_Price"
+        android:layout_width="377dp"
+        android:layout_height="56dp"
+        android:background="@drawable/rectangle_12"
+        android:hint="Price"
+        android:textColorHint="#013073"
+        app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Descrip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.919">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText_Price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#3174D4"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/PaymentButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm details and Pay"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle_1"
+        android:text="Make Payment"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.713"  />
+        app:layout_constraintVertical_bias="0.677" />
 
-    <EditText
-        android:id="@+id/Price2"
-        android:layout_width="260dp"
-        android:layout_height="47dp"
-        android:ems="10"
-        android:inputType="text"
+    <ImageView
+        android:id="@+id/backButtonPT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.153" />
+        app:layout_constraintVertical_bias="0.052"
+        app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
 
-    <EditText
-        android:id="@+id/Item2"
-        android:layout_width="256dp"
-        android:layout_height="38dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.838"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="81dp"
-        android:layout_height="29dp"
-        android:text="Item"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="83dp"
-        android:layout_height="28dp"
-        android:text="Price"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.176" />
 </androidx.constraintlayout.widget.ConstraintLayout>

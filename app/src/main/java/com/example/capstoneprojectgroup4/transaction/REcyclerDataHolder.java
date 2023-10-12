@@ -13,6 +13,7 @@ public class REcyclerDataHolder extends RecyclerView.ViewHolder {
     public TextView nameTextBox;
     public TextView dateTextBox;
     public TextView priceTextBox;
+    public TextView timeTextBox;
 
 
     public REcyclerDataHolder(@NonNull View itemView) {
@@ -20,6 +21,7 @@ public class REcyclerDataHolder extends RecyclerView.ViewHolder {
         nameTextBox = itemView.findViewById(R.id.itemname);
         dateTextBox = itemView.findViewById(R.id.TDate);
         priceTextBox = itemView.findViewById(R.id.TPrice);
+        timeTextBox = itemView.findViewById(R.id.TTime);
 
 
     }
