@@ -64,8 +64,6 @@ public class DoctorViewAppointmentsAdapter extends RecyclerView.Adapter<DoctorVi
         CardView doctorAppointmentCardView = holder.doctorAppointmentCardView;
         holder.time.setText("Time: " +appointmentItem.getStartTime()+ "-"+ appointmentItem.getEndTime());
 
-    }
-
 
         doctorAppointmentCardView.setOnClickListener(new View.OnClickListener()
         {
@@ -215,7 +213,6 @@ public class DoctorViewAppointmentsAdapter extends RecyclerView.Adapter<DoctorVi
         // Start the target activity using the Intent
         context.startActivity(intent);
     }
-
 
 
 
