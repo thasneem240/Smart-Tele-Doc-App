@@ -141,6 +141,7 @@ public class Frag_ListLabReports extends Fragment
                 {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     DoctorMedicalRecords doctorMedicalRecords = new DoctorMedicalRecords();
+
                     fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorMedicalRecords).commit();
                 }
 
@@ -220,7 +221,7 @@ public class Frag_ListLabReports extends Fragment
     {
         // Reference to the Firebase Storage folder where lab reports are stored
         storageReference = FirebaseStorage.getInstance().getReference("Lab_Reports");
-
+        final int[] reportNo = {1};
 
         storageReference.listAll()
                 .addOnSuccessListener(new OnSuccessListener<ListResult>()
@@ -246,8 +247,15 @@ public class Frag_ListLabReports extends Fragment
                                             public void onSuccess(Uri uri)
                                             {
                                                 // Create an LabReport Object and add it to the list
-                                                LabReport labReport = new LabReport(id, uri);
+
+//                                                LabReport labReport = new LabReport(id, uri);
+//                                                labReportList.add(labReport);
+
+                                                String title = "Report " + reportNo[0];
+                                                LabReport labReport = new LabReport(title, uri);
                                                 labReportList.add(labReport);
+
+                                                reportNo[0]++;
 
                                             }
                                         })
