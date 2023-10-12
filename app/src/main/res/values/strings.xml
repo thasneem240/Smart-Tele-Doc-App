@@ -4,9 +4,9 @@
 
 
     <string name="app_name">TeleDoc</string>
-    <string name="token">007eJxTYOCJzr7my9Nn1rph+uwTGz3ubK2/dPL+gaSSXdK9vzI+cC1WYEhJSUtMSk5OTbI0MjNJTbNISjZLSTRPszBKNklKNjdPXndWLbUhkJFBb/NPBkYoBPF5GJLz84pLc0oSSzLz8xgYAFu3JrA=</string>
+    <string name="token">007eJxTYDDXfpav3nGdt6Zc2OjPTm+Z6Vo/Fn17streZe28J3vFkv8rMKSkpCUmJSenJlkamZmkplkkJZulJJqnWRglmyQlm5snm/FqpDYEMjJc1NdlYmSAQBCfh8E5P6+4NKcksSQzP4+BAQC0GyOm</string>
     <string name="appId">ddfabcceb9264ef8bc6da7f82c4bc77c</string>
-    <string name="channel">consultation</string>
+    <string name="channel">Consultation</string>
 
 
 </resources>
