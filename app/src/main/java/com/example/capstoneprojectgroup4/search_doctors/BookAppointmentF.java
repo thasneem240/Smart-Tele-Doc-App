@@ -217,7 +217,7 @@ public class BookAppointmentF extends Fragment {
                 String address = MainActivity.getPatientObject().getAddress();
                 String city = MainActivity.getPatientObject().getCity();
                 String country = MainActivity.getPatientObject().getCountry();
-                getAppointmentType = appointmentType.getText().toString();
+                getAppointmentType = selectedAppointmentType;
 
                 // Generate a unique key for the appointment
                 patientKey = MainActivity.getPatientObject().getUid();
@@ -471,18 +471,18 @@ public class BookAppointmentF extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 String msg;
                 if (response != null)
-                    if (response.isSuccess()){
+                    if (response.isSuccess()) {
                         Date currentTime = Calendar.getInstance().getTime();
                         DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
                         String strDate = dateFormat.format(currentTime);
                         String itemname = item;
                         PatientID = MainActivity.getPatientObject().getUid();
                         Transaction.put("name", itemname);
-                        Transaction.put("item",getAppointmentType+" appointment, 1, "+"LKR "+TotalFees);
+                        Transaction.put("item", getAppointmentType + " appointment, 1, " + "LKR " + TotalFees);
                         Transaction.put("date", strDate);
-                        Transaction.put("price", "LKR "+TotalFees);
-                        Transaction.put("description",itemname+" from "+start+" to "+End+" Appointment number : "+New_NoAppValue);
-                        Transaction.put("patientID",PatientID);
+                        Transaction.put("price", "LKR " + TotalFees);
+                        Transaction.put("description", itemname + " from " + start + " to " + End + " Appointment number : " + New_NoAppValue);
+                        Transaction.put("patientID", PatientID);
                         databaseReference.child("Transaction").child("IDA " + strDate).setValue(Transaction);
                         msg = "Activity result:" + response.getData().toString();
                         //after successful payment book appointment
@@ -490,7 +490,7 @@ public class BookAppointmentF extends Fragment {
 
 
                         uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType, location, New_NoAppValue, PatientID);
-                        uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue,start, End, PatientID);
+                        uploadDoctorAppointment(doctorName, getPatientName, email, day, appointmentKey, getAppointmentType, location, New_NoAppValue, start, End, PatientID);
 
                         updateAvailability(doctorName, location, date, New_NoAppValue);
 
@@ -498,8 +498,7 @@ public class BookAppointmentF extends Fragment {
                         if (isOneDayBeforeAppointmentDate(date)) {
                             sendSMS(phonenum, "Your Appointment at " + location + " with " + doctorName + "is Tomorrow, Please Don't forget !");
                         }
-                    }
-                    else
+                    } else
                         msg = "Result:" + response.toString();
                 else
                     msg = "Result: no response";
@@ -514,6 +513,4 @@ public class BookAppointmentF extends Fragment {
             }
         }
     }
-
 }
-
