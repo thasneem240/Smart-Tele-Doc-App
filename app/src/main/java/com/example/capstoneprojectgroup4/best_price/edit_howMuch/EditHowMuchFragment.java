@@ -102,30 +102,6 @@ public class EditHowMuchFragment extends Fragment {
         availablePharmacies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map<String, Integer> selectedDrugsPrescription = new HashMap<>();
-
-/*                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference();
-
-
-                myRef.child("Pharmacy database").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            ArrayList<ObjectPharmacyAndPrice> availablePharmacies = getAvailablePharmacies(task, selectedDrugsPrescription);
-
-                            if(availablePharmacies.isEmpty()){
-                                Toast.makeText(getContext(), "Sorry, none of the pharmacies can produce all the medicines in this prescription.", Toast.LENGTH_LONG).show();
-                            }
-                            else{
-                                FragmentManager fm = getActivity().getSupportFragmentManager();
-                                AvailablePharmaciesFragment availablePharmaciesFragment = new AvailablePharmaciesFragment(availablePharmacies);
-                                fm.beginTransaction().replace(R.id.fragmentContainerView, availablePharmaciesFragment).commit();
-                            }
-                        }
-                    }
-                });*/
-
                 FirebaseDatabase firebaseDatabase;
                 DatabaseReference databaseReference;
 
@@ -217,8 +193,6 @@ public class EditHowMuchFragment extends Fragment {
                 if(!oneAvailable){
                     allAvailable = false;
                 }
-
-
             }
 
             if (allAvailable) {
