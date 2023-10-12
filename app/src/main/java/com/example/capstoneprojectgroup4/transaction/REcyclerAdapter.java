@@ -1,4 +1,4 @@
-package com.example.capstoneprojectgroup4;
+package com.example.capstoneprojectgroup4.transaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.capstoneprojectgroup4.transaction.TransactionHistoryData;
+import com.example.capstoneprojectgroup4.R;
 
 import java.util.ArrayList;
 
@@ -29,6 +29,8 @@ public class REcyclerAdapter extends RecyclerView.Adapter<REcyclerDataHolder> {
     public void onBindViewHolder(@NonNull REcyclerDataHolder holder, int position) {
         TransactionHistoryData singleData = data.get(position);
         holder.nameTextBox.setText(singleData.getName());
+        holder.dateTextBox.setText(singleData.getDate());
+        holder.priceTextBox.setText(singleData.getPrice());
 
     }
 

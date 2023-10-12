@@ -1,5 +1,9 @@
 package com.example.capstoneprojectgroup4.search_doctors;
 
+import static android.content.ContentValues.TAG;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import android.telephony.SmsManager;
@@ -36,6 +41,15 @@ import android.telephony.SmsManager;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
+
+import lk.payhere.androidsdk.PHConfigs;
+import lk.payhere.androidsdk.PHConstants;
+import lk.payhere.androidsdk.PHMainActivity;
+import lk.payhere.androidsdk.PHResponse;
+import lk.payhere.androidsdk.model.InitRequest;
+import lk.payhere.androidsdk.model.Item;
+import lk.payhere.androidsdk.model.StatusResponse;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,7 +84,20 @@ public class BookAppointmentF extends Fragment {
     private DatabaseReference databaseReference;
     private String selectedAppointmentType;
 
+    private static final int PAYHERE_REQUEST = 110;
+    private Map<String, Object> Transaction = new HashMap<>();
+    private String item;
+    private double TotalFees;
 
+    private String getPatientName;
+
+    private String phonenum;
+
+    private String getAppointmentType;
+
+    private String PatientID;
+
+    private String email;
 
     public BookAppointmentF() {
         // Required empty public constructor
@@ -142,7 +169,7 @@ public class BookAppointmentF extends Fragment {
 
         // Format and set the appointment fees and total price as text
         AppointmentFees.setText("Rs " + String.valueOf((int) docPrice) + ".00"); // Convert double to String
-        double TotalFees = docPrice + 100;
+        TotalFees = docPrice + 100;
         TotalPrice.setText("Rs " + String.valueOf((int) TotalFees) + ".00"); // Convert double to String
 
         String[] appointmentTypes = {"Appointment type", "Voice", "Video"};
@@ -183,6 +210,14 @@ public class BookAppointmentF extends Fragment {
                     return;
                 }
 
+                getPatientName = MainActivity.getPatientObject().getFirstName();
+                String getPatientLastName = MainActivity.getPatientObject().getLastName();
+                email = MainActivity.getPatientObject().getEmail();
+                phonenum = MainActivity.getPatientObject().getMobile();
+                String address = MainActivity.getPatientObject().getAddress();
+                String city = MainActivity.getPatientObject().getCity();
+                String country = MainActivity.getPatientObject().getCountry();
+                getAppointmentType = appointmentType.getText().toString();
 
                 // Generate a unique key for the appointment
                 patientKey = MainActivity.getPatientObject().getUid();
@@ -191,19 +226,35 @@ public class BookAppointmentF extends Fragment {
                 String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
                 AppointmentKeyGenerator.setDoctorName(sanitizedDoctorName);
 
+                //Opening a payhere connection to complete the payment for the appointment booking (appointment booked only after the payment is successfully done )
+                item = getAppointmentType +" appointment with "+doctorName;
+                double price = TotalFees;
 
-                Log.d(TAG, "Generated appointmentKey: " + appointmentKey);
-                String PatientID = MainActivity.getPatientObject().getUid();
+                InitRequest req = new InitRequest();
+                req.setMerchantId("1223432");
+                req.setMerchantSecret("MTczNTk3NTUzNDEzMjE5ODgyNTAzNzk2MzAxNTgzMzEwNTk2NTgw");// Merchant ID
+                req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
+                req.setAmount(price);             // Final Amount to be charged
+                req.setOrderId("230000128");        // Unique Reference ID
+                req.setItemsDescription(item);  // Item description title
+                req.setCustom1("This is the custom message 1");
+                req.setCustom2("This is the custom message 2");
+                req.getCustomer().setFirstName(getPatientName);
+                req.getCustomer().setLastName(getPatientLastName);
+                req.getCustomer().setEmail(email);
+                req.getCustomer().setPhone(phonenum);
+                req.getCustomer().getAddress().setAddress(address);
+                req.getCustomer().getAddress().setCity(city);
+                req.getCustomer().getAddress().setCountry(country);
+                req.getItems().add(new Item(null, item, 1, price));
+
+                temp(req);
 
                 uploadAppointment(email, getPatientName, doctorName, day, start, End, selectedAppointmentType, location, New_NoAppValue, PatientID);
                 uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, selectedAppointmentType, location, New_NoAppValue,start, End, PatientID);
 
-                updateAvailability(doctorName, location, date, New_NoAppValue);
 
-                String phoneNumber = MainActivity.getPatientObject().getMobile();
-                if (isOneDayBeforeAppointmentDate(date)) {
-                    sendSMS(phoneNumber, "Your Appointment at " + location + " with " + doctorName + "is Tomorrow, Please Don't forget !");
-                }
+
 
             }
         });
@@ -397,6 +448,70 @@ public class BookAppointmentF extends Fragment {
         } catch (Exception e) {
             Toast.makeText(requireContext(), "Failed to send SMS", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+        }
+    }
+
+
+    //Initiate a Payment Request to PayHere Payment Gateway
+    public void temp(InitRequest req)
+    {
+        Intent intent = new Intent(getActivity(), PHMainActivity.class);
+        intent.putExtra(PHConstants.INTENT_EXTRA_DATA, req);
+        PHConfigs.setBaseUrl(PHConfigs.SANDBOX_URL);
+        startActivityForResult(intent, PAYHERE_REQUEST); //unique request ID e.g. "11001"
+    }
+
+    //Fetch the Payment Status
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PAYHERE_REQUEST && data != null && data.hasExtra(PHConstants.INTENT_EXTRA_RESULT)) {
+            PHResponse<StatusResponse> response = (PHResponse<StatusResponse>) data.getSerializableExtra(PHConstants.INTENT_EXTRA_RESULT);
+            if (resultCode == Activity.RESULT_OK) {
+                String msg;
+                if (response != null)
+                    if (response.isSuccess()){
+                        Date currentTime = Calendar.getInstance().getTime();
+                        DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+                        String strDate = dateFormat.format(currentTime);
+                        String itemname = item;
+                        PatientID = MainActivity.getPatientObject().getUid();
+                        Transaction.put("name", itemname);
+                        Transaction.put("item",getAppointmentType+" appointment, 1, "+"LKR "+TotalFees);
+                        Transaction.put("date", strDate);
+                        Transaction.put("price", "LKR "+TotalFees);
+                        Transaction.put("description",itemname+" from "+start+" to "+End+" Appointment number : "+New_NoAppValue);
+                        Transaction.put("patientID",PatientID);
+                        databaseReference.child("Transaction").child("IDA " + strDate).setValue(Transaction);
+                        msg = "Activity result:" + response.getData().toString();
+                        //after successful payment book appointment
+                        Log.d(TAG, "Generated appointmentKey: " + appointmentKey);
+
+
+                        uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType, location, New_NoAppValue, PatientID);
+                        uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue,start, End, PatientID);
+
+                        updateAvailability(doctorName, location, date, New_NoAppValue);
+
+                        phonenum = MainActivity.getPatientObject().getMobile();
+                        if (isOneDayBeforeAppointmentDate(date)) {
+                            sendSMS(phonenum, "Your Appointment at " + location + " with " + doctorName + "is Tomorrow, Please Don't forget !");
+                        }
+                    }
+                    else
+                        msg = "Result:" + response.toString();
+                else
+                    msg = "Result: no response";
+                Log.d(TAG, msg);
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show();
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                if (response != null)
+                    Toast.makeText(requireContext(), response.toString(), Toast.LENGTH_SHORT).show();
+
+                else
+                    Toast.makeText(requireContext(), "User canceled the request", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
