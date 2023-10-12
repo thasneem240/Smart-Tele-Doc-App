@@ -203,6 +203,7 @@ public class EditHowMuchFragment extends Fragment {
 
             }
         }
+        //
 
         availablePharmacies.sort(new Comparator<ObjectPharmacyAndPrice>() {
             @Override
