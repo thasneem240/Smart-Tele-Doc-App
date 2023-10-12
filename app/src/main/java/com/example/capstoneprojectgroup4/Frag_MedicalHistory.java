@@ -7,12 +7,22 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
+import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMedicalRecords;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +44,27 @@ public class Frag_MedicalHistory extends Fragment
     private String mParam1;
     private String mParam2;
 
-    public Frag_MedicalHistory() {
+    private String userId;
+    private String userType = "Patient";
+
+
+    private RecyclerView recyclerView;
+    private MedicalHistoryAdapter adapter;
+
+
+
+    public Frag_MedicalHistory()
+    {
         // Required empty public constructor
     }
+
+    public Frag_MedicalHistory(String userType)
+    {
+        this.userType = userType;
+    }
+
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -73,38 +101,140 @@ public class Frag_MedicalHistory extends Fragment
         View view = inflater.inflate(R.layout.fragment_medical_history, container, false);
         ImageView backButton = view.findViewById(R.id.backButtonMedicalHistory);
 
+        // Obtain the RecyclerView UI element
+        recyclerView = (RecyclerView) view.findViewById(R.id.medicalHistoryRecyclerView);
+
         /* Grab the  UI Variables from Layout file */
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        if(userType.equalsIgnoreCase("Patient"))
+        {
+            userId = MainActivity.getPatientObject().getUid();
+        }
+        else // For Doctors
+        {
+            userId = DoctorsActivity.getAppointmentObject().getPatientUserId();
+        }
+
+
+
+        backButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                MedicalRecords searchDoctors = new MedicalRecords();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            public void onClick(View view)
+            {
+                if(userType.equalsIgnoreCase("Patient"))
+                {
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    MedicalRecords medicalRecords = new MedicalRecords();
+                    fm.beginTransaction().replace(R.id.fragmentContainerView, medicalRecords).commit();
+                }
+                else
+                {
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    DoctorMedicalRecords doctorMedicalRecords = new DoctorMedicalRecords();
+                    fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorMedicalRecords).commit();
+                }
+
+
+
             }
         });
 
 
-        List<MedicalHistoryItem> medicalHistoryItems = new ArrayList<>();
+        List<MedicalHistoryItem> medicalHistoryItemList = new ArrayList<>();
+
+        Log.d("OnCreateView:", "After Array List Created");
 
         // Populate medicalHistoryItems with your data
+        //medicalHistoryItems = MedicalHistoryItemGenerator.generateRandomMedicalHistoryItems(200);
+
+        retrieveFromRealTimeDataBase(medicalHistoryItemList);
+        Log.d("OnCreateView:", "After Retrieved the Array List");
 
 
-        medicalHistoryItems = MedicalHistoryItemGenerator.generateRandomMedicalHistoryItems(200);
-
-        // Obtain the RecyclerView UI element
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.medicalHistoryRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        //Create Adapter for the recyclerview
-        MedicalHistoryAdapter adapter = new MedicalHistoryAdapter(medicalHistoryItems);
-
-        // Hook it up
-        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//
+//        //Create Adapter for the recyclerview
+//        adapter = new MedicalHistoryAdapter(medicalHistoryItemList);
+//
+//        // Hook it up
+//        recyclerView.setAdapter(adapter);
 
 
         return  view;
 
 
     }
+
+
+
+    private void retrieveFromRealTimeDataBase(List<MedicalHistoryItem> medicalHistoryItemList)
+    {
+        Log.d("retrieveFromRealTimeDataBase:", "Before Get reference");
+
+        // Get a reference to the user's medical records node
+        DatabaseReference medicalRecordsRef = FirebaseDatabase.getInstance()
+                .getReference("Patient's Medical History").child(userId).child("medicalRecords");
+
+        Log.d("retrieveFromRealTimeDataBase:", "After Get reference");
+
+        // Attach a ValueEventListener to retrieve medical records
+        medicalRecordsRef.addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+
+                Log.d("onDataChange :", "Before For Loop");
+
+                // Clear the existing list before adding new data
+                medicalHistoryItemList.clear();
+
+                // Iterate through the medical records and add them to your list
+                for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                {
+                    Log.d("onDataChange Before snapshot :", "In For Loop");
+
+                    MedicalHistoryItem medicalHistoryItem = snapshot.getValue(MedicalHistoryItem.class);
+
+                    Log.d("onDataChange After snapshot :", "In For Loop");
+
+                    medicalHistoryItemList.add(medicalHistoryItem);
+                }
+
+                Log.d("onDataChange :", "Out of For Loop");
+
+                String message = "Successfully Retrieved the Medical History data from " +
+                        "Firebase Realtime database";
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                //Create Adapter for the recyclerview
+                adapter = new MedicalHistoryAdapter(medicalHistoryItemList);
+
+                // Hook it up
+                recyclerView.setAdapter(adapter);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+            {
+
+                String message = "Error!! While Retrieving Medical history data " +
+                        "from Firebase Realtime database";
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+
+
+
+
 }

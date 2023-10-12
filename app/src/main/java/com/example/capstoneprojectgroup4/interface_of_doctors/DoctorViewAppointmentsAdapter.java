@@ -60,8 +60,10 @@ public class DoctorViewAppointmentsAdapter extends RecyclerView.Adapter<DoctorVi
         holder.typeTextView.setText(appointmentItem.getAppointmentType());
         holder.appointmentNumberTextView.setText("Appointment Number: " +appointmentItem.getAppointmentNumber());
         holder.locationTextView.setText(appointmentItem.getLocation());
+<<<<<<<<< Temporary merge branch 1
 
         CardView doctorAppointmentCardView = holder.doctorAppointmentCardView;
+        holder.time.setText("Time: " +appointmentItem.getStartTime()+ "-"+ appointmentItem.getEndTime());
         holder.time.setText("Time: " +appointmentItem.getStartTime()+ "-"+ appointmentItem.getEndTime());
 
     }
@@ -215,7 +217,6 @@ public class DoctorViewAppointmentsAdapter extends RecyclerView.Adapter<DoctorVi
         // Start the target activity using the Intent
         context.startActivity(intent);
     }
-
 
 
 

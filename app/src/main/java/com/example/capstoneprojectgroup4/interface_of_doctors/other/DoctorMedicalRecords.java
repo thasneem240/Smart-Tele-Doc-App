@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.capstoneprojectgroup4.Frag_ListLabReports;
+import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorViewPatientProfile;
 import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOfPatients_patientProfile.ListOfPatientsFragment2;
@@ -78,9 +80,45 @@ public class DoctorMedicalRecords extends Fragment {
         ImageView patientDetailsImage = v.findViewById(R.id.imageView_PatientDetails3);
         Button patientDetailsButton = v.findViewById(R.id.button12);
 
+
         patientName.setText(DoctorsActivity.getAppointmentObject().getPatientName()+"'s");
 
         FragmentManager fm = getActivity().getSupportFragmentManager();
+
+
+        // Thasneem
+        ImageView medicalHistoryImageView = v.findViewById(R.id.medicalHistoryImageView4);
+        ImageView labReportsImageView = v.findViewById(R.id.labReportsImageView2);
+        medicalHistoryImageView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Frag_MedicalHistory fragMedicalHistory = new Frag_MedicalHistory("Doctor");
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity,
+                        fragMedicalHistory).commit();
+            }
+        });
+
+
+        // Thasneem
+        labReportsImageView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Frag_ListLabReports fragListLabReports = new Frag_ListLabReports("Doctor");
+
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity,
+                        fragListLabReports).commit();
+
+            }
+        });
+
+
+
+
+
         patientDetailsImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,4 +162,7 @@ public class DoctorMedicalRecords extends Fragment {
         return v;
 
     }
+
+
+
 }

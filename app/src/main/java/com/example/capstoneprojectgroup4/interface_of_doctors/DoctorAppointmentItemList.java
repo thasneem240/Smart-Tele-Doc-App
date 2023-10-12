@@ -71,10 +71,12 @@ public class DoctorAppointmentItemList {
     public String getPatientName() {
         return PatientName;
     }
-    public String getEndTime() {
+    public String getEndTime()
+    {
         return EndTime;
     }
-    public String getStartTime() {
+    public String getStartTime()
+    {
         return StartTime;
     }
 
@@ -82,8 +84,4 @@ public class DoctorAppointmentItemList {
         PatientName = patientName;
     }
 
-    public String getStartTime()
-    {
-        return StartTime;
-    }
 }

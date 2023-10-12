@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMedicalRecords;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -49,11 +51,19 @@ public class Frag_ListLabReports extends Fragment
 
     private StorageReference storageReference;
     private String uId;
+    private String userType = "Patient";
 
     public Frag_ListLabReports()
     {
         // Required empty public constructor
     }
+
+    public Frag_ListLabReports(String userType)
+    {
+        this.userType = userType;
+    }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -90,7 +100,14 @@ public class Frag_ListLabReports extends Fragment
         View view = inflater.inflate(R.layout.fragment_list_lab_reports, container, false);
 
 
-        uId = MainActivity.getPatientObject().getUid();
+        if(userType.equalsIgnoreCase("Patient"))
+        {
+            uId = MainActivity.getPatientObject().getUid();
+        }
+        else // For Doctors
+        {
+            uId = DoctorsActivity.getAppointmentObject().getPatientUserId();
+        }
 
         // Initialize a list to store the firebaseLabReports
         List<LabReport> fireBaseLabReports  = new ArrayList<>();
@@ -113,10 +130,24 @@ public class Frag_ListLabReports extends Fragment
             @Override
             public void onClick(View view)
             {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                Frag_LabReports fragLabReports = new Frag_LabReports();
+                if(userType.equalsIgnoreCase("Patient"))
+                {
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    Frag_LabReports fragLabReports = new Frag_LabReports();
 
-                fm.beginTransaction().replace(R.id.fragmentContainerView, fragLabReports).commit();
+                    fm.beginTransaction().replace(R.id.fragmentContainerView, fragLabReports).commit();
+                }
+                else
+                {
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    DoctorMedicalRecords doctorMedicalRecords = new DoctorMedicalRecords();
+
+                    fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorMedicalRecords).commit();
+                }
+
+
+
+
             }
         });
 
@@ -190,7 +221,7 @@ public class Frag_ListLabReports extends Fragment
     {
         // Reference to the Firebase Storage folder where lab reports are stored
         storageReference = FirebaseStorage.getInstance().getReference("Lab_Reports");
-
+        final int[] reportNo = {1};
 
         storageReference.listAll()
                 .addOnSuccessListener(new OnSuccessListener<ListResult>()
@@ -216,8 +247,15 @@ public class Frag_ListLabReports extends Fragment
                                             public void onSuccess(Uri uri)
                                             {
                                                 // Create an LabReport Object and add it to the list
-                                                LabReport labReport = new LabReport(id, uri);
+
+//                                                LabReport labReport = new LabReport(id, uri);
+//                                                labReportList.add(labReport);
+
+                                                String title = "Report " + reportNo[0];
+                                                LabReport labReport = new LabReport(title, uri);
                                                 labReportList.add(labReport);
+
+                                                reportNo[0]++;
 
                                             }
                                         })
