@@ -7,20 +7,16 @@
     tools:context=".medical_records_prescriptions.drug_details.DrugDetailsFragment">
 
     <ImageView
-        android:id="@+id/imageView_backButton"
-        android:layout_width="0dp"
-        android:layout_height="24dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/baseline_keyboard_arrow_left_24"
-        app:layout_constraintBottom_toTopOf="@+id/medical_rec6"
-        app:layout_constraintEnd_toStartOf="@+id/medical_rec6"
+        android:id="@+id/backButtonViewPrescription2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginBottom="73dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView_medDetails"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
 
     <TextView
         android:id="@+id/medical_rec6"
@@ -30,7 +26,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="40dp"
         android:text="Medicine details"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -42,11 +38,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_medDetails"
         android:layout_width="0dp"
-        android:layout_height="581dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButtonViewPrescription2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

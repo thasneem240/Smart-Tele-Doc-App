@@ -153,6 +153,7 @@ public class EditHowMuchFragment extends Fragment {
         Map<String, Object> allTheMedicineEachPharmacy;
         Map<String, Object> pharmacyDrugObject;
         float totalCost = 0;
+        String brandName;
 
         ArrayList<ObjectPharmacyAndPrice> availablePharmacies = new ArrayList<>();
         allPharmacies = (Map) task.getResult().getValue();
@@ -170,6 +171,7 @@ public class EditHowMuchFragment extends Fragment {
                 if(allTheMedicineEachPharmacy.containsKey(drug)){
 
                     pharmacyDrugObject = (Map) allTheMedicineEachPharmacy.get(drug);
+
 
                     boolean available = Boolean.parseBoolean(pharmacyDrugObject.get("availability")+"");
 

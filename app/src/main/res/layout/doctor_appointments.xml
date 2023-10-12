@@ -54,13 +54,22 @@
             android:layout_below="@id/Day" />
 
         <TextView
+            android:id="@+id/Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_below="@id/AppNumber" />
+
+        <TextView
             android:id="@+id/Type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Type"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:layout_below="@id/AppNumber" />
+            android:layout_below="@id/Time" />
 
     </RelativeLayout>
 

@@ -21,9 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
-import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_DoctorsView.ListOfPatientsFragment;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.drug_containers.DrugsContainers;
 import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,9 +30,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
