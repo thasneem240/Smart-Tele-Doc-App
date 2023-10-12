@@ -49,8 +49,18 @@ public class PatientSignUpInstrumentedTest {
 
         onView(ViewMatchers.withId(R.id.EditText_EnterEmail))
                 .perform(ViewActions.typeText("20688651@student.curtin.edu.au"), ViewActions.closeSoftKeyboard());
-        onView(ViewMatchers.withId(R.id.EditText_Doctor_Enter_Password))
+        try {
+            Thread.sleep(2000); // Adjust the sleep duration as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(ViewMatchers.withId(R.id.EditText_EnterPassword))
                 .perform(ViewActions.typeText("123456"), ViewActions.closeSoftKeyboard());
+        try {
+            Thread.sleep(2000); // Adjust the sleep duration as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         onView(ViewMatchers.withId(R.id.EditText_ReEnterPassword))
                 .perform(ViewActions.typeText("123456"), ViewActions.closeSoftKeyboard());
 

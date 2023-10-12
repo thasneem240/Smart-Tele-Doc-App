@@ -1,4 +1,6 @@
 package com.example.capstoneprojectgroup4;
+import androidx.fragment.app.FragmentManager;
+import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -10,7 +12,10 @@ import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.patient_authentication.AccountSettings;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
+import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,17 +32,30 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AccountSettingsTest {
 
-    @Rule
-    public ActivityScenarioRule<MainActivity2> activityScenarioRule = new ActivityScenarioRule<>(MainActivity2.class);
+    private FragmentManager fragmentManager;
+
+    @Before
+    public void setUp() {
+        // Mocking PatientObject for tests
+        PatientObject mockPatient = new PatientObject();
+        mockPatient.setUid("mockPatientUid");
+        mockPatient.setFirstName("MockFirstName");
+
+        // Set the mockPatient in MainActivity for the test
+        MainActivity.setPatientObject(mockPatient);
+
+        // Initialize fragment manager
+        fragmentManager = null; // Initialize to null
+    }
+
 
     @Test
     public void A_testAccountSettingsUIElementsandUpdate() {
         // Launch the AccountSettings fragment
-        activityScenarioRule.getScenario().onActivity(activity -> {
-            AccountSettings accountSettingsFragment = new AccountSettings();
-            activity.getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainerView, accountSettingsFragment)
-                    .commit();
+        ActivityScenario<MainActivity2> scenario = ActivityScenario.launch(MainActivity2.class);
+        scenario.onActivity(activity -> {
+            fragmentManager = activity.getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, new AccountSettings()).commit();
         });
 
         // Wait for a short period to allow any animations to complete
@@ -82,11 +100,10 @@ public class AccountSettingsTest {
     @Test
     public void B_testAccountSettingsLogout() {
 
-        activityScenarioRule.getScenario().onActivity(activity -> {
-            AccountSettings accountSettingsFragment = new AccountSettings();
-            activity.getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainerView, accountSettingsFragment)
-                    .commit();
+        ActivityScenario<MainActivity2> scenario = ActivityScenario.launch(MainActivity2.class);
+        scenario.onActivity(activity -> {
+            fragmentManager = activity.getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, new AccountSettings()).commit();
         });
 
         // Wait for a short period to allow any animations to complete
