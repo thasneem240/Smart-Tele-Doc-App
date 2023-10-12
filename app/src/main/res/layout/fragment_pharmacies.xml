@@ -54,7 +54,7 @@
         android:layout_alignBottom="@+id/rectangle_8"
         android:layout_alignParentEnd="true"
         android:background="@drawable/rectangle_3"
-        android:text="Upload Prescription"
+        android:text="Select Prescription"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="12sp"

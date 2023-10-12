@@ -21,9 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
-import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_DoctorsView.ListOfPatientsFragment;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.drug_containers.DrugsContainers;
 import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,9 +30,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -62,10 +57,8 @@ public class CreatePrescription extends Fragment {
     EditText editText_writtenOn;
     TextView drugsCount;
     WritingPrescriptionActivity writingPrescriptionActivity;
-    String currentTimeObj;
-    int treatmentDurationObj; // treatment duration in days
-    ArrayList<PrescriptionDrugObject> selectedDrugsObj;
-    String doctorNameObj, patientNameObj, prescriptionNotesObj;
+    TextView manuallyWritten;
+
 
     public CreatePrescription() {
         // Required empty public constructor
@@ -113,6 +106,7 @@ public class CreatePrescription extends Fragment {
         editText_prescriptionNotes = v.findViewById(R.id.EditText_PrescriptionNotes);
         drugsCount = v.findViewById(R.id.TextView_DrugsCount);
         backButton = v.findViewById(R.id.ImageView_BackButton);
+        manuallyWritten = v.findViewById(R.id.textView29);
 
         editText_patientName.setEnabled(false);
         editText_doctorName.setEnabled(false);
@@ -122,6 +116,13 @@ public class CreatePrescription extends Fragment {
         writingPrescriptionActivity = (WritingPrescriptionActivity) v.getContext();
         PrescriptionObject prescriptionObject = writingPrescriptionActivity.getPrescriptionObject();
         PatientObject patientObject = writingPrescriptionActivity.getPatientObject();
+
+        if(prescriptionObject.isManuallyWrittenDrugs()){
+            manuallyWritten.setVisibility(View.VISIBLE);
+        }
+        else{
+            manuallyWritten.setVisibility(View.INVISIBLE);
+        }
 
         prescriptionObject.setPatientName(patientObject.getFirstName() + " " + patientObject.getLastName());
         prescriptionObject.setDoctorName(DoctorsActivity.getDoctorObject().getName());
@@ -143,9 +144,11 @@ public class CreatePrescription extends Fragment {
                 prescriptionObject.setDoctorName(editText_doctorName.getText().toString());
                 prescriptionObject.setDob(editText_dob.getText().toString());
                 prescriptionObject.setWrittenOn(editText_writtenOn.getText().toString());
+                prescriptionObject.setPrescriptionNotes(editText_prescriptionNotes.getText().toString());
 
                 writingPrescriptionActivity = (WritingPrescriptionActivity) getActivity();
                 writingPrescriptionActivity.setPrescriptionObject(prescriptionObject);
+
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DrugsContainers drugsContainers = new DrugsContainers();
@@ -168,11 +171,10 @@ public class CreatePrescription extends Fragment {
                 prescriptionObject.setSelectedDrugs(writingPrescriptionActivity.getSelectedDrug());
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Users").child(patientObject.getUid()).child("Doctors")
-                        .child(DoctorsActivity.getDoctorRegNumber()).child("Prescriptions").child( (new Date()).toString());
+                DatabaseReference myRef = database.getReference("Prescriptions").child(patientObject.getUid()).
+                        child("Prescriptions").child( (new Date()).toString());
 
-//                Log.d(TAG, LocalTime.now().toString());
-
+                // child(DoctorsActivity.getDoctorRegNumber())
                 myRef.setValue(prescriptionObject).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

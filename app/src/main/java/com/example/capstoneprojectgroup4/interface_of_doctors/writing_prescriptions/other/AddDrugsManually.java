@@ -1,6 +1,8 @@
 package com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.other;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.drug_containers.DrugsContainers;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -99,10 +102,6 @@ public class AddDrugsManually extends Fragment {
                 fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugsContainers).commit();
 
 
-//                MaterialAlertDialogBuilder builder =
-//                        new MaterialAlertDialogBuilder(getContext())
-//                                .setTitle("Confirmation Dialog")
-//                                .setSingleChoiceItems()
             }
         });
 

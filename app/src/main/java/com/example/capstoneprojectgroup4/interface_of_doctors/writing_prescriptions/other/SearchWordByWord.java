@@ -8,13 +8,17 @@ import androidx.fragment.app.FragmentManager;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.ListOfPatients_writingPrescription.AppointmentObject;
+import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.drug_containers.DrugsContainers;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.select_from_the_list.SelectTheDrug;
 
 import java.util.ArrayList;
@@ -79,15 +83,18 @@ public class SearchWordByWord extends Fragment {
         View v = inflater.inflate(R.layout.fragment_search_word_by_word, container, false);
 
         EditText nameOfTheDrug = v.findViewById(R.id.EditText_name_of_the_drug);
+        ImageView backButton = v.findViewById(R.id.imageView_BackButton);
+
         FragmentManager fm = getActivity().getSupportFragmentManager();
+
+        SelectTheDrug selectTheDrug = new SelectTheDrug(list);
+        fm.beginTransaction().replace(R.id.FrameLayout_FragmentContainer, selectTheDrug).commit();
 
         InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         nameOfTheDrug.requestFocus();
         imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
         nameOfTheDrug.addTextChangedListener(new TextWatcher() {
-            char s;
-            String ss="";
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -95,29 +102,7 @@ public class SearchWordByWord extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int charSequencePosition, int backward, int forward) {
-//                String s = String.format("%s %s, %s, %s", charSequence, charSequencePosition, charSequencePosition, charSequencePosition);
-                if(forward == 1){
-                    s = charSequence.charAt(charSequencePosition);
-                    ss = ss+s;
-                }
-                else if(charSequencePosition > 0){ // backward
-                    s = charSequence.charAt(charSequencePosition-1);
-                    ss = ss.substring(0, ss.length()-1);
-                }
-                else{ // deleting after last character
-                    ss = "";
-                }
-
-                ArrayList<String> output = new ArrayList<>();
-
-                for(String drug : list){
-                        if(Pattern.compile(Pattern.quote(ss), Pattern.CASE_INSENSITIVE).matcher(drug).find()){ // The version of case sensitivity removed -> number.contains(ss)
-                            output.add(drug);
-                        }
-                }
-
-                SelectTheDrug selectTheDrug = new SelectTheDrug(output);
-//                fm.beginTransaction().replace(R.id.FragmentContainerView_SelectTheDrug, selectTheDrug).commit();
+                SelectTheDrug selectTheDrug = new SelectTheDrug(filterPatientNames(list, charSequence.toString()));
                 fm.beginTransaction().replace(R.id.FrameLayout_FragmentContainer, selectTheDrug).commit();
             }
 
@@ -127,6 +112,27 @@ public class SearchWordByWord extends Fragment {
             }
         });
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DrugData drugData = new DrugData();
+                fm.beginTransaction().replace(R.id.fragmentContainerPrescription, drugData).commit();
+            }
+        });
+
         return v;
     }
+
+    private ArrayList<String> filterPatientNames(ArrayList<String> list, String searchText) {
+        ArrayList<String> output = new ArrayList<>();
+
+        for(String s : list){
+            if(s.toLowerCase().contains(searchText.toLowerCase())){
+                output.add(s);
+            }
+        }
+
+        return output;
+    }
+
 }

@@ -39,6 +39,8 @@ public class DoctorViewAppointmentsAdapter extends RecyclerView.Adapter<DoctorVi
         holder.typeTextView.setText(appointmentItem.getAppointmentType());
         holder.appointmentNumberTextView.setText("Appointment Number: " +appointmentItem.getAppointmentNumber());
         holder.locationTextView.setText(appointmentItem.getLocation());
+        holder.time.setText("Time: " +appointmentItem.getStartTime()+ "-"+ appointmentItem.getEndTime());
+
     }
 
     @Override

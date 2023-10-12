@@ -7,7 +7,6 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,15 +16,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.REcyclerAdapter;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
-import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
+import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class TransactionHistory extends AppCompatActivity {
@@ -61,15 +58,18 @@ public class TransactionHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_history);
         backButton = findViewById(R.id.backButtonTransHistory);
-
+        homePage = findViewById(R.id.homePageButton);
+        chatBot = findViewById(R.id.chatBotButton);
+        appointments = findViewById(R.id.appointmentButton);
+        userProfile = findViewById(R.id.userProfileButton);
 
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent chatbotActivity = new Intent(TransactionHistory.this, MainActivity2.class);
-                startActivity(chatbotActivity);
+                Intent Activity = new Intent(TransactionHistory.this, MainActivity2.class);
+                startActivity(Activity);
             }
         });
 
@@ -96,12 +96,54 @@ public class TransactionHistory extends AppCompatActivity {
                 for (int i = childrenList.size() - 1; i >= 0; i--) {
                     DataSnapshot Snapshot = childrenList.get(i);
                     data.add(Snapshot.getValue(TransactionHistoryData.class)) ;
+                    TransactionHistoryData singleData= data.get(data.size() - 1);
+                    if(!Objects.equals(singleData.getPatientID(), MainActivity.getPatientObject().getUid())){
+                        data.remove(data.size() - 1);
+                    }
+
+
                 }
                 adapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+
+        homePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Activity = new Intent(TransactionHistory.this, MainActivity2.class);
+                startActivity(Activity);
+            }
+        });
+
+        chatBot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chatbotActivity = new Intent(TransactionHistory.this, ChatbotActivity.class);
+                startActivity(chatbotActivity);
+            }
+        });
+
+        appointments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent senderIntent = new Intent(TransactionHistory.this, MainActivity2.class);
+                senderIntent.putExtra("Page","appointmentsList");
+                startActivity(senderIntent);
+            }
+        });
+
+
+        userProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent senderIntent = new Intent(TransactionHistory.this, MainActivity2.class);
+                senderIntent.putExtra("Page","patientDetails");
+                startActivity(senderIntent);
+
             }
         });
     }

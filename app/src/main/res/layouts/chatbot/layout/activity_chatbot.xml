@@ -9,7 +9,7 @@
 
 
   <ImageView
-      android:id="@+id/ImageView_Chatbot_backbutton"
+      android:id="@+id/ChatbotBackbutton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="19dp"
@@ -41,6 +41,7 @@
         android:hint="Enter your message"
         android:inputType="textPersonName"
         android:padding="10dp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnSend"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +69,7 @@
       app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/ImageView_Chatbot_backbutton"
+      app:layout_constraintTop_toBottomOf="@+id/ChatbotBackbutton"
       app:stackFromEnd="true"
       tools:itemCount="2"
       tools:listitem="@layout/adapter_message_one" />

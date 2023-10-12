@@ -1,22 +1,31 @@
 package com.example.capstoneprojectgroup4.search_doctors;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +46,7 @@ public class AppHistoryBookAppointmentF extends Fragment {
     private static final String ARG_END = "End";
     private static final String ARG_LOCATION = "location";
     private static final String ARG_NOAPP = "noApp";
+    private static final String ARG_PRICE = "docPrice";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -49,18 +59,21 @@ public class AppHistoryBookAppointmentF extends Fragment {
     private String date;
     private String start;
     private String End;
+    private double docPrice;
     private  int New_NoAppValue;
     private String patientKey;
     private String appointmentKey;
     private Button UploadAppointment ;
     private FirebaseDatabase firebaseDatabase ;
     private DatabaseReference databaseReference;
+    private String selectedAppointmentType;
+
     public AppHistoryBookAppointmentF() {
         // Required empty public constructor
     }
 
 
-    public static AppHistoryBookAppointmentF newInstance(String doctorName, String date, String day,String start, String End, String noApp, String location) {
+    public static AppHistoryBookAppointmentF newInstance(String doctorName, String date, String day,String start, String End, String noApp, String location, double docPrice) {
         AppHistoryBookAppointmentF fragment = new AppHistoryBookAppointmentF();
         Bundle args = new Bundle();
         args.putString(ARG_DOCTOR_NAME, doctorName);
@@ -71,6 +84,7 @@ public class AppHistoryBookAppointmentF extends Fragment {
         args.putString(ARG_DATE, date);
         args.putString(ARG_NOAPP,noApp);
         args.putString(ARG_LOCATION,location);
+        args.putDouble(ARG_PRICE,docPrice);
         fragment.setArguments(args);
         return fragment;
     }
@@ -86,7 +100,7 @@ public class AppHistoryBookAppointmentF extends Fragment {
             noApp = getArguments().getString(ARG_NOAPP);
             location = getArguments().getString(ARG_LOCATION);
             date = getArguments().getString(ARG_DATE);
-
+            docPrice = getArguments().getDouble(ARG_PRICE);
         }
         // Initialize the Firebase Database reference here
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -104,6 +118,9 @@ public class AppHistoryBookAppointmentF extends Fragment {
         TextView noAppTextView = view.findViewById(R.id.textAppointmentNumberValue2);
         TextView doctorNameTextView = view.findViewById(R.id.textDoctorNameValue2);
         TextView dayTextView = view.findViewById(R.id.textDateTimeValue);
+
+        TextView TotalPrice = view.findViewById(R.id.TotalTv);
+        TextView AppointmentFees = view.findViewById(R.id.AdminfeesTv);
         // Set the doctor's name and day to the TextViews
         doctorNameTextView.setText(doctorName);
         dayTextView.setText(day + " "+ start+"-"+ End);
@@ -114,9 +131,33 @@ public class AppHistoryBookAppointmentF extends Fragment {
         TextView patientNameTextView = view.findViewById(R.id.textPatientNameValue2);
         patientNameTextView.setText(patientName);
 
+        // Format and set the appointment fees and total price as text
+        AppointmentFees.setText("Rs " + String.valueOf((int) docPrice) + ".00"); // Convert double to String
+        double TotalFees = docPrice + 100;
+        TotalPrice.setText("Rs " + String.valueOf((int) TotalFees) + ".00"); // Convert double to String
+
+
         // Initialize appointmentType EditText and UploadAppointment Button
-        EditText appointmentType = view.findViewById(R.id.textAppointmentType2);
+        Spinner appointmentTypeSpinner = view.findViewById(R.id.spinner_appointmentType2);
         UploadAppointment = view.findViewById(R.id.buttonConfirmAppointment2);
+
+        String[] appointmentTypes = {"Appointment type", "Voice", "Video"};
+
+        ArrayAdapter<String> arrayAdapterBrands = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, appointmentTypes);
+        arrayAdapterBrands.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        appointmentTypeSpinner.setAdapter(arrayAdapterBrands);
+
+        appointmentTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedAppointmentType = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
 
@@ -124,12 +165,110 @@ public class AppHistoryBookAppointmentF extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack("AppHistoryDocAvailF", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fm.popBackStack("DocAvailF", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            }
+        });
+
+        UploadAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getPatientName = MainActivity.getPatientObject().getFirstName();
+                String email = MainActivity.getPatientObject().getEmail();
+
+                if(selectedAppointmentType.equals("Appointment type")){
+                    Toast.makeText(getActivity(), "Please choose the type of appointment.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Generate a unique key for the appointment
+                patientKey = MainActivity.getPatientObject().getUid();
+                appointmentKey = databaseReference.child("Appointment Data").child(patientKey).push().getKey();
+                AppointmentKeyGenerator.setAppointmentKey(appointmentKey);
+                String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
+                AppointmentKeyGenerator.setDoctorName(sanitizedDoctorName);
+
+
+                Log.d(TAG, "Generated appointmentKey: " + appointmentKey);
+                String PatientID = MainActivity.getPatientObject().getUid();
+
+                uploadAppointment(email, getPatientName, doctorName, day, start, End, selectedAppointmentType, location, New_NoAppValue, PatientID);
+                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, selectedAppointmentType, location, New_NoAppValue,start, End, PatientID);
+
             }
         });
 
         return view;
 
-
     }
+
+    private void uploadDoctorAppointment(String doctorName, String pPatientName, String pPatientEmail, String pDay, String appointmentKey, String VoiceVideoCallType, String location, int noApp, String start, String end, String PatientID) {
+        // Sanitize input values to remove invalid characters
+        String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
+        String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
+
+        // Create a reference to the "Doctor Appointments" node under the doctor's name
+        DatabaseReference doctorAppointmentsRef = databaseReference.child("Doctor Appointments").child(sanitizedDoctorName);
+
+        // Create a HashMap to represent the appointment data
+        HashMap<String, Object> appointmentData = new HashMap<>();
+        appointmentData.put("Location", location);
+        appointmentData.put("AppointmentType", VoiceVideoCallType);
+        appointmentData.put("AppointmentNumber", noApp);
+        appointmentData.put("PatientName", sanitizedPatientName);
+        appointmentData.put("PatientEmail", pPatientEmail);
+        appointmentData.put("StartTime", start);
+        appointmentData.put("EndTime", end);
+        appointmentData.put("Date", pDay);
+        appointmentData.put("PatientUserId",PatientID);
+
+        // Use the generated key to store the appointment data under the doctor's appointments
+        doctorAppointmentsRef.child(appointmentKey).setValue(appointmentData)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(requireContext(), "Error booking appointment", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end, String VoiceVideoCallType, String location, int noApp, String PatientID) {
+
+        // Sanitize the email to remove invalid characters
+
+        String sanitizedEmail = email.replaceAll("[.#$\\[\\]]", "_");
+        String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
+        String sanitizedDoctorName = pDoctorName.replaceAll("[.#$\\[\\]]", "_");
+
+        // Encrypt patientName and email before uploading
+        String encryptedPatientName = EncryptionUtil.encrypt(sanitizedPatientName);
+        String encryptedEmail = EncryptionUtil.encrypt(sanitizedEmail);
+
+
+
+        HashMap<String, Object> appointmentData = new HashMap<>();
+        //appointmentData.put("PatientName", sanitizedPatientName);
+        //appointmentData.put("PatientEmail", sanitizedEmail);
+        appointmentData.put("PatientName", encryptedPatientName);
+        appointmentData.put("PatientEmail", encryptedEmail);
+
+        appointmentData.put("DoctorName", sanitizedDoctorName);
+        appointmentData.put("Location", location);
+        appointmentData.put("AppointmentType", VoiceVideoCallType);
+        appointmentData.put("AppointmentNumber", noApp);
+        appointmentData.put("StartTime", start);
+        appointmentData.put("EndTime", end);
+        appointmentData.put("Date", pDay);
+        appointmentData.put("PatientUserId",PatientID);
+
+        // Use the generated key to store the appointment data under the patient's appointments
+        databaseReference.child("Appointment Data").child(patientKey).child(appointmentKey).setValue(appointmentData)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(requireContext(), "Appointment Booked Successfully", Toast.LENGTH_SHORT).show();
+
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(requireContext(), "Error booking appointment", Toast.LENGTH_SHORT).show();
+                });
+    }
+
 }

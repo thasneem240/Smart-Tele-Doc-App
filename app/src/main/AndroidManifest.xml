@@ -66,12 +66,6 @@
             android:name=".ssearch_pharmacy.PrescriptionTransaction"
             android:exported="false" />
         <activity
-            android:name=".transaction.AppointmentTransaction"
-            android:exported="false" />
-        <activity
-            android:name=".ResultActivity"
-            android:exported="false" />
-        <activity
             android:name=".chatbot.ChatbotActivity"
             android:exported="false" />
         <activity

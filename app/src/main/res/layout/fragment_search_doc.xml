@@ -23,12 +23,12 @@
         android:textColorHint="#A1A8B0"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/PatsearchName"
+            android:id="@+id/textInputEditText_searchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#3174D4"

@@ -77,7 +77,7 @@ public class DoctorUserProfile extends Fragment {
         ImageView backButton = v.findViewById(R.id.ImageView_BackButton2);
         Button logoutButton = v.findViewById(R.id.button_Logout);
 
-        textViewGreetings.setText("Hi, "+DoctorsActivity.getDoctorObject().getName());
+        textViewGreetings.setText("Hi, \n"+DoctorsActivity.getDoctorObject().getName());
         editTextName.setText(DoctorsActivity.getDoctorObject().getName());
         editTextRegNumber.setText(DoctorsActivity.getDoctorRegNumber());
         editTextSpecialization.setText(DoctorsActivity.getDoctorObject().getSpecialization());
