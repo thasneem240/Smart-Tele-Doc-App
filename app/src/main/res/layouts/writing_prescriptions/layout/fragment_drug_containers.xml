@@ -76,6 +76,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/rectangle_10"
         android:text="Add from the list"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -89,6 +90,7 @@
         android:layout_marginEnd="18dp"
         android:background="@drawable/rectangle_10"
         android:text="Manually add medicines"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_add_drugs" />
