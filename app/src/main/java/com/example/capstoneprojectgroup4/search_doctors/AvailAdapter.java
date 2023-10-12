@@ -69,6 +69,8 @@ public class AvailAdapter  extends RecyclerView.Adapter<AvailViewHolder> {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentManager fm = activity.getSupportFragmentManager();
 
+
+
                 if(availability.getNoApp() < 30)
                 {
                     // Pass the selected date to the BookAppointmentF fragment

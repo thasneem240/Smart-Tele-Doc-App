@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4;
 
+import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentManager;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
@@ -7,6 +8,7 @@ import androidx.test.espresso.FailureHandler;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -62,6 +64,118 @@ public class SearchDocFInstrumentedTest {
     public void tearDown() {
         // Clean up resources if needed
     }
+
+
+
+    public static class MyViewAction {
+
+        public  ViewAction clickChildViewWithId(final int id) {
+            return new ViewAction() {
+                @Override
+                public Matcher<View> getConstraints() {
+                    return null;
+                }
+
+                @Override
+                public String getDescription() {
+                    return "Click on a child view with specified id.";
+                }
+
+                @Override
+                public void perform(UiController uiController, View view) {
+                    View v = view.findViewById(id);
+                    v.performClick();
+                }
+            };
+        }
+
+    }
+
+    @Test
+    public void testSearchAndBookAppointment() {
+
+
+
+        // Launch the MainActivity and navigate to the SearchDocF fragment
+        ActivityScenario<MainActivity2> scenario = ActivityScenario.launch(MainActivity2.class);
+        scenario.onActivity(activity -> {
+            fragmentManager = activity.getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, new SearchDocF()).commit();
+        });
+
+        // Type text into the EditText field
+        onView(withId(R.id.textInputEditText_searchName))
+                .perform(typeText("Noel"), ViewActions.closeSoftKeyboard()); // Close the keyboard
+
+        onView(withId(R.id.searchDoctorsNSLDButton)).check(matches(isDisplayed()));
+
+        // Perform click on the search button
+        onView(withId(R.id.searchDoctorsNSLDButton))
+                .perform(click());
+
+        // Wait for the Doctor search results to load
+        try {
+            Thread.sleep(1000); // Adjust the sleep duration as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Click on "Dr. Noel Somasundaram" text within CardView1
+        onView(withId(R.id.searchrv)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(0, clickButtonWithId(R.id.textName))
+        );
+
+        // Wait for the DocAvailF fragment to load
+        try {
+            Thread.sleep(25000); // Adjust the sleep duration as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.backButtonDocAvail)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.recyclerView)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(0, clickButtonWithId(R.id.textDay)));
+
+        try {
+            Thread.sleep(25000); // Adjust the sleep duration as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.buttonConfirmAppointment2)).check(matches(isDisplayed()));
+
+
+
+
+    }
+
+
+
+
+    public static ViewAction clickButtonWithId(@IdRes final int buttonId) {
+        return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return allOf(isAssignableFrom(View.class), isDisplayed());
+            }
+
+            @Override
+            public String getDescription() {
+                return "Click on a button with specified resource id";
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                View button = view.findViewById(buttonId);
+                if (button != null) {
+                    button.performClick();
+                }
+            }
+        };
+    }
+
+
+
+
 
     @Test
     public void testSearchDoctorsName() {
