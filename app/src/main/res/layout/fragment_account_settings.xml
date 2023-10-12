@@ -31,7 +31,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout_Email"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:background="@drawable/rectangle_12"
                 android:hint="Email"
@@ -53,7 +53,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout_FirstName"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -76,7 +76,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout_LastName"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -99,7 +99,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout_Nic"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -123,7 +123,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Dob"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -148,12 +148,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout_Gender"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
-                android:gravity="center"
                 android:hint="Gender"
+                android:gravity="center"
                 android:textColorHint="#013073"
                 app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Mobile"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -172,7 +172,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Mobile"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
 
@@ -199,7 +199,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Height"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
 
@@ -226,7 +226,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Weight"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
 
@@ -252,7 +252,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Country"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
 
@@ -276,7 +276,7 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_City"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
@@ -300,8 +300,8 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:id="@+id/TextInputLayout_Address"
-                android:layout_width="377dp"
-                android:layout_height="56dp"
+                android:layout_width="360dp"
+                android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
                 android:hint="Address"
@@ -322,7 +322,7 @@
 
             <Button
                 android:id="@+id/Button_Update"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="47dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_4"
@@ -333,7 +333,7 @@
 
             <Button
                 android:id="@+id/Button_Logout"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_4"
@@ -377,6 +377,7 @@
         android:layout_width="96dp"
         android:layout_height="81dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="61dp"
         android:src="@drawable/female_avatar"
         app:layout_constraintEnd_toStartOf="@+id/textView4"

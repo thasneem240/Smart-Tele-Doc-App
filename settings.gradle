@@ -15,6 +15,8 @@ dependencyResolutionManagement {
         maven {
             url  "https://repo.repsy.io/mvn/payhere/payhere-mobilesdk-android/"
         }
+
+        maven { setUrl("https://jitpack.io") }
     }
 }
 rootProject.name = "CapStoneProjectGroup4"

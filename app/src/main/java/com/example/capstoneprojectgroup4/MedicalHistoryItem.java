@@ -6,6 +6,16 @@ package com.example.capstoneprojectgroup4;
         private String date;
         private String description;
 
+
+        public MedicalHistoryItem()
+        {
+            /**
+             * Default constructor required for calls to
+             * DataSnapshot.getValue(MedicalHistoryItem.class)
+             */
+
+        }
+
         public MedicalHistoryItem(String date, String description)
         {
             this.date = date;

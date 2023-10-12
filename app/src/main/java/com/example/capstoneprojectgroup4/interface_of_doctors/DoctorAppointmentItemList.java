@@ -71,14 +71,17 @@ public class DoctorAppointmentItemList {
     public String getPatientName() {
         return PatientName;
     }
-    public String getEndTime() {
+    public String getEndTime()
+    {
         return EndTime;
     }
-    public String getStartTime() {
+    public String getStartTime()
+    {
         return StartTime;
     }
 
     public void setPatientName(String patientName) {
         PatientName = patientName;
     }
+
 }

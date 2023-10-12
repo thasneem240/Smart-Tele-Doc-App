@@ -44,6 +44,7 @@ public class AvailablePharmaciesAdapter extends RecyclerView.Adapter<AvailablePh
 
     @Override
     public void onBindViewHolder(@NonNull AvailablePharmaciesViewHolder holder, int position) {
+        int pos = position;
         holder.pharmacy_name.setText(String.valueOf(availablePharmacies.get(position).pharmacy));
         holder.totalPrice.setText("Rs. "+availablePharmacies.get(position).price);
         holder.pharmacy_name.setOnClickListener(new View.OnClickListener() {
@@ -51,8 +52,9 @@ public class AvailablePharmaciesAdapter extends RecyclerView.Adapter<AvailablePh
             public void onClick(View view){
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 Intent senderIntent = new Intent(activity, PrescriptionTransaction.class);
-                senderIntent.putExtra("ITEM",holder.pharmacy_name.getText());
-                senderIntent.putExtra("PRICE","1200.00");
+                senderIntent.putExtra("ITEM", holder.pharmacy_name.getText());
+                senderIntent.putExtra("PRICE",String.valueOf((availablePharmacies.get(pos).price)));
+                senderIntent.putExtra("Chatbot","false");
                 activity.startActivity(senderIntent);
 
             }

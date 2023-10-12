@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,7 +40,8 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TimeZone;
 
-public class ViewAppointments extends Fragment {
+public class ViewAppointments extends Fragment
+{
 
     private RecyclerView recyclerView;
     private ViewAppointmentsAdapter viewAppointmentsAdapter;
@@ -67,13 +69,16 @@ public class ViewAppointments extends Fragment {
         TextView viewh = view.findViewById(R.id.viewhistory);
 
         ImageView back = view.findViewById(R.id.backButtonViewApp);
+
+
         String name = MainActivity.getPatientObject().getFirstName();
         patient.setText(name);
         recyclerView = view.findViewById(R.id.recyclerAppView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Set the adapter here
-        viewAppointmentsAdapter = new ViewAppointmentsAdapter(new ArrayList<>());
+        viewAppointmentsAdapter = new ViewAppointmentsAdapter(new ArrayList<>(),getActivity(),
+                getActivity().getSupportFragmentManager());
         recyclerView.setAdapter(viewAppointmentsAdapter);
 
 
@@ -157,7 +162,8 @@ public class ViewAppointments extends Fragment {
                 }
 
                 // Create and set the adapter with the fetched appointments
-                viewAppointmentsAdapter = new ViewAppointmentsAdapter(appointments);
+                viewAppointmentsAdapter = new ViewAppointmentsAdapter(appointments,getActivity(),
+                        getActivity().getSupportFragmentManager());
                 recyclerView.setAdapter(viewAppointmentsAdapter);
                 viewAppointmentsAdapter.notifyDataSetChanged(); // Notify data change
             }

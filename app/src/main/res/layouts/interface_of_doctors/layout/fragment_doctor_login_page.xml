@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".interface_of_doctors.doctor_authentication.DoctorLoginPage">
 
 
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="360dp"
         android:src="@drawable/baseline_keyboard_arrow_left_24"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="40dp"
+            android:textColor="#3174D4"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,6 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="40dp"
+            android:textColor="#3174D4"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,9 +141,10 @@
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"
         android:text="Don't have an account?"
+        android:textColor="#717784"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button3" />
 
@@ -148,10 +152,10 @@
         android:id="@+id/TextView_sign_up_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
         android:text="Sign up"
         android:textColor="#013073"
-        app:layout_constraintEnd_toEndOf="@+id/login_button3"
+        app:layout_constraintStart_toEndOf="@+id/textView23"
         app:layout_constraintTop_toBottomOf="@+id/login_button3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

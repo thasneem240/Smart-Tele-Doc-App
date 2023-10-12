@@ -28,9 +28,11 @@ public class REcyclerAdapter extends RecyclerView.Adapter<REcyclerDataHolder> {
     @Override
     public void onBindViewHolder(@NonNull REcyclerDataHolder holder, int position) {
         TransactionHistoryData singleData = data.get(position);
+        String datetime[] = singleData.getDate().split(" ");
         holder.nameTextBox.setText(singleData.getName());
-        holder.dateTextBox.setText(singleData.getDate());
+        holder.dateTextBox.setText(datetime[0]);
         holder.priceTextBox.setText(singleData.getPrice());
+        holder.timeTextBox.setText(datetime[1]);
 
     }
 

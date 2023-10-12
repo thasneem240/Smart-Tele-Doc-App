@@ -202,8 +202,7 @@ public class BookAppointmentF extends Fragment {
         UploadAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getPatientName = MainActivity.getPatientObject().getFirstName();
-                String email = MainActivity.getPatientObject().getEmail();
+                email = MainActivity.getPatientObject().getEmail();
 
                 if(selectedAppointmentType.equals("Appointment type")){
                     Toast.makeText(getActivity(), "Please choose the type of appointment.", Toast.LENGTH_SHORT).show();
@@ -249,12 +248,6 @@ public class BookAppointmentF extends Fragment {
                 req.getItems().add(new Item(null, item, 1, price));
 
                 temp(req);
-
-                uploadAppointment(email, getPatientName, doctorName, day, start, End, selectedAppointmentType, location, New_NoAppValue, PatientID);
-                uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, selectedAppointmentType, location, New_NoAppValue,start, End, PatientID);
-
-
-
 
             }
         });
@@ -471,18 +464,18 @@ public class BookAppointmentF extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 String msg;
                 if (response != null)
-                    if (response.isSuccess()) {
+                    if (response.isSuccess()){
                         Date currentTime = Calendar.getInstance().getTime();
                         DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
                         String strDate = dateFormat.format(currentTime);
                         String itemname = item;
                         PatientID = MainActivity.getPatientObject().getUid();
                         Transaction.put("name", itemname);
-                        Transaction.put("item", getAppointmentType + " appointment, 1, " + "LKR " + TotalFees);
+                        Transaction.put("item",getAppointmentType+" appointment, Quantity 1, "+"LKR "+TotalFees);
                         Transaction.put("date", strDate);
-                        Transaction.put("price", "LKR " + TotalFees);
-                        Transaction.put("description", itemname + " from " + start + " to " + End + " Appointment number : " + New_NoAppValue);
-                        Transaction.put("patientID", PatientID);
+                        Transaction.put("price", "LKR "+TotalFees);
+                        Transaction.put("description",itemname+" from "+start+" to "+End+" Appointment number : "+New_NoAppValue);
+                        Transaction.put("patientID",PatientID);
                         databaseReference.child("Transaction").child("IDA " + strDate).setValue(Transaction);
                         msg = "Activity result:" + response.getData().toString();
                         //after successful payment book appointment
@@ -490,7 +483,7 @@ public class BookAppointmentF extends Fragment {
 
 
                         uploadAppointment(email, getPatientName, doctorName, day, start, End, getAppointmentType, location, New_NoAppValue, PatientID);
-                        uploadDoctorAppointment(doctorName, getPatientName, email, day, appointmentKey, getAppointmentType, location, New_NoAppValue, start, End, PatientID);
+                        uploadDoctorAppointment( doctorName, getPatientName, email,day, appointmentKey, getAppointmentType, location, New_NoAppValue,start, End, PatientID);
 
                         updateAvailability(doctorName, location, date, New_NoAppValue);
 
@@ -498,7 +491,8 @@ public class BookAppointmentF extends Fragment {
                         if (isOneDayBeforeAppointmentDate(date)) {
                             sendSMS(phonenum, "Your Appointment at " + location + " with " + doctorName + "is Tomorrow, Please Don't forget !");
                         }
-                    } else
+                    }
+                    else
                         msg = "Result:" + response.toString();
                 else
                     msg = "Result: no response";
@@ -513,4 +507,6 @@ public class BookAppointmentF extends Fragment {
             }
         }
     }
+
 }
+

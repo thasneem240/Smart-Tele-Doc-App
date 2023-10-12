@@ -17,6 +17,7 @@ import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOfPatients_patientProfile.ListOfPatientsFragment2;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.ListOfPatients_writingPrescription.ListOfPatientsFragment;
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DoctorMainMenu#newInstance} factory method to

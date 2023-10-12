@@ -12,10 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
 import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.search_doctors.AppointmentItem;
+import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,10 +42,19 @@ public class Frag_Remote_Consultation extends Fragment
 
     private EditText patientNameEditText;
     private ImageView backButtonRemoteCons;
+    private AppointmentItem appointmentItem;
+    private EditText issueEditText;
 
-    public Frag_Remote_Consultation() {
+    public Frag_Remote_Consultation()
+    {
         // Required empty public constructor
     }
+
+    public Frag_Remote_Consultation(AppointmentItem appointmentItem)
+    {
+        this.appointmentItem = appointmentItem;
+    }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -79,11 +93,19 @@ public class Frag_Remote_Consultation extends Fragment
         Button videoConferenceButton = view.findViewById(R.id.videoConferenceButton);
         patientNameEditText = view.findViewById(R.id.patientNameEditText);
         backButtonRemoteCons = view.findViewById(R.id.backButtonRemoteCons);
+        issueEditText = view.findViewById(R.id.issueEditText);
 
 
         String patientName = MainActivity.getPatientObject().getFirstName();
+        String appointmentType = appointmentItem.getAppointmentType();
+
         // patientNameEditText.setText("A.S.M. Thasneem");
         patientNameEditText.setText(patientName);
+
+        if(appointmentType.equalsIgnoreCase("Voice"))
+        {
+            videoConferenceButton.setText("Start Audio Conference");
+        }
 
 
         videoConferenceButton.setOnClickListener(new View.OnClickListener()
@@ -94,22 +116,58 @@ public class Frag_Remote_Consultation extends Fragment
                 // Handle the video conference button click event here
                 // You can start the video conference activity or initiate the call.
 
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                Frag_VideoConference fragVideoConference = new Frag_VideoConference();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, fragVideoConference).commit();
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
+//                Frag_VideoConference fragVideoConference = new Frag_VideoConference();
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, fragVideoConference).commit();
 
+
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
+//                Frag_AgoraVideoConference videoConference = new Frag_AgoraVideoConference(1);
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, videoConference).commit();
+
+
+                String issueText = issueEditText.getText().toString().trim();
+
+                if (issueText.isEmpty())
+                {
+                    String message = "Please write Your Issue or Concern in the issue text field";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    saveToRealTimeDataBase(issueText);
+
+                    // Audio Conference
+                    if(appointmentType.equalsIgnoreCase("Voice"))
+                    {
+                        startAudioConference();
+                    }
+                    else
+                    {
+                        startVideoConference();
+                    }
+                }
 
             }
         });
+
+
+
+
 
         backButtonRemoteCons.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
+//                MedicalRecords medicalRecords = new MedicalRecords();
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, medicalRecords).commit();
+
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                MedicalRecords medicalRecords = new MedicalRecords();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, medicalRecords).commit();
+                ViewAppointments viewAppointments = new ViewAppointments();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, viewAppointments).commit();
+
             }
         });
 
@@ -117,4 +175,63 @@ public class Frag_Remote_Consultation extends Fragment
 
         return view;
     }
+
+    private void saveToRealTimeDataBase(String issueText)
+    {
+
+        // Update this info into real time database
+
+        String date = appointmentItem.getDate();
+        String description = issueText;
+
+        // Create a MedicalHistoryItem object
+        MedicalHistoryItem medicalHistoryItem = new MedicalHistoryItem(date,description);
+
+        String userId = MainActivity.getPatientObject().getUid();
+
+        // Get a reference to the Firebase Realtime Database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("Patient's Medical History");
+
+
+        // Store the medical record under the user's ID
+        usersRef.child(userId).child("medicalRecords").push().setValue(medicalHistoryItem);
+
+        String message = " Successfully Stored the Medical History data into Realtime database";
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+
+    }
+
+
+    private void startVideoConference()
+    {
+        // Create an Intent to specify the target activity
+        Intent intent = new Intent(getActivity(), Activity_Agora_VideoConference.class);
+
+        // Optionally, add data to the Intent using key-value pairs
+        intent.putExtra("userType", "Patient");
+
+        // Start the target activity using the Intent
+        startActivity(intent);
+    }
+
+
+
+    private void startAudioConference()
+    {
+        // Create an Intent to specify the target activity
+        Intent intent = new Intent(getActivity(), Activity_Agora_AudioConference.class);
+
+        // Optionally, add data to the Intent using key-value pairs
+        intent.putExtra("userType", "Patient");
+
+        // Start the target activity using the Intent
+        startActivity(intent);
+    }
+
+
+
+
+
+
 }

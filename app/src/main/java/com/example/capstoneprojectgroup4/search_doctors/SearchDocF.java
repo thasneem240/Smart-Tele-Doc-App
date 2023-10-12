@@ -264,6 +264,7 @@ public class SearchDocF extends Fragment  {
                     if (searchType == 0 && name != null &&
                             removeWhitespaceAndToLower(name).contains(removeWhitespaceAndToLower(nameEd))) {                        Doctors doctor = new Doctors(name, specialization, locations);
                         doctors.add(doctor);
+
                     } else if (searchType == 1 && specialization != null && removeWhitespaceAndToLower(specialization).contains(removeWhitespaceAndToLower(specializationEd))){
                         Doctors doctor = new Doctors(name, specialization, locations);
                         doctors.add(doctor);
@@ -298,6 +299,7 @@ public class SearchDocF extends Fragment  {
 
                 DocSearchResultAdapter docSearchResultAdapter = new DocSearchResultAdapter(doctors);
                 recyclerView.setAdapter(docSearchResultAdapter);
+
             }
 
             @Override

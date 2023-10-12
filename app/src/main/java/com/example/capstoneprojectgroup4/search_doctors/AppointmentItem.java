@@ -1,6 +1,7 @@
 package com.example.capstoneprojectgroup4.search_doctors;
 
-public class AppointmentItem {
+public class AppointmentItem
+{
     private String PatientName;
     private String PatientEmail;
     private String DoctorName;
@@ -36,11 +37,13 @@ public class AppointmentItem {
 
     }
 
-    public String getStartTime() {
+    public String getStartTime()
+    {
         return StartTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(String startTime)
+    {
         this.StartTime = startTime;
     }
 

@@ -18,43 +18,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PatientListAdapter extends RecyclerView.Adapter<PatientListViewHolder> {
-private List<String> patientNames;
+public class PatientListAdapter extends RecyclerView.Adapter<PatientListViewHolder>
+{
+        private List<String> patientNames;
 
-public PatientListAdapter(List<String> patientNames) {
-        this.patientNames = patientNames;
+        public PatientListAdapter(List<String> patientNames)
+        {
+                this.patientNames = patientNames;
         }
 
-@NonNull
-@Override
-public PatientListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.patient_list, parent, false);
-        return new PatientListViewHolder(view);
+        @NonNull
+        @Override
+        public PatientListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+        {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.patient_list, parent, false);
+                return new PatientListViewHolder(view);
         }
 
-@Override
-public void onBindViewHolder(@NonNull PatientListViewHolder holder, int position) {
-        String patientName = patientNames.get(position);
-        holder.bind(patientName);
-        holder.select.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                        FragmentManager fm = activity.getSupportFragmentManager();
-                        DoctorMedicalRecords doctorAvailability = new DoctorMedicalRecords();
-                        fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorAvailability).commit();
-                }
-        });
+        @Override
+        public void onBindViewHolder(@NonNull PatientListViewHolder holder, int position)
+        {
+                String patientName = patientNames.get(position);
+                holder.bind(patientName);
+                holder.select.setOnClickListener(new View.OnClickListener()
+                {
+                        @Override
+                        public void onClick(View view) {
+                                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                                FragmentManager fm = activity.getSupportFragmentManager();
+                                DoctorMedicalRecords doctorAvailability = new DoctorMedicalRecords();
+                                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorAvailability).commit();
+                        }
+                });
+
         }
 
-@Override
-public int getItemCount() {
-        return patientNames.size();
+        @Override
+        public int getItemCount()
+        {
+                return patientNames.size();
         }
 
 
-        public void setPatientNames(List<String> patientNames) {
+        public void setPatientNames(List<String> patientNames)
+        {
                 this.patientNames = patientNames;
                 notifyDataSetChanged();
         }
-        }
+}

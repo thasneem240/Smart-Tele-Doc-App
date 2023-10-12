@@ -1,5 +1,8 @@
 package com.example.capstoneprojectgroup4.ssearch_pharmacy;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,11 +13,19 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.content.Intent;
+import android.net.Uri;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +34,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
 import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -52,8 +67,11 @@ public class PharmaciesF extends Fragment {
     Button searchButton;
     Toolbar toolbar;
     Button orderButton;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
     Button bestPrice;
     public static final String TAG = "PharmaciesF"; // Add this TAG field
+
 
 
     RadioGroup radioGroup;
@@ -112,6 +130,73 @@ public class PharmaciesF extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pharmacies, container, false);
+        TextView find = view.findViewById(R.id.FindNearby);
+         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+         locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                // Handle location updates here
+                // Get the user's current latitude and longitude
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+
+                // Create a URI for launching Google Maps with nearby pharmacies
+                Uri gmmIntentUri = Uri.parse("geo:" + latitude + "," + longitude + "?q=pharmacy&radius=1000");
+
+                // Create an Intent to open Google Maps
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps"); // Ensure Google Maps is used
+                startActivity(mapIntent);
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            @Override
+            public void onProviderEnabled(String provider) {}
+
+            @Override
+            public void onProviderDisabled(String provider) {}
+        };
+        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+        find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Check for location permission
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted, request current location
+                    fusedLocationProviderClient.getLastLocation()
+                            .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+                                    if (location != null) {
+                                        // Get the user's current latitude and longitude
+                                        double latitude = location.getLatitude();
+                                        double longitude = location.getLongitude();
+
+                                        // Create a URI for launching Google Maps with nearby pharmacies
+                                        Uri gmmIntentUri = Uri.parse("geo:" + latitude + "," + longitude + "?q=pharmacy&radius=1000");
+
+                                        // Create an Intent to open Google Maps
+                                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                                        mapIntent.setPackage("com.google.android.apps.maps"); // Ensure Google Maps is used
+                                        startActivity(mapIntent);
+                                    }
+                                }
+                            });
+                } else {
+                    // Permission not granted, request it
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            REQUEST_LOCATION_PERMISSION);
+                }
+            }
+        });
+
+
 
         etPharmName= view.findViewById(R.id.searchPharmName);
         etPharmLocation = view.findViewById(R.id.searchPharmLoc);
@@ -159,6 +244,26 @@ public class PharmaciesF extends Fragment {
         });
 
         return view;
+    }
+
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
+
+    // Handle the permission request result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, you can now request location updates
+                try {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                } catch (SecurityException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                // Permission denied, handle it as needed (e.g., show a message)
+                Toast.makeText(getActivity(), "Location permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 

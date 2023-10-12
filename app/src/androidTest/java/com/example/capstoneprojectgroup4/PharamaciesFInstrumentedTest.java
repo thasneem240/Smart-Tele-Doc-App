@@ -66,7 +66,7 @@ public class PharamaciesFInstrumentedTest {
 
         // Replace with your specific test case steps
         Espresso.onView(ViewMatchers.withId(R.id.searchPharmName))
-                .perform(ViewActions.typeText("Union")); // Type the pharmacy name
+                .perform(ViewActions.typeText("Union"), ViewActions.closeSoftKeyboard()); // Type the pharmacy name
         Espresso.onView(ViewMatchers.withId(R.id.pharmsearchButton)).check(matches(isDisplayed()));
 
         // Perform click
@@ -98,7 +98,7 @@ public class PharamaciesFInstrumentedTest {
             fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, new PharmaciesF()).commit();
         });
         Espresso.onView(ViewMatchers.withId(R.id.searchPharmLoc))
-                .perform(ViewActions.typeText("Kandy")); // Type the pharmacy location
+                .perform(ViewActions.typeText("Kandy"), ViewActions.closeSoftKeyboard()); // Type the pharmacy location
 
         // Check visibility
         Espresso.onView(ViewMatchers.withId(R.id.pharmsearchButton)).check(matches(isDisplayed()));
