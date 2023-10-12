@@ -12,8 +12,9 @@ import androidx.test.rule.ActivityTestRule;
 
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.example.capstoneprojectgroup4.front_end.PatientLogin;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientLogin;
+
 import androidx.test.espresso.Root;
 import androidx.test.espresso.matcher.BoundedMatcher;
 import android.view.Gravity;
