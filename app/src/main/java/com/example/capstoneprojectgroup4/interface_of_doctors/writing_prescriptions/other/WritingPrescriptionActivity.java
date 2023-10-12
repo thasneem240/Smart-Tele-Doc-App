@@ -41,6 +41,10 @@ public class WritingPrescriptionActivity extends AppCompatActivity {
         this.selectedDrug.add(prescriptionDrugObject);
     }
 
+    public void removeSelectedDrug(int position){
+        this.selectedDrug.remove(position);
+    }
+
     public PrescriptionObject getPrescriptionObject() {
         return prescriptionObject;
     }
