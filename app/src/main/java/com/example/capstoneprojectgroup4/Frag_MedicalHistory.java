@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
+import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMedicalRecords;
+import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +37,21 @@ public class Frag_MedicalHistory extends Fragment
     private String mParam1;
     private String mParam2;
 
-    public Frag_MedicalHistory() {
+    private String uId;
+    private String userType = "Patient";
+
+    public Frag_MedicalHistory()
+    {
         // Required empty public constructor
     }
+
+    public Frag_MedicalHistory(String userType)
+    {
+        this.userType = userType;
+    }
+
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -75,12 +90,37 @@ public class Frag_MedicalHistory extends Fragment
 
         /* Grab the  UI Variables from Layout file */
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        if(userType.equalsIgnoreCase("Patient"))
+        {
+            uId = MainActivity.getPatientObject().getUid();
+        }
+        else // For Doctors
+        {
+            uId = DoctorsActivity.getAppointmentObject().getPatientUserId();
+        }
+
+
+
+        backButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                MedicalRecords searchDoctors = new MedicalRecords();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+            public void onClick(View view)
+            {
+                if(userType.equalsIgnoreCase("Patient"))
+                {
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    MedicalRecords medicalRecords = new MedicalRecords();
+                    fm.beginTransaction().replace(R.id.fragmentContainerView, medicalRecords).commit();
+                }
+                else
+                {
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    DoctorMedicalRecords doctorMedicalRecords = new DoctorMedicalRecords();
+                    fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, doctorMedicalRecords).commit();
+                }
+
+
+
             }
         });
 

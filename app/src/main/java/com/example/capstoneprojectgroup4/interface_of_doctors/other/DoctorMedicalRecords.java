@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.Frag_ListLabReports;
+import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorViewPatientProfile;
 import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOfPatients_patientProfile.ListOfPatientsFragment2;
@@ -93,11 +94,14 @@ public class DoctorMedicalRecords extends Fragment {
             @Override
             public void onClick(View view)
             {
-
+                Frag_MedicalHistory fragMedicalHistory = new Frag_MedicalHistory("Doctor");
+                fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity,
+                        fragMedicalHistory).commit();
             }
         });
 
 
+        // Thasneem
         labReportsImageView.setOnClickListener(new View.OnClickListener()
         {
             @Override
