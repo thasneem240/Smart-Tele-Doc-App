@@ -8,7 +8,6 @@
     app:cardBackgroundColor="@color/white"
     android:backgroundTint="@color/white"
     app:cardCornerRadius="6dp"
-    android:backgroundTint="#87CEEB"
     app:cardUseCompatPadding="true">
 
 <LinearLayout

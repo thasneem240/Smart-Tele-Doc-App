@@ -1,6 +1,5 @@
 package com.example.capstoneprojectgroup4.interface_of_doctors.other;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -15,10 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
-import com.example.capstoneprojectgroup4.interface_of_doctors.DoctorPatientProfiles;
 import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOfPatients_patientProfile.ListOfPatientsFragment2;
-import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_writingPrescription.ListOfPatientsFragment;
+import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.ListOfPatients_writingPrescription.ListOfPatientsFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +33,6 @@ public class DoctorMainMenu extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
 
     public DoctorMainMenu() {
         // Required empty public constructor
@@ -77,10 +74,9 @@ public class DoctorMainMenu extends Fragment {
         Button writePrescriptionButton = v.findViewById(R.id.Button_writePrescription);
         Button listOfPatients = v.findViewById(R.id.ListofPatientsButton);
         ImageView listOfPatientsImage = v.findViewById(R.id.imageView_listOfPatients);
-        Button aiChatBot = v.findViewById(R.id.AIHelpButton);
-        ImageView aiChatBotImage = v.findViewById(R.id.AIHelpSquare);
 
         TextView greetings = v.findViewById(R.id.good_morning2);
+
         greetings.setText("Hi, " + DoctorsActivity.getDoctorObject().getName());
 
         listOfPatients.setOnClickListener(new View.OnClickListener() {
@@ -122,25 +118,6 @@ public class DoctorMainMenu extends Fragment {
                 fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatientsFragment).commit();
             }
         });
-
-
-        aiChatBotImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
-                chatbotActivity.putExtra("DOCINT","true");
-                startActivity(chatbotActivity);
-            }
-        });
-        aiChatBot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
-                chatbotActivity.putExtra("DOCINT","true");
-                startActivity(chatbotActivity);
-            }
-        });
-
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
