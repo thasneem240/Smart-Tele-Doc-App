@@ -47,8 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="40dp"
-            android:textSize="14sp"
-            android:inputType="textEmailAddress"/>
+            android:textColor="#3174D4"
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -75,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
+            android:textColor="#3174D4"
             android:layout_marginEnd="40dp"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -109,9 +110,7 @@
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="49dp"
-        android:layout_marginEnd="101dp"
         android:background="@drawable/rectangle_1"
         android:text="Login"
         android:textColor="#FFFFFF"
@@ -122,10 +121,10 @@
 
     <TextView
         android:id="@+id/dont_have_account_text"
-        android:layout_width="207dp"
-        android:layout_height="wrap_content"
+        android:layout_width="172dp"
+        android:layout_height="17dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="47dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal|top"
         android:letterSpacing="0.03"
@@ -138,19 +137,18 @@
 
     <TextView
         android:id="@+id/sign_up_link"
-        android:layout_width="96dp"
-        android:layout_height="wrap_content"
+        android:layout_width="62dp"
+        android:layout_height="22dp"
         android:layout_alignBottom="@+id/login_button"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="90dp"
         android:gravity="center_horizontal|top"
         android:letterSpacing="0.03"
         android:lineSpacingExtra="2sp"
         android:text="Sign Up"
         android:textColor="#013073"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dont_have_account_text"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
     <ImageView
@@ -159,7 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="360dp"
         android:src="@drawable/baseline_keyboard_arrow_left_24"
         app:layout_constraintEnd_toEndOf="parent"
