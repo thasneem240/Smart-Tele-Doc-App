@@ -5,6 +5,9 @@
     app:cardCornerRadius="6dp"
     app:cardElevation="6dp"
     android:id="@+id/currentAppointmentCardView"
+    android:background="@drawable/rectangle_12"
+    app:cardBackgroundColor="@color/white"
+    android:backgroundTint="@color/white"
     app:cardUseCompatPadding="true">
     <RelativeLayout
         android:layout_width="match_parent"

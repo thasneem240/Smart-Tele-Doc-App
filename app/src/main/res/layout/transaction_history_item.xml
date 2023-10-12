@@ -5,12 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="6dp"
     app:cardCornerRadius="6dp"
+    android:background="#FFFFFF"
+    app:cardBackgroundColor="@color/white"
+    android:backgroundTint="@color/white"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_margin="15dp">
 
 
@@ -24,7 +27,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.033"
+            app:layout_constraintHorizontal_bias="0.04"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.202" />
@@ -48,15 +51,32 @@
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:text="Date"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/TTime"
+            app:layout_constraintEnd_toStartOf="@+id/TPrice"
+            app:layout_constraintHorizontal_bias="0.046"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemname"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/TTime"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"
+            android:text="Time"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/TPrice"
-            app:layout_constraintHorizontal_bias="0.038"
+            app:layout_constraintHorizontal_bias="0.047"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemname"
-            app:layout_constraintVertical_bias="0.466" />
+            app:layout_constraintVertical_bias="0.857" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
