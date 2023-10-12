@@ -16,8 +16,10 @@ public class DoctorViewAppointmentsViewHolder extends RecyclerView.ViewHolder {
     public TextView time;
 
     public TextView typeTextView;
+    public CardView doctorAppointmentCardView;
 
-    public DoctorViewAppointmentsViewHolder(@NonNull View itemView) {
+    public DoctorViewAppointmentsViewHolder(@NonNull View itemView)
+    {
         super(itemView);
         doctorNameTextView = itemView.findViewById(R.id.DoctorName);
         locationTextView = itemView.findViewById(R.id.Location);
@@ -26,5 +28,6 @@ public class DoctorViewAppointmentsViewHolder extends RecyclerView.ViewHolder {
         time = itemView.findViewById(R.id.Time);
 
         typeTextView = itemView.findViewById(R.id.Type);
+        doctorAppointmentCardView = itemView.findViewById(R.id.doctorAppointmentCardView);
     }
 }

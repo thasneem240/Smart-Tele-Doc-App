@@ -113,6 +113,6 @@ dependencies {
     androidTestImplementation 'androidx.test:core:1.4.0'
     androidTestImplementation 'androidx.test:runner:1.4.0'
 
-
+    implementation group: 'io.agora.rtc', name: 'full-sdk', version: '4.1.1' // For Agora Video
 
 }

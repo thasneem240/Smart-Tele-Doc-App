@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="6dp"
     app:cardElevation="6dp"
+    android:id="@+id/currentAppointmentCardView"
     android:background="@drawable/rectangle_12"
     app:cardBackgroundColor="@color/white"
     android:backgroundTint="@color/white"
     app:cardUseCompatPadding="true">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -80,7 +80,6 @@
             android:text="Cancel"
             android:textColor="#ff0000"
             android:textSize="16sp"
-            android:background="@color/white"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:onClick="onCancelButtonClick" />
