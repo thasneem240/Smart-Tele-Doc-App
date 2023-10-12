@@ -9,7 +9,8 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.home.MainActivity;
-import com.example.capstoneprojectgroup4.front_end.AccountSettings;
+import com.example.capstoneprojectgroup4.patient_authentication.AccountSettings;
+
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,7 +48,7 @@ public class AccountSettingsTest {
         }
 
         // Verify that the EditText fields become enabled for editing
-        Espresso.onView(ViewMatchers.withId(R.id.EditText_FirstName))
+        Espresso.onView(ViewMatchers.withId(R.id.EditText_DoctorName))
                 .check(ViewAssertions.matches(ViewMatchers.isEnabled()));
         try {
             Thread.sleep(3000); // Adjust the duration as needed
@@ -55,7 +56,7 @@ public class AccountSettingsTest {
             e.printStackTrace();
         }
         // Type something into an EditText and close the keyboard
-        Espresso.onView(ViewMatchers.withId(R.id.EditText_FirstName))
+        Espresso.onView(ViewMatchers.withId(R.id.EditText_DoctorName))
                 .perform(typeText("John"), closeSoftKeyboard());
 
         try {
