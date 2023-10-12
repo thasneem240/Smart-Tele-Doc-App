@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/RecyclerView_ListOfPatients"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="16dp"
         android:text="List of Prescriptions"
         android:textColor="@color/black"
@@ -32,8 +32,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerView_ListOfPatients"
-        android:layout_width="376dp"
-        android:layout_height="547dp"
+        android:layout_width="367dp"
+        android:layout_height="543dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"

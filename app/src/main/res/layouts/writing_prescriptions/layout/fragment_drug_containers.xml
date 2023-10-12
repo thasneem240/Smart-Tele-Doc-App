@@ -82,8 +82,8 @@
 
     <Button
         android:id="@+id/button_add_drugs_maually"
-        android:layout_width="0dp"
-        android:layout_height="49dp"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="18dp"

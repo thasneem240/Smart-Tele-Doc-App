@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".interface_of_doctors.DoctorPatientProfiles">
 
     <Button
@@ -44,7 +45,7 @@
             android:id="@+id/ListPatsearchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#A1A8B0"
+            android:textColor="#3174D4"
             android:textSize="10sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -78,8 +79,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listPatientsrv"
-        android:layout_width="334dp"
-        android:layout_height="368dp"
+        android:layout_width="363dp"
+        android:layout_height="421dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.519"

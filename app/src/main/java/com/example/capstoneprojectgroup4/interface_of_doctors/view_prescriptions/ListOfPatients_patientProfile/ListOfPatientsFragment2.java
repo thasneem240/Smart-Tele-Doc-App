@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.interface_of_doctors.ListOfPatients_writingPrescription.AppointmentObject;
+import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.ListOfPatients_writingPrescription.AppointmentObject;
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorMainMenu;
 import com.example.capstoneprojectgroup4.interface_of_doctors.other.DoctorsActivity;
 import com.google.android.gms.tasks.OnFailureListener;

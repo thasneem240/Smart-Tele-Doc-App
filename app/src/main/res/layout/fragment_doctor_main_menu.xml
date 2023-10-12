@@ -9,66 +9,23 @@
 
 
     <ImageView
-        android:id="@+id/ConferenceSquare"
-        android:layout_width="139.29dp"
-        android:layout_height="120dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/yellow_square"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_listOfPatients" />
-
-    <Button
-        android:id="@+id/ConferenceButton"
-        android:layout_width="63dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/layered_video_conference"
-        app:layout_constraintEnd_toEndOf="@+id/ConferenceSquare"
-        app:layout_constraintStart_toStartOf="@+id/ConferenceSquare"
-        app:layout_constraintTop_toTopOf="@+id/ConferenceSquare" />
-
-    <TextView
-        android:id="@+id/doctor3"
-        android:layout_width="133dp"
-        android:layout_height="22dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
-        android:gravity="center_horizontal|top"
-        android:text="Conferencing"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.153"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ConferenceButton"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
         android:id="@+id/AIHelpSquare"
         android:layout_width="139.29dp"
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/green_square"
         android:contentDescription="Pharmacy Button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImageView_writePrescription" />
 
     <TextView
         android:id="@+id/pharmacytext2"
-        android:layout_width="134dp"
-        android:layout_height="22dp"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="12dp"
@@ -76,12 +33,9 @@
         android:text="AI Helper"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AIHelpButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/AIHelpSquare"
+        app:layout_constraintStart_toStartOf="@+id/AIHelpSquare"
+        app:layout_constraintTop_toBottomOf="@+id/AIHelpButton" />
 
     <Button
         android:id="@+id/AIHelpButton"
@@ -120,24 +74,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
-
     <TextView
         android:id="@+id/doctor2"
-        android:layout_width="133dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_horizontal|top"
         android:text="Write prescription"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.848"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_writePrescription"
-        app:layout_constraintVertical_bias="0.016" />
+        app:layout_constraintEnd_toEndOf="@+id/ImageView_writePrescription"
+        app:layout_constraintStart_toStartOf="@+id/ImageView_writePrescription"
+        app:layout_constraintTop_toBottomOf="@+id/Button_writePrescription" />
+
 
     <TextView
         android:id="@+id/good_morning2"
@@ -155,10 +106,9 @@
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView15"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView15"
@@ -176,7 +126,9 @@
         android:layout_height="120dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="26dp"
+        android:layout_marginEnd="53dp"
         android:src="@drawable/blue_square"
+        app:layout_constraintEnd_toStartOf="@+id/ImageView_writePrescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
@@ -202,12 +154,9 @@
         android:text="List of Patients"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.181"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ListofPatientsButton"
-        app:layout_constraintVertical_bias="0.004" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView_listOfPatients"
+        app:layout_constraintStart_toStartOf="@+id/imageView_listOfPatients"
+        app:layout_constraintTop_toBottomOf="@+id/ListofPatientsButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

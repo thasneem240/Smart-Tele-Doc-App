@@ -3,6 +3,7 @@ package com.example.capstoneprojectgroup4.interface_of_doctors;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,7 +39,8 @@ import java.util.TimeZone;
  * Use the {@link DoctorViewAppointments#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DoctorViewAppointments extends Fragment {
+public class DoctorViewAppointments extends Fragment
+{
     private RecyclerView recyclerView;
     private DoctorViewAppointmentsAdapter viewAppointmentsAdapter;
     // TODO: Rename parameter arguments, choose names that match
@@ -50,7 +52,8 @@ public class DoctorViewAppointments extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public DoctorViewAppointments() {
+    public DoctorViewAppointments()
+    {
         // Required empty public constructor
     }
 
@@ -63,7 +66,8 @@ public class DoctorViewAppointments extends Fragment {
      * @return A new instance of fragment DoctorViewAppointments.
      */
     // TODO: Rename and change types and number of parameters
-    public static DoctorViewAppointments newInstance(String param1, String param2) {
+    public static DoctorViewAppointments newInstance(String param1, String param2)
+    {
         DoctorViewAppointments fragment = new DoctorViewAppointments();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -104,7 +108,8 @@ public class DoctorViewAppointments extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Set the adapter here
-        viewAppointmentsAdapter = new DoctorViewAppointmentsAdapter(new ArrayList<>());
+        viewAppointmentsAdapter = new DoctorViewAppointmentsAdapter(new ArrayList<>(), getActivity(),
+                getActivity().getSupportFragmentManager());
         recyclerView.setAdapter(viewAppointmentsAdapter);
         Calendar calendar = Calendar.getInstance();
         Date currentDateTime = calendar.getTime();
@@ -147,7 +152,8 @@ public class DoctorViewAppointments extends Fragment {
                 }
 
                 // Create and set the adapter with the fetched appointments
-                viewAppointmentsAdapter = new DoctorViewAppointmentsAdapter(appointments);
+                viewAppointmentsAdapter = new DoctorViewAppointmentsAdapter(appointments,getActivity(),
+                        getActivity().getSupportFragmentManager());
                 recyclerView.setAdapter(viewAppointmentsAdapter);
                 viewAppointmentsAdapter.notifyDataSetChanged(); // Notify data change
             }

@@ -84,7 +84,7 @@ public class MedicalRecords extends Fragment {
         Button labReportsButton = v.findViewById(R.id.button3);
         ImageView prescriptionsImageView = v.findViewById(R.id.ImageView_ViewPrescriptions);
         Button prescriptionsButton = v.findViewById(R.id.Button_ViewPrescriptions);
-      //  ImageView imageView_RemoteConsultation = v.findViewById(R.id.imageView_RemoteConsultation);
+//        ImageView imageView_RemoteConsultation = v.findViewById(R.id.imageView_RemoteConsultation);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,41 +171,28 @@ public class MedicalRecords extends Fragment {
         prescriptionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-        });
-
-
-     /*   imageView_RemoteConsultation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-//                Intent intent = new Intent(getActivity(), Activity_Remote_Consultation.class);
-//                startActivity(intent);
-
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                Frag_Remote_Consultation fragRemoteConsultation = new Frag_Remote_Consultation();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, fragRemoteConsultation).commit();
-
-
-
+                PrescriptionsListFragment prescriptionsListFragment = new PrescriptionsListFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, prescriptionsListFragment).commit();
             }
         });
-*/
+
+
+//        imageView_RemoteConsultation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view)
+//            {
+////                Intent intent = new Intent(getActivity(), Activity_Remote_Consultation.class);
+////                startActivity(intent);
+//
+//                FragmentManager fm = getActivity().getSupportFragmentManager();
+//                Frag_Remote_Consultation fragRemoteConsultation = new Frag_Remote_Consultation();
+//                fm.beginTransaction().replace(R.id.fragmentContainerView, fragRemoteConsultation).commit();
+//
+//
+//
+//            }
+//        });
 
 
 

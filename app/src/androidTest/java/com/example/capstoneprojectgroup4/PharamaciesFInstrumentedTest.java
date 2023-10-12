@@ -19,6 +19,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 
 import org.hamcrest.Matcher;
@@ -35,10 +36,19 @@ public class PharamaciesFInstrumentedTest {
 
     @Before
     public void setUp() {
-        // Initialize context and fragment manager
+        // Mocking PatientObject for tests
+        PatientObject mockPatient = new PatientObject();
+        mockPatient.setUid("mockPatientUid");
+        mockPatient.setFirstName("MockFirstName");
+
+        // Set the mockPatient in MainActivity for the test
+        MainActivity.setPatientObject(mockPatient);
+
+        // Initialize fragment manager
         context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         fragmentManager = null; // Initialize to null
     }
+
 
     @After
     public void tearDown() {
@@ -56,7 +66,7 @@ public class PharamaciesFInstrumentedTest {
 
         // Replace with your specific test case steps
         Espresso.onView(ViewMatchers.withId(R.id.searchPharmName))
-                .perform(ViewActions.typeText("Union")); // Type the pharmacy name
+                .perform(ViewActions.typeText("Union"), ViewActions.closeSoftKeyboard()); // Type the pharmacy name
         Espresso.onView(ViewMatchers.withId(R.id.pharmsearchButton)).check(matches(isDisplayed()));
 
         // Perform click
@@ -88,7 +98,7 @@ public class PharamaciesFInstrumentedTest {
             fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, new PharmaciesF()).commit();
         });
         Espresso.onView(ViewMatchers.withId(R.id.searchPharmLoc))
-                .perform(ViewActions.typeText("Kandy")); // Type the pharmacy location
+                .perform(ViewActions.typeText("Kandy"), ViewActions.closeSoftKeyboard()); // Type the pharmacy location
 
         // Check visibility
         Espresso.onView(ViewMatchers.withId(R.id.pharmsearchButton)).check(matches(isDisplayed()));

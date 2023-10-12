@@ -6,10 +6,13 @@ import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
+import org.junit.FixMethodOrder;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
-
-import com.example.capstoneprojectgroup4.front_end.PatientSignUp;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientSignUp;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -25,6 +28,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 public class PatientSignUpInstrumentedTest {
 
     @Rule
@@ -39,13 +44,23 @@ public class PatientSignUpInstrumentedTest {
                 .commit();    }
 
     @Test
-    public void testSignUpWithValidInput() {
+    public void B_testSignUpWithValidInput() {
         // Enter valid email and password
 
         onView(ViewMatchers.withId(R.id.EditText_EnterEmail))
                 .perform(ViewActions.typeText("20688651@student.curtin.edu.au"), ViewActions.closeSoftKeyboard());
-        onView(ViewMatchers.withId(R.id.EditText_Doctor_Enter_Password))
+        try {
+            Thread.sleep(2000); // Adjust the sleep duration as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(ViewMatchers.withId(R.id.EditText_EnterPassword))
                 .perform(ViewActions.typeText("123456"), ViewActions.closeSoftKeyboard());
+        try {
+            Thread.sleep(2000); // Adjust the sleep duration as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         onView(ViewMatchers.withId(R.id.EditText_ReEnterPassword))
                 .perform(ViewActions.typeText("123456"), ViewActions.closeSoftKeyboard());
 
@@ -69,7 +84,7 @@ public class PatientSignUpInstrumentedTest {
     }
 
     @Test
-    public void testSignUpWithInvalidInput() {
+    public void A_testSignUpWithInvalidInput() {
 
         // Click the sign-up button without entering any data
         onView(withId(R.id.sign_up_button)).perform(click());
