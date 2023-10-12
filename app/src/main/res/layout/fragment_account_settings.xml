@@ -12,13 +12,13 @@
         android:id="@+id/scrollView"
         android:layout_width="380dp"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImageView_AccountSettings_backbutton">
 
@@ -152,8 +152,8 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
-                android:hint="Gender"
                 android:gravity="center"
+                android:hint="Gender"
                 android:textColorHint="#013073"
                 app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Mobile"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -206,12 +206,12 @@
                 android:background="@drawable/rectangle_12"
                 android:hint="Height"
                 android:textColorHint="#013073"
-                app:suffixText="ft"
                 app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Weight"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Mobile">
+                app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Mobile"
+                app:suffixText="ft">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/EditText_Height"
@@ -233,12 +233,12 @@
                 android:background="@drawable/rectangle_12"
                 android:hint="Weight"
                 android:textColorHint="#013073"
-                app:suffixText="kg"
                 app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_Country"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Height">
+                app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Height"
+                app:suffixText="kg">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/EditText_Weight"
@@ -358,7 +358,6 @@
         </LinearLayout>
 
     </ScrollView>
-
 
     <ImageView
         android:id="@+id/ImageView_AccountSettings_backbutton"
