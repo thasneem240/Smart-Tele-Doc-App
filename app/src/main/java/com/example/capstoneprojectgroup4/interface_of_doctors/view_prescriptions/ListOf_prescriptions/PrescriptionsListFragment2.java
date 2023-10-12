@@ -45,13 +45,9 @@ public class PrescriptionsListFragment2 extends Fragment {
     private String mParam1;
     private String mParam2;
     ArrayList<PrescriptionObject> listOfPrescriptions;
-    String patientUID;
 
     public PrescriptionsListFragment2() {
         // Required empty public constructor
-    }
-    public PrescriptionsListFragment2(String patientUID){
-        this.patientUID = patientUID;
     }
 
     /**
