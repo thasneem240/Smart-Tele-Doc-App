@@ -11,6 +11,8 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
+import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
 
 import org.hamcrest.Matcher;
@@ -43,9 +45,18 @@ public class SearchDocFInstrumentedTest {
 
     @Before
     public void setUp() {
+        // Mocking PatientObject for tests
+        PatientObject mockPatient = new PatientObject();
+        mockPatient.setUid("mockPatientUid");
+        mockPatient.setFirstName("MockFirstName");
+
+        // Set the mockPatient in MainActivity for the test
+        MainActivity.setPatientObject(mockPatient);
+
         // Initialize fragment manager
         fragmentManager = null; // Initialize to null
     }
+
 
     @After
     public void tearDown() {

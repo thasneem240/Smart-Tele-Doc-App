@@ -19,6 +19,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
 import com.example.capstoneprojectgroup4.ssearch_pharmacy.PharmaciesF;
 
 import org.hamcrest.Matcher;
@@ -35,10 +36,19 @@ public class PharamaciesFInstrumentedTest {
 
     @Before
     public void setUp() {
-        // Initialize context and fragment manager
+        // Mocking PatientObject for tests
+        PatientObject mockPatient = new PatientObject();
+        mockPatient.setUid("mockPatientUid");
+        mockPatient.setFirstName("MockFirstName");
+
+        // Set the mockPatient in MainActivity for the test
+        MainActivity.setPatientObject(mockPatient);
+
+        // Initialize fragment manager
         context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         fragmentManager = null; // Initialize to null
     }
+
 
     @After
     public void tearDown() {
