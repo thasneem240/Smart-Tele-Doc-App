@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.best_price.PharmacyDrugObject;
 import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
-import com.example.capstoneprojectgroup4.best_price.available_pharmacies.AvailablePharmaciesFragment;
 import com.example.capstoneprojectgroup4.best_price.ObjectPharmacyAndPrice;
+import com.example.capstoneprojectgroup4.best_price.available_pharmacies.AvailablePharmaciesFragment;
 import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -102,7 +104,7 @@ public class EditHowMuchFragment extends Fragment {
             public void onClick(View view) {
                 Map<String, Integer> selectedDrugsPrescription = new HashMap<>();
 
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
+/*                FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference();
 
 
@@ -121,6 +123,33 @@ public class EditHowMuchFragment extends Fragment {
                                 fm.beginTransaction().replace(R.id.fragmentContainerView, availablePharmaciesFragment).commit();
                             }
                         }
+                    }
+                });*/
+
+                FirebaseDatabase firebaseDatabase;
+                DatabaseReference databaseReference;
+
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                databaseReference = firebaseDatabase.getReference("Pharmacy database 2");
+
+                databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                    @Override
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+                        ArrayList<ObjectPharmacyAndPrice> availablePharmacies = getAvailablePharmacies(dataSnapshot);
+
+                        if(availablePharmacies.isEmpty()){
+                            Toast.makeText(getContext(), "Sorry, none of the pharmacies can produce all the medicines in this prescription.", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            AvailablePharmaciesFragment availablePharmaciesFragment = new AvailablePharmaciesFragment(availablePharmacies);
+                            fm.beginTransaction().replace(R.id.fragmentContainerView, availablePharmaciesFragment).commit();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -148,63 +177,57 @@ public class EditHowMuchFragment extends Fragment {
         return v;
     }
 
-    private ArrayList<ObjectPharmacyAndPrice> getAvailablePharmacies(Task<DataSnapshot> task, Map<String, Integer> prescription){
-        Map<String, Object> allPharmacies;
-        Map<String, Object> allTheMedicineEachPharmacy;
-        Map<String, Object> pharmacyDrugObject;
+    private ArrayList<ObjectPharmacyAndPrice> getAvailablePharmacies(DataSnapshot dataSnapshot){
         float totalCost = 0;
-        String brandName;
+        ArrayList<ObjectPharmacyAndPrice> availablePharmacies;
+        PharmacyDrugObject pharmacyDrugObject;
+        String pharmacy;
+        boolean oneAvailable;
+        boolean allAvailable;
 
-        ArrayList<ObjectPharmacyAndPrice> availablePharmacies = new ArrayList<>();
-        allPharmacies = (Map) task.getResult().getValue();
+        availablePharmacies = new ArrayList<>();
 
-        boolean allTheDrugsAreAvailable = true;
+        for(DataSnapshot pharmacies : dataSnapshot.getChildren()){
+            pharmacy = pharmacies.getKey();
+            allAvailable = true;
 
-        for (Map.Entry<String, Object> onePharmacy : allPharmacies.entrySet()) {
-            String pharmacy = onePharmacy.getKey();
-            allTheMedicineEachPharmacy = (Map) onePharmacy.getValue();
-
-            for(PrescriptionDrugObject oneSelectedDrug : selectedDrugs){
-                String drug = oneSelectedDrug.getNameOfTheDrug();
-                int amount = oneSelectedDrug.getAmount();
-
-                if(allTheMedicineEachPharmacy.containsKey(drug)){
-
-                    pharmacyDrugObject = (Map) allTheMedicineEachPharmacy.get(drug);
+            for(PrescriptionDrugObject drugObject : selectedDrugs){
+                oneAvailable = false;
 
 
-                    boolean available = Boolean.parseBoolean(pharmacyDrugObject.get("availability")+"");
 
-                    if (available){
+                for(DataSnapshot medsInEachPharmacy : pharmacies.getChildren()){
+                    pharmacyDrugObject = medsInEachPharmacy.getValue(PharmacyDrugObject.class);
 
-                        float priceForOne = Float.parseFloat(pharmacyDrugObject.get("price")+"");
+                    if(pharmacyDrugObject.getNameOfTheDrug().equals(drugObject.getNameOfTheDrug()) &&
+                            pharmacyDrugObject.getBrandName().equals(drugObject.getBrandName()) &&
+                            pharmacyDrugObject.getStrength().equals(drugObject.getStrength()) &&
+                            pharmacyDrugObject.getAvailability()){
+
+                        int amount = drugObject.getAmount();
+
+                        float priceForOne = pharmacyDrugObject.getPrice();
 
                         totalCost = totalCost + priceForOne*amount;
 
-                    }
-                    else{
-
-                        allTheDrugsAreAvailable = false;
-
+                        oneAvailable = true;
+                        break;
                     }
                 }
-                else
-                    allTheDrugsAreAvailable = false;
+                if(!oneAvailable){
+                    allAvailable = false;
+                }
+
+
             }
 
-
-            if (allTheDrugsAreAvailable){
-
-
+            if (allAvailable) {
                 ObjectPharmacyAndPrice objectPharmacyAndPrice = new ObjectPharmacyAndPrice(pharmacy, totalCost);
                 availablePharmacies.add(objectPharmacyAndPrice);
 
+                totalCost = 0;
 
             }
-
-
-            totalCost = 0;
-
         }
 
         availablePharmacies.sort(new Comparator<ObjectPharmacyAndPrice>() {
