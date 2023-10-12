@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".interface_of_doctors.DoctorMedicalRecords">
+    tools:context=".interface_of_doctors.other.DoctorMedicalRecords">
 
 
     <ImageView
@@ -202,7 +202,7 @@
     <ImageView
         android:id="@+id/backDoc"
         android:layout_width="43dp"
-        android:layout_height="21dp"
+        android:layout_height="0dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -211,4 +211,17 @@
         android:src="@drawable/baseline_keyboard_arrow_left_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patient's"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/medical_rec3"
+        app:layout_constraintStart_toStartOf="@+id/medical_rec3"
+        app:layout_constraintTop_toBottomOf="@+id/backDoc"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

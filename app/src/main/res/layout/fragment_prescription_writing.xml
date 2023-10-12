@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".writing_prescriptions.CreatePrescription">
+    tools:context=".interface_of_doctors.writing_prescriptions.other.CreatePrescription">
 
     <ImageView
         android:id="@+id/ImageView_BackButton"
@@ -44,110 +44,111 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="119dp"
+        android:layout_marginTop="109dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="118dp"
         android:src="@drawable/rectangle_8" />
 
     <EditText
         android:id="@+id/EditText_PrescriptionNotes"
-        android:layout_width="288dp"
-        android:layout_height="113dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="413dp"
-        android:layout_marginEnd="62dp"
-        android:background="#F6F8E2"
-        android:hint="Prescription Notes"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/EditText_patientName"
-        android:layout_width="285dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="119dp"
-        android:layout_marginEnd="65dp"
-        android:background="@drawable/rectangle_4"
-        android:hint=" Patient Name"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/EditText_doctorName"
-        android:layout_width="285dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="182dp"
-        android:layout_marginEnd="65dp"
-        android:background="@drawable/rectangle_4"
-        android:hint="Doctor's Name"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/EditText_dob"
-        android:layout_width="285dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="248dp"
-        android:layout_marginEnd="65dp"
-        android:background="@drawable/rectangle_4"
-        android:hint="Date of birth"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/EditText_WrittenOn"
-        android:layout_width="286dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="301dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/rectangle_9"
-        android:hint="Written on"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/EditText_ExpirationDate"
-        android:layout_width="286dp"
-        android:layout_height="wrap_content"
+        android:layout_width="283dp"
+        android:layout_height="164dp"
+        android:layout_alignBottom="@+id/imageView10"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="58dp"
-        android:layout_marginTop="358dp"
-        android:layout_marginEnd="67dp"
-        android:background="@drawable/rectangle_9"
-        android:hint="Prescription expiration date"
-        android:textSize="14sp" />
+        android:layout_marginLeft="59dp"
+        android:layout_marginTop="367dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginBottom="82dp"
+        android:background="#F6F8E2"
+        android:gravity="top"
+        android:hint="Prescription Notes"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="184dp"
+        android:background="#A8FAEE"
+        android:hint="Name of the doctor"
+        android:textColorHint="#3951ED">
+
+        <EditText
+            android:id="@+id/EditText_doctorName"
+            android:layout_width="285dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="61dp"
+            android:layout_marginTop="182dp"
+            android:layout_marginEnd="65dp"
+            android:background="@drawable/rectangle_4"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="247dp"
+        android:background="#A8FAEE"
+        android:hint="Date of birth"
+        android:textColorHint="#3951ED">
+
+        <EditText
+            android:id="@+id/EditText_dob"
+            android:layout_width="285dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="61dp"
+            android:layout_marginTop="248dp"
+            android:layout_marginEnd="65dp"
+            android:background="@drawable/rectangle_4"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="308dp"
+        android:background="#A8FAEE"
+        android:hint="Written on"
+        android:textColorHint="#3951ED">
+
+        <EditText
+            android:id="@+id/EditText_WrittenOn"
+            android:layout_width="286dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="311dp"
+            android:layout_marginEnd="65dp"
+            android:background="@drawable/rectangle_9"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/TextView_DrugsCount"
         android:layout_width="84dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/EditText_PrescriptionNotes"
+        android:layout_alignBottom="@+id/imageView10"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="229dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="98dp"
+        android:layout_marginLeft="223dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="7dp"
         android:background="@drawable/rectangle_9"
         android:text="Drugs count"
         android:textSize="14sp" />
@@ -169,12 +170,48 @@
         android:id="@+id/Button_SelectedDrugs"
         android:layout_width="133dp"
         android:layout_height="38dp"
-        android:layout_below="@+id/EditText_PrescriptionNotes"
+        android:layout_alignBottom="@+id/imageView10"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="219dp"
+        android:layout_marginEnd="217dp"
+        android:layout_marginBottom="9dp"
         android:background="@drawable/rectangle_6"
-        android:text="Select drugs" />
+        android:text="Select medicines" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="121dp"
+        android:background="#A8FAEE"
+        android:hint="Name of the patient"
+        android:textColorHint="#3951ED">
+
+        <EditText
+            android:id="@+id/EditText_patientName"
+            android:layout_width="285dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="61dp"
+            android:layout_marginTop="119dp"
+            android:layout_marginEnd="65dp"
+            android:background="@drawable/rectangle_4"
+            android:textColor="@color/black"
+            android:textColorHint="#217BDA"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="169dp"
+        android:text="Manually written"
+        android:textColor="#AF0E0E" />
 
 
 </RelativeLayout>

@@ -18,8 +18,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
@@ -29,13 +27,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 /**
@@ -92,7 +87,7 @@ public class DocAvailF extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doc_avail, container, false);
-        TextView textDoctorName = view.findViewById(R.id.textDoctorName);
+        TextView textDoctorName = view.findViewById(R.id.textDoctorName22);
         TextView textDoctorLocation = view.findViewById(R.id.textDoctorLocation);
         ImageView backButton = view.findViewById(R.id.backButtonDocAvail);
 
@@ -114,27 +109,33 @@ public class DocAvailF extends Fragment {
             Log.d("DocAvailF", "Doctor Name: " + doctorNameV);
             Log.d("DocAvailF", "Location: " + locationV);
             if (doctorNameV != null && locationV != null) {
+                Log.d("DocAvailF", "check1.");
+
                 DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference("Availability");
 
-                Query query = availabilityRef.orderByChild("Name").equalTo(doctorNameV);
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                // Query all child nodes under "Availability"
+                availabilityRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         ArrayList<Availability> sessionDetails = new ArrayList<>();
+                        Log.d("DocAvailF", "check2.");
 
-                        if (snapshot.exists()) {
-                            DataSnapshot doctorData = snapshot.child("d1"); // Change this to match the specific doctor's data
+                        for (DataSnapshot doctorSnapshot : snapshot.getChildren()) {
+                            String doctorKey = doctorSnapshot.getKey();
+                            DataSnapshot doctorData = doctorSnapshot.child("Name");
 
-                            if (doctorData != null) {
-                                String doctorName = doctorData.child("Name").getValue(String.class);
+                            if (doctorData.exists() && doctorData.getValue(String.class).equals(doctorNameV)) {
+                                // Found the matching doctor
+                                Log.d("DocAvailF", "Found doctor: " + doctorNameV);
 
-                                if (doctorName != null) {
-                                    textDoctorName.setText(doctorName);
-                                }
+                                double price = doctorSnapshot.child("Price").getValue(Double.class); // Extract the Price
+                                Log.d("DocAvailF", "Found Price: " + price);
 
-                                DataSnapshot locationData = doctorData.child("l1"); // Change this to match the specific location's data
+                                DataSnapshot locationData = doctorSnapshot.child("l1"); // Adjust for location "l2" if needed
 
-                                if (locationData != null) {
+                                if (locationData.exists()) {
+                                    Log.d("DocAvailF", "check6.");
+
                                     String locationName = locationData.child("LName").getValue(String.class);
 
                                     if (locationName != null) {
@@ -149,7 +150,7 @@ public class DocAvailF extends Fragment {
                                     dateTimeFormat.setTimeZone(TimeZone.getDefault()); // Set to local time zone
 
                                     for (DataSnapshot dayData : locationData.getChildren()) {
-                                        if (dayData.getKey() != null && !dayData.getKey().equals("LName")) {
+                                        if (!dayData.getKey().equals("LName")) {
                                             String day = dayData.getKey();
                                             String date = dayData.child("Date").getValue(String.class);
                                             String startTime = dayData.child("StartTime").getValue(String.class);
@@ -162,7 +163,7 @@ public class DocAvailF extends Fragment {
 
                                                     // Compare session date-time with the current date-time
                                                     if (sessionDateTime != null && sessionDateTime.after(currentDateTime)) {
-                                                        Availability sessionObject = new Availability(doctorName, locationName, day, noApp, endTime, startTime, date);
+                                                        Availability sessionObject = new Availability(doctorNameV, locationName, day, noApp, endTime, startTime, date, price);
                                                         sessionDetails.add(sessionObject);
                                                     }
                                                 } catch (ParseException e) {
@@ -189,13 +190,17 @@ public class DocAvailF extends Fragment {
                                     });
 
                                     // Create the adapter and set it to the RecyclerView
-                                    AvailAdapter availAdapter = new AvailAdapter(sessionDetails, doctorName, "", 0, "", locationName);
+                                    AvailAdapter availAdapter = new AvailAdapter(sessionDetails, doctorNameV, "", 0, "", locationName,price);
                                     recyclerView.setAdapter(availAdapter);
+
+                                    // Set the doctor's name in the TextView
+                                    textDoctorName.setText(doctorNameV);
+                                } else {
+                                    Log.d("DocAvailF", "No location data found for this doctor.");
                                 }
                             }
                         }
                     }
-
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -209,4 +214,5 @@ public class DocAvailF extends Fragment {
 
         return view;
     }
+
 }

@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.writing_prescriptions.WritingPrescriptionActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,9 +68,9 @@ public class Create_or_View_Prescription extends Fragment {
         View v= inflater.inflate(R.layout.fragment_create_or__view__prescription, container, false);
 
 
-        Button test = v.findViewById(R.id.CreatePresc);
+        //Button test = v.findViewById(R.id.CreatePresc);
 
-        test.setOnClickListener(new View.OnClickListener() {
+        /*test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent prescriptionActivity = new Intent(getActivity(), WritingPrescriptionActivity.class);
@@ -83,10 +82,10 @@ public class Create_or_View_Prescription extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DoctorMainMenu doctorAvailability = new DoctorMainMenu();
+                DoctorPatientProfiles doctorAvailability = new DoctorPatientProfiles();
                 fm.beginTransaction().replace(R.id.docmenufragmentContainer, doctorAvailability).commit();
             }
-        });
+        });*/
 
 
 

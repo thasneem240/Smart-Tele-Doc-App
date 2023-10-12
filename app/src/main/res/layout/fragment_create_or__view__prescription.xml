@@ -3,55 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".interface_of_doctors.Create_or_View_Prescription">
-
-
-    <ImageView
-        android:id="@+id/backButtonCorW"
-        android:layout_width="43dp"
-        android:layout_height="21dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="360dp"
-        android:src="@drawable/baseline_keyboard_arrow_left_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/ViewPresc"
+        android:id="@+id/button6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="99dp"
-        android:background="@drawable/rectangle_4"
-        android:text="View Prescriptions"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="179dp"
+        android:layout_marginEnd="135dp"
+        android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="88dp"
-        android:text="Create or Write Prescriptions"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/CreatePresc"
+        android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="95dp"
-        android:background="@drawable/rectangle_4"
-        android:text="Write Prescription"
+        android:layout_marginStart="173dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="150dp"
+        android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ViewPresc" />
+        app:layout_constraintTop_toBottomOf="@+id/button6" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.Signup_EmailVerificationF">
+    tools:context=".patient_authentication.Signup_EmailVerificationF">
 
     <Button
         android:id="@+id/email_verification_button"
@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="206dp"
         android:layout_marginBottom="162dp"
-        android:text="Send email verification"
+        android:background="@drawable/rectangle_4"
+        android:text="Re-send email verification"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/next_button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="269dp"
         android:text="Next"
+        android:background="@drawable/rectangle_4"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

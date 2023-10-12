@@ -23,6 +23,16 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/Location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_below="@id/DoctorName" />
+
+        <TextView
             android:id="@+id/Day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +40,26 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:layout_below="@id/DoctorName" />
+            android:layout_below="@id/Location" />
+
+        <TextView
+            android:id="@+id/AppNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Appointment Number:"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_below="@id/Day" />
+
+        <TextView
+            android:id="@+id/Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_below="@id/AppNumber" />
 
         <TextView
             android:id="@+id/Type"
@@ -39,17 +68,18 @@
             android:text="Type"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:layout_below="@id/Day" />
+            android:layout_below="@id/Time" />
 
-        <TextView
+        <Button
             android:id="@+id/Cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
             android:textColor="#ff0000"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:onClick="onCancelButtonClick" />
 
     </RelativeLayout>
 

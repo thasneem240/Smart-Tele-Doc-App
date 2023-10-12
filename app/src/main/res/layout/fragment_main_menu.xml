@@ -12,7 +12,7 @@
         android:id="@+id/your_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/good_mornin"
+        android:layout_below="@+id/TextView_goodMorning"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="6dp"
         android:layout_marginTop="74dp"
@@ -25,7 +25,7 @@
 
 
     <TextView
-        android:id="@+id/good_mornin"
+        android:id="@+id/TextView_goodMorning"
         android:layout_width="251dp"
         android:layout_height="45dp"
         android:layout_alignParentLeft="true"
@@ -61,9 +61,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginBottom="56dp"
         android:background="@drawable/blue_square"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Ai_square" />
 
@@ -134,11 +136,11 @@
     <ImageView
         android:id="@+id/emergencySquare"
         android:layout_width="139.29dp"
-        android:layout_height="120dp"
+        android:layout_height="0dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="44dp"
         android:background="@drawable/blue_square"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/docSquare" />
@@ -165,7 +167,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/green_square"
         app:layout_constraintEnd_toEndOf="parent"
@@ -193,8 +195,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="56dp"
         android:background="@drawable/yellow_square"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emergencySquare" />
 
@@ -299,7 +303,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.291"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/good_mornin" />
+        app:layout_constraintTop_toBottomOf="@+id/TextView_goodMorning" />
 
     <TextView
         android:id="@+id/how_are_you"

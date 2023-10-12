@@ -4,8 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".writing_prescriptions.DrugData">
+    tools:context=".interface_of_doctors.writing_prescriptions.other.DrugData">
 
+
+    <EditText
+        android:id="@+id/editText_MedicineNotes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="39dp"
+        android:background="#90EE90"
+        android:hint="Frequency, the route  and other notes"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:gravity="top"
+        app:layout_constraintBottom_toTopOf="@+id/edittext_how_much"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="157dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="157dp"
+        android:text="Medicine \nnotes"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/edittext_how_much"
+        app:layout_constraintEnd_toStartOf="@+id/editText_MedicineNotes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Spinner_AvailbleStrenghts" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Amount"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edittext_how_much"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView22"
@@ -13,128 +58,109 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="263dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="44dp"
         android:text="Select Drugs from List"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.215"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButtonSelectDrugs2" />
+        app:layout_constraintStart_toStartOf="@+id/Button_NameOfTheDrug"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/backButtonSelectDrugs2"
+        android:id="@+id/ImageView_BackButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="360dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/FragCont"
-        android:layout_width="413dp"
-        android:layout_height="213dp"
-        android:layout_marginTop="7dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listdrugsadd" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/listdrugsadd"
-        android:layout_width="377dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rectangle_12"
-        android:hint="Search Drug from List"
-        android:textColorHint="#013073"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView22">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditText_ListDrugs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#3174D4"
-            android:textSize="15sp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/Button_NameOfTheDrug"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/rectangle_10"
         android:text="Name of the drug"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FragCont" />
-
-    <Spinner
-        android:id="@+id/Spinner_AvailbleStrenghts"
-        android:layout_width="297dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/spinner_background_2"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/Spinner_AvailableBrands" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="12dp"
-        android:text="Brand name:"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/Spinner_AvailableBrands"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_NameOfTheDrug" />
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="@+id/Spinner_AvailableBrands"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="34dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="275dp"
+        android:layout_marginEnd="23dp"
         android:text="Strength:"
         android:textColor="@color/black"
-        app:layout_constraintBaseline_toBaselineOf="@+id/Spinner_AvailbleStrenghts"
         app:layout_constraintEnd_toStartOf="@+id/Spinner_AvailbleStrenghts"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/Spinner_AvailableBrands"
-        android:layout_width="297dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="74dp"
         android:background="@drawable/spinner_background_2"
         android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/Button_NameOfTheDrug" />
+        app:layout_constraintTop_toTopOf="@+id/Button_NameOfTheDrug" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="1dp"
+        android:text="Brand name:"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/Spinner_AvailableBrands"
+        app:layout_constraintEnd_toStartOf="@+id/Spinner_AvailableBrands"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/Spinner_AvailbleStrenghts"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/spinner_background_2"
+        android:minHeight="48dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView12" />
 
     <Button
         android:id="@+id/Button_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginBottom="43dp"
         android:background="@drawable/rectangle_4"
         android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edittext_how_much"
+        android:layout_width="209dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="31dp"
+        android:background="@drawable/rectangle_10"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/Button_Add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Spinner_AvailbleStrenghts" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

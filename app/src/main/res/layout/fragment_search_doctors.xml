@@ -29,7 +29,7 @@
         android:textColor="@color/black" />
 
     <EditText
-        android:id="@+id/PatsearchName"
+        android:id="@+id/textInputEditText_searchName"
         android:layout_width="327dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"

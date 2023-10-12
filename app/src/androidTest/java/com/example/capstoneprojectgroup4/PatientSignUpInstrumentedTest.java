@@ -11,8 +11,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.example.capstoneprojectgroup4.front_end.PatientSignUp;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientSignUp;
 
 import org.junit.Before;
 import org.junit.Rule;

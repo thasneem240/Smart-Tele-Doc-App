@@ -11,7 +11,8 @@ import android.widget.Button;
 import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
 import com.example.capstoneprojectgroup4.R;
-import com.example.capstoneprojectgroup4.authentication.PatientObject;
+import com.example.capstoneprojectgroup4.patient_authentication.AccountSettings;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
 import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
@@ -23,6 +24,7 @@ import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.dialogflow.v2.SessionsClient;
 import com.google.cloud.dialogflow.v2.SessionsSettings;
 import com.google.common.collect.Lists;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.InputStream;
 
@@ -33,8 +35,6 @@ public class MainActivity2 extends AppCompatActivity {
     Button chatBot;
     Button appointments;
     Button userProfile;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +95,12 @@ public class MainActivity2 extends AppCompatActivity {
                 Frag_LabReports fragLabReports = new Frag_LabReports();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, fragLabReports).commit();
             }
+            if (recive.getStringExtra("Page").equals("appointmentsList")){
+                fm = getSupportFragmentManager();
+                ViewAppointments appointmentsList = new ViewAppointments();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, appointmentsList).commit();
+            }
+
 
         }
 
@@ -132,9 +138,6 @@ public class MainActivity2 extends AppCompatActivity {
                 AccountSettings searchDoctors = new AccountSettings();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
 
-//                FragmentManager fm = getSupportFragmentManager();
-//                PatientProfileF patientProfileF = new PatientProfileF();
-//                fm.beginTransaction().replace(R.id.fragmentContainerView, patientProfileF).commit();
             }
         });
     }

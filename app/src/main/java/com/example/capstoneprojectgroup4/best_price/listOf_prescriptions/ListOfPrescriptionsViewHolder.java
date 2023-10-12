@@ -11,12 +11,14 @@ import com.example.capstoneprojectgroup4.R;
 
 public class ListOfPrescriptionsViewHolder extends RecyclerView.ViewHolder {
     TextView date, doctor;
+    TextView writtenManually;
     Button select;
     public ListOfPrescriptionsViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        date = itemView.findViewById(R.id.text_medicine);
-        doctor = itemView.findViewById(R.id.text_dosage);
-        select = itemView.findViewById(R.id.text_select);
+        date = itemView.findViewById(R.id.TextView_PatientName);
+        doctor = itemView.findViewById(R.id.TextView_Dob);
+        select = itemView.findViewById(R.id.Button_select);
+        writtenManually = itemView.findViewById(R.id.textView26);
     }
 }

@@ -4,8 +4,8 @@ public class PrescriptionDrugObject {
     private String nameOfTheDrug;
     private String brandName;
     private String strength;
-    private int amount;
-    private String drugSpecificNotes;
+    private int amount = 0;
+    private String medicineNotes;
 
     public String getNameOfTheDrug() {
         return nameOfTheDrug;
@@ -40,11 +40,11 @@ public class PrescriptionDrugObject {
         this.amount = amount;
     }
 
-    public String getDrugSpecificNotes() {
-        return drugSpecificNotes;
+    public String getMedicineNotes() {
+        return medicineNotes;
     }
 
-    public void setDrugSpecificNotes(String drugSpecificNotes) {
-        this.drugSpecificNotes = drugSpecificNotes;
+    public void setMedicineNotes(String medicineNotes) {
+        this.medicineNotes = medicineNotes;
     }
 }

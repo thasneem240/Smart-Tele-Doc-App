@@ -1,6 +1,8 @@
 package com.example.capstoneprojectgroup4.search_doctors;
 
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +43,8 @@ public class ViewAppointments extends Fragment {
 
     private RecyclerView recyclerView;
     private ViewAppointmentsAdapter viewAppointmentsAdapter;
+    private BookAppointmentF bookAppointmentFragment;
+
     private String userId; // User ID obtained from MainActivity
 
     public ViewAppointments() {
@@ -57,21 +61,39 @@ public class ViewAppointments extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_appointments, container, false);
         TextView patient = view.findViewById(R.id.patientNameViewApp);
-        ImageView back = view.findViewById(R.id.backButtonViewApp);
+        TextView viewh = view.findViewById(R.id.viewhistory);
 
-                String name = MainActivity.getPatientObject().getFirstName();
+        ImageView back = view.findViewById(R.id.backButtonViewApp);
+        String name = MainActivity.getPatientObject().getFirstName();
         patient.setText(name);
         recyclerView = view.findViewById(R.id.recyclerAppView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Set the adapter here
+        viewAppointmentsAdapter = new ViewAppointmentsAdapter(new ArrayList<>());
+        recyclerView.setAdapter(viewAppointmentsAdapter);
+
+
+
+        viewh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                AppointmentHistory searchDoctors = new AppointmentHistory();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
+
+            }
+        });
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 MainMenu searchDoctors = new MainMenu();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, searchDoctors).commit();
@@ -83,9 +105,17 @@ public class ViewAppointments extends Fragment {
         return view;
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if (getContext() == null)  {
+            return;
+        }
+
+
+
 
         // Get the current date and time in the device's local time zone
         Calendar calendar = Calendar.getInstance();
@@ -93,7 +123,7 @@ public class ViewAppointments extends Fragment {
 
         // Create a SimpleDateFormat for date and time comparison using the device's local time zone
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
-        dateTimeFormat.setTimeZone(TimeZone.getDefault()); // Set to local time zone
+        dateTimeFormat.setTimeZone(TimeZone.getDefault()); // Set to the local time zone
 
         // Create a database reference to the "Appointment Data" section for the specific user
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Appointment Data")
@@ -138,5 +168,5 @@ public class ViewAppointments extends Fragment {
             }
         });
     }
-
 }
+

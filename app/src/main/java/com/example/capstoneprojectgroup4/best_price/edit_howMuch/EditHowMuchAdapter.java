@@ -1,9 +1,9 @@
 package com.example.capstoneprojectgroup4.best_price.edit_howMuch;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +17,6 @@ public class EditHowMuchAdapter extends RecyclerView.Adapter<EditHowMuchViewHold
     ArrayList<PrescriptionDrugObject> selectedDrugs;
     public EditHowMuchAdapter(ArrayList<PrescriptionDrugObject> selectedDrugs){
         this.selectedDrugs = selectedDrugs;
-        Log.d("key key", selectedDrugs.toString());
     }
 
     @NonNull
@@ -33,10 +32,10 @@ public class EditHowMuchAdapter extends RecyclerView.Adapter<EditHowMuchViewHold
     public void onBindViewHolder(@NonNull EditHowMuchViewHolder holder, int position) {
         String nameOfTheDrug = selectedDrugs.get(position).getNameOfTheDrug();
         String strength = selectedDrugs.get(position).getStrength();
-        int amount = selectedDrugs.get(position).getAmount();
+        int originalAmount = selectedDrugs.get(position).getAmount();
 
         holder.medicineName.setText(nameOfTheDrug + " " + strength);
-        holder.editDosage.setText(amount+"");
+        holder.editDosage.setText(originalAmount+"");
 
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,8 +46,17 @@ public class EditHowMuchAdapter extends RecyclerView.Adapter<EditHowMuchViewHold
         holder.doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.editDosage.setEnabled(false);
-                selectedDrugs.get(position).setAmount(Integer.parseInt(holder.editDosage.getText().toString()));
+
+                int newAmount = Integer.parseInt(holder.editDosage.getText().toString());
+
+                if(newAmount <= originalAmount){
+                    selectedDrugs.get(position).setAmount(newAmount);
+                    holder.editDosage.setEnabled(false);
+
+                }
+                else{
+                    Toast.makeText(view.getContext(), "New amount need to be less than the original amount "+originalAmount, Toast.LENGTH_SHORT).show();
+                }
             }
         });
         holder.removeButton.setOnClickListener(new View.OnClickListener() {

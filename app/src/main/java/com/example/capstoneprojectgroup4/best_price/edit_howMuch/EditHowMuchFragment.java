@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.capstoneprojectgroup4.R;
 import com.example.capstoneprojectgroup4.best_price.PrescriptionDrugObject;
@@ -88,14 +89,13 @@ public class EditHowMuchFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_edit_how_much, container, false);
 
+        availablePharmacies = v.findViewById(R.id.button_available_pharmacies);
         ImageView backButton = v.findViewById(R.id.backButtonSearchDrugs);
 
         RecyclerView rv = v.findViewById(R.id.recycler_view_edit_prescription);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         EditHowMuchAdapter editHowMuchAdapter = new EditHowMuchAdapter(selectedDrugs);
         rv.setAdapter(editHowMuchAdapter);
-
-        availablePharmacies = v.findViewById(R.id.button_available_pharmacies);
 
         availablePharmacies.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,9 +112,14 @@ public class EditHowMuchFragment extends Fragment {
                         if (task.isSuccessful()) {
                             ArrayList<ObjectPharmacyAndPrice> availablePharmacies = getAvailablePharmacies(task, selectedDrugsPrescription);
 
-                            FragmentManager fm = getActivity().getSupportFragmentManager();
-                            AvailablePharmaciesFragment availablePharmaciesFragment = new AvailablePharmaciesFragment(availablePharmacies);
-                            fm.beginTransaction().replace(R.id.fragmentContainerView, availablePharmaciesFragment).commit();
+                            if(availablePharmacies.isEmpty()){
+                                Toast.makeText(getContext(), "Sorry, none of the pharmacies can produce all the medicines in this prescription.", Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                FragmentManager fm = getActivity().getSupportFragmentManager();
+                                AvailablePharmaciesFragment availablePharmaciesFragment = new AvailablePharmaciesFragment(availablePharmacies);
+                                fm.beginTransaction().replace(R.id.fragmentContainerView, availablePharmaciesFragment).commit();
+                            }
                         }
                     }
                 });
@@ -148,6 +153,7 @@ public class EditHowMuchFragment extends Fragment {
         Map<String, Object> allTheMedicineEachPharmacy;
         Map<String, Object> pharmacyDrugObject;
         float totalCost = 0;
+        String brandName;
 
         ArrayList<ObjectPharmacyAndPrice> availablePharmacies = new ArrayList<>();
         allPharmacies = (Map) task.getResult().getValue();
@@ -165,6 +171,7 @@ public class EditHowMuchFragment extends Fragment {
                 if(allTheMedicineEachPharmacy.containsKey(drug)){
 
                     pharmacyDrugObject = (Map) allTheMedicineEachPharmacy.get(drug);
+
 
                     boolean available = Boolean.parseBoolean(pharmacyDrugObject.get("availability")+"");
 
