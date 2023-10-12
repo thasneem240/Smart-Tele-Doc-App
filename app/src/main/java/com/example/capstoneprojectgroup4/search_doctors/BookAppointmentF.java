@@ -217,7 +217,7 @@ public class BookAppointmentF extends Fragment {
                 String address = MainActivity.getPatientObject().getAddress();
                 String city = MainActivity.getPatientObject().getCity();
                 String country = MainActivity.getPatientObject().getCountry();
-               // getAppointmentType = appointmentType.getText().toString();
+//                getAppointmentType = appointmentType.getText().toString();
                 getAppointmentType = "Voice";
 
                 // Generate a unique key for the appointment
