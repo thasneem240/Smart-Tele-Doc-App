@@ -57,10 +57,13 @@
             android:id="@+id/textView27_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="23dp"
             android:text="First Name"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_firstName_dpp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,137 +71,137 @@
             android:id="@+id/textView30_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="33dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginBottom="22dp"
             android:text="Last Name"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_firstName_dpp" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_lastName_dpp"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView_lastName_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginBottom="21dp"
             android:text="last_name"
-            app:layout_constraintStart_toStartOf="@+id/textView30_dpp"
-            app:layout_constraintTop_toBottomOf="@+id/textView30_dpp" />
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/textView32_dpp"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView_height_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="38dp"
+            android:layout_marginBottom="21dp"
             android:text="height"
-            app:layout_constraintStart_toStartOf="@+id/textView36_dpp"
-            app:layout_constraintTop_toBottomOf="@+id/textView36_dpp" />
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/textView33_dpp"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView36_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="33dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginBottom="22dp"
             android:text="Height"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_gender_dpp" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_height_dpp"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView34_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="33dp"
-            android:layout_marginEnd="278dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginBottom="22dp"
             android:text="Gender"
             android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView_gender_dpp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_dob_dpp" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView_gender_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="279dp"
-            android:layout_marginBottom="34dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginBottom="21dp"
             android:text="gender"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/textView36_dpp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView34_dpp" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView32_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="245dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginBottom="21dp"
             android:text="Date of birth"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_lastName_dpp" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_dob_dpp"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView_dob_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="33dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginBottom="21dp"
             android:text="dob"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/textView34_dpp"
-            app:layout_constraintStart_toStartOf="@+id/textView32_dpp"
-            app:layout_constraintTop_toBottomOf="@+id/textView32_dpp"
-            app:layout_constraintVertical_bias="0.56" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView_firstName_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginBottom="21dp"
             android:text="first_name"
-            app:layout_constraintStart_toStartOf="@+id/textView27_dpp"
-            app:layout_constraintTop_toBottomOf="@+id/textView27_dpp" />
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/textView30_dpp"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView33_dpp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="85dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginBottom="16dp"
             android:text="Weight"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/progressBar_dpp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_height_dpp" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_weight_dpp"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView_weight_dpp"
             android:layout_width="42dp"
             android:layout_height="19dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginBottom="14dp"
             android:text="weight"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView33_dpp"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
             android:id="@+id/progressBar_dpp"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="388dp"
+            android:layout_marginStart="63dp"
             android:layout_marginBottom="57dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/textView33_dpp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
