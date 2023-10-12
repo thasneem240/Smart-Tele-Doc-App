@@ -5,6 +5,9 @@
     app:cardCornerRadius="6dp"
     app:cardElevation="6dp"
     android:id="@+id/doctorAppointmentCardView"
+    android:background="@drawable/rectangle_12"
+    app:cardBackgroundColor="@color/white"
+    android:backgroundTint="@color/white"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -52,6 +55,15 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_below="@id/Day" />
+
+        <TextView
+            android:id="@+id/Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_below="@id/AppNumber" />
 
         <TextView
             android:id="@+id/Type"

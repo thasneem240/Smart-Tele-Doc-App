@@ -9,11 +9,16 @@ import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
+import org.junit.FixMethodOrder;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.example.capstoneprojectgroup4.front_end.MainActivity2;
 import com.example.capstoneprojectgroup4.front_end.MainMenu;
-import com.example.capstoneprojectgroup4.front_end.PatientLogin;
 import com.example.capstoneprojectgroup4.home.MainActivity;
+import com.example.capstoneprojectgroup4.patient_authentication.PatientLogin;
+
 import androidx.test.espresso.Root;
 import androidx.test.espresso.matcher.BoundedMatcher;
 import android.view.Gravity;
@@ -39,6 +44,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 public class PatientLoginInstrumentedTest {
 
     @Rule
@@ -61,7 +68,7 @@ public class PatientLoginInstrumentedTest {
 
 
     @Test
-    public void testPatientLoginWithInvalidCredentials() {
+    public void A_testPatientLoginWithInvalidCredentials() {
         // Enter invalid email and password
         onView(ViewMatchers.withId(R.id.EditText_Doctor_Enter_Reg_Layout))
                 .perform(ViewActions.typeText("invalidemail@gmail.com"), ViewActions.closeSoftKeyboard());
@@ -80,7 +87,7 @@ public class PatientLoginInstrumentedTest {
     }
 
     @Test
-    public void testPatientLoginWithValidCredentials() {
+    public void B_testPatientLoginWithValidCredentials() {
         try {
             Thread.sleep(5000); // Adjust the sleep duration as needed
         } catch (InterruptedException e) {
@@ -94,7 +101,7 @@ public class PatientLoginInstrumentedTest {
         onView(withId(R.id.login_button))
                 .perform(click());
         try {
-            Thread.sleep(5000); // Adjust the sleep duration as needed
+            Thread.sleep(7000); // Adjust the sleep duration as needed
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

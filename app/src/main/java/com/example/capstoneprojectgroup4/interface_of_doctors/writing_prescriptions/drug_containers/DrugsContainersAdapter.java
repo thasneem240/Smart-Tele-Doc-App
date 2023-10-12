@@ -1,11 +1,13 @@
 package com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.drug_containers;
 
+import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstoneprojectgroup4.R;
@@ -40,15 +42,7 @@ public class DrugsContainersAdapter extends RecyclerView.Adapter<DrugsContainers
             @Override
             public void onClick(View view) {
                 selectedDrugsList.remove(position);
-
-                holder.medicineName.setVisibility(View.INVISIBLE);
-                holder.howMuch.setVisibility(View.INVISIBLE);
-                holder.removeButton.setVisibility(View.INVISIBLE);
-
-                new DrugsContainersAdapter(selectedDrugsList);
-
-                Log.d("nndp", "position "+position);
-                Log.d("nndp", "size "+selectedDrugsList.size());
+                notifyItemRemoved(position);
             }
         });
     }

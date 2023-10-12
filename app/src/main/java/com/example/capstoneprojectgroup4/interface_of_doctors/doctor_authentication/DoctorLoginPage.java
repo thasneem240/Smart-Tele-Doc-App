@@ -197,7 +197,7 @@ public class DoctorLoginPage extends Fragment {
         }). addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Error in the database. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Error in loading database. Please try again.", Toast.LENGTH_SHORT).show();
             }
         });
     }

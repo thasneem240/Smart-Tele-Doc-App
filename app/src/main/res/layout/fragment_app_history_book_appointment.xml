@@ -137,8 +137,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPatientNameValue2" />
 
-    <EditText
-        android:id="@+id/textAppointmentType2"
+    <Spinner
+        android:id="@+id/spinner_appointmentType2"
         android:layout_width="185dp"
         android:layout_height="22dp"
         android:layout_below="@id/textPatientName22"
@@ -146,6 +146,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/rectangle_9"
+        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textAppointmentNumber22" />
@@ -162,7 +163,7 @@
         android:textColor="#0B0808"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textAppointmentType2" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_appointmentType2" />
 
     <Button
         android:id="@+id/buttonConfirmAppointment2"

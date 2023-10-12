@@ -53,6 +53,7 @@ public class DoctorViewAppointmentsAdapter extends RecyclerView.Adapter<DoctorVi
 
 
 
+
         // Set the data to the views in the ViewHolder
         holder.doctorNameTextView.setText(appointmentItem.getPatientName());
         holder.dayTextView.setText(appointmentItem.getDate());
@@ -61,6 +62,9 @@ public class DoctorViewAppointmentsAdapter extends RecyclerView.Adapter<DoctorVi
         holder.locationTextView.setText(appointmentItem.getLocation());
 
         CardView doctorAppointmentCardView = holder.doctorAppointmentCardView;
+        holder.time.setText("Time: " +appointmentItem.getStartTime()+ "-"+ appointmentItem.getEndTime());
+
+    }
 
 
         doctorAppointmentCardView.setOnClickListener(new View.OnClickListener()
