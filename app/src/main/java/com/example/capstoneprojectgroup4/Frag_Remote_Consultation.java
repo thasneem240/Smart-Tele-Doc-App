@@ -19,6 +19,8 @@ import com.example.capstoneprojectgroup4.home.A_Patient_Or_A_Doctor;
 import com.example.capstoneprojectgroup4.home.MainActivity;
 import com.example.capstoneprojectgroup4.search_doctors.AppointmentItem;
 import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -133,6 +135,8 @@ public class Frag_Remote_Consultation extends Fragment
                 }
                 else
                 {
+                    saveToRealTimeDataBase(issueText);
+
                     // Audio Conference
                     if(appointmentType.equalsIgnoreCase("Voice"))
                     {
@@ -170,6 +174,32 @@ public class Frag_Remote_Consultation extends Fragment
 
 
         return view;
+    }
+
+    private void saveToRealTimeDataBase(String issueText)
+    {
+
+        // Update this info into real time database
+
+        String date = appointmentItem.getDate();
+        String description = issueText;
+
+        // Create a MedicalHistoryItem object
+        MedicalHistoryItem medicalHistoryItem = new MedicalHistoryItem(date,description);
+
+        String userId = MainActivity.getPatientObject().getUid();
+
+        // Get a reference to the Firebase Realtime Database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("Patient's Medical History");
+
+
+        // Store the medical record under the user's ID
+        usersRef.child(userId).child("medicalRecords").push().setValue(medicalHistoryItem);
+
+        String message = " Successfully Stored the Medical History data into Realtime database";
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+
     }
 
 
