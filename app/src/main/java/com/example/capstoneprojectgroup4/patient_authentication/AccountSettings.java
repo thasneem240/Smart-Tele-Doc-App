@@ -240,7 +240,7 @@ public class AccountSettings extends Fragment {
             public void onClick(View view) {
                 boolean complete = true;
 
-//                setEditTextEnable(false);
+                setEditTextEnable(false);
 
                 if(firstNameEditText.getText().toString().equals("")){
                     firstNameEditText.setError("Required");
@@ -295,7 +295,7 @@ public class AccountSettings extends Fragment {
                 patientObject.setCity(cityEditText.getText().toString());
                 patientObject.setAddress(addressEditText.getText().toString());
 
-//                setEditTextEnable(true);
+                setEditTextEnable(true);
 
                 if(complete){
                     patientObject.setCompleted(true);
