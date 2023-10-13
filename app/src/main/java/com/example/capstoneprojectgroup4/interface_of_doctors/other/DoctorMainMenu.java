@@ -1,5 +1,6 @@
 package com.example.capstoneprojectgroup4.interface_of_doctors.other;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
 import com.example.capstoneprojectgroup4.interface_of_doctors.view_prescriptions.ListOfPatients_patientProfile.ListOfPatientsFragment2;
 import com.example.capstoneprojectgroup4.interface_of_doctors.writing_prescriptions.ListOfPatients_writingPrescription.ListOfPatientsFragment;
 
@@ -74,6 +76,8 @@ public class DoctorMainMenu extends Fragment {
         Button writePrescriptionButton = v.findViewById(R.id.Button_writePrescription);
         Button listOfPatients = v.findViewById(R.id.ListofPatientsButton);
         ImageView listOfPatientsImage = v.findViewById(R.id.imageView_listOfPatients);
+        Button AIHelpButton = v.findViewById(R.id.AIHelpButton);
+        ImageView AIHelpSquare = v.findViewById(R.id.AIHelpSquare);
 
         TextView greetings = v.findViewById(R.id.good_morning2);
 
@@ -118,6 +122,23 @@ public class DoctorMainMenu extends Fragment {
                 fm.beginTransaction().replace(R.id.fragmentContainerDoctorsActivity, listOfPatientsFragment).commit();
             }
         });
+        AIHelpSquare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
+                chatbotActivity.putExtra("DOCINT","true");
+                startActivity(chatbotActivity);
+            }
+        });
+        AIHelpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chatbotActivity = new Intent(getActivity(), ChatbotActivity.class);
+                chatbotActivity.putExtra("DOCINT","true");
+                startActivity(chatbotActivity);
+            }
+        });
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {

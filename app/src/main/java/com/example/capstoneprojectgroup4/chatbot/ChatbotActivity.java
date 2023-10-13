@@ -87,8 +87,8 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
       messageList.add(new Message("Please choose the page that you want to visit.", true));
     }
     else {
-      messageList.add(new Message("Hi, I'm the Teledoc AI chatbot.\n" +
-              "I am able to  help you to make an appointment, purchase medicine, diagnose symptoms and to navigate to the pages in the application.\n" , true));
+      messageList.add(new Message("Hi, I'm the Teledoc AI chatbot.\n" , true));
+      messageList.add(new Message("I am able to  help you to make an appointment, purchase medicine, diagnose symptoms and to navigate to the pages in the application.\n" , true));
       messageList.add(new Message("Please choose what you want me to do.", true));
     }
 
@@ -170,113 +170,76 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
 
   public void DialogFlowParameters(DetectIntentResponse returnResponse){
     String doctor = null;
-    String patient = null;
-    String dateAndTime = null;
-    String date = null;
-    String time = null;
+    String location = null;
     String drug = null;
     String quantity = null;
     String price = null;
-    LocalDate localDate = null;
-    LocalTime localTime = null;
 
-    if(!(recive.getStringExtra("DOCINT").equals("true"))){
-      if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("patient")){
-        if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStructValue().getFieldsMap().containsKey("name")){
-          patient = returnResponse.getQueryResult().getParameters().getFieldsMap().get("patient").getStructValue().getFieldsMap().get("name").getStringValue();
-        }
-      }
 
-      if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("date")){
-        date = returnResponse.getQueryResult().getParameters().getFieldsMap().get("date").getStringValue()+"";
+    if((recive.getStringExtra("DOCINT")== null)){
 
-        if(!date.equals("")){
-          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
-            DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-            ZonedDateTime zonedDateTime = ZonedDateTime.parse(date, formatter);
-            localDate = zonedDateTime.toLocalDate();
-          }
-        }
-      }
-
-      if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("time")){
-        time = returnResponse.getQueryResult().getParameters().getFieldsMap().get("time").getStringValue()+"";
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-
-          DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-          ZonedDateTime zonedDateTime = ZonedDateTime.parse(time, formatter);
-          localTime = zonedDateTime.toLocalTime();
-        }
-      }
-
-      if(returnResponse.getQueryResult().getParameters().getFieldsMap().containsKey("doctor")){
-        if(returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().containsKey("name")){
-          doctor = returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStructValue().getFieldsMap().get("name").getStringValue();
-        }
-      }
-
-      Log.d("DialogFlow***", String.format("Patient = %s\nDate = %s\nTime = %s\nDoctor = %s", patient, localDate, localTime, doctor));
-
-      if(patient!="" & doctor!="" & dateAndTime!="" &
-              patient!=null & doctor!=null & dateAndTime!=null){
-
-        BookAppointmentF.uploadAppointmentSecond(patient, doctor, dateAndTime);
-        Log.d("DialogFlow***", "Done");
-      }
-
-      if (returnResponse.getQueryResult().getAction().equals("OpenTransactionHistorypage")){
+      if (returnResponse.getQueryResult().getAction().equals("AppNavigation.AppNavigation-OpenTransactionHistorypage")){
         Intent intent = new Intent(this, TransactionHistory.class);
         startActivity(intent);
       }
 
-      if (returnResponse.getQueryResult().getAction().equals("OpenDoctorSearchpage")){
+      if (returnResponse.getQueryResult().getAction().equals("AppNavigation.AppNavigation-DoctorSearchpage")){
         Intent senderIntent = new Intent(this, MainActivity2.class);
         senderIntent.putExtra("Page","searchDoctor");
         startActivity(senderIntent);
 
       }
 
-      if (returnResponse.getQueryResult().getAction().equals("OpenPharmacySearchpage")){
+      if (returnResponse.getQueryResult().getAction().equals("AppNavigation.AppNavigation-OpenPharmacySearchpage")){
         Intent senderIntent = new Intent(this, MainActivity2.class);
         senderIntent.putExtra("Page","searchPharm");
         startActivity(senderIntent);
 
       }
 
-      if (returnResponse.getQueryResult().getAction().equals("OpenPatientRecordsPage")){
+      if (returnResponse.getQueryResult().getAction().equals("AppNavigation.AppNavigation-OpenPatientRecordsPage")){
         Intent senderIntent = new Intent(this, MainActivity2.class);
         senderIntent.putExtra("Page","patientRecords");
         startActivity(senderIntent);
 
       }
 
-      if (returnResponse.getQueryResult().getAction().equals("OpenPatientDetialspage")){
+      if (returnResponse.getQueryResult().getAction().equals("AppNavigation.AppNavigation-PatientDetailspage")){
         Intent senderIntent = new Intent(this, MainActivity2.class);
         senderIntent.putExtra("Page","patientDetails");
         startActivity(senderIntent);
       }
 
-      if (returnResponse.getQueryResult().getAction().equals("OpenMedicalHistorypage")){
+      if (returnResponse.getQueryResult().getAction().equals("AppNavigation.AppNavigation-MedicalHistorypage")){
         Intent senderIntent = new Intent(this, MainActivity2.class);
         senderIntent.putExtra("Page","medicalHistory");
         startActivity(senderIntent);
       }
 
-      if (returnResponse.getQueryResult().getAction().equals("OpenPrescriptionspage")){
+      if (returnResponse.getQueryResult().getAction().equals("AppNavigation.AppNavigation-OpenPriscriptsionlistpage")){
         Intent senderIntent = new Intent(this, MainActivity2.class);
         senderIntent.putExtra("Page","prescriptionsPage");
         startActivity(senderIntent);
       }
 
-      if (returnResponse.getQueryResult().getAction().equals("OpenLabReportspage")){
+      if (returnResponse.getQueryResult().getAction().equals("AppNavigation.AppNavigation-LabReportspage")){
         Intent senderIntent = new Intent(this, MainActivity2.class);
         senderIntent.putExtra("Page","labReport");
         startActivity(senderIntent);
       }
 
-
+      if(returnResponse.getQueryResult().getAction().equals("AppointmentBooking.AppointmentBooking-Makinganappointment")){
+        doctor = returnResponse.getQueryResult().getParameters().getFieldsMap().get("doctor").getStringValue()+"";
+        location = returnResponse.getQueryResult().getParameters().getFieldsMap().get("location").getStringValue()+"";
+        if (doctor!="" & location!="" & doctor!=null & location!=null ){
+          Intent senderIntent = new Intent(this, MainActivity2.class);
+          senderIntent.putExtra("Page","Makinganappointment");
+          senderIntent.putExtra("doc",doctor);
+          senderIntent.putExtra("loc",location);
+          startActivity(senderIntent);
+        }
+      }
 
       if (returnResponse.getQueryResult().getAction().equals("BuyMedicine")){
         drug = returnResponse.getQueryResult().getParameters().getFieldsMap().get("drug").getStringValue()+"";
