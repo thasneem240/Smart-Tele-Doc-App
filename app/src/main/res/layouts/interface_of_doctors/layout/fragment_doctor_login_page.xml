@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".interface_of_doctors.doctor_authentication.DoctorLoginPage">
+
+
+    <ImageView
+        android:id="@+id/backButtonDocLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="360dp"
+        android:src="@drawable/baseline_keyboard_arrow_left_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/login_button3"
+        android:layout_width="210dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="82dp"
+        android:background="@drawable/rectangle_1"
+        android:text="Login"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Doctor_Enter_Password" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Doctor_Enter_Password"
+        android:layout_width="371dp"
+        android:layout_height="52.57dp"
+        android:layout_below="@id/Doctor_Enter_Reg_Layout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rectangle_12"
+
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="Enter your Password"
+        android:textColorHint="#A1A8B0"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Doctor_Enter_Reg_Layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText_Doctor_Enter_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="40dp"
+            android:textColor="#3174D4"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Doctor_Enter_Reg_Layout"
+        android:layout_width="371dp"
+        android:layout_height="52.57dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="109dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rectangle_12"
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="Enter your registration number"
+        android:strokeWidth="2"
+        android:strokeColor="#E5E7EB"
+        android:textColorHint="#A1A8B0"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText_Doctor_Enter_Reg_Layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="40dp"
+            android:textColor="#3174D4"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="313dp"
+        android:layout_height="44dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center_horizontal|top"
+        android:text="Login As A Doctor"
+        android:textColor="#8BB8E8"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/password_icon3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/Doctor_Enter_Password"
+        android:layout_alignTop="@+id/Doctor_Enter_Password"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/password_icon"
+        app:layout_constraintStart_toStartOf="@+id/Doctor_Enter_Password"
+        app:layout_constraintTop_toTopOf="@+id/Doctor_Enter_Password" />
+
+    <ImageView
+        android:id="@+id/login_email_icon3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/Doctor_Enter_Reg_Layout"
+        android:layout_alignTop="@+id/Doctor_Enter_Reg_Layout"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/message_icon"
+        app:layout_constraintStart_toStartOf="@+id/Doctor_Enter_Reg_Layout"
+        app:layout_constraintTop_toTopOf="@+id/Doctor_Enter_Reg_Layout" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"
+        android:text="Don't have an account?"
+        android:textColor="#717784"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button3" />
+
+    <TextView
+        android:id="@+id/TextView_sign_up_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
+        android:text="Sign up"
+        android:textColor="#013073"
+        app:layout_constraintStart_toEndOf="@+id/textView23"
+        app:layout_constraintTop_toBottomOf="@+id/login_button3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".interface_of_doctors.other.DoctorUserProfile">
+
+
+    <Button
+        android:id="@+id/button_Logout"
+        android:layout_width="377dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/rectangle_4"
+        android:text="Logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Mobile" />
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/TextInputLayout_Mobile"
+        android:layout_width="377dp"
+        android:layout_height="56dp"
+
+        android:background="@drawable/rectangle_12"
+        android:hint="Specialization"
+        android:textColorHint="#013073"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_FirstName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText_MobileNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#3174D4"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_FirstName"
+        android:layout_width="377dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rectangle_12"
+        android:hint="Name"
+        android:textColorHint="#013073"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_Email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText_DoctorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#3174D4"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_Email"
+        android:layout_width="377dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="59dp"
+        android:background="@drawable/rectangle_12"
+        android:hint="Registration Number"
+        android:textColorHint="#013073"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView20">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText_Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#3174D4"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/TextView_Greetings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="104dp"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView20"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ImageView_BackButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="360dp"
+        android:src="@drawable/baseline_keyboard_arrow_left_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="92dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/steth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ImageView_BackButton2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
