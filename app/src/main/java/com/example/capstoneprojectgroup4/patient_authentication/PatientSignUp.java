@@ -90,7 +90,7 @@ public class PatientSignUp extends Fragment {
         TextView login = v.findViewById(R.id.login_link);
         ImageView backButton = v.findViewById(R.id.ImageView_SignupBack);
         EditText enterEmail = v.findViewById(R.id.EditText_EnterEmail);
-        EditText enterPassword = v.findViewById(R.id.EditText_Doctor_Enter_Password);
+        EditText enterPassword = v.findViewById(R.id.EditText_EnterPassword);
         EditText reEnterPassword = v.findViewById(R.id.EditText_ReEnterPassword);
         CheckBox termsConditions = v.findViewById(R.id.CheckBox_Terms);
 
