@@ -78,7 +78,7 @@ public class DoctorVerifyRegNumber extends Fragment {
 
         DatabaseReference myRef;
 
-        EditText regNum_edittext = v.findViewById(R.id.EditText_RegistrationNumber);
+        EditText regNum_edittext = v.findViewById(R.id.EditText_RegNumberVLayout);
         Button signUpButton = v.findViewById(R.id.Button_Verify);
         TextView loginLink = v.findViewById(R.id.login_link);
         ImageView backButton = v.findViewById(R.id.ImageView_SignupBack);

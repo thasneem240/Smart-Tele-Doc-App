@@ -98,7 +98,7 @@ public class DoctorUserName extends Fragment {
         EditText password_edittext = v.findViewById(R.id.EditText_EnterPassword);
         EditText reEnterPassword_edittext = v.findViewById(R.id.EditText_ReEnterPassword);
         CheckBox termsCheckBox = v.findViewById(R.id.CheckBox_Terms);
-        Button signupButton = v.findViewById(R.id.Button_Verify);
+        Button signupButton = v.findViewById(R.id.Button_SignUp);
         ImageView backButton = v.findViewById(R.id.ImageView_SignupBack);
 
         mobileNumber_edittext.setVisibility(View.INVISIBLE);

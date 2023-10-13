@@ -301,7 +301,7 @@
 
                 android:id="@+id/TextInputLayout_Address"
                 android:layout_width="360dp"
-                android:layout_height="0dp"
+                android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rectangle_12"
                 android:hint="Address"
