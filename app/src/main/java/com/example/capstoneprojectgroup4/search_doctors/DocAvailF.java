@@ -2,6 +2,7 @@ package com.example.capstoneprojectgroup4.search_doctors;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,6 +54,8 @@ public class DocAvailF extends Fragment {
 
     AvailAdapter availAdapter;
 
+    String doctorNameV;
+    String locationV;
     public DocAvailF() {
         // Required empty public constructor
     }
@@ -104,8 +107,8 @@ public class DocAvailF extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         if (getArguments() != null) {
-            String doctorNameV = getArguments().getString("doctorName");
-            String locationV = getArguments().getString("location");
+            doctorNameV = getArguments().getString("doctorName");
+            locationV = getArguments().getString("location");
             Log.d("DocAvailF", "Doctor Name: " + doctorNameV);
             Log.d("DocAvailF", "Location: " + locationV);
             if (doctorNameV != null && locationV != null) {

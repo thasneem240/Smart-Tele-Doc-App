@@ -39,6 +39,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         holder.doctorNameTextView.setText(docName);
         holder.dayTextView.setText(appointmentItem.getDate());
         holder.locationTextView.setText(appointmentItem.getLocation());
+        holder.timeTextView.setText("Time: " +appointmentItem.getStartTime()+ "-"+ appointmentItem.getEndTime());
 
 
 

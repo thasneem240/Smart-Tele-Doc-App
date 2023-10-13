@@ -9,7 +9,7 @@ import com.example.capstoneprojectgroup4.R;
 
 public class AppointmentHistoryViewHolder extends RecyclerView.ViewHolder {
 
-    TextView doctorNameTextView, locationTextView, dayTextView;
+    TextView doctorNameTextView, locationTextView, dayTextView,timeTextView;
     Button rebook;
 
     public AppointmentHistoryViewHolder(@NonNull View itemView) {
@@ -19,6 +19,7 @@ public class AppointmentHistoryViewHolder extends RecyclerView.ViewHolder {
         locationTextView = itemView.findViewById(R.id.Location2);
         dayTextView = itemView.findViewById(R.id.Day2);
         rebook = itemView.findViewById(R.id.ReBook);
+        timeTextView = itemView.findViewById(R.id.TimeTXT);
 
     }
 }

@@ -11,9 +11,11 @@ import android.widget.Button;
 import com.example.capstoneprojectgroup4.Frag_LabReports;
 import com.example.capstoneprojectgroup4.Frag_MedicalHistory;
 import com.example.capstoneprojectgroup4.R;
+import com.example.capstoneprojectgroup4.medical_records_prescriptions.prescriptions_list.PrescriptionsListFragment;
 import com.example.capstoneprojectgroup4.patient_authentication.AccountSettings;
 import com.example.capstoneprojectgroup4.patient_authentication.PatientObject;
 import com.example.capstoneprojectgroup4.chatbot.ChatbotActivity;
+import com.example.capstoneprojectgroup4.search_doctors.DocAvailF;
 import com.example.capstoneprojectgroup4.search_doctors.ViewAppointments;
 import com.example.capstoneprojectgroup4.best_price.listOf_prescriptions.ListOfPrescriptionsFragment;
 import com.example.capstoneprojectgroup4.search_doctors.SearchDocF;
@@ -36,12 +38,14 @@ public class MainActivity2 extends AppCompatActivity {
     Button appointments;
     Button userProfile;
 
+    Intent recive;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        Intent recive = getIntent();
+        recive = getIntent();
 
         homePage = findViewById(R.id.homePageButton);
         chatBot = findViewById(R.id.chatBotButton);
@@ -87,8 +91,8 @@ public class MainActivity2 extends AppCompatActivity {
             }
             if (recive.getStringExtra("Page").equals("prescriptionsPage")){
                 fm = getSupportFragmentManager();
-                ListOfPrescriptionsFragment listOfPrescriptionsFragment = new ListOfPrescriptionsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainerView, listOfPrescriptionsFragment).commit();
+                PrescriptionsListFragment prescriptionsListFragment = new PrescriptionsListFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainerView, prescriptionsListFragment).commit();
             }
             if (recive.getStringExtra("Page").equals("labReport")){
                 fm = getSupportFragmentManager();
@@ -100,6 +104,12 @@ public class MainActivity2 extends AppCompatActivity {
                 ViewAppointments appointmentsList = new ViewAppointments();
                 fm.beginTransaction().replace(R.id.fragmentContainerView, appointmentsList).commit();
             }
+            if (recive.getStringExtra("Page").equals("Makinganappointment")){
+                fm = getSupportFragmentManager();
+                DocAvailF fragment = DocAvailF.newInstance(recive.getStringExtra("doc"), recive.getStringExtra("loc"));
+                fm.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
+            }
+
 
 
         }
@@ -141,6 +151,8 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
     }
+
+
 
     public void setPatientObject(PatientObject patientObject) {
         try{
