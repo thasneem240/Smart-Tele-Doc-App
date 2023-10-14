@@ -203,7 +203,7 @@ public class Frag_ListLabReports extends Fragment
     }
 
 
-    private void enableReportsRecyclerView(List<LabReport> fireBaseLabReports, RecyclerView recyclerView)
+    public void enableReportsRecyclerView(List<LabReport> fireBaseLabReports, RecyclerView recyclerView)
     {
         //Create Adapter for the recyclerview
         LabReportAdapter adapter = new LabReportAdapter(fireBaseLabReports); // labReports is a List of LabReport objects
@@ -217,7 +217,7 @@ public class Frag_ListLabReports extends Fragment
     }
 
 
-    private void retrieveLabReports(List<LabReport> labReportList)
+    public void retrieveLabReports(List<LabReport> labReportList)
     {
         // Reference to the Firebase Storage folder where lab reports are stored
         storageReference = FirebaseStorage.getInstance().getReference("Lab_Reports");

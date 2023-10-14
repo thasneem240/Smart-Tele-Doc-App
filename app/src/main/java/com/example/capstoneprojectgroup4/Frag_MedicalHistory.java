@@ -168,7 +168,7 @@ public class Frag_MedicalHistory extends Fragment
 
 
 
-    private void retrieveFromRealTimeDataBase(List<MedicalHistoryItem> medicalHistoryItemList)
+    public void retrieveFromRealTimeDataBase(List<MedicalHistoryItem> medicalHistoryItemList)
     {
         Log.d("retrieveFromRealTimeDataBase:", "Before Get reference");
 
@@ -235,6 +235,27 @@ public class Frag_MedicalHistory extends Fragment
     }
 
 
+    public void setUserId(String userId) {
 
+        this.userId = userId;
+    }
 
+    public void setAdapter(MedicalHistoryAdapter adapter)
+    {
+        this.adapter = adapter;
+    }
+
+    public String getUserId()
+    {
+        return userId;
+    }
+
+    public MedicalHistoryAdapter getAdapter()
+    {
+        return adapter;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 }
