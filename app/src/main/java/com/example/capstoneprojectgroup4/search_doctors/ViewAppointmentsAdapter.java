@@ -88,8 +88,8 @@ public class ViewAppointmentsAdapter extends RecyclerView.Adapter<ViewAppointmen
                 String appointmentType = appointmentItem.getAppointmentType();
 
 
-               // if(checkDateAndTime(appointmentItem))
-                if(true)
+                if(checkDateAndTime(appointmentItem))
+                //if(true)
                 {
                     if(appointmentType != null)
                     {
