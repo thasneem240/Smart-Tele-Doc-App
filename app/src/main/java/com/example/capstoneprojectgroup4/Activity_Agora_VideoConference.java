@@ -53,7 +53,7 @@ public class Activity_Agora_VideoConference extends AppCompatActivity
 
 
 
-    private boolean checkSelfPermission()
+    public boolean checkSelfPermission()
     {
         if (ContextCompat.checkSelfPermission(this, REQUESTED_PERMISSIONS[0]) !=  PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this, REQUESTED_PERMISSIONS[1]) !=  PackageManager.PERMISSION_GRANTED)
@@ -70,7 +70,7 @@ public class Activity_Agora_VideoConference extends AppCompatActivity
 
 
 
-    private void setupVideoSDKEngine()
+    public void setupVideoSDKEngine()
     {
         try
         {
