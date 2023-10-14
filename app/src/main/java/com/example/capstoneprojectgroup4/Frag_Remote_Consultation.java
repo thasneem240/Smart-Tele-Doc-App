@@ -176,7 +176,7 @@ public class Frag_Remote_Consultation extends Fragment
         return view;
     }
 
-    private void saveToRealTimeDataBase(String issueText)
+    public void saveToRealTimeDataBase(String issueText)
     {
 
         // Update this info into real time database
@@ -203,7 +203,7 @@ public class Frag_Remote_Consultation extends Fragment
     }
 
 
-    private void startVideoConference()
+    public void startVideoConference()
     {
         // Create an Intent to specify the target activity
         Intent intent = new Intent(getActivity(), Activity_Agora_VideoConference.class);
@@ -217,7 +217,7 @@ public class Frag_Remote_Consultation extends Fragment
 
 
 
-    private void startAudioConference()
+    public void startAudioConference()
     {
         // Create an Intent to specify the target activity
         Intent intent = new Intent(getActivity(), Activity_Agora_AudioConference.class);
