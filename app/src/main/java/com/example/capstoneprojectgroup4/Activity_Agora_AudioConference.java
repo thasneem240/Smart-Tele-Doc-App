@@ -39,7 +39,7 @@ public class Activity_Agora_AudioConference extends AppCompatActivity
                     Manifest.permission.RECORD_AUDIO
             };
 
-    private boolean checkSelfPermission()
+    public boolean checkSelfPermission()
     {
         if (ContextCompat.checkSelfPermission(this, REQUESTED_PERMISSIONS[0]) !=  PackageManager.PERMISSION_GRANTED)
         {
@@ -83,7 +83,7 @@ public class Activity_Agora_AudioConference extends AppCompatActivity
     /**
      * Setup Agora Engine
      */
-    private void setupVoiceSDKEngine()
+    public void setupVoiceSDKEngine()
     {
         try
         {
