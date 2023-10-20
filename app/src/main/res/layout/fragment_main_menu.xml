@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/your_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView_goodMorning"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toEndOf="@+id/how_are_you"
+        android:src="@drawable/doctor_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/how_are_you"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/TextView_goodMorning"
+        android:layout_width="251dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="120dp"
+        android:gravity="top"
+        android:text="Good Morning, Nethmi"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/pharma_Button"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_pharmacy_button"
+        app:layout_constraintEnd_toEndOf="@+id/pharmacySquare"
+        app:layout_constraintStart_toStartOf="@+id/pharmacySquare"
+        app:layout_constraintTop_toTopOf="@+id/pharmacySquare" />
+
+    <ImageView
+        android:id="@+id/records_square"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/blue_square"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Ai_square" />
+
+    <ImageView
+        android:id="@+id/pharmacySquare"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/yellow_square"
+        android:contentDescription="Pharmacy Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/how_are_you" />
+
+    <Button
+        android:id="@+id/doctor_Button"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_doc_button"
+        app:layout_constraintEnd_toEndOf="@+id/docSquare"
+        app:layout_constraintStart_toStartOf="@+id/docSquare"
+        app:layout_constraintTop_toTopOf="@+id/docSquare" />
+
+    <Button
+        android:id="@+id/aiButton"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_ai_button"
+        app:layout_constraintEnd_toEndOf="@+id/Ai_square"
+        app:layout_constraintStart_toStartOf="@+id/Ai_square"
+        app:layout_constraintTop_toTopOf="@+id/Ai_square" />
+
+    <Button
+        android:id="@+id/records_Button"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_records_button"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="@+id/records_square"
+        app:layout_constraintStart_toStartOf="@+id/records_square"
+        app:layout_constraintTop_toTopOf="@+id/records_square" />
+
+    <Button
+        android:id="@+id/transactionButton"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_transaction_icon"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="@+id/transaction_square"
+        app:layout_constraintStart_toStartOf="@+id/transaction_square"
+        app:layout_constraintTop_toTopOf="@+id/transaction_square" />
+
+    <ImageView
+        android:id="@+id/emergencySquare"
+        android:layout_width="139.29dp"
+        android:layout_height="0dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/blue_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/docSquare" />
+
+    <TextView
+        android:id="@+id/emergency"
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal|top"
+        android:text="Emergency"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emergencyButton" />
+
+    <ImageView
+        android:id="@+id/Ai_square"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/green_square"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pharmacySquare" />
+
+    <TextView
+        android:id="@+id/ai_helper"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="37dp"
+        android:gravity="center_horizontal|top"
+        android:text="AI Helper"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aiButton" />
+
+    <ImageView
+        android:id="@+id/transaction_square"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/yellow_square"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emergencySquare" />
+
+    <TextView
+        android:id="@+id/transaction"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal|top"
+        android:text="Transactions"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transactionButton" />
+
+    <TextView
+        android:id="@+id/pharmacytext"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="34dp"
+        android:gravity="center_horizontal|top"
+        android:text="Pharmacy"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pharma_Button" />
+
+    <ImageView
+        android:id="@+id/docSquare"
+        android:layout_width="139.29dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/green_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/how_are_you" />
+
+    <TextView
+        android:id="@+id/doctor"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal|top"
+        android:text="Doctor"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doctor_Button" />
+
+    <TextView
+        android:id="@+id/records"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="34dp"
+        android:gravity="center_horizontal|top"
+        android:text="Records"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/records_Button" />
+
+    <Button
+        android:id="@+id/emergencyButton"
+        android:layout_width="60dp"
+        android:layout_height="57dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layered_emergency_button"
+        app:layout_constraintEnd_toEndOf="@+id/emergencySquare"
+        app:layout_constraintStart_toStartOf="@+id/emergencySquare"
+        app:layout_constraintTop_toTopOf="@+id/emergencySquare" />
+
+    <TextView
+        android:id="@+id/your_virtua"
+        android:layout_width="284dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:gravity="top"
+        android:lineSpacingExtra="3sp"
+        android:text="Your Virtual Doctor Is \nAlways Ready to Listen!"
+        android:textColor="#101623"
+        android:textSize="16sp"
+        android:translationY="-1.61sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.291"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_goodMorning" />
+
+    <TextView
+        android:id="@+id/how_are_you"
+        android:layout_width="228dp"
+        android:layout_height="27dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="6dp"
+        android:gravity="top"
+        android:text="How are you feeling today?"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/your_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/your_virtua" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

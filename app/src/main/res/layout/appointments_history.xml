@@ -1,0 +1,71 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="6dp"
+    android:background="@drawable/rectangle_12"
+    app:cardBackgroundColor="@color/white"
+    android:backgroundTint="@color/white"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/DoctorName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DoctorName"
+            android:textColor="#407C87"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Location2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_below="@id/DoctorName2" />
+
+        <TextView
+            android:id="@+id/Day2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11/09/2023"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_below="@id/Location2" />
+
+
+        <Button
+            android:id="@+id/ReBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:onClick="onCancelButtonClick"
+            android:text="ReBook"
+            android:background="@color/white"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/TimeTXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_below="@id/Day2"/>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

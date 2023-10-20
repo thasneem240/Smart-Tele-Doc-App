@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".patient_authentication.PatientSignUp">
+
+    <!-- Sign up As Patient -->
+
+
+    <ImageView
+        android:id="@+id/ImageView_SignupBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/baseline_keyboard_arrow_left_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/DocRegNumberEnterLayout"
+        android:layout_width="371dp"
+        android:layout_height="51dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/rectangle_12"
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="Registration Number"
+        android:textColorHint="#A1A8B0"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_title">
+
+        <EditText
+            android:id="@+id/EditText_RegNumberVLayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:textColor="#3174D4"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="144dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/sign_up_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="81dp"
+        android:gravity="center_horizontal"
+        android:text="Doctor Registration"
+        android:textColor="#407C87"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Button_Verify"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/CheckBox_Terms"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="160dp"
+        android:background="@drawable/rectangle_1"
+        android:text="Verify"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DocRegNumberEnterLayout"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/login_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sign_up_button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="243dp"
+        android:text="Login"
+        android:textColor="#013073"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/have_an_account_text"
+        app:layout_constraintTop_toBottomOf="@+id/Button_Verify" />
+
+    <TextView
+        android:id="@+id/have_an_account_text"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sign_up_button"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="243dp"
+        android:layout_toStartOf="@+id/login_link"
+        android:text="Have an account?"
+        android:textColor="#717784"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Button_Verify" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

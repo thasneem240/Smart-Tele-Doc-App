@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".front_end.EmergencyFragment">
+
+    <!-- ImageView for Back Button -->
+    <ImageView
+        android:id="@+id/backButtonEmergency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="360dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
+
+    <!-- Title Text -->
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:text="Emergency Numbers"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButtonEmergency" />
+
+    <!-- Sri Lanka Police Emergency Button -->
+    <Button
+        android:id="@+id/police"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="103dp"
+        android:background="@drawable/rectangle_10"
+        android:gravity="start|center_vertical"
+        android:paddingStart="8dp"
+        android:text="Sri Lanka Police Emergency"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ImageView for Sri Lanka Police Emergency -->
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="2dp"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:src="@drawable/emergency_light___1"
+        app:layout_constraintBottom_toBottomOf="@+id/police"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Suwa Seriya Ambulance Button -->
+    <Button
+        android:id="@+id/ambulance"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="103dp"
+        android:background="@drawable/rectangle_10"
+        android:text="Suwa Seriya Ambulance"
+        android:textColor="@color/black"
+        android:gravity="start|center_vertical"
+        android:textStyle="normal"
+        android:textSize="12sp"
+        android:paddingStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/police" />
+
+    <!-- ImageView for Suwa Seriya Ambulance -->
+
+    <!-- Mental Health Helpline Button -->
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="2dp"
+        android:src="@drawable/ambulance___fast"
+        app:layout_constraintBottom_toBottomOf="@+id/ambulance"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/mental"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="103dp"
+        android:background="@drawable/rectangle_10"
+        android:gravity="start|center_vertical"
+        android:paddingStart="8dp"
+        android:text="Mental Health Helpline"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ambulance" />
+
+    <!-- ImageView for Mental Health Helpline -->
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="2dp"
+        android:src="@drawable/location"
+        app:layout_constraintBottom_toBottomOf="@+id/mental"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
