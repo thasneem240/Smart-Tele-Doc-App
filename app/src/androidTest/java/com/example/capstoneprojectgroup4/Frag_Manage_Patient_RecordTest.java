@@ -15,11 +15,17 @@ import org.junit.runner.RunWith;
 public class Frag_Manage_Patient_RecordTest
 {
 
+
+
     @Before
     public void setUp() {
         // Launch the activity that contains the fragment
         ActivityScenario.launch(Activity_Common.class);
     }
+
+
+
+
 
     @Test
     public void testButtonClicks()
