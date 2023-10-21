@@ -1,32 +1,7 @@
 package com.example.capstoneprojectgroup4;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import android.content.Context;
-import android.net.Uri;
-
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.capstoneprojectgroup4.front_end.MedicalRecords;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class TransactionsTest {
-  /*  @Mock
+public class AIChatbot {
+    /*  @Mock
     private FragmentManager mockFragmentManager;
     @Mock
     private MedicalRecords mockMedicalRecordsFragment;
@@ -65,7 +40,6 @@ public class TransactionsTest {
         when(mockStorageReference.child(Mockito.anyString())).thenReturn(mockItemReference);
 
         when(mockFragmentTransaction.replace(Mockito.anyInt(), Mockito.any(Frag_ListLabReports.class))).thenReturn(mockFragmentTransaction);
-    }
+    }*/
 
-   */
 }
