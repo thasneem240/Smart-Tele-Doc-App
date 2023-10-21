@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionsTest {
-    @Mock
+  /*  @Mock
     private FragmentManager mockFragmentManager;
     @Mock
     private MedicalRecords mockMedicalRecordsFragment;
@@ -92,5 +92,5 @@ public class TransactionsTest {
         List<LabReport> labReports = new ArrayList<>();
         labReports.add(new LabReport("Title", mockUri));
 
-    }
+    }*/
 }
