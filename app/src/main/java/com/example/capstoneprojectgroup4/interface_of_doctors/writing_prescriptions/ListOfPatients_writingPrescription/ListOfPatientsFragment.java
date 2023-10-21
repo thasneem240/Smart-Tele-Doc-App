@@ -90,50 +90,6 @@ public class ListOfPatientsFragment extends Fragment {
 
         ArrayList<AppointmentObject> appointmentObjectArrayList = new ArrayList<>();
 
-/*        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Users");
-
-        databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                PatientObject patientObject;
-                Map<String, Object> eachUserHashMap;
-                Map<String, Object> doctorIDs;
-                ArrayList<PatientObject> patientsUnderThisDoctor = new ArrayList<>();
-
-                for(DataSnapshot dataSnapshotChild : dataSnapshot.getChildren()){
-
-                    patientObject = dataSnapshotChild.getValue(PatientObject.class);
-
-                    if(dataSnapshotChild.hasChild("Doctors")){
-                        eachUserHashMap = (Map)dataSnapshotChild.getValue();
-
-                        doctorIDs = (Map) eachUserHashMap.get("Doctors");
-
-                        if(doctorIDs.containsKey(DoctorsActivity.getDoctorRegNumber())){
-                            patientsUnderThisDoctor.add(patientObject);
-                        }
-                    }
-                }
-
-                if(patientsUnderThisDoctor.isEmpty()){
-                    Toast.makeText(getActivity(), "No patients have made appointments yet.", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    RecyclerView rv = v.findViewById(R.id.RecyclerView_ListOfPatients);
-                    rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                    ListOfPatientsAdapter listOfPatientsAdapter = new ListOfPatientsAdapter(patientsUnderThisDoctor);
-                    rv.setAdapter(listOfPatientsAdapter);
-                }
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Error in the database. Please try again.", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
         String sanitizedDoctorName = DoctorsActivity.getDoctorObject().getName().replaceAll("[.#$\\[\\]]", "_");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
