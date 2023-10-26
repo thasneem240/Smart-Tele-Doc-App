@@ -36,18 +36,18 @@ import java.util.Objects;
 
 
 public class TransactionHistory extends AppCompatActivity {
-    ArrayList <TransactionHistoryData> data;
-    Button homePage;
-    Button chatBot;
+    public ArrayList <TransactionHistoryData> data;
+    public Button homePage;
+    public Button chatBot;
 
-    ImageView backButton;
+    public ImageView backButton;
 
-    Button appointments;
-    Button userProfile;
+    public Button appointments;
+    public Button userProfile;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Transaction");
-    REcyclerAdapter adapter;
+    public REcyclerAdapter adapter;
 
 
     public TransactionHistory(){
@@ -147,7 +147,6 @@ public class TransactionHistory extends AppCompatActivity {
             }
         });
     }
-
 
 
 

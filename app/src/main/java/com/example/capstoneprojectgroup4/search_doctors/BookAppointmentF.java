@@ -1,7 +1,5 @@
 package com.example.capstoneprojectgroup4.search_doctors;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -58,6 +56,7 @@ import lk.payhere.androidsdk.model.StatusResponse;
  */
 public class BookAppointmentF extends Fragment {
 
+    public static final int PAYHERE_REQUEST =110 ;
     private static final String ARG_DOCTOR_NAME = "doctorName";
     private static final String ARG_DAY = "day";
     private static final String ARG_DATE = "date";
@@ -67,6 +66,9 @@ public class BookAppointmentF extends Fragment {
     private static final String ARG_NOAPP = "noApp";
     private static final String ARG_PRICE = "docPrice";
     private static final String TAG = "BookAppointmentF";
+
+
+
     private String doctorName;
     private String noApp;
     private String location;
@@ -84,7 +86,7 @@ public class BookAppointmentF extends Fragment {
     private DatabaseReference databaseReference;
     private String selectedAppointmentType;
 
-    private static final int PAYHERE_REQUEST = 110;
+
     private Map<String, Object> Transaction = new HashMap<>();
     private String item;
     private double TotalFees;
@@ -256,7 +258,7 @@ public class BookAppointmentF extends Fragment {
     }
 
 
-    private void updateAvailability(String doctorName, String location, String date, int newNoAppValue) {
+    public void updateAvailability(String doctorName, String location, String date, int newNoAppValue) {
         DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference("Availability");
 
         // Find the doctor's availability using their name
@@ -322,7 +324,7 @@ public class BookAppointmentF extends Fragment {
             }
         });
     }
-    private void uploadDoctorAppointment(String doctorName, String pPatientName, String pPatientEmail, String pDay, String appointmentKey, String VoiceVideoCallType, String location, int noApp, String start, String end, String PatientID) {
+    public void uploadDoctorAppointment(String doctorName, String pPatientName, String pPatientEmail, String pDay, String appointmentKey, String VoiceVideoCallType, String location, int noApp, String start, String end, String PatientID) {
         // Sanitize input values to remove invalid characters
         String sanitizedPatientName = pPatientName.replaceAll("[.#$\\[\\]]", "_");
         String sanitizedDoctorName = doctorName.replaceAll("[.#$\\[\\]]", "_");
@@ -357,7 +359,7 @@ public class BookAppointmentF extends Fragment {
 
 
 
-    private void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end, String VoiceVideoCallType, String location, int noApp, String PatientID) {
+    public void uploadAppointment(String email, String pPatientName, String pDoctorName, String pDay, String start, String end, String VoiceVideoCallType, String location, int noApp, String PatientID) {
 
         // Sanitize the email to remove invalid characters
 
@@ -412,7 +414,7 @@ public class BookAppointmentF extends Fragment {
                 .setValue(hashMap);
 
     }
-    private boolean isOneDayBeforeAppointmentDate(String appointmentDate) {
+    public boolean isOneDayBeforeAppointmentDate(String appointmentDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar currentDate = Calendar.getInstance();
         Calendar appointmentCalendar = Calendar.getInstance();
@@ -507,6 +509,7 @@ public class BookAppointmentF extends Fragment {
             }
         }
     }
+
 
 }
 

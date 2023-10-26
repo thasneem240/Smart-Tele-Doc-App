@@ -123,7 +123,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     setUpBot();
   }
 
-  private void setUpBot() {
+  public void setUpBot() {
     try {
       InputStream stream = this.getResources().openRawResource(R.raw.credential);
       GoogleCredentials credentials = GoogleCredentials.fromStream(stream)
@@ -142,7 +142,7 @@ public class ChatbotActivity extends AppCompatActivity implements BotReply {
     }
   }
 
-  private void sendMessageToBot(String message) {
+  public void sendMessageToBot(String message) {
     QueryInput input = QueryInput.newBuilder()
         .setText(TextInput.newBuilder().setText(message).setLanguageCode("en-US")).build();
     new SendMessageInBg(this, sessionName, sessionsClient, input).execute();
